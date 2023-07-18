@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/GroupsFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/GroupsFragment"
         android:name="com.padawanbr.smartsoccer.presentation.GroupsFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/group_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_GroupsFragment_to_SoccerPlayerFragment"
+            app:destination="@id/SoccerPlayerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/SoccerPlayerFragment"
         android:name="com.padawanbr.smartsoccer.presentation.SoccerPlayerFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/soccer_player_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_SoccerPlayerFragment_to_GroupsFragment"
+            app:destination="@id/GroupsFragment" />
     </fragment>
 </navigation>
