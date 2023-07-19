@@ -1,20 +1,18 @@
 package com.padawanbr.smartsoccer.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.padawanbr.smartsoccer.R
-import com.padawanbr.smartsoccer.databinding.FragmentSecondBinding
+import androidx.fragment.app.Fragment
+import com.padawanbr.smartsoccer.databinding.FragmentSoccerPlayerBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class SoccerPlayerFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentSoccerPlayerBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,7 +23,7 @@ class SoccerPlayerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentSoccerPlayerBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -33,9 +31,9 @@ class SoccerPlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SoccerPlayerFragment_to_GroupsFragment)
-        }
+//        binding.buttonSecond.setOnClickListener {
+//            findNavController().navigate(R.id.action_SoccerPlayerFragment_to_GroupsFragment)
+//        }
     }
 
     override fun onDestroyView() {

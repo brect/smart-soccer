@@ -6,23 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
-import com.padawanbr.smartsoccer.databinding.FragmentFirstBinding
 import androidx.navigation.fragment.findNavController
+import com.padawanbr.smartsoccer.databinding.FragmentGroupsBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class GroupsFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentGroupsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val viewModel: GroupViewModel by viewModels()
 
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var _bottomSheetBinding: BottonsheetCreateGroupBinding? = null
@@ -31,12 +34,13 @@ class GroupsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
-
-    }
+    ) = FragmentGroupsBinding.inflate(
+        inflater,
+        container,
+        false
+    ).apply {
+        _binding = this
+    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,9 +53,17 @@ class GroupsFragment : Fragment() {
                 .setAnchorView(R.id.floatingActionButton)
                 .setAction("Action", null).show()
         }
+
+        observeUiState()
     }
 
-    private fun bindingBottomSheetToCreateGroup() {
+    private fun observeUiState() {
+//        viewModel.run {
+//
+//        }
+    }
+
+        private fun bindingBottomSheetToCreateGroup() {
         // Crie um novo BottomSheetDialog aqui
         bottomSheetDialog = BottomSheetDialog(requireContext())
 

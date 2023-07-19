@@ -9,7 +9,7 @@
         android:id="@+id/GroupsFragment"
         android:name="com.padawanbr.smartsoccer.presentation.GroupsFragment"
         android:label="@string/group_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_groups">
 
         <action
             android:id="@+id/action_GroupsFragment_to_SoccerPlayerFragment"
@@ -19,7 +19,7 @@
         android:id="@+id/SoccerPlayerFragment"
         android:name="com.padawanbr.smartsoccer.presentation.SoccerPlayerFragment"
         android:label="@string/soccer_player_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_soccer_player">
 
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_GroupsFragment"
