@@ -3,6 +3,8 @@ package com.padawanbr.smartsoccer.framework.di
 
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCaseImpl
+import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCase
+import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,5 +16,8 @@ interface UseCaseModule {
 
     @Binds
     fun bindAddGroupUseCase(useCaseImpl: AddGroupUseCaseImpl): AddGroupUseCase
+
+    @Binds
+    fun bindGetGroupsUseCase(useCaseImpl: GetGroupsUseCaseImpl): GetGroupsUseCase
 
 }

@@ -6,6 +6,6 @@ data class Grupo(
     val quantidadeMinimaJogadores: Int,
     val quantidadeMinimaJogadoresPorTime: Int,
     val quantidadeTimes: Int,
-    val jogadores: MutableList<Jogador>,
-    val sorteios: MutableList<Sorteio>
+    val jogadores: MutableList<Jogador>?,
+    val sorteios: MutableList<Sorteio>?
 )

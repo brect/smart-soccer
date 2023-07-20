@@ -7,16 +7,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import androidx.navigation.fragment.findNavController
+import com.example.marvelapp.presentation.common.getCommonAdapterOf
 import com.padawanbr.smartsoccer.databinding.FragmentGroupsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
+@AndroidEntryPoint
 class GroupsFragment : Fragment() {
 
     private var _binding: FragmentGroupsBinding? = null
@@ -30,6 +32,14 @@ class GroupsFragment : Fragment() {
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var _bottomSheetBinding: BottonsheetCreateGroupBinding? = null
     private val bottomSheetBinding: BottonsheetCreateGroupBinding get() = _bottomSheetBinding!!
+
+    private val groupsAdapter by lazy {
+        getCommonAdapterOf {
+            GroupsViewHolder.create(
+                it
+            )
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +55,8 @@ class GroupsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initGroupsAdapter()
+
         bindingBottomSheetToCreateGroup()
 
         binding.floatingActionButton.setOnClickListener {
@@ -55,12 +67,42 @@ class GroupsFragment : Fragment() {
         }
 
         observeUiState()
+
+        viewModel.getAll()
+    }
+
+    private fun initGroupsAdapter() {
+        binding.recyclerGroupItens.run {
+            setHasFixedSize(true)
+            adapter = groupsAdapter
+        }
     }
 
     private fun observeUiState() {
-//        viewModel.run {
-//
-//        }
+        viewModel.run {
+            state.observe(viewLifecycleOwner) { uiState ->
+                when (uiState) {
+                    GroupViewModel.UiState.Error -> {
+                        Toast.makeText(context, "Category GroupViewModel.UiState.Error", Toast.LENGTH_SHORT).show()
+                    }
+                    GroupViewModel.UiState.Loading -> {
+                        Toast.makeText(context, "Category GroupViewModel.UiState.Loading", Toast.LENGTH_SHORT).show()
+                    }
+                    GroupViewModel.UiState.Success -> {
+                        findNavController().navigate(R.id.action_GroupsFragment_to_SoccerPlayerFragment)
+                        bottomSheetDialog.hide()
+                    }
+                    GroupViewModel.UiState.ShowEmptyGroups -> {
+                        Toast.makeText(context, "Category GroupViewModel.ShowEmptyGroups", Toast.LENGTH_SHORT).show()
+                        groupsAdapter.submitList(emptyList())
+                    }
+                    is GroupViewModel.UiState.ShowGroups -> {
+                        groupsAdapter.submitList(uiState.groups)
+                        Toast.makeText(context, "Category GroupViewModel.ShowGroups", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
         private fun bindingBottomSheetToCreateGroup() {
@@ -75,9 +117,8 @@ class GroupsFragment : Fragment() {
 
         // Access elements in the layout using ViewBinding
         bottomSheetBinding.buttonCreateGroup.setOnClickListener {
-            Toast.makeText(context, "Category buttonSaveCategory", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_GroupsFragment_to_SoccerPlayerFragment)
-            bottomSheetDialog.hide()
+            val textNameGroup = bottomSheetBinding.editTextTextInputGroupName.text.toString()
+            viewModel.createGroup(textNameGroup)
         }
     }
 

@@ -11,7 +11,7 @@ class GroupRepositoryImpl @Inject constructor(
 ) : GroupRepository {
 
     override fun getAll(): Flow<List<Grupo>> {
-        TODO("Not yet implemented")
+        return groupLocalDataSource.getAll()
     }
 
     override suspend fun saveGroup(grupo: Grupo) {

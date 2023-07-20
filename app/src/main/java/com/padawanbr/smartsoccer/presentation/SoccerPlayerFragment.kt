@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.padawanbr.smartsoccer.databinding.FragmentSoccerPlayerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
+
+@AndroidEntryPoint
 class SoccerPlayerFragment : Fragment() {
 
     private var _binding: FragmentSoccerPlayerBinding? = null

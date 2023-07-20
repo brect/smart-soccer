@@ -4,6 +4,11 @@ import com.padawanbr.smartsoccer.core.data.repository.GroupLocalDataSource
 import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.framework.db.dao.GrupoDao
 import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
+import com.padawanbr.smartsoccer.framework.db.entity.toGroupModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RoomGroupDataSource @Inject constructor(
@@ -14,6 +19,12 @@ class RoomGroupDataSource @Inject constructor(
         return grupoDao.insert(grupo.toGrupoEntity())
     }
 
+    override fun getAll(): Flow<List<Grupo>> {
+        return grupoDao.getAll().map {
+            it.toGroupModel()
+        }
+    }
+
     private fun Grupo.toGrupoEntity() = GrupoEntity(
         id,
         nome,
@@ -21,5 +32,5 @@ class RoomGroupDataSource @Inject constructor(
         quantidadeMinimaJogadoresPorTime,
         quantidadeTimes
     )
-
 }
+
