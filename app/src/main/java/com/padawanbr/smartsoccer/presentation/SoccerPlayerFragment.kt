@@ -30,10 +30,6 @@ class SoccerPlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        binding.buttonSecond.setOnClickListener {
-//            findNavController().navigate(R.id.action_SoccerPlayerFragment_to_GroupsFragment)
-//        }
     }
 
     override fun onDestroyView() {

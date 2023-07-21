@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
-import androidx.navigation.fragment.findNavController
-import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
 import com.padawanbr.smartsoccer.databinding.FragmentGroupsBinding
+import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -79,51 +79,50 @@ class GroupsFragment : Fragment() {
     }
 
     private fun observeUiState() {
-        viewModel.run {
-            state.observe(viewLifecycleOwner) { uiState ->
-                when (uiState) {
-                    GroupViewModel.UiState.Error -> {
-                        Toast.makeText(
-                            context,
-                            "Category GroupViewModel.UiState.Error",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+        viewModel.state.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                GroupViewModel.UiState.Error -> {
+                    Toast.makeText(
+                        context,
+                        "Category GroupViewModel.UiState.Error",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-                    GroupViewModel.UiState.Loading -> {
-                        Toast.makeText(
-                            context,
-                            "Category GroupViewModel.UiState.Loading",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                GroupViewModel.UiState.Loading -> {
+                    Toast.makeText(
+                        context,
+                        "Category GroupViewModel.UiState.Loading",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
-                    GroupViewModel.UiState.Success -> {
-                        findNavController().navigate(R.id.action_GroupsFragment_to_SoccerPlayerFragment)
-                        bottomSheetDialog.hide()
-                    }
+                GroupViewModel.UiState.Success -> {
+                    findNavController().navigate(R.id.action_GroupsFragment_to_SoccerPlayerFragment)
+                    bottomSheetDialog.hide()
+                }
 
-                    GroupViewModel.UiState.ShowEmptyGroups -> {
-                        Toast.makeText(
-                            context,
-                            "Category GroupViewModel.ShowEmptyGroups",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        groupsAdapter.submitList(emptyList())
-                    }
+                GroupViewModel.UiState.ShowEmptyGroups -> {
+                    Toast.makeText(
+                        context,
+                        "Category GroupViewModel.ShowEmptyGroups",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    groupsAdapter.submitList(emptyList())
+                }
 
-                    is GroupViewModel.UiState.ShowGroups -> {
-                        groupsAdapter.submitList(uiState.groups)
-                        Toast.makeText(
-                            context,
-                            "Category GroupViewModel.ShowGroups",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                is GroupViewModel.UiState.ShowGroups -> {
+                    groupsAdapter.submitList(uiState.groups)
+                    Toast.makeText(
+                        context,
+                        "Category GroupViewModel.ShowGroups",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
     }
+
 
     private fun bindingBottomSheetToCreateGroup() {
         // Crie um novo BottomSheetDialog aqui

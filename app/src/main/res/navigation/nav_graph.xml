@@ -13,7 +13,9 @@
 
         <action
             android:id="@+id/action_GroupsFragment_to_SoccerPlayerFragment"
-            app:destination="@id/SoccerPlayerFragment" />
+            app:destination="@id/SoccerPlayerFragment"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/SoccerPlayerFragment"
