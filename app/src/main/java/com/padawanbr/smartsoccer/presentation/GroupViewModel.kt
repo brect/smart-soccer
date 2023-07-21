@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import com.google.android.material.textfield.TextInputLayout
-import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
@@ -32,9 +30,9 @@ class GroupViewModel @Inject constructor(
                         AddGroupUseCase.Params(
                             0,
                             it.groupName,
-                            22,
-                            11,
-                            2,
+                            it.quantidadeMinimaJogadores,
+                            it.quantidadeMinimaJogadoresPorTime,
+                            it.quantidadeTimes,
                             arrayListOf(),
                             arrayListOf()
                         )
@@ -80,8 +78,18 @@ class GroupViewModel @Inject constructor(
         }
     }
 
-    fun createGroup(groupName: String) {
-        action.value = Action.CreateGroup(groupName)
+    fun createGroup(
+        groupName: String,
+        quantidadeMinimaJogadores: Int,
+        quantidadeMinimaJogadoresPorTime: Int,
+        quantidadeTimes: Int
+    ) {
+        action.value = Action.CreateGroup(
+            groupName,
+            quantidadeMinimaJogadores,
+            quantidadeMinimaJogadoresPorTime,
+            quantidadeTimes
+        )
     }
 
     fun getAll() {
@@ -101,6 +109,9 @@ class GroupViewModel @Inject constructor(
     sealed class Action {
         data class CreateGroup(
             val groupName: String,
+            val quantidadeMinimaJogadores: Int,
+            val quantidadeMinimaJogadoresPorTime: Int,
+            val quantidadeTimes: Int,
         ) : Action()
 
         object GetAll : Action()

@@ -1,14 +1,12 @@
-package com.example.marvelapp.presentation.common
+package com.padawanbr.smartsoccer.presentation.common
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.padawanbr.smartsoccer.presentation.common.CommonDiffCallback
-import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
-import com.padawanbr.smartsoccer.presentation.common.ListItem
 
 
 inline fun <T: ListItem, VH: CommonViewHolder<T>> getCommonAdapterOf(
-    crossinline createViewHolder: (ViewGroup) -> VH
+    crossinline createViewHolder: (ViewGroup) -> VH,
+    crossinline itemClicked: (T) -> Unit
 ): ListAdapter<T, VH> {
     val diffCallback = CommonDiffCallback<T>()
 
@@ -18,7 +16,9 @@ inline fun <T: ListItem, VH: CommonViewHolder<T>> getCommonAdapterOf(
         }
 
         override fun onBindViewHolder(holder: VH, position: Int) {
-            holder.bind(getItem(position))
+            val item = getItem(position)
+            holder.bind(item)
+            holder.itemView.setOnClickListener { itemClicked(item) }
         }
     }
 }

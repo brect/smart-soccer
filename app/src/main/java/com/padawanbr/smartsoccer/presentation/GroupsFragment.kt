@@ -7,13 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import androidx.navigation.fragment.findNavController
-import com.example.marvelapp.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
 import com.padawanbr.smartsoccer.databinding.FragmentGroupsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,11 +33,12 @@ class GroupsFragment : Fragment() {
     private val bottomSheetBinding: BottonsheetCreateGroupBinding get() = _bottomSheetBinding!!
 
     private val groupsAdapter by lazy {
-        getCommonAdapterOf {
-            GroupsViewHolder.create(
-                it
-            )
-        }
+        getCommonAdapterOf(
+            { GroupsViewHolder.create(it) },
+            { item: GrupoItem ->
+                Toast.makeText(context, "productsAdapter $item", Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
     override fun onCreateView(
@@ -83,29 +83,49 @@ class GroupsFragment : Fragment() {
             state.observe(viewLifecycleOwner) { uiState ->
                 when (uiState) {
                     GroupViewModel.UiState.Error -> {
-                        Toast.makeText(context, "Category GroupViewModel.UiState.Error", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Category GroupViewModel.UiState.Error",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
+
                     GroupViewModel.UiState.Loading -> {
-                        Toast.makeText(context, "Category GroupViewModel.UiState.Loading", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Category GroupViewModel.UiState.Loading",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
+
                     GroupViewModel.UiState.Success -> {
                         findNavController().navigate(R.id.action_GroupsFragment_to_SoccerPlayerFragment)
                         bottomSheetDialog.hide()
                     }
+
                     GroupViewModel.UiState.ShowEmptyGroups -> {
-                        Toast.makeText(context, "Category GroupViewModel.ShowEmptyGroups", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Category GroupViewModel.ShowEmptyGroups",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         groupsAdapter.submitList(emptyList())
                     }
+
                     is GroupViewModel.UiState.ShowGroups -> {
                         groupsAdapter.submitList(uiState.groups)
-                        Toast.makeText(context, "Category GroupViewModel.ShowGroups", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Category GroupViewModel.ShowGroups",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
         }
     }
 
-        private fun bindingBottomSheetToCreateGroup() {
+    private fun bindingBottomSheetToCreateGroup() {
         // Crie um novo BottomSheetDialog aqui
         bottomSheetDialog = BottomSheetDialog(requireContext())
 
@@ -118,7 +138,18 @@ class GroupsFragment : Fragment() {
         // Access elements in the layout using ViewBinding
         bottomSheetBinding.buttonCreateGroup.setOnClickListener {
             val textNameGroup = bottomSheetBinding.editTextTextInputGroupName.text.toString()
-            viewModel.createGroup(textNameGroup)
+            val qtdMinPlayers =
+                bottomSheetBinding.editTextTextInputQtdMinPlayers.text.toString().toInt()
+            val qtdNumberPlayersPerTeam =
+                bottomSheetBinding.editTextTextInputQtdNumberPlayersPerTeam.text.toString().toInt()
+            val qtdTeam = bottomSheetBinding.editTextTextInputQtdTeam.text.toString().toInt()
+
+            viewModel.createGroup(
+                textNameGroup,
+                qtdMinPlayers,
+                qtdNumberPlayersPerTeam,
+                qtdTeam
+            )
         }
     }
 
