@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:background="@drawable/background_group_item_rounded_border">
+
+    <TextView
+        android:id="@+id/textView_soccerPlayerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Bruno de Lima Silva"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayerAge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_soccerPlayerAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Idade: 30 anos"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayerAbility"
+        app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerName"
+        app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerName" />
+
+    <TextView
+        android:id="@+id/textView_soccerPlayerAbility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Habilidade: 4 estrelas"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/soccerPlayerPosition"
+        app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerName"
+        app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerAge" />
+
+    <TextView
+        android:id="@+id/soccerPlayerPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Posição: Lateral"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayerMedicalDepartment"
+        app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerName"
+        app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerAbility" />
+
+    <TextView
+        android:id="@+id/textView_soccerPlayerMedicalDepartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
+        android:text="Departamento Médico: "
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerName"
+        app:layout_constraintTop_toBottomOf="@+id/soccerPlayerPosition" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

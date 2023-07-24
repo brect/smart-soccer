@@ -16,6 +16,7 @@
             app:destination="@id/SoccerPlayerFragment"
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="false" />
+
     </fragment>
     <fragment
         android:id="@+id/SoccerPlayerFragment"
@@ -23,6 +24,15 @@
         android:label="@string/soccer_player_fragment_label"
         tools:layout="@layout/fragment_soccer_player">
 
+        <argument
+            android:name="isEditing"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="grupoItemViewArgs"
+            app:argType="com.padawanbr.smartsoccer.presentation.GrupoItemViewArgs"
+            android:defaultValue="@null"
+            app:nullable="true" />
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_GroupsFragment"
             app:destination="@id/GroupsFragment" />

@@ -6,8 +6,29 @@
     <string name="soccer_player_fragment_label">Jogadores</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
     <string name="minimo_de_jogadores">Mínimo de jogadores: %s</string>
     <string name="minimo_por_time">Mínimo por time: %s</string>
     <string name="quantidade_de_times">Quantidade de times: %s</string>
 
+
+
+    <string name="hint_text_input_name_item">Digite um nome para o item</string>
+    <string name="valor_unitario">Valor unit</string>
+    <string name="desconto">Desconto</string>
+    <string name="hint_text_input_dueDate">dd/mm/aaaa</string>
+    <string name="data_vencimento">Data vencimento</string>
+    <string name="save">Salvar</string>
+    <string name="exclude">Excluir</string>
+    <string name="default_monetary_value">R$ 00,00</string>
+    <string name="finish">Finalizar</string>
+    <string name="action_edit_list">Editar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="hint_text_input_category">Digite um nome para categoria</string>
+    <string name="label_title_category">Categoria</string>
+
+    <string name="name">Nome</string>
+    <string name="hint_text_input_name_list">Digite um nome para sua lista</string>
+    <string name="details_item_title">Details item</string>
+    <string name="idade">idade</string>
 </resources>
