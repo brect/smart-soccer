@@ -6,12 +6,15 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
+import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
 import com.padawanbr.smartsoccer.framework.db.entity.JogadorEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface JogadorDao {
+
     @Query("SELECT * FROM jogador")
-    fun getAll(): List<JogadorEntity>
+    fun getAll(): Flow<List<JogadorEntity>>
 
     @Insert
     fun insert(jogador: JogadorEntity)

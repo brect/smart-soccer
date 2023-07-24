@@ -36,5 +36,20 @@
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_GroupsFragment"
             app:destination="@id/GroupsFragment" />
+        <action
+            android:id="@+id/action_SoccerPlayerFragment_to_DetailsSoccerPlayerFragment"
+            app:destination="@id/detailsSoccerPlayerFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/detailsSoccerPlayerFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.DetailsSoccerPlayerFragment"
+        android:label="DetailsSoccerPlayerFragment" >
+
+        <argument
+            android:name="grupoId"
+            app:argType="integer" />
+
+    </fragment>
+
 </navigation>

@@ -15,14 +15,14 @@ class RoomGroupDataSource @Inject constructor(
     private val grupoDao: GrupoDao
 ) : GroupLocalDataSource {
 
-    override suspend fun saveGroup(grupo: Grupo) {
-        return grupoDao.insert(grupo.toGrupoEntity())
-    }
-
     override fun getAll(): Flow<List<Grupo>> {
         return grupoDao.getAll().map {
             it.toGroupModel()
         }
+    }
+
+    override suspend fun saveGroup(grupo: Grupo) {
+        return grupoDao.insert(grupo.toGrupoEntity())
     }
 
     private fun Grupo.toGrupoEntity() = GrupoEntity(
