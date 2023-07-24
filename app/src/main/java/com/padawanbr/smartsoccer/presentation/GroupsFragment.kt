@@ -104,6 +104,7 @@ class GroupsFragment : Fragment() {
                     }
                 }
             })
+
         }
 
 
@@ -129,7 +130,7 @@ class GroupsFragment : Fragment() {
                 }
 
                 GroupViewModel.UiState.Success -> {
-                    findNavController().navigate(R.id.action_GroupsFragment_to_SoccerPlayerFragment)
+//                    findNavController().navigate(R.id.action_GroupsFragment_to_SoccerPlayerFragment)
                     bottomSheetDialog.hide()
                 }
 

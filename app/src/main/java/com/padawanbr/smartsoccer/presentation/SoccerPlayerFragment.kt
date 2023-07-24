@@ -98,16 +98,16 @@ class SoccerPlayerFragment : Fragment() {
             setHasFixedSize(true)
             adapter = soccerPlayersAdapter
 
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            binding.recyclerSoccerPlayers.addOnScrollListener(object :
+                RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
 
-                    // Verificar se a rolagem atingiu a parte inferior da lista.
-                    if (!recyclerView.canScrollVertically(1)) {
-                        // Se a rolagem atingiu a parte inferior, oculte o FloatingActionButton.
+                    if (dy > 0 && binding.floatingActionButtonAddSoccer.isShown) {
+                        // Scroll para baixo e o FloatingActionButton está visível, oculta o FAB.
                         binding.floatingActionButtonAddSoccer.hide()
-                    } else {
-                        // Caso contrário, mostre o FloatingActionButton.
+                    } else if (dy < 0 && !binding.floatingActionButtonAddSoccer.isShown) {
+                        // Scroll para cima e o FloatingActionButton está oculto, mostra o FAB.
                         binding.floatingActionButtonAddSoccer.show()
                     }
                 }
