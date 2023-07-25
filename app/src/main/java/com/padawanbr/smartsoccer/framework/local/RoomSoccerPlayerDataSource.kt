@@ -1,12 +1,9 @@
 package com.padawanbr.smartsoccer.framework.local
 
 import com.padawanbr.smartsoccer.core.data.repository.SoccerPlayerLocalDataSource
-import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.framework.db.dao.JogadorDao
-import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
 import com.padawanbr.smartsoccer.framework.db.entity.JogadorEntity
-import com.padawanbr.smartsoccer.framework.db.entity.toGroupModel
 import com.padawanbr.smartsoccer.framework.db.entity.toSoccerPlayerModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,9 +12,7 @@
 
         <action
             android:id="@+id/action_GroupsFragment_to_SoccerPlayerFragment"
-            app:destination="@id/SoccerPlayerFragment"
-            app:popUpTo="@+id/nav_graph"
-            app:popUpToInclusive="false" />
+            app:destination="@id/SoccerPlayerFragment" />
 
     </fragment>
     <fragment
