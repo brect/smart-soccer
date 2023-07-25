@@ -32,4 +32,5 @@
     <string name="details_item_title">Details item</string>
     <string name="idade">idade</string>
     <string name="habilidade">Habilidade</string>
+    <string name="sort">Sortear</string>
 </resources>
