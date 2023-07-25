@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsSoccerPlayerBinding
@@ -21,6 +22,7 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
     private val binding: FragmentDetailsSoccerPlayerBinding get() = _binding!!
 
     private val viewModel: DetailsSoccerPlayerViewModel by viewModels()
+    private val sharedViewModel: SharedSoccerPlayerViewModel by activityViewModels()
 
     private lateinit var spinnerDetailsPlayerPosition: Spinner
     private lateinit var adapterDetailsPlayerPosition: ArrayAdapter<String>
@@ -111,6 +113,7 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 is DetailsSoccerPlayerViewModel.UiState.ShowSoccers -> {
                     Toast.makeText(
                         context,
@@ -118,12 +121,18 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                DetailsSoccerPlayerViewModel.UiState.Success -> {
+
+                is DetailsSoccerPlayerViewModel.UiState.Success -> {
                     Toast.makeText(
                         context,
                         "DetailsSoccerPlayerViewModel.UiState.Success",
                         Toast.LENGTH_SHORT
                     ).show()
+
+                    // Atualize a lista de jogadores no SoccerPlayerFragment
+                    sharedViewModel.updateSoccerPlayers(true)
+
+                    this.dismiss()
                 }
             }
         }

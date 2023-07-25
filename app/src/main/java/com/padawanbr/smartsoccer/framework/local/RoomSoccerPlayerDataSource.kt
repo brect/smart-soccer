@@ -17,7 +17,7 @@ class RoomSoccerPlayerDataSource @Inject constructor(
 ) : SoccerPlayerLocalDataSource {
 
     override suspend fun getAllSoccerPlayers(grupoId: Int): Flow<List<Jogador>> {
-        return jogadorDao.getAll().map {
+        return jogadorDao.getJogadoresByGrupo(grupoId).map {
             it.toSoccerPlayerModel()
         }
     }

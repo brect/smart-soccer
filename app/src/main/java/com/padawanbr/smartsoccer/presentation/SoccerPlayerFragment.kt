@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -35,6 +36,7 @@ class SoccerPlayerFragment : Fragment() {
     private val args by navArgs<SoccerPlayerFragmentArgs>()
 
     private val viewModel: SoccerPlayerViewModel by viewModels()
+    private val sharedViewModel: SharedSoccerPlayerViewModel by activityViewModels()
 
     private val soccerPlayersAdapter by lazy {
         getCommonAdapterOf(
@@ -71,6 +73,7 @@ class SoccerPlayerFragment : Fragment() {
         }
 
         observeUiState()
+        observeSharedUiState()
 
         val grupoId = args.grupoItemViewArgs?.id
 
@@ -87,10 +90,23 @@ class SoccerPlayerFragment : Fragment() {
                 )
             }
         }
+
+        getAllSoccers(grupoId)
+
+    }
+
+    private fun getAllSoccers(grupoId: Int?) {
         grupoId?.let {
             viewModel.getAllSoccerPlayers(grupoId)
         }
+    }
 
+    private fun observeSharedUiState() {
+        sharedViewModel.updateSoccerPlayers.observe(viewLifecycleOwner) {
+            // Atualize o adaptador com a nova lista de jogadores
+            val grupoId = args.grupoItemViewArgs?.id
+            getAllSoccers(grupoId)
+        }
     }
 
     private fun initSoccerPlayersAdapter() {
@@ -159,6 +175,10 @@ class SoccerPlayerFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onDestroyView() {

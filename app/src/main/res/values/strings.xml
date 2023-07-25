@@ -31,4 +31,5 @@
     <string name="hint_text_input_name_list">Digite um nome para sua lista</string>
     <string name="details_item_title">Details item</string>
     <string name="idade">idade</string>
+    <string name="habilidade">Habilidade</string>
 </resources>
