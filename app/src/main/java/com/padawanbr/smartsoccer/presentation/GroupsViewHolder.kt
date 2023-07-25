@@ -20,8 +20,8 @@ class GroupsViewHolder(
 
     override fun bind(data: GrupoItem) {
         textName.text = data.nome
-        textQtdMinPlayers.text = mContext.getString(R.string.minimo_por_time, data.quantidadeMinimaJogadores)
-        textQtdNumberPlayersPerTeam.text = mContext.getString(R.string.minimo_por_time, data.quantidadeMinimaJogadoresPorTime.toString())
+//        textQtdMinPlayers.text = mContext.getString(R.string.minimo_por_time, data.quantidadeMinimaJogadores)
+//        textQtdNumberPlayersPerTeam.text = mContext.getString(R.string.minimo_por_time, data.quantidadeMinimaJogadoresPorTime.toString())
         textQtdTeam.text = mContext.getString(R.string.quantidade_de_times, data.quantidadeTimes.toString())
     }
 

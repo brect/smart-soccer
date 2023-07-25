@@ -1,8 +1,11 @@
 package com.padawanbr.smartsoccer.framework.local
 
 import com.padawanbr.smartsoccer.core.data.repository.GroupLocalDataSource
+import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Grupo
+import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.framework.db.dao.GrupoDao
+import com.padawanbr.smartsoccer.framework.db.entity.ConfiguracaoEsporteEntity
 import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
 import com.padawanbr.smartsoccer.framework.db.entity.toGroupModel
 import kotlinx.coroutines.flow.Flow
@@ -28,9 +31,13 @@ class RoomGroupDataSource @Inject constructor(
     private fun Grupo.toGrupoEntity() = GrupoEntity(
         id,
         nome,
-        quantidadeMinimaJogadores,
-        quantidadeMinimaJogadoresPorTime,
-        quantidadeTimes
+        quantidadeTimes,
+        configuracaoEsporte.toConfiguracaoEsporteEntity() // Utilize a função de conversão aqui
+    )
+
+    private fun ConfiguracaoEsporte.toConfiguracaoEsporteEntity() = ConfiguracaoEsporteEntity(
+        tipoEsporte.toString(),
+        quantidadeMinimaPorTime
     )
 }
 

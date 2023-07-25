@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.padawanbr.smartsoccer.R
+import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import com.padawanbr.smartsoccer.databinding.FragmentGroupsBinding
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
@@ -42,9 +43,8 @@ class GroupsFragment : Fragment() {
                 directions.grupoItemViewArgs = GrupoItemViewArgs(
                     item.id,
                     item.nome,
-                    item.quantidadeMinimaJogadores,
-                    item.quantidadeMinimaJogadoresPorTime,
-                    item.quantidadeTimes
+                    item.quantidadeTimes,
+                    item.configuracaoEsporte.tipoEsporte
                 )
 
                 directions.isEditing = true
@@ -177,9 +177,8 @@ class GroupsFragment : Fragment() {
 
             viewModel.createGroup(
                 textNameGroup,
-                qtdMinPlayers,
-                qtdNumberPlayersPerTeam,
-                qtdTeam
+                qtdTeam,
+                TipoEsporte.FUTEBOL
             )
         }
     }

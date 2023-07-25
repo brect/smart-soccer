@@ -78,7 +78,6 @@ class SoccerPlayerFragment : Fragment() {
         val grupoId = args.grupoItemViewArgs?.id
 
         binding.floatingActionButtonAddSoccer.setOnClickListener {
-            val grupoId = args.grupoItemViewArgs?.id
             grupoId?.let {
                 val detailsSoccerPlayerFragment = DetailsSoccerPlayerFragment()
                 val bundle = Bundle()
@@ -101,14 +100,6 @@ class SoccerPlayerFragment : Fragment() {
         }
     }
 
-    private fun observeSharedUiState() {
-        sharedViewModel.updateSoccerPlayers.observe(viewLifecycleOwner) {
-            // Atualize o adaptador com a nova lista de jogadores
-            val grupoId = args.grupoItemViewArgs?.id
-            getAllSoccers(grupoId)
-        }
-    }
-
     private fun initSoccerPlayersAdapter() {
         binding.recyclerSoccerPlayers.run {
             setHasFixedSize(true)
@@ -128,6 +119,14 @@ class SoccerPlayerFragment : Fragment() {
                     }
                 }
             })
+        }
+    }
+
+    private fun observeSharedUiState() {
+        sharedViewModel.updateSoccerPlayers.observe(viewLifecycleOwner) {
+            // Atualize o adaptador com a nova lista de jogadores
+            val grupoId = args.grupoItemViewArgs?.id
+            getAllSoccers(grupoId)
         }
     }
 
@@ -175,10 +174,6 @@ class SoccerPlayerFragment : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onDestroyView() {

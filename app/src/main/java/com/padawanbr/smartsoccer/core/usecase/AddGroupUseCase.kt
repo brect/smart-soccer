@@ -2,9 +2,11 @@ package com.padawanbr.smartsoccer.core.usecase
 
 import com.padawanbr.smartsoccer.core.usecase.base.CoroutinesDispatchers
 import com.padawanbr.smartsoccer.core.data.repository.GroupRepository
+import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.core.domain.model.Sorteio
+import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.core.usecase.base.ResultStatus
 import com.padawanbr.smartsoccer.core.usecase.base.UseCase
 import kotlinx.coroutines.flow.Flow
@@ -18,28 +20,26 @@ interface AddGroupUseCase {
     data class Params(
         val id: Int,
         val nome: String,
-        val quantidadeMinimaJogadores: Int,
-        val quantidadeMinimaJogadoresPorTime: Int,
         val quantidadeTimes: Int,
+        val tipoEsporte: TipoEsporte,
         val jogadores: MutableList<Jogador>,
         val sorteios: MutableList<Sorteio>
     )
 }
 
 class AddGroupUseCaseImpl @Inject constructor(
-    private val respository: GroupRepository,
+    private val repository: GroupRepository,
     private val dispatchers: CoroutinesDispatchers,
 ) : UseCase<AddGroupUseCase.Params, Unit>(), AddGroupUseCase {
 
     override suspend fun doWork(params: AddGroupUseCase.Params): ResultStatus<Unit> {
         return withContext(dispatchers.io()) {
-            respository.saveGroup(
+            repository.saveGroup(
                 Grupo(
                     params.id,
                     params.nome,
-                    params.quantidadeMinimaJogadores,
-                    params.quantidadeMinimaJogadoresPorTime,
                     params.quantidadeTimes,
+                    ConfiguracaoEsporte(params.tipoEsporte, params.tipoEsporte.quantidadeMinimaPorTime),
                     params.jogadores,
                     params.sorteios
                 )

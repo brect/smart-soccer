@@ -5,6 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
+import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
+import com.padawanbr.smartsoccer.core.domain.model.Jogador
+import com.padawanbr.smartsoccer.core.domain.model.Sorteio
+import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
@@ -30,9 +34,8 @@ class GroupViewModel @Inject constructor(
                         AddGroupUseCase.Params(
                             0,
                             it.groupName,
-                            it.quantidadeMinimaJogadores,
-                            it.quantidadeMinimaJogadoresPorTime,
                             it.quantidadeTimes,
+                            it.tipoEsporte,
                             arrayListOf(),
                             arrayListOf()
                         )
@@ -59,9 +62,8 @@ class GroupViewModel @Inject constructor(
                                 GrupoItem(
                                     groups.id,
                                     groups.nome,
-                                    groups.quantidadeMinimaJogadores,
-                                    groups.quantidadeMinimaJogadoresPorTime,
                                     groups.quantidadeTimes,
+                                    groups.configuracaoEsporte,
                                     arrayListOf(),
                                     arrayListOf()
                                 )
@@ -80,15 +82,13 @@ class GroupViewModel @Inject constructor(
 
     fun createGroup(
         groupName: String,
-        quantidadeMinimaJogadores: Int,
-        quantidadeMinimaJogadoresPorTime: Int,
-        quantidadeTimes: Int
+        quantidadeTimes: Int,
+        tipoEsporte: TipoEsporte
     ) {
         action.value = Action.CreateGroup(
             groupName,
-            quantidadeMinimaJogadores,
-            quantidadeMinimaJogadoresPorTime,
-            quantidadeTimes
+            quantidadeTimes,
+            tipoEsporte
         )
     }
 
@@ -109,9 +109,8 @@ class GroupViewModel @Inject constructor(
     sealed class Action {
         data class CreateGroup(
             val groupName: String,
-            val quantidadeMinimaJogadores: Int,
-            val quantidadeMinimaJogadoresPorTime: Int,
             val quantidadeTimes: Int,
+            val tipoEsporte: TipoEsporte
         ) : Action()
 
         object GetAll : Action()

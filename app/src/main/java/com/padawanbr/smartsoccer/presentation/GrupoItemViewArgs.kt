@@ -2,6 +2,8 @@ package com.padawanbr.smartsoccer.presentation
 
 import android.os.Parcelable
 import androidx.annotation.Keep
+import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
+import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import kotlinx.parcelize.Parcelize
 
 
@@ -10,7 +12,6 @@ import kotlinx.parcelize.Parcelize
 data class GrupoItemViewArgs(
     val id: Int,
     val nome: String,
-    val quantidadeMinimaJogadores: Int,
-    val quantidadeMinimaJogadoresPorTime: Int,
     val quantidadeTimes: Int,
+    val tipoEsporte: TipoEsporte
 ) : Parcelable
