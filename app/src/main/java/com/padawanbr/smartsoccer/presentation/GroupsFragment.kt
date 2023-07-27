@@ -106,8 +106,6 @@ class GroupsFragment : Fragment() {
             })
 
         }
-
-
     }
 
     private fun observeUiState() {
@@ -154,7 +152,6 @@ class GroupsFragment : Fragment() {
             }
         }
     }
-
 
     private fun bindingBottomSheetToCreateGroup() {
         // Crie um novo BottomSheetDialog aqui

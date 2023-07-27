@@ -2,7 +2,9 @@ package com.padawanbr.smartsoccer.presentation
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.ItemGroupBinding
@@ -15,17 +17,17 @@ class SoccerPlayerViewHolder(
 ): CommonViewHolder<JogadorItem>(itemBinding){
 
     private val textViewSoccerPlayerName: TextView = itemBinding.textViewSoccerPlayerName
-    private val textViewSoccerPlayerAge: TextView = itemBinding.textViewSoccerPlayerAge
-    private val textViewSoccerPlayerAbility: TextView = itemBinding.textViewSoccerPlayerAbility
     private val soccerPlayerPosition: TextView = itemBinding.soccerPlayerPosition
-    private val textViewSoccerPlayerMedicalDepartment: TextView = itemBinding.textViewSoccerPlayerMedicalDepartment
+    private var textViewSoccerPlayerMedicalDepartment: ImageView = itemBinding.textViewSoccerPlayerMedicalDepartment
 
     override fun bind(data: JogadorItem) {
         textViewSoccerPlayerName.text = data.nome
-        textViewSoccerPlayerAge.text = data.idade.toString()
-        textViewSoccerPlayerAbility.text = data.classificacoes
         soccerPlayerPosition.text = data.posicoes
-        textViewSoccerPlayerMedicalDepartment.text = data.estaNoDepartamentoMedico.toString()
+
+        if (data.estaNoDepartamentoMedico == true) {
+            textViewSoccerPlayerMedicalDepartment.visibility = View.VISIBLE
+        }
+
     }
 
     companion object {

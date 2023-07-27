@@ -26,6 +26,9 @@ fun List<JogadorEntity>.toSoccerPlayerModel() = map {
     Jogador(
         it.id,
         it.nome,
-        it.idade
+        it.idade,
+        emptyList(),
+        it.classificacoes,
+        it.estaNoDepartamentoMedico
     )
 }

@@ -17,7 +17,8 @@ interface AddSoccerPlayerUseCase {
     data class Params(
         val grupoId: Int,
         val nome: String,
-        val idade: Int
+        val idade: Int,
+        val dm: Boolean
     )
 }
 
@@ -34,7 +35,7 @@ class AddSoccerPlayerUseCaseImpl @Inject constructor(
                     idade = params.idade,
                     posicoes = emptyList(),
                     classificacoes = emptyMap(),
-                    estaNoDepartamentoMedico = false
+                    estaNoDepartamentoMedico = params.dm
                 ),
                 params.grupoId,
             )

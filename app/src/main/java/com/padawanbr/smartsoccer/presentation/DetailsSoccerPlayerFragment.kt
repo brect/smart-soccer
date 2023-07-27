@@ -47,10 +47,13 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
             val textInputDetailsPlayerAge =
                 binding.editTextTextInputDetailsPlayerAge.text.toString().toInt()
 
+            val playerIsInDM = binding.switchDetailsPlayerDM.isChecked
+
             viewModel.createSoccer(
                 grupoId,
                 textInputDetailsPlayerName,
-                textInputDetailsPlayerAge
+                textInputDetailsPlayerAge,
+                playerIsInDM
             )
             Toast.makeText(context, "buttonSaveItem", Toast.LENGTH_SHORT).show()
         }

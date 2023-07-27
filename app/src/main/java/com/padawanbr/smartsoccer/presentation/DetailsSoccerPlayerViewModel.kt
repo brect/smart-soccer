@@ -30,7 +30,8 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
                         AddSoccerPlayerUseCase.Params(
                             it.groupId,
                             it.namePlayer,
-                            it.age
+                            it.age,
+                            it.dm
                         )
                     ).watchStatus(
                         loading = {
@@ -78,12 +79,14 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
     fun createSoccer(
         groupId: Int,
         namePlayer: String,
-        age: Int
+        age: Int,
+        dm: Boolean
     ) {
         action.value = Action.CreateSoccerPlayer(
             groupId,
             namePlayer,
-            age
+            age,
+            dm
         )
     }
 
@@ -105,7 +108,8 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
         data class CreateSoccerPlayer(
             val groupId: Int,
             val namePlayer: String,
-            val age: Int
+            val age: Int,
+            val dm: Boolean
         ) : Action()
 
         object GetAllSoccers : Action()

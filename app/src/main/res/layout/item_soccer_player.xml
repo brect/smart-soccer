@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
@@ -12,57 +13,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="Bruno de Lima Silva"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayerAge"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_soccerPlayerAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Idade: 30 anos"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayerAbility"
-        app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerName"
-        app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerName" />
-
-    <TextView
-        android:id="@+id/textView_soccerPlayerAbility"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Habilidade: 4 estrelas"
-        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/soccerPlayerPosition"
-        app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerName"
-        app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerAge" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/soccerPlayerPosition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Posição: Lateral"
-        android:layout_marginTop="4dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayerMedicalDepartment"
-        app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerName"
-        app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerAbility" />
-
-    <TextView
-        android:id="@+id/textView_soccerPlayerMedicalDepartment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="16dp"
-        android:text="Departamento Médico: "
+        android:text="Lateral"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerName"
-        app:layout_constraintTop_toBottomOf="@+id/soccerPlayerPosition" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerName" />
+
+    <ImageView
+        android:id="@+id/textView_soccerPlayerMedicalDepartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_round_healing_24"
+        android:visibility="invisible"
+        android:text="Departamento Médico: "
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayerName"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@android:style/Widget.Holo.Light.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:numStars="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView_soccerPlayerMedicalDepartment"
+        app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerMedicalDepartment" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
