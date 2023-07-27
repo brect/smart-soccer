@@ -28,7 +28,7 @@ class RoomSoccerPlayerDataSource @Inject constructor(
         idade = idade,
         posicao = posicao,
         habilidades = habilidades ?: emptyMap(),
-        estaNoDepartamentoMedico = false,
+        estaNoDepartamentoMedico = estaNoDepartamentoMedico ?: false,
         grupoId = grupoId
     )
 }
