@@ -6,7 +6,7 @@ data class JogadorItem(
     val id: Int?,
     val nome: String?,
     val idade: Int?,
-    val posicoes: String?,
+    val posicao: String?,
     val habilidades: Map<String, Float>?,
     var estaNoDepartamentoMedico: Boolean?,
     override val key: Long = id?.toLong()!!

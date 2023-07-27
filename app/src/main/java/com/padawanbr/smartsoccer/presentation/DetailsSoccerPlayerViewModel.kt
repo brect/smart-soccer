@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
+import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
@@ -28,6 +29,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
                             it.groupId,
                             it.playerName,
                             it.playerAge,
+                            it.playerPosition,
                             it.playerAbilitiesMap,
                             it.playerIsInDM
                         )
@@ -78,6 +80,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
         groupId: Int,
         playerName: String,
         playerAge: Int,
+        playerPosition: PosicaoJogador?,
         playerAbilitiesMap: Map<String, Float>,
         playerIsInDM: Boolean
     ) {
@@ -85,6 +88,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
             groupId,
             playerName,
             playerAge,
+            playerPosition,
             playerAbilitiesMap,
             playerIsInDM
         )
@@ -109,6 +113,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
             val groupId: Int,
             val playerName: String,
             val playerAge: Int,
+            val playerPosition: PosicaoJogador?,
             val playerAbilitiesMap: Map<String, Float>,
             val playerIsInDM: Boolean
         ) : Action()

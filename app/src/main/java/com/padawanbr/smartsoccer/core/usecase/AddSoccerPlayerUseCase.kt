@@ -2,6 +2,7 @@ package com.padawanbr.smartsoccer.core.usecase
 
 import com.padawanbr.smartsoccer.core.data.repository.SoccerPlayerRepository
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
+import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.core.usecase.base.CoroutinesDispatchers
 import com.padawanbr.smartsoccer.core.usecase.base.ResultStatus
 import com.padawanbr.smartsoccer.core.usecase.base.UseCase
@@ -18,6 +19,7 @@ interface AddSoccerPlayerUseCase {
         val groupId: Int,
         val playerName: String,
         val playerAge: Int,
+        val playerPosition: PosicaoJogador?,
         val playerAbilitiesMap: Map<String, Float>,
         val playerIsInDM: Boolean
     )
@@ -34,7 +36,7 @@ class AddSoccerPlayerUseCaseImpl @Inject constructor(
                 Jogador(
                     nome = params.playerName,
                     idade = params.playerAge,
-                    posicoes = emptyList(),
+                    posicao = params.playerPosition,
                     habilidades = params.playerAbilitiesMap,
                     estaNoDepartamentoMedico = params.playerIsInDM
                 ),

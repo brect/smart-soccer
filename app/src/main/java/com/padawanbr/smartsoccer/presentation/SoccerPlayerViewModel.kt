@@ -33,7 +33,7 @@ class SoccerPlayerViewModel @Inject constructor(
                                     soccers.id,
                                     soccers.nome,
                                     soccers.idade,
-                                    soccers.posicoes.toString(),
+                                    "${soccers.posicao?.funcao} (${soccers.posicao?.abreviacao})",
                                     soccers.habilidades,
                                     soccers.estaNoDepartamentoMedico
                                 )
@@ -46,6 +46,7 @@ class SoccerPlayerViewModel @Inject constructor(
                             emit(uiState)
                         }
                 }
+
                 else -> {}
             }
         }

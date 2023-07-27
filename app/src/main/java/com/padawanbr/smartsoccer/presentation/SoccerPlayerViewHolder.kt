@@ -23,7 +23,7 @@ class SoccerPlayerViewHolder(
 
     override fun bind(data: JogadorItem) {
         textViewSoccerPlayerName.text = data.nome
-        soccerPlayerPosition.text = data.posicoes
+        soccerPlayerPosition.text = data.posicao
 
         if (data.estaNoDepartamentoMedico == true) {
             textViewSoccerPlayerMedicalDepartment.visibility = View.VISIBLE

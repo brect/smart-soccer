@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsSoccerPlayerBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,6 +49,11 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
             val playerName = binding.editTextTextInputDetailsPlayerName.text.toString()
             val playerAge = binding.editTextTextInputDetailsPlayerAge.text.toString().toInt()
 
+            // Obtenha o enum PosicaoJogador selecionado no Spinner
+            val selectedPosition = spinnerDetailsPlayerPosition.selectedItem as String
+            val playerPositionString = selectedPosition.substringBefore("(").trim() // Obtém apenas a posição, ignorando a abreviação
+            val playerPosition = PosicaoJogador.values().find { it.funcao == playerPositionString }
+
             val playerAbilitiesMap = createPlayerAbilitiesMap()
 
             val playerIsInDM = binding.switchDetailsPlayerDM.isChecked
@@ -56,6 +62,7 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
                 grupoId,
                 playerName,
                 playerAge,
+                playerPosition,
                 playerAbilitiesMap,
                 playerIsInDM
             )
@@ -125,8 +132,9 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
     private fun initSpinnerDetailsPlayerAdapter() {
         spinnerDetailsPlayerPosition = binding.spinnerDetailsPlayerPosition
 
-        val detailsPlayerPositions =
-            arrayOf("Selecione uma posição", "posição 1", "posição 2", "posição 3")
+        val detailsPlayerPositions = PosicaoJogador.values().map { posicao ->
+            "${posicao.funcao} (${posicao.abreviacao})"
+        }.toMutableList()
 
         adapterDetailsPlayerPosition =
             ArrayAdapter(requireContext(), R.layout.simple_list_item_1, detailsPlayerPositions)
@@ -136,16 +144,16 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
         spinnerDetailsPlayerPosition.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    // You can define you actions as you want
+                    // Obtenha o enum PosicaoJogador selecionado no Spinner
+                    val selectedPosition = PosicaoJogador.values()[p2]
+                    // Agora você pode usar o enum PosicaoJogador diretamente, por exemplo:
+                    val posicao = selectedPosition.funcao // Nome da posição
+                    val abreviacao = selectedPosition.abreviacao // Abreviação da posição
+                    // Outras ações que você deseja realizar com o enum PosicaoJogador
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    val selectedObject = spinnerDetailsPlayerPosition.selectedItem as String
-                    Toast.makeText(
-                        requireContext(),
-                        "ID: ${selectedObject} Name: ${selectedObject}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    // Lida com o caso em que nada foi selecionado
                 }
             }
     }

@@ -3,6 +3,7 @@ package com.padawanbr.smartsoccer.framework.db.entity
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 
 class PosicoesConverter {
     @TypeConverter
@@ -14,6 +15,18 @@ class PosicoesConverter {
     @TypeConverter
     fun fromMap(map: Map<String, Int>): String {
         return Gson().toJson(map)
+    }
+}
+
+class PosicaoJogadorConverter {
+    @TypeConverter
+    fun fromPosicaoJogador(tipoPosicao: PosicaoJogador?): String? {
+        return tipoPosicao?.name
+    }
+
+    @TypeConverter
+    fun toPosicaoJogador(tipoPosicao: String?): PosicaoJogador? {
+        return tipoPosicao?.let { enumValueOf<PosicaoJogador>(it) }
     }
 }
 

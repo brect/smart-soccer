@@ -26,7 +26,7 @@ class RoomSoccerPlayerDataSource @Inject constructor(
     private fun Jogador.toJogadorEntity(grupoId: Int) = JogadorEntity(
         nome = nome,
         idade = idade,
-        posicoes = emptyMap(),
+        posicao = posicao,
         habilidades = habilidades ?: emptyMap(),
         estaNoDepartamentoMedico = false,
         grupoId = grupoId
