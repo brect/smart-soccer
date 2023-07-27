@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
@@ -90,21 +91,19 @@ class GroupsFragment : Fragment() {
             setHasFixedSize(true)
             adapter = groupsAdapter
 
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            binding.recyclerGroupItens.addOnScrollListener(object :
+                RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
-
-                    // Verificar se a rolagem atingiu a parte inferior da lista.
-                    if (!recyclerView.canScrollVertically(1)) {
-                        // Se a rolagem atingiu a parte inferior, oculte o FloatingActionButton.
+                    if (dy > 0 && binding.floatingActionButton.isShown) {
+                        // Scroll para baixo e o FloatingActionButton está visível, oculta o FAB.
                         binding.floatingActionButton.hide()
-                    } else {
-                        // Caso contrário, mostre o FloatingActionButton.
+                    } else if (dy < 0 && !binding.floatingActionButton.isShown) {
+                        // Scroll para cima e o FloatingActionButton está oculto, mostra o FAB.
                         binding.floatingActionButton.show()
                     }
                 }
             })
-
         }
     }
 
