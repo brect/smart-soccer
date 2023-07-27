@@ -27,7 +27,7 @@ class RoomSoccerPlayerDataSource @Inject constructor(
         nome = nome,
         idade = idade,
         posicoes = emptyMap(),
-        classificacoes = emptyMap(),
+        habilidades = habilidades ?: emptyMap(),
         estaNoDepartamentoMedico = false,
         grupoId = grupoId
     )

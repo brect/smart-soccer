@@ -39,27 +39,87 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         initSpinnerDetailsPlayerAdapter()
 
+        ratingBarAbilityBinding()
+
         binding.buttonSaveItem.setOnClickListener {
 
             val grupoId = arguments?.getInt("grupoId", -1) ?: -1
-            val textInputDetailsPlayerName =
-                binding.editTextTextInputDetailsPlayerName.text.toString()
-            val textInputDetailsPlayerAge =
-                binding.editTextTextInputDetailsPlayerAge.text.toString().toInt()
+
+            val playerName = binding.editTextTextInputDetailsPlayerName.text.toString()
+            val playerAge = binding.editTextTextInputDetailsPlayerAge.text.toString().toInt()
+
+            val playerAbilitiesMap = createPlayerAbilitiesMap()
 
             val playerIsInDM = binding.switchDetailsPlayerDM.isChecked
 
             viewModel.createSoccer(
                 grupoId,
-                textInputDetailsPlayerName,
-                textInputDetailsPlayerAge,
+                playerName,
+                playerAge,
+                playerAbilitiesMap,
                 playerIsInDM
             )
+
             Toast.makeText(context, "buttonSaveItem", Toast.LENGTH_SHORT).show()
         }
 
         observeUiState()
 
+    }
+
+    private fun createPlayerAbilitiesMap(): Map<String, Float> {
+        val playerAbilitiesMap = mutableMapOf<String, Float>()
+
+        playerAbilitiesMap[binding.itemPlayerRatingSpeed.textViewSoccerPlayerAbility.text.toString()] =
+            binding.itemPlayerRatingSpeed.ratingBarAbility.rating
+        playerAbilitiesMap[binding.itemPlayerRatingKick.textViewSoccerPlayerAbility.text.toString()] =
+            binding.itemPlayerRatingKick.ratingBarAbility.rating
+        playerAbilitiesMap[binding.itemPlayerRatingPass.textViewSoccerPlayerAbility.text.toString()] =
+            binding.itemPlayerRatingPass.ratingBarAbility.rating
+        playerAbilitiesMap[binding.itemPlayerRatingMarking.textViewSoccerPlayerAbility.text.toString()] =
+            binding.itemPlayerRatingMarking.ratingBarAbility.rating
+        playerAbilitiesMap[binding.itemPlayerRatingDribble.textViewSoccerPlayerAbility.text.toString()] =
+            binding.itemPlayerRatingDribble.ratingBarAbility.rating
+        playerAbilitiesMap[binding.itemPlayerRatingRace.textViewSoccerPlayerAbility.text.toString()] =
+            binding.itemPlayerRatingRace.ratingBarAbility.rating
+
+        return playerAbilitiesMap
+    }
+
+    private fun ratingBarAbilityBinding() {
+        // Criar uma lista com os IDs dos itens para facilitar o loop
+        val itemBindings = listOf(
+            binding.itemPlayerRatingSpeed,
+            binding.itemPlayerRatingKick,
+            binding.itemPlayerRatingPass,
+            binding.itemPlayerRatingMarking,
+            binding.itemPlayerRatingDribble,
+            binding.itemPlayerRatingRace
+        )
+
+        // Criar uma lista com as habilidades correspondentes
+        val abilities = listOf(
+            "Velocidade",
+            "Chute",
+            "Passe",
+            "Marcação",
+            "Drible",
+            "Raça"
+        )
+
+        // Loop para atribuir as labels e atualizar os valores dos TextViews
+        for (i in itemBindings.indices) {
+            val itemBinding = itemBindings[i]
+            itemBinding.soccerPlayerAbility = abilities[i]
+
+            val textViewScore = itemBinding.textViewSoccerPlayerScore
+            textViewScore.text = String.format("%.1f", itemBinding.ratingBarAbility.rating)
+
+            // Configurar o setOnRatingBarChangeListener para cada RatingBar individualmente
+            itemBinding.ratingBarAbility.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+                textViewScore.text = String.format("%.1f", rating)
+            }
+        }
     }
 
     private fun initSpinnerDetailsPlayerAdapter() {

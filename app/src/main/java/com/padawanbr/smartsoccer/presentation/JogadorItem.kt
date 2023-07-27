@@ -7,8 +7,21 @@ data class JogadorItem(
     val nome: String?,
     val idade: Int?,
     val posicoes: String?,
-    val classificacoes: String?,
+    val habilidades: Map<String, Float>?,
     var estaNoDepartamentoMedico: Boolean?,
-
     override val key: Long = id?.toLong()!!
-) : ListItem
+) : ListItem {
+    // Função de extensão para calcular a média das habilidades
+    fun calcularMediaHabilidades(): Float {
+        // Verifica se o mapa de habilidades não é nulo e não está vazio
+        habilidades?.let {
+            if (it.isNotEmpty()) {
+                // Calcula a média das habilidades
+                val somaHabilidades = it.values.sum()
+                return somaHabilidades / it.size
+            }
+        }
+        // Retorna 0.0 se não houver habilidades ou o mapa for nulo/vazio
+        return 0.0f
+    }
+}

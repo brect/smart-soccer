@@ -5,6 +5,6 @@ data class Jogador(
     val nome: String,
     val idade: Int,
     val posicoes: List<PosicaoJogador>? = null,
-    val classificacoes: Map<String, Double>? = null,
+    val habilidades: Map<String, Float>? = null,
     var estaNoDepartamentoMedico: Boolean? = null
 )

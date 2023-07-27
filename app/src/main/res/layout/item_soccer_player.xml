@@ -43,13 +43,13 @@
         android:visibility="invisible"
         android:text="Departamento Médico: "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar_averageSoccerPlayer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayerName"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/ratingBar_averageSoccerPlayer"
         style="@android:style/Widget.Holo.Light.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -34,7 +34,7 @@ class SoccerPlayerViewModel @Inject constructor(
                                     soccers.nome,
                                     soccers.idade,
                                     soccers.posicoes.toString(),
-                                    soccers.classificacoes.toString(),
+                                    soccers.habilidades,
                                     soccers.estaNoDepartamentoMedico
                                 )
                             }

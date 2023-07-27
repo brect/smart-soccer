@@ -16,7 +16,7 @@ data class JogadorEntity(
     @TypeConverters(PosicoesConverter::class)
     val posicoes: Map<String, Int> = emptyMap(),
     @TypeConverters(ClassificacoesConverter::class)
-    val classificacoes: Map<String, Double> = emptyMap(),
+    val habilidades: Map<String, Float> = emptyMap(),
     var estaNoDepartamentoMedico: Boolean = false,
     @ColumnInfo(name = "grupoId")
     val grupoId: Int  // Relacionamento reverso apontando para o grupo ao qual o jogador pertence
@@ -28,7 +28,7 @@ fun List<JogadorEntity>.toSoccerPlayerModel() = map {
         it.nome,
         it.idade,
         emptyList(),
-        it.classificacoes,
+        it.habilidades,
         it.estaNoDepartamentoMedico
     )
 }

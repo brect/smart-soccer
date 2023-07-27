@@ -14,11 +14,12 @@ import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
 class SoccerPlayerViewHolder(
     itemBinding: ItemSoccerPlayerBinding,
     private val mContext: Context
-): CommonViewHolder<JogadorItem>(itemBinding){
+) : CommonViewHolder<JogadorItem>(itemBinding) {
 
     private val textViewSoccerPlayerName: TextView = itemBinding.textViewSoccerPlayerName
     private val soccerPlayerPosition: TextView = itemBinding.soccerPlayerPosition
-    private var textViewSoccerPlayerMedicalDepartment: ImageView = itemBinding.textViewSoccerPlayerMedicalDepartment
+    private val textViewSoccerPlayerMedicalDepartment: ImageView = itemBinding.textViewSoccerPlayerMedicalDepartment
+    private val ratingBarAverageSoccerPlayer = itemBinding.ratingBarAverageSoccerPlayer
 
     override fun bind(data: JogadorItem) {
         textViewSoccerPlayerName.text = data.nome
@@ -28,6 +29,7 @@ class SoccerPlayerViewHolder(
             textViewSoccerPlayerMedicalDepartment.visibility = View.VISIBLE
         }
 
+        ratingBarAverageSoccerPlayer.rating = data.calcularMediaHabilidades()
     }
 
     companion object {

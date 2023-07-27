@@ -19,13 +19,13 @@ class PosicoesConverter {
 
 class ClassificacoesConverter {
     @TypeConverter
-    fun fromString(value: String): Map<String, Double> {
-        val mapType = object : TypeToken<Map<String, Double>>() {}.type
+    fun fromString(value: String): Map<String, Float> {
+        val mapType = object : TypeToken<Map<String, Float>>() {}.type
         return Gson().fromJson(value, mapType)
     }
 
     @TypeConverter
-    fun fromMap(map: Map<String, Double>): String {
+    fun fromMap(map: Map<String, Float>): String {
         return Gson().toJson(map)
     }
 }

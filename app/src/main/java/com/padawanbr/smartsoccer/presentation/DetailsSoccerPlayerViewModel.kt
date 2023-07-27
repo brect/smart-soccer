@@ -5,13 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCase
-import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,9 +26,10 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
                     addSoccerPlayerUseCase.invoke(
                         AddSoccerPlayerUseCase.Params(
                             it.groupId,
-                            it.namePlayer,
-                            it.age,
-                            it.dm
+                            it.playerName,
+                            it.playerAge,
+                            it.playerAbilitiesMap,
+                            it.playerIsInDM
                         )
                     ).watchStatus(
                         loading = {
@@ -78,15 +76,17 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
 
     fun createSoccer(
         groupId: Int,
-        namePlayer: String,
-        age: Int,
-        dm: Boolean
+        playerName: String,
+        playerAge: Int,
+        playerAbilitiesMap: Map<String, Float>,
+        playerIsInDM: Boolean
     ) {
         action.value = Action.CreateSoccerPlayer(
             groupId,
-            namePlayer,
-            age,
-            dm
+            playerName,
+            playerAge,
+            playerAbilitiesMap,
+            playerIsInDM
         )
     }
 
@@ -107,9 +107,10 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
     sealed class Action {
         data class CreateSoccerPlayer(
             val groupId: Int,
-            val namePlayer: String,
-            val age: Int,
-            val dm: Boolean
+            val playerName: String,
+            val playerAge: Int,
+            val playerAbilitiesMap: Map<String, Float>,
+            val playerIsInDM: Boolean
         ) : Action()
 
         object GetAllSoccers : Action()

@@ -11,161 +11,164 @@
         android:id="@+id/add_item_drag_handle"
         android:layout_width="80dp"
         android:layout_height="4dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/drag_handle_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/container_details"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/text_details_soccer_title"
+        <LinearLayout
+            android:id="@+id/container_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Detalhes do jogador"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
+            android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput_detailsPlayerName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/name"
-            app:expandedHintEnabled="false"
-            app:hintEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_details_soccer_title">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_textInput_detailsPlayerName"
+            <TextView
+                android:id="@+id/text_details_soccer_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_text_input_name_item" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="24dp"
+                android:text="Detalhes do jogador"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput_detailsPlayerAge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/idade"
-            app:expandedHintEnabled="false"
-            app:hintEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_details_soccer_title">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_textInput_detailsPlayerAge"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_detailsPlayerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Digite a idade do jogador" />
+                android:layout_marginTop="16dp"
+                android:hint="@string/name"
+                app:expandedHintEnabled="false"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_details_soccer_title">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_textInput_detailsPlayerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_text_input_name_item" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInput_detailsPlayerAbility"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/habilidade"
-            app:expandedHintEnabled="false"
-            app:hintEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_details_soccer_title">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_textInput_detailsPlayerAbility"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_detailsPlayerAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Digite a habilidade" />
+                android:layout_marginTop="16dp"
+                android:hint="@string/idade"
+                app:expandedHintEnabled="false"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_details_soccer_title">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_textInput_detailsPlayerAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Digite a idade do jogador" />
 
-        <Spinner
-            android:id="@+id/spinner_detailsPlayerPosition"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/background_border_stroke"
-            app:layout_constraintTop_toBottomOf="@+id/textInput_dueDate"
-            tools:layout_editor_absoluteX="24dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <Switch
-            android:id="@+id/switch_detailsPlayerDM"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Está no DM?"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInput_add_item" />
-
-
-        <ViewFlipper
-            android:id="@+id/flipper_save_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/flipper_exclude_item"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_save_item"
+            <Spinner
+                android:id="@+id/spinner_detailsPlayerPosition"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:text="@string/save"
-                android:textAllCaps="false" />
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_border_stroke"
+                app:layout_constraintTop_toBottomOf="@+id/textInput_dueDate"
+                tools:layout_editor_absoluteX="24dp" />
 
-            <ProgressBar
-                android:id="@+id/progress_save_item"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center" />
-        </ViewFlipper>
-
-        <ViewFlipper
-            android:id="@+id/flipper_exclude_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/flipper_save_item"
-            app:layout_constraintStart_toStartOf="@+id/flipper_save_item"
-            app:layout_constraintTop_toBottomOf="@+id/flipper_save_item">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_exclude_item"
+            <Switch
+                android:id="@+id/switch_detailsPlayerDM"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:text="@string/exclude"
-                android:textAllCaps="false" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Está no DM?"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInput_add_item" />
 
-            <ProgressBar
-                android:id="@+id/progress_exclude_item"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center" />
+            <include
+                android:id="@+id/item_player_rating_speed"
+                layout="@layout/item_player_rating" />
 
-        </ViewFlipper>
-    </LinearLayout>
+            <include
+                android:id="@+id/item_player_rating_kick"
+                layout="@layout/item_player_rating" />
+
+            <include
+                android:id="@+id/item_player_rating_pass"
+                layout="@layout/item_player_rating" />
+
+            <include
+                android:id="@+id/item_player_rating_marking"
+                layout="@layout/item_player_rating" />
+
+            <include
+                android:id="@+id/item_player_rating_dribble"
+                layout="@layout/item_player_rating" />
+
+            <include
+                android:id="@+id/item_player_rating_race"
+                layout="@layout/item_player_rating" />
+
+            <ViewFlipper
+                android:id="@+id/flipper_save_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintBottom_toTopOf="@+id/flipper_exclude_item"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_save_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:text="@string/save"
+                    android:textAllCaps="false" />
+
+                <ProgressBar
+                    android:id="@+id/progress_save_item"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </ViewFlipper>
+
+            <ViewFlipper
+                android:id="@+id/flipper_exclude_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/flipper_save_item"
+                app:layout_constraintStart_toStartOf="@+id/flipper_save_item"
+                app:layout_constraintTop_toBottomOf="@+id/flipper_save_item">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_exclude_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:text="@string/exclude"
+                    android:textAllCaps="false" />
+
+                <ProgressBar
+                    android:id="@+id/progress_exclude_item"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+
+            </ViewFlipper>
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
