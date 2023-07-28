@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.padawanbr.smartsoccer.R
+import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import com.padawanbr.smartsoccer.databinding.FragmentGroupsBinding
@@ -30,6 +35,7 @@ class GroupsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: GroupViewModel by viewModels()
+    private val sharedViewModel: SharedGroupsViewModel by activityViewModels()
 
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var _bottomSheetBinding: BottonsheetCreateGroupBinding? = null
@@ -72,16 +78,16 @@ class GroupsFragment : Fragment() {
 
         initGroupsAdapter()
 
-        bindingBottomSheetToCreateGroup()
-
         binding.floatingActionButton.setOnClickListener {
-            bottomSheetDialog.show()
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.floatingActionButton)
-                .setAction("Action", null).show()
+            val createGroupFragment = CreateGroupFragment()
+            createGroupFragment.show(
+                childFragmentManager,
+                "CreateGroupFragment"
+            )
         }
 
         observeUiState()
+        observeSharedUiState()
 
         viewModel.getAll()
     }
@@ -141,30 +147,9 @@ class GroupsFragment : Fragment() {
         }
     }
 
-    private fun bindingBottomSheetToCreateGroup() {
-        // Crie um novo BottomSheetDialog aqui
-        bottomSheetDialog = BottomSheetDialog(requireContext())
-
-        // Inflate your custom layout with ViewBinding
-        _bottomSheetBinding = BottonsheetCreateGroupBinding.inflate(layoutInflater)
-
-        // Set the custom layout as the content view of the BottomSheetDialog
-        bottomSheetDialog.setContentView(bottomSheetBinding.root)
-
-        // Access elements in the layout using ViewBinding
-        bottomSheetBinding.buttonCreateGroup.setOnClickListener {
-            val textNameGroup = bottomSheetBinding.editTextTextInputGroupName.text.toString()
-            val qtdMinPlayers =
-                bottomSheetBinding.editTextTextInputQtdMinPlayers.text.toString().toInt()
-            val qtdNumberPlayersPerTeam =
-                bottomSheetBinding.editTextTextInputQtdNumberPlayersPerTeam.text.toString().toInt()
-            val qtdTeam = bottomSheetBinding.editTextTextInputQtdTeam.text.toString().toInt()
-
-            viewModel.createGroup(
-                textNameGroup,
-                qtdTeam,
-                TipoEsporte.FUTEBOL
-            )
+    private fun observeSharedUiState() {
+        sharedViewModel.updateGroups.observe(viewLifecycleOwner) {
+            viewModel.getAll()
         }
     }
 

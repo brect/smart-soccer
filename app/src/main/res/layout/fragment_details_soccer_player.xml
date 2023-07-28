@@ -80,7 +80,7 @@
             <Spinner
                 android:id="@+id/spinner_detailsPlayerPosition"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="58dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/background_border_stroke"
                 app:layout_constraintTop_toBottomOf="@+id/textInput_dueDate"
