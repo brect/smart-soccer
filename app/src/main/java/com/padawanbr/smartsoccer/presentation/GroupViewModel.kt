@@ -45,6 +45,7 @@ class GroupViewModel @Inject constructor(
                         },
                         success = {
                             emit(UiState.Success)
+                            getAll()
                         },
                         error = {
                             emit(UiState.Error)

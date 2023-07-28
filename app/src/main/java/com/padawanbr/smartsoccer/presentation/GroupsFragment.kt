@@ -113,7 +113,7 @@ class GroupsFragment : Fragment() {
                 GroupViewModel.UiState.Error -> {
                     Toast.makeText(
                         context,
-                        "Category GroupViewModel.UiState.Error",
+                        "Groups GroupViewModel.UiState.Error",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -121,32 +121,21 @@ class GroupsFragment : Fragment() {
                 GroupViewModel.UiState.Loading -> {
                     Toast.makeText(
                         context,
-                        "Category GroupViewModel.UiState.Loading",
+                        "Groups GroupViewModel.UiState.Loading",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
 
                 GroupViewModel.UiState.Success -> {
-//                    findNavController().navigate(R.id.action_GroupsFragment_to_SoccerPlayerFragment)
                     bottomSheetDialog.hide()
                 }
 
                 GroupViewModel.UiState.ShowEmptyGroups -> {
-                    Toast.makeText(
-                        context,
-                        "Category GroupViewModel.ShowEmptyGroups",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     groupsAdapter.submitList(emptyList())
                 }
 
                 is GroupViewModel.UiState.ShowGroups -> {
                     groupsAdapter.submitList(uiState.groups)
-                    Toast.makeText(
-                        context,
-                        "Category GroupViewModel.ShowGroups",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             }
         }
