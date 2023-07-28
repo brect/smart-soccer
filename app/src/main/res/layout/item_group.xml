@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
@@ -9,50 +10,32 @@
 
     <TextView
         android:id="@+id/textView_group_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="14dp"
+        android:layout_marginEnd="16dp"
         android:text="Nome do grupo"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView_minPlayers"
+        app:layout_constraintBottom_toTopOf="@+id/textView_groupType"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textView_minPlayers"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView_groupType"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="4dp"
-        android:text="@string/minimo_de_jogadores"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
+        android:text="FUTEBOL"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_numberPlayersPerTeam"
-        app:layout_constraintStart_toStartOf="@+id/textView_numberPlayersPerTeam"
-        app:layout_constraintTop_toBottomOf="@+id/textView_group_title" />
-
-    <TextView
-        android:id="@+id/textView_numberPlayersPerTeam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="4dp"
-        android:text="@string/minimo_por_time"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_qtdTeam"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView_group_title"
         app:layout_constraintStart_toStartOf="@+id/textView_group_title"
         app:layout_constraintTop_toBottomOf="@+id/textView_group_title" />
-
-    <TextView
-        android:id="@+id/textView_qtdTeam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:text="@string/quantidade_de_times"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_numberPlayersPerTeam"
-        app:layout_constraintStart_toStartOf="@+id/textView_group_title"
-        app:layout_constraintTop_toBottomOf="@+id/textView_numberPlayersPerTeam" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

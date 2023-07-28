@@ -14,15 +14,11 @@ class GroupsViewHolder(
 ): CommonViewHolder<GrupoItem>(itemBinding){
 
     private val textName: TextView = itemBinding.textViewGroupTitle
-    private val textQtdMinPlayers: TextView = itemBinding.textViewMinPlayers
-    private val textQtdNumberPlayersPerTeam: TextView = itemBinding.textViewNumberPlayersPerTeam
-    private val textQtdTeam: TextView = itemBinding.textViewQtdTeam
+    private val textType: TextView = itemBinding.textViewGroupType
 
     override fun bind(data: GrupoItem) {
         textName.text = data.nome
-//        textQtdMinPlayers.text = mContext.getString(R.string.minimo_por_time, data.quantidadeMinimaJogadores)
-//        textQtdNumberPlayersPerTeam.text = mContext.getString(R.string.minimo_por_time, data.quantidadeMinimaJogadoresPorTime.toString())
-        textQtdTeam.text = mContext.getString(R.string.quantidade_de_times, data.quantidadeTimes.toString())
+        textType.text = data.configuracaoEsporte.tipoEsporte.tipo
     }
 
     companion object {

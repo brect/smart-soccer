@@ -43,6 +43,9 @@ class SoccerPlayerFragment : Fragment() {
             { SoccerPlayerViewHolder.create(it) },
             { item: JogadorItem ->
                 Toast.makeText(context, "productsAdapter $item", Toast.LENGTH_SHORT).show()
+            },
+            { item: JogadorItem ->
+                Toast.makeText(context, "productsAdapter onLongClicked $item", Toast.LENGTH_SHORT).show()
             }
         )
     }

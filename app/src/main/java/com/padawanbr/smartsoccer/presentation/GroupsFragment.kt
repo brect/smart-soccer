@@ -4,21 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
-import com.padawanbr.smartsoccer.R
-import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
-import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import com.padawanbr.smartsoccer.databinding.FragmentGroupsBinding
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
@@ -29,17 +21,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class GroupsFragment : Fragment() {
 
     private var _binding: FragmentGroupsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val viewModel: GroupViewModel by viewModels()
     private val sharedViewModel: SharedGroupsViewModel by activityViewModels()
-
-    private lateinit var bottomSheetDialog: BottomSheetDialog
-    private var _bottomSheetBinding: BottonsheetCreateGroupBinding? = null
-    private val bottomSheetBinding: BottonsheetCreateGroupBinding get() = _bottomSheetBinding!!
 
     private val groupsAdapter by lazy {
         getCommonAdapterOf(
@@ -57,7 +42,13 @@ class GroupsFragment : Fragment() {
                 directions.isEditing = true
 
                 findNavController().navigate(directions)
-//                Toast.makeText(context, "productsAdapter $item", Toast.LENGTH_SHORT).show()
+            },
+            { item: GrupoItem ->
+                Toast.makeText(
+                    context,
+                    "GroupsAdapter itemLongClicked $item",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         )
     }
@@ -133,7 +124,11 @@ class GroupsFragment : Fragment() {
                 }
 
                 GroupViewModel.UiState.Success -> {
-                    bottomSheetDialog.hide()
+                    Toast.makeText(
+                        context,
+                        "Groups GroupViewModel.UiState.Success",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 GroupViewModel.UiState.ShowEmptyGroups -> {

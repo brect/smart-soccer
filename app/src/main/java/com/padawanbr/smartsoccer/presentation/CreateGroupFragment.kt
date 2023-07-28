@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import dagger.hilt.android.AndroidEntryPoint
