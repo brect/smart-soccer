@@ -18,7 +18,7 @@ class SoccerPlayerViewHolder(
 
     private val textViewSoccerPlayerName: TextView = itemBinding.textViewSoccerPlayerName
     private val soccerPlayerPosition: TextView = itemBinding.soccerPlayerPosition
-    private val textViewSoccerPlayerMedicalDepartment: ImageView = itemBinding.textViewSoccerPlayerMedicalDepartment
+    private val textViewSoccerPlayerMedicalDepartment: ImageView = itemBinding.imageViewSoccerPlayerMedicalDepartment
     private val ratingBarAverageSoccerPlayer = itemBinding.ratingBarAverageSoccerPlayer
 
     override fun bind(data: JogadorItem) {

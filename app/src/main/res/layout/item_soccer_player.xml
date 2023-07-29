@@ -6,59 +6,82 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
-    android:background="@drawable/background_group_item_rounded_border">
+    android:background="@drawable/background_group_item_rounded_border"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/textView_soccerPlayerName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
         android:text="Bruno de Lima Silva"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/soccerPlayerPosition"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_soccerPlayerMedicalDepartment"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/soccerPlayerPosition"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="16dp"
         android:text="Lateral"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/soccerPlayerPosition2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerName"
         app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerName" />
 
-    <ImageView
-        android:id="@+id/textView_soccerPlayerMedicalDepartment"
+    <TextView
+        android:id="@+id/soccerPlayerPosition2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_round_healing_24"
-        android:visibility="invisible"
-        android:text="Departamento Médico: "
+        android:layout_marginTop="4dp"
+        android:text="Média jogador:"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/ratingBar_averageSoccerPlayer"
+        app:layout_constraintEnd_toStartOf="@+id/textView_mediaSoccerPlayerScore"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/soccerPlayerPosition"
+        app:layout_constraintTop_toBottomOf="@+id/soccerPlayerPosition" />
+
+    <TextView
+        android:id="@+id/textView_mediaSoccerPlayerScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:text="4,5"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/soccerPlayerPosition2"
+        app:layout_constraintStart_toEndOf="@+id/soccerPlayerPosition2"
+        app:layout_constraintTop_toTopOf="@+id/soccerPlayerPosition2" />
+
+    <ImageView
+        android:id="@+id/imageView_soccerPlayerMedicalDepartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_round_healing_24"
+        android:text="Departamento Médico: "
+        android:textSize="14sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayerName"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayerName"
+        app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayerName" />
 
     <RatingBar
         android:id="@+id/ratingBar_averageSoccerPlayer"
         style="@android:style/Widget.Holo.Light.RatingBar.Small"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="match_parent"
         android:numStars="5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView_soccerPlayerMedicalDepartment"
-        app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerMedicalDepartment" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView_mediaSoccerPlayerScore"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
