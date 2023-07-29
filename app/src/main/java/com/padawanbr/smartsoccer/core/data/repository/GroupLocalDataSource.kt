@@ -4,9 +4,7 @@ import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import kotlinx.coroutines.flow.Flow
 
 interface GroupLocalDataSource {
-
-    suspend fun saveGroup(grupo: Grupo)
-
     fun getAll(): Flow<List<Grupo>>
-
+    suspend fun saveGroup(grupo: Grupo)
+    suspend fun deleteGroup(groupId: Int)
 }

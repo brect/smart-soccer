@@ -5,6 +5,8 @@ import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCaseImpl
+import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCase
+import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.GetSoccerPlayersByGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetSoccerPlayersByGroupUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCase
@@ -29,5 +31,8 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetSoccerPlayersByGroupUseCase(useCaseImpl: GetSoccerPlayersByGroupUseCaseImpl): GetSoccerPlayersByGroupUseCase
+
+    @Binds
+    fun bindDeleteGroupUseCase(useCaseImpl: DeleteGroupUseCaseImpl): DeleteGroupUseCase
 
 }

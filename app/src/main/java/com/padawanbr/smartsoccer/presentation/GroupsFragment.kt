@@ -11,7 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
+import com.padawanbr.smartsoccer.R
+import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
 import com.padawanbr.smartsoccer.databinding.FragmentGroupsBinding
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +26,12 @@ class GroupsFragment : Fragment() {
 
     private val viewModel: GroupViewModel by viewModels()
     private val sharedViewModel: SharedGroupsViewModel by activityViewModels()
+
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var _bottomSheetBinding: BottonsheetExcludeGroupBinding? = null
+    private val bottomSheetBinding: BottonsheetExcludeGroupBinding get() = _bottomSheetBinding!!
+
+    private var selectedItem: GrupoItem? = null
 
     private val groupsAdapter by lazy {
         getCommonAdapterOf(
@@ -44,6 +51,13 @@ class GroupsFragment : Fragment() {
                 findNavController().navigate(directions)
             },
             { item: GrupoItem ->
+
+                selectedItem = item
+
+                bottomSheetBinding.textExcludeGroupContent.text = context?.getString(R.string.exclude_groups, item.nome)
+
+                bottomSheetDialog.show()
+
                 Toast.makeText(
                     context,
                     "GroupsAdapter itemLongClicked $item",
@@ -68,6 +82,7 @@ class GroupsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initGroupsAdapter()
+        bindingBottomSheetToExcludeGroup()
 
         binding.floatingActionButton.setOnClickListener {
             val createGroupFragment = CreateGroupFragment()
@@ -124,6 +139,7 @@ class GroupsFragment : Fragment() {
                 }
 
                 GroupViewModel.UiState.Success -> {
+                    viewModel.getAll()
                     Toast.makeText(
                         context,
                         "Groups GroupViewModel.UiState.Success",
@@ -138,6 +154,30 @@ class GroupsFragment : Fragment() {
                 is GroupViewModel.UiState.ShowGroups -> {
                     groupsAdapter.submitList(uiState.groups)
                 }
+            }
+        }
+    }
+
+    fun bindingBottomSheetToExcludeGroup() {
+        // Crie um novo BottomSheetDialog aqui
+        bottomSheetDialog = BottomSheetDialog(requireContext())
+
+        // Inflate your custom layout with ViewBinding
+        _bottomSheetBinding = BottonsheetExcludeGroupBinding.inflate(layoutInflater)
+
+        // Set the custom layout as the content view of the BottomSheetDialog
+        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+
+        bottomSheetBinding.buttonExcludeGroup.setOnClickListener {
+            // Verifique se existe um item selecionado
+            selectedItem?.let { selectedGroup ->
+                // Faça o que você precisa fazer com o item selecionado
+                // Por exemplo, chame o método para excluir o grupo
+                viewModel.deleteGroup(selectedGroup.id)
+                // Limpe o item selecionado após a ação
+                selectedItem = null
+                // Feche o BottomSheetDialog
+                bottomSheetDialog.dismiss()
             }
         }
     }

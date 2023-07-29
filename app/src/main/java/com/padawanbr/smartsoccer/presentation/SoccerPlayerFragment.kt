@@ -23,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import java.io.Serializable
 
 @AndroidEntryPoint
 class SoccerPlayerFragment : Fragment() {
@@ -43,6 +44,8 @@ class SoccerPlayerFragment : Fragment() {
             { SoccerPlayerViewHolder.create(it) },
             { item: JogadorItem ->
                 Toast.makeText(context, "productsAdapter $item", Toast.LENGTH_SHORT).show()
+                val grupoId = args.grupoItemViewArgs?.id
+                showDetailsSoccerPlayerFragment(grupoId, item, true)
             },
             { item: JogadorItem ->
                 Toast.makeText(context, "productsAdapter onLongClicked $item", Toast.LENGTH_SHORT).show()
@@ -81,20 +84,37 @@ class SoccerPlayerFragment : Fragment() {
         val grupoId = args.grupoItemViewArgs?.id
 
         binding.floatingActionButtonAddSoccer.setOnClickListener {
-            grupoId?.let {
-                val detailsSoccerPlayerFragment = DetailsSoccerPlayerFragment()
-                val bundle = Bundle()
-                bundle.putInt("grupoId", grupoId)
-                detailsSoccerPlayerFragment.arguments = bundle
-                detailsSoccerPlayerFragment.show(
-                    childFragmentManager,
-                    "DetailsSoccerPlayerFragment"
-                )
-            }
+            showDetailsSoccerPlayerFragment(grupoId)
         }
 
         getAllSoccers(grupoId)
 
+    }
+
+    private fun showDetailsSoccerPlayerFragment(grupoId: Int?, jogador: JogadorItem? = null, isEditing: Boolean = false) {
+        grupoId?.let {
+            val detailsSoccerPlayerFragment = DetailsSoccerPlayerFragment()
+            val bundle = Bundle()
+
+            bundle.putInt("grupoId", grupoId)
+            bundle.putBoolean("isEditing", isEditing)
+
+            // Verifica se o jogador não é nulo e, em seguida, adiciona seus atributos individualmente no Bundle
+            jogador?.let {
+                bundle.putInt("id", it.id ?: 0)
+                bundle.putString("nome", it.nome)
+                bundle.putInt("idade", it.idade ?: 0)
+                bundle.putString("posicao", it.posicao)
+                bundle.putSerializable("habilidades", it.habilidades as Serializable)
+                bundle.putBoolean("estaNoDepartamentoMedico", it.estaNoDepartamentoMedico ?: false)
+            }
+
+            detailsSoccerPlayerFragment.arguments = bundle
+            detailsSoccerPlayerFragment.show(
+                childFragmentManager,
+                "DetailsSoccerPlayerFragment"
+            )
+        }
     }
 
     private fun getAllSoccers(grupoId: Int?) {

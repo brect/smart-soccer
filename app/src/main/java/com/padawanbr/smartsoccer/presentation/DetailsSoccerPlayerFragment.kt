@@ -42,16 +42,25 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
 
         ratingBarAbilityBinding()
 
-        binding.buttonSaveItem.setOnClickListener {
+        val grupoId = arguments?.getInt("grupoId", -1) ?: -1
+        val isEditing = arguments?.getBoolean("isEditing", false)
 
-            val grupoId = arguments?.getInt("grupoId", -1) ?: -1
+        binding.flipperExcludeItem.visibility = View.GONE
+
+        if (isEditing == true) {
+            binding.flipperExcludeItem.visibility = View.VISIBLE
+            populatePlayerDetails()
+        }
+
+        binding.buttonSaveItem.setOnClickListener {
 
             val playerName = binding.editTextTextInputDetailsPlayerName.text.toString()
             val playerAge = binding.editTextTextInputDetailsPlayerAge.text.toString().toInt()
 
             // Obtenha o enum PosicaoJogador selecionado no Spinner
             val selectedPosition = spinnerDetailsPlayerPosition.selectedItem as String
-            val playerPositionString = selectedPosition.substringBefore("(").trim() // Obtém apenas a posição, ignorando a abreviação
+            val playerPositionString = selectedPosition.substringBefore("(")
+                .trim() // Obtém apenas a posição, ignorando a abreviação
             val playerPosition = PosicaoJogador.values().find { it.funcao == playerPositionString }
 
             val playerAbilitiesMap = createPlayerAbilitiesMap()
@@ -74,19 +83,77 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
 
     }
 
+    private fun populatePlayerDetails() {
+        val nome = arguments?.getString("nome")
+        val idade = arguments?.getInt("idade")
+        val estaNoDepartamentoMedico = arguments?.getBoolean("estaNoDepartamentoMedico", false) ?: false
+        val selectedPosition = arguments?.getString("posicao")
+        val habilidades = arguments?.getSerializable("habilidades") as? Map<String, Float>
+
+        binding.editTextTextInputDetailsPlayerName.setText(nome)
+        binding.editTextTextInputDetailsPlayerAge.setText(idade.toString())
+        binding.switchDetailsPlayerDM.isChecked = estaNoDepartamentoMedico
+
+        val posicaoJogador = PosicaoJogador.fromString(selectedPosition)
+        val positionIndex = PosicaoJogador.values().indexOf(posicaoJogador)
+        spinnerDetailsPlayerPosition.setSelection(positionIndex)
+
+        setPlayerAbilities(habilidades)
+    }
+
+    private fun setPlayerAbilities(habilidades: Map<String, Float>?) {
+        habilidades?.let {
+            // Aqui, você precisa substituir os IDs de TextView e RatingBar pelos IDs reais do seu layout
+            binding.itemPlayerRatingSpeed.textViewSoccerPlayerScore.text =
+                it["Velocidade"]?.toString() ?: "0.0"
+            binding.itemPlayerRatingSpeed.ratingBarAbility.rating =
+                it["Velocidade"] ?: 0.0f
+
+            binding.itemPlayerRatingKick.textViewSoccerPlayerScore.text =
+                it["Chute"]?.toString() ?: "0.0"
+            binding.itemPlayerRatingKick.ratingBarAbility.rating =
+                it["Chute"] ?: 0.0f
+
+            binding.itemPlayerRatingPass.textViewSoccerPlayerScore.text =
+                it["Passe"]?.toString() ?: "0.0"
+            binding.itemPlayerRatingPass.ratingBarAbility.rating =
+                it["Passe"] ?: 0.0f
+
+            binding.itemPlayerRatingMarking.textViewSoccerPlayerScore.text =
+                it["Marcação"]?.toString() ?: "0.0"
+            binding.itemPlayerRatingMarking.ratingBarAbility.rating =
+                it["Marcação"] ?: 0.0f
+
+            binding.itemPlayerRatingDribble.textViewSoccerPlayerScore.text =
+                it["Drible"]?.toString() ?: "0.0"
+            binding.itemPlayerRatingDribble.ratingBarAbility.rating =
+                it["Drible"] ?: 0.0f
+
+            binding.itemPlayerRatingRace.textViewSoccerPlayerScore.text =
+                it["Raça"]?.toString() ?: "0.0"
+            binding.itemPlayerRatingRace.ratingBarAbility.rating =
+                it["Raça"] ?: 0.0f
+        }
+    }
+
     private fun createPlayerAbilitiesMap(): Map<String, Float> {
         val playerAbilitiesMap = mutableMapOf<String, Float>()
 
         playerAbilitiesMap[binding.itemPlayerRatingSpeed.textViewSoccerPlayerAbility.text.toString()] =
             binding.itemPlayerRatingSpeed.ratingBarAbility.rating
+
         playerAbilitiesMap[binding.itemPlayerRatingKick.textViewSoccerPlayerAbility.text.toString()] =
             binding.itemPlayerRatingKick.ratingBarAbility.rating
+
         playerAbilitiesMap[binding.itemPlayerRatingPass.textViewSoccerPlayerAbility.text.toString()] =
             binding.itemPlayerRatingPass.ratingBarAbility.rating
+
         playerAbilitiesMap[binding.itemPlayerRatingMarking.textViewSoccerPlayerAbility.text.toString()] =
             binding.itemPlayerRatingMarking.ratingBarAbility.rating
+
         playerAbilitiesMap[binding.itemPlayerRatingDribble.textViewSoccerPlayerAbility.text.toString()] =
             binding.itemPlayerRatingDribble.ratingBarAbility.rating
+
         playerAbilitiesMap[binding.itemPlayerRatingRace.textViewSoccerPlayerAbility.text.toString()] =
             binding.itemPlayerRatingRace.ratingBarAbility.rating
 

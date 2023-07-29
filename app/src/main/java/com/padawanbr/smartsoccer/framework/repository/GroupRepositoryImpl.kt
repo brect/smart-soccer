@@ -18,4 +18,8 @@ class GroupRepositoryImpl @Inject constructor(
         return groupLocalDataSource.saveGroup(grupo)
     }
 
+    override suspend fun deleteGroup(groupId: Int) {
+        groupLocalDataSource.deleteGroup(groupId)
+    }
+
 }

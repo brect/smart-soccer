@@ -20,8 +20,8 @@ interface GrupoDao {
     @Update
     fun update(grupo: GrupoEntity)
 
-    @Delete
-    fun delete(grupo: GrupoEntity)
+    @Query("DELETE FROM grupo WHERE id = :groupId")
+    suspend fun delete(groupId: Int)
 
 //    @Transaction
 //    @Query("SELECT * FROM grupo")

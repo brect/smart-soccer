@@ -9,4 +9,5 @@ interface GroupRepository {
 
     suspend fun saveGroup(grupo: Grupo)
 
+    suspend fun deleteGroup(groupId: Int)
 }

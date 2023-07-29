@@ -28,6 +28,10 @@ class RoomGroupDataSource @Inject constructor(
         return grupoDao.insert(grupo.toGrupoEntity())
     }
 
+    override suspend fun deleteGroup(groupId: Int) {
+        grupoDao.delete(groupId)
+    }
+
     private fun Grupo.toGrupoEntity() = GrupoEntity(
         id,
         nome,

@@ -33,4 +33,5 @@
     <string name="idade">idade</string>
     <string name="habilidade">Habilidade</string>
     <string name="sort">Sortear</string>
+    <string name="exclude_groups">Você deseja excluir o grupo %s? \n\nCom isso você perderá acesso a todas as configurações desse grupo.</string>
 </resources>
