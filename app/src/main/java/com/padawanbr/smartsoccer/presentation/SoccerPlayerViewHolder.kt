@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.padawanbr.smartsoccer.R
-import com.padawanbr.smartsoccer.databinding.ItemGroupBinding
 import com.padawanbr.smartsoccer.databinding.ItemSoccerPlayerBinding
 import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
 
@@ -20,6 +18,7 @@ class SoccerPlayerViewHolder(
     private val soccerPlayerPosition: TextView = itemBinding.soccerPlayerPosition
     private val textViewSoccerPlayerMedicalDepartment: ImageView = itemBinding.imageViewSoccerPlayerMedicalDepartment
     private val ratingBarAverageSoccerPlayer = itemBinding.ratingBarAverageSoccerPlayer
+    private val textViewAverageSoccerPlayer = itemBinding.textViewAverageSoccerPlayerScore
 
     override fun bind(data: JogadorItem) {
         textViewSoccerPlayerName.text = data.nome
@@ -29,7 +28,9 @@ class SoccerPlayerViewHolder(
             textViewSoccerPlayerMedicalDepartment.visibility = View.VISIBLE
         }
 
-        ratingBarAverageSoccerPlayer.rating = data.calcularMediaHabilidades()
+        val mediaHabilidades = data.calcularMediaHabilidades()
+        ratingBarAverageSoccerPlayer.rating = mediaHabilidades
+        textViewAverageSoccerPlayer.text = String.format("%.2f", mediaHabilidades)
     }
 
     companion object {
