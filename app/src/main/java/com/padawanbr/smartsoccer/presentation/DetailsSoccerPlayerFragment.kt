@@ -75,12 +75,20 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
                 playerAbilitiesMap,
                 playerIsInDM
             )
+        }
 
-            Toast.makeText(context, "buttonSaveItem", Toast.LENGTH_SHORT).show()
+        binding.buttonExcludeItem.setOnClickListener {
+            val playerId = arguments?.getInt("id", -1) ?: -1
+            if (playerId != -1) {
+                // Chamar o método de exclusão do jogador do ViewModel
+                viewModel.deletePlayer(playerId)
+            } else {
+                // Tratar o caso em que o ID do jogador não está disponível
+                Toast.makeText(context, "Jogador inválido ou não encontrado", Toast.LENGTH_SHORT).show()
+            }
         }
 
         observeUiState()
-
     }
 
     private fun populatePlayerDetails() {
@@ -244,26 +252,23 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
                     ).show()
                 }
 
-                DetailsSoccerPlayerViewModel.UiState.ShowEmptySoccers -> {
-                    Toast.makeText(
-                        context,
-                        "DetailsSoccerPlayerViewModel.UiState.ShowEmptySoccers",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                is DetailsSoccerPlayerViewModel.UiState.ShowSoccers -> {
-                    Toast.makeText(
-                        context,
-                        "DetailsSoccerPlayerViewModel.UiState.ShowSoccers",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
                 is DetailsSoccerPlayerViewModel.UiState.Success -> {
                     Toast.makeText(
                         context,
                         "DetailsSoccerPlayerViewModel.UiState.Success",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    // Atualize a lista de jogadores no SoccerPlayerFragment
+                    sharedViewModel.updateSoccerPlayers(true)
+
+                    this.dismiss()
+                }
+
+                DetailsSoccerPlayerViewModel.UiState.Delete -> {
+                    Toast.makeText(
+                        context,
+                        "DetailsSoccerPlayerViewModel.UiState.Delete",
                         Toast.LENGTH_SHORT
                     ).show()
 

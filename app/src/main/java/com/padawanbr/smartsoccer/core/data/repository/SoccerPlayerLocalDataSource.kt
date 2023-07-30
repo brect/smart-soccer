@@ -9,4 +9,6 @@ interface SoccerPlayerLocalDataSource {
 
     suspend fun saveSoccerPlayer(jogador: Jogador, grupoId: Int)
 
+    suspend fun deleteSoccerPlayer(jogadorId: Int)
+
 }

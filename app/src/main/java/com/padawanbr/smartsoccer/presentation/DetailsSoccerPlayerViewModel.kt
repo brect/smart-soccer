@@ -1,5 +1,6 @@
 package com.padawanbr.smartsoccer.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +8,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCase
+import com.padawanbr.smartsoccer.core.usecase.DeleteSoccerPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +18,7 @@ import javax.inject.Inject
 class DetailsSoccerPlayerViewModel @Inject constructor(
     private val coroutinesDispatchers: AppCoroutinesDispatchers,
     private val addSoccerPlayerUseCase: AddSoccerPlayerUseCase,
+    private val deleteSoccerPlayerUseCase: DeleteSoccerPlayerUseCase,
 ) : ViewModel() {
 
     private val action = MutableLiveData<Action>()
@@ -46,32 +49,26 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
                     )
                 }
 
-//                is Action.GetAllSoccers -> {
-//                    getGroupsUseCase.invoke()
-//                        .catch {
-//                            emit(UiState.ShowEmptyGroups)
-//                        }
-//                        .collect {
-//                            val items = it.map { groups ->
-//                                GrupoItem(
-//                                    groups.id,
-//                                    groups.nome,
-//                                    groups.quantidadeMinimaJogadores,
-//                                    groups.quantidadeMinimaJogadoresPorTime,
-//                                    groups.quantidadeTimes,
-//                                    arrayListOf(),
-//                                    arrayListOf()
-//                                )
-//                            }
-//
-//                            val uiState = if (items.isEmpty()) {
-//                                UiState.ShowEmptyGroups
-//                            } else UiState.ShowGroups(items)
-//
-//                            emit(uiState)
-//                        }
-//                }
-                else -> {}
+                is Action.ExcludeSoccerPlayer -> {
+                    deleteSoccerPlayerUseCase.invoke(
+                        DeleteSoccerPlayerUseCase.Params(
+                            it.playerId
+                        )
+                    ).watchStatus(
+                        loading = {
+                            emit(UiState.Loading)
+                        },
+                        success = {
+                            emit(UiState.Delete)
+                        },
+                        error = {
+                            emit(UiState.Error)
+                        }
+                    )
+                }
+                else -> {
+                    Log.i("DetailsSoccerPlayerViewModel", "DetailsSoccerPlayerViewModel: else")
+                }
             }
         }
     }
@@ -94,18 +91,15 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
         )
     }
 
-    fun getAll() {
-        action.value = Action.GetAllSoccers
+    fun deletePlayer(playerId: Int) {
+        action.value = Action.ExcludeSoccerPlayer(playerId)
     }
 
     sealed class UiState {
         object Loading : UiState()
         object Success : UiState()
         object Error : UiState()
-
-        data class ShowSoccers(val groups: List<GrupoItem>) : UiState()
-
-        object ShowEmptySoccers : UiState()
+        object Delete : UiState()
     }
 
     sealed class Action {
@@ -118,7 +112,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
             val playerIsInDM: Boolean
         ) : Action()
 
-        object GetAllSoccers : Action()
+        data class ExcludeSoccerPlayer(val playerId: Int) : Action()
     }
 
 }

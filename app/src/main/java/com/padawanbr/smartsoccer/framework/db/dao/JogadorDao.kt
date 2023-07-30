@@ -19,12 +19,16 @@ interface JogadorDao {
     @Query("SELECT * FROM jogador WHERE grupoId = :grupoId")
     fun getJogadoresByGrupo(grupoId: Int): Flow<List<JogadorEntity>>
 
+    @Query("SELECT * FROM jogador WHERE id = :jogadorId")
+    fun getJogadorById(jogadorId: Int): JogadorEntity?
+
     @Insert
     fun insert(jogador: JogadorEntity)
 
     @Update
     fun update(jogador: JogadorEntity)
 
-    @Delete
-    fun delete(jogador: JogadorEntity)
+    @Query("DELETE FROM jogador WHERE id = :jogadorId")
+    fun delete(jogadorId: Int)
+
 }
