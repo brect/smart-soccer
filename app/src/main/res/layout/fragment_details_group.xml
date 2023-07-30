@@ -27,4 +27,38 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_moreOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_add_round"
+        app:backgroundTintMode="src_over"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_soccerPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/fab_moreOptions"
+        app:layout_constraintEnd_toEndOf="@+id/fab_moreOptions"
+        app:layout_constraintStart_toStartOf="@+id/fab_moreOptions"
+        app:srcCompat="@drawable/ic_add_round" />
+
+    <TextView
+        android:id="@+id/textView_add_soccerPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Adicionar jogador"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_add_soccerPlayer"
+        app:layout_constraintEnd_toStartOf="@+id/fab_add_soccerPlayer"
+        app:layout_constraintTop_toTopOf="@+id/fab_add_soccerPlayer" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
         android:id="@+id/fliper_soccer_players"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/container_raffle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -55,54 +55,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/fliper_soccer_players"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_raffle"
-        android:layout_width="match_parent"
-        android:layout_height="84dp"
-        android:background="@drawable/background_rounded_border"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fliper_soccer_players">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="12dp"
-            android:background="@drawable/background_rounded_border"
-            android:backgroundTint="#000000"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:background="@drawable/background_rounded_border"
-                android:backgroundTint="@color/white"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
-                android:text="0"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:text="@string/sort"
-                android:textAlignment="textEnd"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

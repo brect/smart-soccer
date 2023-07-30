@@ -19,7 +19,6 @@
     <fragment
         android:id="@+id/detailsGroupFragment"
         android:name="com.padawanbr.smartsoccer.presentation.DetailsGroupFragment"
-        android:label="@string/details_group_fragment_label"
         tools:layout="@layout/fragment_details_group">
 
         <argument
@@ -51,12 +50,7 @@
             android:name="groupId"
             app:argType="integer"
             android:defaultValue="-1" />
-<!--        -->
-<!--        <argument-->
-<!--            android:name="grupoItemViewArgs"-->
-<!--            app:argType="com.padawanbr.smartsoccer.presentation.GrupoItemViewArgs"-->
-<!--            android:defaultValue="@null"-->
-<!--            app:nullable="true" />-->
+
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_DetailsGroupFragment"
             app:destination="@id/detailsGroupFragment" />

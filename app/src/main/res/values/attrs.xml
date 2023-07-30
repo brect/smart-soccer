@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomButton">
+        <attr name="image" format="reference" />
+        <attr name="text" format="string" />
+        <attr name="borderWidth" format="dimension" />
+        <attr name="borderColor" format="color" />
+
+        <attr name="imageMargin" format="dimension" />
+        <attr name="textMargin" format="dimension" />
+
+        <attr name="imageMarginTop" format="dimension" />
+        <attr name="imageMarginBottom" format="dimension" />
+        <attr name="imageMarginLeft" format="dimension" />
+        <attr name="imageMarginRight" format="dimension" />
+
+        <attr name="textMarginTop" format="dimension" />
+        <attr name="textMarginBottom" format="dimension" />
+        <attr name="textMarginLeft" format="dimension" />
+        <attr name="textMarginRight" format="dimension" />
+
+        <attr name="cornerRadius" format="dimension" />
+
+        <attr name="backgroundColor" format="color" />
+    </declare-styleable>
+</resources>
