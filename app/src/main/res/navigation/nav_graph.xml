@@ -2,19 +2,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/GroupsFragment">
+    app:startDestination="@id/groupsFragment">
 
     <fragment
-        android:id="@+id/GroupsFragment"
+        android:id="@+id/groupsFragment"
         android:name="com.padawanbr.smartsoccer.presentation.GroupsFragment"
         android:label="@string/group_fragment_label"
         tools:layout="@layout/fragment_groups">
 
         <action
-            android:id="@+id/action_GroupsFragment_to_SoccerPlayerFragment"
-            app:destination="@id/SoccerPlayerFragment" />
+            android:id="@+id/action_GroupsFragment_to_DetailsGroupFragment"
+            app:destination="@id/detailsGroupFragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/detailsGroupFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.DetailsGroupFragment"
+        android:label="@string/details_group_fragment_label"
+        tools:layout="@layout/fragment_details_group">
+
+        <argument
+            android:name="detailsGroupViewArgs"
+            app:argType="com.padawanbr.smartsoccer.presentation.DetalheGrupoItemViewArgs"
+            android:defaultValue="@null"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_DetailsGroupFragment_to_SoccerPlayerFragment"
+            app:destination="@id/SoccerPlayerFragment" />
+        <action
+            android:id="@+id/action_DetailsGroupFragment_to_GroupsFragment"
+            app:destination="@id/groupsFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/SoccerPlayerFragment"
         android:name="com.padawanbr.smartsoccer.presentation.SoccerPlayerFragment"
@@ -25,14 +46,20 @@
             android:name="isEditing"
             app:argType="boolean"
             android:defaultValue="false" />
+
         <argument
-            android:name="grupoItemViewArgs"
-            app:argType="com.padawanbr.smartsoccer.presentation.GrupoItemViewArgs"
-            android:defaultValue="@null"
-            app:nullable="true" />
+            android:name="groupId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+<!--        -->
+<!--        <argument-->
+<!--            android:name="grupoItemViewArgs"-->
+<!--            app:argType="com.padawanbr.smartsoccer.presentation.GrupoItemViewArgs"-->
+<!--            android:defaultValue="@null"-->
+<!--            app:nullable="true" />-->
         <action
-            android:id="@+id/action_SoccerPlayerFragment_to_GroupsFragment"
-            app:destination="@id/GroupsFragment" />
+            android:id="@+id/action_SoccerPlayerFragment_to_DetailsGroupFragment"
+            app:destination="@id/detailsGroupFragment" />
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_DetailsSoccerPlayerFragment"
             app:destination="@id/detailsSoccerPlayerFragment" />

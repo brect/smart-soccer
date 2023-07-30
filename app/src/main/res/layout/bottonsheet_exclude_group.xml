@@ -33,7 +33,7 @@
         android:id="@+id/text_excludeGroup_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="18dp"
         android:gravity="center_vertical"
         android:text="@string/exclude_groups"
         android:textColor="@color/black"

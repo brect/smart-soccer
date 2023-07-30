@@ -44,7 +44,7 @@ class SoccerPlayerFragment : Fragment() {
             { SoccerPlayerViewHolder.create(it) },
             { item: JogadorItem ->
                 Toast.makeText(context, "productsAdapter $item", Toast.LENGTH_SHORT).show()
-                val grupoId = args.grupoItemViewArgs?.id
+                val grupoId = args.groupId
                 showDetailsSoccerPlayerFragment(grupoId, item, true)
             },
             { item: JogadorItem ->
@@ -68,20 +68,10 @@ class SoccerPlayerFragment : Fragment() {
 
         initSoccerPlayersAdapter()
 
-        if (args.isEditing) {
-            Toast.makeText(
-                context,
-                "Modo edição de grupos",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            binding.textViewSoccerPlayerGroupName.text = args.grupoItemViewArgs?.nome
-        }
-
         observeUiState()
         observeSharedUiState()
 
-        val grupoId = args.grupoItemViewArgs?.id
+        val grupoId = args.groupId
 
         binding.floatingActionButtonAddSoccer.setOnClickListener {
             showDetailsSoccerPlayerFragment(grupoId)
@@ -148,7 +138,7 @@ class SoccerPlayerFragment : Fragment() {
     private fun observeSharedUiState() {
         sharedViewModel.updateSoccerPlayers.observe(viewLifecycleOwner) {
             // Atualize o adaptador com a nova lista de jogadores
-            val grupoId = args.grupoItemViewArgs?.id
+            val grupoId = args.groupId
             getAllSoccers(grupoId)
         }
     }

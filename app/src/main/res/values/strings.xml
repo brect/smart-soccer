@@ -34,4 +34,5 @@
     <string name="habilidade">Habilidade</string>
     <string name="sort">Sortear</string>
     <string name="exclude_groups">Você deseja excluir o grupo %s? \n\nCom isso você perderá acesso a todas as configurações desse grupo.</string>
+    <string name="details_group_fragment_label" >Detalhes grupo</string>
 </resources>

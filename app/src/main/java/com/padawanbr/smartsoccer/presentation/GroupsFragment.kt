@@ -37,16 +37,14 @@ class GroupsFragment : Fragment() {
         getCommonAdapterOf(
             { GroupsViewHolder.create(it) },
             { item: GrupoItem ->
-                val directions = GroupsFragmentDirections.actionGroupsFragmentToSoccerPlayerFragment()
+                val directions = GroupsFragmentDirections.actionGroupsFragmentToDetailsGroupFragment()
 
-                directions.grupoItemViewArgs = GrupoItemViewArgs(
+                directions.detailsGroupViewArgs = DetalheGrupoItemViewArgs(
                     item.id,
                     item.nome,
                     item.quantidadeTimes,
                     item.configuracaoEsporte.tipoEsporte
                 )
-
-                directions.isEditing = true
 
                 findNavController().navigate(directions)
             },
@@ -57,12 +55,6 @@ class GroupsFragment : Fragment() {
                 bottomSheetBinding.textExcludeGroupContent.text = context?.getString(R.string.exclude_groups, item.nome)
 
                 bottomSheetDialog.show()
-
-                Toast.makeText(
-                    context,
-                    "GroupsAdapter itemLongClicked $item",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
         )
     }
