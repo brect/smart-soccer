@@ -11,8 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -25,125 +27,297 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_groupInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_rounded_border"
             android:backgroundTint="@color/black"
             android:orientation="vertical"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="8dp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:id="@+id/textView_group_teamName_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome time: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_group_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView_group_teamName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome time: Sociedade Esportiva Flor da Vila Formosa"
-                android:textSize="14sp" />
+                android:text="Sociedade Esportiva Flor da Vila Formosa"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_group_teamName_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_group_teamName_lbl"
+                app:layout_constraintTop_toTopOf="@+id/textView_group_teamName_lbl"
+                tools:layout_editor_absoluteY="8dp" />
+
+            <TextView
+                android:id="@+id/textView_group_date_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:text="Dia do jogo: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_group_local_lbl"
+                app:layout_constraintStart_toStartOf="@+id/textView_group_teamName_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_group_teamName_lbl" />
 
             <TextView
                 android:id="@+id/textView_group_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
-                android:text="Dia do jogo: Domingo"
-                android:textSize="14sp" />
+                android:text="Domingo"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_group_date_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_group_date_lbl"
+                app:layout_constraintTop_toTopOf="@+id/textView_group_date_lbl"
+                tools:layout_editor_absoluteX="8dp" />
+
+            <TextView
+                android:id="@+id/textView_group_local_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:text="Local: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView_group_date_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_group_date_lbl" />
 
             <TextView
                 android:id="@+id/textView_group_local"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
-                android:text="Local: Rua do futebol"
-                android:textSize="14sp" />
+                android:text="Rua do futebol"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_group_local_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_group_local_lbl"
+                app:layout_constraintTop_toTopOf="@+id/textView_group_local_lbl"
+                tools:layout_editor_absoluteX="8dp" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/textView_game_infos_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
             android:text="Informações do jogo"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_gameInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_rounded_border"
             android:backgroundTint="@color/black"
-            android:orientation="vertical"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="8dp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:id="@+id/textView_gameInformation_typeOfCourt_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo de quadra: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_configuration_lbl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView_gameInformation_typeOfCourt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipo de quadra: Society"
-                android:textSize="14sp" />
+                android:text="Society"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_gameInformation_typeOfCourt_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_typeOfCourt_lbl"
+                app:layout_constraintTop_toTopOf="@+id/textView_gameInformation_typeOfCourt_lbl"
+                tools:layout_editor_absoluteX="40dp" />
+
+            <TextView
+                android:id="@+id/textView_gameInformation_configuration_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Configuração: "
+                android:layout_marginVertical="4dp"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_typeOfCourt_lbl"
+                app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_typeOfCourt_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_typeOfCourt_lbl" />
 
             <TextView
                 android:id="@+id/textView_gameInformation_configuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="7x7"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_configuration_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_configuration_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_configuration_lbl" />
+
+            <TextView
+                android:id="@+id/textView_gameInformation_singlePrice_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
-                android:text="Configuração: 7x7"
-                android:textSize="14sp" />
+                android:text="Preço avulso: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_monthlyPrice"
+                app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_configuration_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_configuration_lbl" />
 
             <TextView
                 android:id="@+id/textView_gameInformation_singlePrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="R$ 20"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_singlePrice_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_singlePrice_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_singlePrice_lbl" />
+
+            <TextView
+                android:id="@+id/textView_gameInformation_monthlyPrice_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Preço mensalista: "
                 android:layout_marginVertical="4dp"
-                android:text="Preço avulso: R$ 20"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_rateAge_lbl"
+                app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_singlePrice_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_singlePrice_lbl" />
 
             <TextView
                 android:id="@+id/textView_gameInformation_monthlyPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Preço mensalista: R$ 60"
-                android:textSize="14sp" />
+                android:text="R$ 60"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_monthlyPrice_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_monthlyPrice_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_monthlyPrice_lbl" />
+
+            <TextView
+                android:id="@+id/textView_gameInformation_rateAge_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Idade: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_monthlyPrice_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_monthlyPrice_lbl" />
+
 
             <TextView
                 android:id="@+id/textView_gameInformation_rateAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Idade: 20 a 70 anos"
-                android:textSize="14sp" />
+                android:text="20 a 70 anos"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_rateAge_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_rateAge_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_rateAge_lbl"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/textView_soccerPlayer_infos_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
             android:text="Informações jogadores"
             android:textSize="18sp"
             android:textStyle="bold" />
 
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_soccerPlayesInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_rounded_border"
             android:backgroundTint="@color/black"
             android:orientation="vertical"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="8dp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="8dp">
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/textView_soccerPlayes_avalible_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jogadores disponíveis: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayes_dm_lbl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_soccerPlayes_avalible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_soccerPlayes_avalible_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayes_avalible_lbl"
+                app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayes_avalible_lbl" />
+
+            <TextView
+                android:id="@+id/textView_soccerPlayes_dm_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:text="Jogadores no DM: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
+                app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayes_avalible_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayes_avalible_lbl" />
+
+            <TextView
+                android:id="@+id/textView_soccerPlayes_dm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_soccerPlayes_dm_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayes_dm_lbl"
+                app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayes_dm_lbl" />
+
+            <TextView
+                android:id="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mensalistas: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayes_dm_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayes_dm_lbl" />
+
+            <TextView
+                android:id="@+id/textView_soccerPlayes_monthlyWorkers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
+                app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_moreOptions"
