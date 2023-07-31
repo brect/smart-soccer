@@ -3,6 +3,7 @@ package com.padawanbr.smartsoccer.framework.repository
 import com.padawanbr.smartsoccer.core.data.repository.GroupLocalDataSource
 import com.padawanbr.smartsoccer.core.data.repository.GroupRepository
 import com.padawanbr.smartsoccer.core.domain.model.Grupo
+import com.padawanbr.smartsoccer.framework.db.entity.GrupoComJogadores
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -20,6 +21,10 @@ class GroupRepositoryImpl @Inject constructor(
 
     override suspend fun deleteGroup(groupId: Int) {
         groupLocalDataSource.deleteGroup(groupId)
+    }
+
+    override fun getGrupoComJogadoresById(grupoId: Int?): Flow<GrupoComJogadores?> {
+        return groupLocalDataSource.getGrupoComJogadoresById(grupoId)
     }
 
 }

@@ -13,6 +13,8 @@ import com.padawanbr.smartsoccer.core.usecase.GetSoccerPlayersByGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetSoccerPlayersByGroupUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCaseImpl
+import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresByIdUseCase
+import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresByIdUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -39,5 +41,8 @@ interface UseCaseModule {
 
     @Binds
     fun bindDeleteSoccerPlayerUseCase(useCaseImpl: DeleteSoccerPlayerUseCaseImpl): DeleteSoccerPlayerUseCase
+
+    @Binds
+    fun bindGetGrupoComJogadoresByIdUseCase(useCaseImpl: GetGrupoComJogadoresByIdUseCaseImpl): GetGrupoComJogadoresByIdUseCase
 
 }

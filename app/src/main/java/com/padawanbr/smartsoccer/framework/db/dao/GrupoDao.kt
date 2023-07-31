@@ -5,7 +5,9 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
+import com.padawanbr.smartsoccer.framework.db.entity.GrupoComJogadores
 import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -23,7 +25,11 @@ interface GrupoDao {
     @Query("DELETE FROM grupo WHERE id = :groupId")
     suspend fun delete(groupId: Int)
 
-//    @Transaction
-//    @Query("SELECT * FROM grupo")
-//    fun getGruposComJogadores(): List<GrupoComJogadores>
+    @Transaction
+    @Query("SELECT * FROM grupo")
+    fun getGruposComJogadores(): List<GrupoComJogadores>
+
+    @Transaction
+    @Query("SELECT * FROM grupo WHERE id = :grupoId")
+    fun getGrupoComJogadoresById(grupoId: Int?): Flow<GrupoComJogadores?>
 }

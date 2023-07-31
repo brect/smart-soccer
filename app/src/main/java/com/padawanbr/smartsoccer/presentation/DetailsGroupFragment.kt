@@ -1,17 +1,15 @@
 package com.padawanbr.smartsoccer.presentation
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsGroupBinding
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateFab
@@ -25,6 +23,8 @@ class DetailsGroupFragment : Fragment() {
 
     private var _binding: FragmentDetailsGroupBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: DetailsGroupViewModel by viewModels()
 
     private val args by navArgs<DetailsGroupFragmentArgs>()
 
@@ -44,45 +44,90 @@ class DetailsGroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val groupName = args.detailsGroupViewArgs?.nome
-        groupName?.let { setToolbarTitle(it) }
+        args.detailsGroupViewArgs?.nome?.let { setToolbarTitle(it) }
 
-        binding.textViewSoccerPlayerGroupName.text = groupName
+        var groupId = args.detailsGroupViewArgs?.id
+        viewModel.getGroupById(groupId)
 
+        initFabs()
         configureFabMoreOptions()
+        fabAddSoccerPlayerOnClick()
+
+        observeUiState()
+    }
+
+    private fun observeUiState() {
+        viewModel.state.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                DetailsGroupViewModel.UiState.Error -> {
+                    Toast.makeText(
+                        context,
+                        "DetailsGroupViewModel.UiState.Error",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                DetailsGroupViewModel.UiState.Loading -> {
+                    Toast.makeText(
+                        context,
+                        "CreateGroupViewModel.UiState.Loading",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                is DetailsGroupViewModel.UiState.Success -> {
+                    binding.textViewGroupTeamName.text = uiState.grupo.nome
+                }
+            }
+        }
+    }
+
+    private fun configureFabMoreOptions() {
+        binding.fabMoreOptions.setOnClickListener {
+            isRotate = rotateFab(it, !isRotate)
+
+            if(isRotate){
+                showFabs()
+            } else {
+                hideFabs()
+            }
+        }
+    }
+
+    private fun fabAddSoccerPlayerOnClick() {
+        binding.fabAddSoccerPlayer.setOnClickListener {
+            isRotate = rotateFab(it, !isRotate)
+            hideFabs()
+            val directions =
+                DetailsGroupFragmentDirections.actionDetailsGroupFragmentToSoccerPlayerFragment()
+            if (args.detailsGroupViewArgs != null) {
+                directions.groupId = it.id
+            }
+            findNavController().navigate(directions)
+        }
+    }
+
+    private fun initFabs() {
+        init(binding.fabAddSoccerPlayer)
+        init(binding.textViewAddSoccerPlayer)
+        init(binding.fabSeparateTimes)
+        init(binding.textViewSeparateTimes)
     }
 
     private fun setToolbarTitle(title: String) {
         (activity as AppCompatActivity).supportActionBar?.title = title
     }
 
-    private fun configureFabMoreOptions() {
+    private fun showFabs() {
+        showIn(binding.fabAddSoccerPlayer)
+        showIn(binding.textViewAddSoccerPlayer)
+        showIn(binding.fabSeparateTimes)
+        showIn(binding.textViewSeparateTimes)
+    }
 
-        init(binding.fabAddSoccerPlayer)
-        init(binding.textViewAddSoccerPlayer)
-
-        binding.fabMoreOptions.setOnClickListener {
-
-            isRotate = rotateFab(it, !isRotate)
-
-            if(isRotate){
-                showIn(binding.fabAddSoccerPlayer)
-                showIn(binding.textViewAddSoccerPlayer)
-            } else {
-                showOut(binding.fabAddSoccerPlayer)
-                showOut(binding.textViewAddSoccerPlayer)
-            }
-        }
-
-        binding.fabAddSoccerPlayer.setOnClickListener {
-            val directions = DetailsGroupFragmentDirections.actionDetailsGroupFragmentToSoccerPlayerFragment()
-
-            if (args.detailsGroupViewArgs != null) {
-                directions.groupId = it.id
-            }
-
-            findNavController().navigate(directions)
-        }
+    private fun hideFabs() {
+        showOut(binding.fabAddSoccerPlayer)
+        showOut(binding.textViewAddSoccerPlayer)
+        showOut(binding.fabSeparateTimes)
+        showOut(binding.textViewSeparateTimes)
     }
 
     override fun onDestroyView() {

@@ -6,6 +6,7 @@ import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.framework.db.dao.GrupoDao
 import com.padawanbr.smartsoccer.framework.db.entity.ConfiguracaoEsporteEntity
+import com.padawanbr.smartsoccer.framework.db.entity.GrupoComJogadores
 import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
 import com.padawanbr.smartsoccer.framework.db.entity.toGroupModel
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +23,10 @@ class RoomGroupDataSource @Inject constructor(
         return grupoDao.getAll().map {
             it.toGroupModel()
         }
+    }
+
+    override fun getGrupoComJogadoresById(grupoId: Int?): Flow<GrupoComJogadores?> {
+        return grupoDao.getGrupoComJogadoresById(grupoId)
     }
 
     override suspend fun saveGroup(grupo: Grupo) {
