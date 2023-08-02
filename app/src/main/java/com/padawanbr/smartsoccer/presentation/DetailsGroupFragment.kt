@@ -75,9 +75,26 @@ class DetailsGroupFragment : Fragment() {
                 }
                 is DetailsGroupViewModel.UiState.Success -> {
                     binding.textViewGroupTeamName.text = uiState.grupo.nome
+                    binding.textViewGroupDate.text = "dd/mm/yyyy"
+                    binding.textViewGroupLocal.text = "-"
 
-                    binding.textViewSoccerPlayesAvalible.text = uiState.grupo.jogadoresDisponiveis.toString()
-                    binding.textViewSoccerPlayesDm.text = uiState.grupo.jogadoresNoDM.toString()
+                    binding.textViewGameInformationTypeOfCourt.text = "-"
+                    binding.textViewGameInformationConfiguration.text = "-"
+                    binding.textViewGameInformationSinglePrice.text = "R$ 00,00"
+                    binding.textViewGameInformationMonthlyPrice.text = "R$ 00,00"
+                    binding.textViewGameInformationRateAge.text = "X a Y anos"
+
+                    val jogadoresDisponiveis = uiState.grupo.jogadoresDisponiveis
+                    val jogadoresNoDM = uiState.grupo.jogadoresNoDM
+
+                    binding.textViewSoccerPlayesAvalible.text = jogadoresDisponiveis.toString()
+                    binding.textViewSoccerPlayesDm.text = jogadoresNoDM.toString()
+
+                    binding.textViewSoccerPlayesMonthlyWorkers.text = (jogadoresNoDM?.let {
+                        jogadoresDisponiveis?.plus(
+                            it
+                        )
+                    }).toString()
                 }
             }
         }
