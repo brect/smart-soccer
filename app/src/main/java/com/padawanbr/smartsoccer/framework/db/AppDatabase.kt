@@ -18,6 +18,7 @@ import com.padawanbr.smartsoccer.framework.db.entity.PlacarEntity
 import com.padawanbr.smartsoccer.framework.db.entity.PosicaoJogadorEntity
 import com.padawanbr.smartsoccer.framework.db.entity.PosicoesConverter
 import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
+import com.padawanbr.smartsoccer.framework.db.entity.UUIDTypeConverter
 
 @Database(
     entities = [
@@ -33,7 +34,11 @@ import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
     exportSchema = false
 )
 
-@TypeConverters(PosicoesConverter::class, ClassificacoesConverter::class)
+@TypeConverters(
+    PosicoesConverter::class,
+    ClassificacoesConverter::class,
+    UUIDTypeConverter::class
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun jogadorDao(): JogadorDao
     abstract fun grupoDao(): GrupoDao

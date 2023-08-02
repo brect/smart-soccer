@@ -38,7 +38,8 @@ class GroupViewModel @Inject constructor(
                                     groups.quantidadeTimes,
                                     groups.configuracaoEsporte,
                                     arrayListOf(),
-                                    arrayListOf()
+                                    null,
+                                    null
                                 )
                             }
 
@@ -75,7 +76,7 @@ class GroupViewModel @Inject constructor(
         action.value = Action.GetAll
     }
 
-    fun deleteGroup(groupId: Int) {
+    fun deleteGroup(groupId: String) {
         action.value = Action.DeleteGroup(groupId)
     }
 
@@ -89,7 +90,7 @@ class GroupViewModel @Inject constructor(
     }
 
     sealed class Action {
-        data class DeleteGroup(val groupId: Int) : Action()
+        data class DeleteGroup(val groupId: String) : Action()
         object GetAll : Action()
     }
 

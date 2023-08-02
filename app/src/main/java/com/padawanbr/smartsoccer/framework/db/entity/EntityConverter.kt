@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
+import java.util.UUID
 
 class PosicoesConverter {
     @TypeConverter
@@ -40,5 +41,17 @@ class ClassificacoesConverter {
     @TypeConverter
     fun fromMap(map: Map<String, Float>): String {
         return Gson().toJson(map)
+    }
+}
+
+class UUIDTypeConverter {
+    @TypeConverter
+    fun fromString(value: String?): UUID? {
+        return value?.let { UUID.fromString(it) }
+    }
+
+    @TypeConverter
+    fun toString(uuid: UUID?): String? {
+        return uuid?.toString()
     }
 }

@@ -42,7 +42,7 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
 
         ratingBarAbilityBinding()
 
-        val grupoId = arguments?.getInt("grupoId", -1) ?: -1
+        val grupoId = arguments?.getString("grupoId", "") ?: ""
         val isEditing = arguments?.getBoolean("isEditing", false)
 
         binding.flipperExcludeItem.visibility = View.GONE
@@ -68,12 +68,12 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
             val playerIsInDM = binding.switchDetailsPlayerDM.isChecked
 
             viewModel.createSoccer(
-                grupoId,
                 playerName,
                 playerAge,
                 playerPosition,
                 playerAbilitiesMap,
-                playerIsInDM
+                playerIsInDM,
+                grupoId,
             )
         }
 

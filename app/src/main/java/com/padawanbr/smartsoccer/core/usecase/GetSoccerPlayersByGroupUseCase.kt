@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 interface GetSoccerPlayersByGroupUseCase {
-    suspend operator fun invoke(grupoId: Int): Flow<List<Jogador>>
+    suspend operator fun invoke(grupoId: String): Flow<List<Jogador>>
 }
 
 class GetSoccerPlayersByGroupUseCaseImpl @Inject constructor(
@@ -16,7 +16,7 @@ class GetSoccerPlayersByGroupUseCaseImpl @Inject constructor(
     private val dispatchers: CoroutinesDispatchers,
 ) : GetSoccerPlayersByGroupUseCase {
 
-    override suspend fun invoke(grupoId: Int): Flow<List<Jogador>> {
+    override suspend fun invoke(grupoId: String): Flow<List<Jogador>> {
         return withContext(dispatchers.io()) {
             repository.getAllSoccerPlayers(grupoId)
         }

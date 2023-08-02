@@ -48,8 +48,8 @@
 
         <argument
             android:name="groupId"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            app:argType="string"
+            android:defaultValue='""' />
 
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_DetailsGroupFragment"

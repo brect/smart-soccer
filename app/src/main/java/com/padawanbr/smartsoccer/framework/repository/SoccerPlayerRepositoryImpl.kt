@@ -9,12 +9,12 @@ import javax.inject.Inject
 class SoccerPlayerRepositoryImpl @Inject constructor(
     private val soccerPlayerLocalDataSource: SoccerPlayerLocalDataSource,
 ) : SoccerPlayerRepository {
-    override suspend fun getAllSoccerPlayers(grupoId: Int): Flow<List<Jogador>> {
+    override suspend fun getAllSoccerPlayers(grupoId: String): Flow<List<Jogador>> {
         return soccerPlayerLocalDataSource.getAllSoccerPlayers(grupoId)
     }
 
-    override suspend fun saveSoccerPlayer(jogador: Jogador, grupoId: Int) {
-        soccerPlayerLocalDataSource.saveSoccerPlayer(jogador, grupoId)
+    override suspend fun saveSoccerPlayer(jogador: Jogador) {
+        soccerPlayerLocalDataSource.saveSoccerPlayer(jogador)
     }
 
     override suspend fun deleteSoccerPlayer(jogadorId: Int) {

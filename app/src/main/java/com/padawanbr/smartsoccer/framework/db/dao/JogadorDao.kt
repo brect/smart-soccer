@@ -17,7 +17,7 @@ interface JogadorDao {
     fun getAll(): Flow<List<JogadorEntity>>
 
     @Query("SELECT * FROM jogador WHERE grupoId = :grupoId")
-    fun getJogadoresByGrupo(grupoId: Int): Flow<List<JogadorEntity>>
+    fun getJogadoresByGrupo(grupoId: String): Flow<List<JogadorEntity>>
 
     @Query("SELECT * FROM jogador WHERE id = :jogadorId")
     fun getJogadorById(jogadorId: Int): JogadorEntity?

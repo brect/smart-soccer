@@ -52,7 +52,7 @@ class SoccerPlayerViewModel @Inject constructor(
         }
     }
 
-    fun getAllSoccerPlayers(grupoId: Int) {
+    fun getAllSoccerPlayers(grupoId: String) {
         action.value = Action.GetAllSoccerPlayers(grupoId)
     }
 
@@ -67,7 +67,7 @@ class SoccerPlayerViewModel @Inject constructor(
     }
 
     sealed class Action {
-        data class GetAllSoccerPlayers(val grupoId: Int) : Action()
+        data class GetAllSoccerPlayers(val grupoId: String) : Action()
     }
 
 }

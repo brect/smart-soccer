@@ -29,12 +29,12 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
                 is Action.CreateSoccerPlayer -> {
                     addSoccerPlayerUseCase.invoke(
                         AddSoccerPlayerUseCase.Params(
-                            it.groupId,
                             it.playerName,
                             it.playerAge,
                             it.playerPosition,
                             it.playerAbilitiesMap,
-                            it.playerIsInDM
+                            it.playerIsInDM,
+                            it.groupId,
                         )
                     ).watchStatus(
                         loading = {
@@ -74,20 +74,20 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
     }
 
     fun createSoccer(
-        groupId: Int,
         playerName: String,
         playerAge: Int,
         playerPosition: PosicaoJogador?,
         playerAbilitiesMap: Map<String, Float>,
-        playerIsInDM: Boolean
+        playerIsInDM: Boolean,
+        groupId: String,
     ) {
         action.value = Action.CreateSoccerPlayer(
-            groupId,
             playerName,
             playerAge,
             playerPosition,
             playerAbilitiesMap,
-            playerIsInDM
+            playerIsInDM,
+            groupId,
         )
     }
 
@@ -104,12 +104,12 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
 
     sealed class Action {
         data class CreateSoccerPlayer(
-            val groupId: Int,
             val playerName: String,
             val playerAge: Int,
             val playerPosition: PosicaoJogador?,
             val playerAbilitiesMap: Map<String, Float>,
-            val playerIsInDM: Boolean
+            val playerIsInDM: Boolean,
+            val groupId: String,
         ) : Action()
 
         data class ExcludeSoccerPlayer(val playerId: Int) : Action()

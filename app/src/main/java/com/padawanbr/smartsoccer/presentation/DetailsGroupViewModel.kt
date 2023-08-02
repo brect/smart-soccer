@@ -6,16 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import com.padawanbr.smartsoccer.core.domain.model.Jogador
-import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
-import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCase
-import com.padawanbr.smartsoccer.core.usecase.DeleteSoccerPlayerUseCase
+import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresByIdUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
-import com.padawanbr.smartsoccer.framework.db.entity.JogadorEntity
-import com.padawanbr.smartsoccer.framework.db.entity.toConfiguracaoEsporteModel
-import com.padawanbr.smartsoccer.framework.db.entity.toSoccerPlayerModel
-import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
@@ -31,8 +24,6 @@ class DetailsGroupViewModel @Inject constructor(
     val state: LiveData<UiState> = action.switchMap {
         liveData(coroutinesDispatchers.main()) {
             when (it) {
-
-
                 is Action.GetGroupById -> {
                     getGrupoComJogadoresById.invoke(
                         GetGrupoComJogadoresByIdUseCase.Params(
@@ -40,31 +31,30 @@ class DetailsGroupViewModel @Inject constructor(
                         )
                     ).catch {
                         emit(UiState.Error)
-                    }
-                        .collect {
-                            var grupoComJogadores: GrupoItem? = null
-                            var jogadores: List<Jogador> = mutableListOf()
-                            if (it != null) {
+                    }.collect {
+                        val grupo = it?.grupo
+                        val jogadores = it?.jogadores?.toMutableList()
 
-                                jogadores = it.jogadores.toSoccerPlayerModel()
+                        var grupoItem = GrupoItem()
 
-                                grupoComJogadores = GrupoItem(
-                                    it.grupo.id,
-                                    it.grupo.nome,
-                                    it.grupo.quantidadeTimes,
-                                    it.grupo.configuracaoEsporte.toConfiguracaoEsporteModel(),
-                                    jogadores.toMutableList(),
-                                    mutableListOf()
-                                )
-                            }
-
-
-                            val uiState = if (grupoComJogadores == null) {
-                                UiState.Error
-                            } else UiState.Success(grupoComJogadores)
-
-                            emit(uiState)
+                        if (grupo != null && jogadores != null){
+                            grupoItem =  GrupoItem(
+                                grupo.id,
+                                grupo.nome,
+                                grupo.quantidadeTimes,
+                                grupo.configuracaoEsporte,
+                                jogadores,
+                                it.jogadoresDisponiveis,
+                                it.jogadoresNoDM
+                            )
                         }
+
+                        val uiState = if (it == null) {
+                            UiState.Error
+                        } else UiState.Success(grupoItem)
+
+                        emit(uiState)
+                    }
                 }
 
                 else -> {
@@ -75,7 +65,7 @@ class DetailsGroupViewModel @Inject constructor(
     }
 
 
-    fun getGroupById(groupId: Int?) {
+    fun getGroupById(groupId: String?) {
         action.value = Action.GetGroupById(groupId)
     }
 
@@ -87,7 +77,7 @@ class DetailsGroupViewModel @Inject constructor(
 
     sealed class Action {
         data class GetGroupById(
-            val groupId: Int?,
+            val groupId: String?,
         ) : Action()
     }
 

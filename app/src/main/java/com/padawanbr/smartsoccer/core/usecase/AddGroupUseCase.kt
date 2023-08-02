@@ -11,6 +11,7 @@ import com.padawanbr.smartsoccer.core.usecase.base.ResultStatus
 import com.padawanbr.smartsoccer.core.usecase.base.UseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import java.util.UUID
 import javax.inject.Inject
 
 interface AddGroupUseCase {
@@ -18,7 +19,7 @@ interface AddGroupUseCase {
     operator fun invoke(params: Params): Flow<ResultStatus<Unit>>
 
     data class Params(
-        val id: Int,
+        val id: String,
         val nome: String,
         val quantidadeTimes: Int,
         val tipoEsporte: TipoEsporte,
@@ -40,11 +41,10 @@ class AddGroupUseCaseImpl @Inject constructor(
                     params.nome,
                     params.quantidadeTimes,
                     ConfiguracaoEsporte(params.tipoEsporte, params.tipoEsporte.quantidadeMinimaPorTime),
-                    params.jogadores,
-                    params.sorteios
                 )
             )
             ResultStatus.Success(Unit)
         }
     }
 }
+

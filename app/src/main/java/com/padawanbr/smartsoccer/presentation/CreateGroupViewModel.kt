@@ -12,6 +12,7 @@ import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +29,7 @@ class CreateGroupViewModel @Inject constructor(
                 is Action.CreateGroup -> {
                     addGroupUseCase.invoke(
                         AddGroupUseCase.Params(
-                            0,
+                            UUID.randomUUID().toString(),
                             it.groupName,
                             it.quantidadeTimes,
                             it.tipoEsporte,

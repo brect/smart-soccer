@@ -71,7 +71,7 @@ class SoccerPlayerFragment : Fragment() {
         observeUiState()
         observeSharedUiState()
 
-        val grupoId = args.groupId
+        val grupoId = args.groupId ?: ""
 
         binding.floatingActionButtonAddSoccer.setOnClickListener {
             showDetailsSoccerPlayerFragment(grupoId)
@@ -81,17 +81,17 @@ class SoccerPlayerFragment : Fragment() {
 
     }
 
-    private fun showDetailsSoccerPlayerFragment(grupoId: Int?, jogador: JogadorItem? = null, isEditing: Boolean = false) {
+    private fun showDetailsSoccerPlayerFragment(grupoId: String, jogador: JogadorItem? = null, isEditing: Boolean = false) {
         grupoId?.let {
             val detailsSoccerPlayerFragment = DetailsSoccerPlayerFragment()
             val bundle = Bundle()
 
-            bundle.putInt("grupoId", grupoId)
+            bundle.putString("grupoId", grupoId)
             bundle.putBoolean("isEditing", isEditing)
 
             // Verifica se o jogador não é nulo e, em seguida, adiciona seus atributos individualmente no Bundle
             jogador?.let {
-                bundle.putInt("id", it.id ?: 0)
+                bundle.putString("id", it.id ?: "")
                 bundle.putString("nome", it.nome)
                 bundle.putInt("idade", it.idade ?: 0)
                 bundle.putString("posicao", it.posicao)
@@ -107,7 +107,7 @@ class SoccerPlayerFragment : Fragment() {
         }
     }
 
-    private fun getAllSoccers(grupoId: Int?) {
+    private fun getAllSoccers(grupoId: String?) {
         grupoId?.let {
             viewModel.getAllSoccerPlayers(grupoId)
         }

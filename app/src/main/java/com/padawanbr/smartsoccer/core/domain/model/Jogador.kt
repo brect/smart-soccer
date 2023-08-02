@@ -1,10 +1,13 @@
 package com.padawanbr.smartsoccer.core.domain.model
 
+import java.util.UUID
+
 data class Jogador(
-    val id: Int? = 0,
+    val id: String = UUID.randomUUID().toString(),
     val nome: String,
     val idade: Int,
     val posicao: PosicaoJogador? = null,
-    val habilidades: Map<String, Float>? = null,
-    var estaNoDepartamentoMedico: Boolean? = null
+    val habilidades: Map<String, Float> = emptyMap(),
+    var estaNoDepartamentoMedico: Boolean = false,
+    val grupoId: String
 )

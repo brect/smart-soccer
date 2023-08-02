@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Keep
 @Parcelize
 data class DetalheGrupoItemViewArgs(
-    val id: Int,
+    val id: String,
     val nome: String,
     val quantidadeTimes: Int,
     val tipoEsporte: TipoEsporte

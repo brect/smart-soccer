@@ -15,7 +15,7 @@ interface DeleteGroupUseCase {
     operator fun invoke(params: Params): Flow<ResultStatus<Unit>>
 
     data class Params(
-        val id: Int,
+        val id: String,
     )
 }
 

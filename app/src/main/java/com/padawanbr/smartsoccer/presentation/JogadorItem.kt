@@ -3,13 +3,14 @@ package com.padawanbr.smartsoccer.presentation
 import com.padawanbr.smartsoccer.presentation.common.ListItem
 
 data class JogadorItem(
-    val id: Int?,
+    val id: String,
     val nome: String?,
     val idade: Int?,
     val posicao: String?,
     val habilidades: Map<String, Float>?,
     var estaNoDepartamentoMedico: Boolean?,
-    override val key: Long = id?.toLong()!!
+
+    override val key: String = id
 ) : ListItem {
     // Função de extensão para calcular a média das habilidades
     fun calcularMediaHabilidades(): Float {

@@ -75,6 +75,9 @@ class DetailsGroupFragment : Fragment() {
                 }
                 is DetailsGroupViewModel.UiState.Success -> {
                     binding.textViewGroupTeamName.text = uiState.grupo.nome
+
+                    binding.textViewSoccerPlayesAvalible.text = uiState.grupo.jogadoresDisponiveis.toString()
+                    binding.textViewSoccerPlayesDm.text = uiState.grupo.jogadoresNoDM.toString()
                 }
             }
         }
@@ -99,7 +102,7 @@ class DetailsGroupFragment : Fragment() {
             val directions =
                 DetailsGroupFragmentDirections.actionDetailsGroupFragmentToSoccerPlayerFragment()
             if (args.detailsGroupViewArgs != null) {
-                directions.groupId = it.id
+                directions.groupId = args.detailsGroupViewArgs!!.id
             }
             findNavController().navigate(directions)
         }

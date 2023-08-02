@@ -16,12 +16,12 @@ interface AddSoccerPlayerUseCase {
     operator fun invoke(params: Params): Flow<ResultStatus<Unit>>
 
     data class Params(
-        val groupId: Int,
         val playerName: String,
         val playerAge: Int,
         val playerPosition: PosicaoJogador?,
         val playerAbilitiesMap: Map<String, Float>,
-        val playerIsInDM: Boolean
+        val playerIsInDM: Boolean,
+        val groupId: String,
     )
 }
 
@@ -38,9 +38,9 @@ class AddSoccerPlayerUseCaseImpl @Inject constructor(
                     idade = params.playerAge,
                     posicao = params.playerPosition,
                     habilidades = params.playerAbilitiesMap,
-                    estaNoDepartamentoMedico = params.playerIsInDM
+                    estaNoDepartamentoMedico = params.playerIsInDM,
+                    grupoId =  params.groupId
                 ),
-                params.groupId,
             )
             ResultStatus.Success(Unit)
         }
