@@ -18,7 +18,7 @@ class GroupsViewHolder(
 
     override fun bind(data: GrupoItem) {
         textName.text = data.nome
-        textType.text = data.configuracaoEsporte.tipoEsporte.tipo
+        textType.text = data.configuracaoEsporte.tipoEsporte.modalidade
     }
 
     companion object {

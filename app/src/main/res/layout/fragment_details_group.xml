@@ -150,8 +150,8 @@
                 android:id="@+id/textView_gameInformation_configuration_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Configuração: "
                 android:layout_marginVertical="4dp"
+                android:text="Configuração: "
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_typeOfCourt_lbl"
                 app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_typeOfCourt_lbl"
@@ -192,8 +192,8 @@
                 android:id="@+id/textView_gameInformation_monthlyPrice_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Preço mensalista: "
                 android:layout_marginVertical="4dp"
+                android:text="Preço mensalista: "
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_rateAge_lbl"
                 app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_singlePrice_lbl"
@@ -228,7 +228,7 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_rateAge_lbl"
                 app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_rateAge_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_rateAge_lbl"/>
+                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_rateAge_lbl" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -277,7 +277,7 @@
                 android:id="@+id/textView_soccerPlayes_dm_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
+                android:layout_marginTop="4dp"
                 android:text="Jogadores no DM: "
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
@@ -298,9 +298,10 @@
                 android:id="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Mensalistas: "
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayes_teamAbilityAverage_lbl"
                 app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayes_dm_lbl"
                 app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayes_dm_lbl" />
 
@@ -314,6 +315,26 @@
                 app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
                 app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl" />
 
+            <TextView
+                android:id="@+id/textView_soccerPlayes_teamAbilityAverage_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Média habilidades: "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl" />
+
+            <TextView
+                android:id="@+id/textView_soccerPlayes_teamAverage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_soccerPlayes_teamAbilityAverage_lbl"
+                app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayes_teamAbilityAverage_lbl"
+                app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayes_teamAbilityAverage_lbl" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -39,6 +39,7 @@ class GroupViewModel @Inject constructor(
                                     groups.configuracaoEsporte,
                                     arrayListOf(),
                                     null,
+                                    null,
                                     null
                                 )
                             }

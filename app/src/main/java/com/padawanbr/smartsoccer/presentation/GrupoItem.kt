@@ -15,6 +15,7 @@ data class GrupoItem(
     val jogadores: MutableList<Jogador>?,
     val jogadoresDisponiveis: Int?,
     val jogadoresNoDM: Int?,
+    val mediaJogadores: Float?,
 
     override val key: String = id
 ) : ListItem {
@@ -23,6 +24,7 @@ data class GrupoItem(
         "",
         0,
         ConfiguracaoEsporte(TipoEsporte.UNDEFINED, TipoEsporte.UNDEFINED.quantidadeMinimaPorTime),
+        null,
         null,
         null,
         null

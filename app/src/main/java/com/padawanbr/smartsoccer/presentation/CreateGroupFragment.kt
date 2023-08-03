@@ -49,7 +49,7 @@ class CreateGroupFragment : BottomSheetDialogFragment() {
             val groupModalityPositionString = selectedPosition.substringBefore("(")
                 .trim() // Obtém apenas a posição, ignorando a abreviação
             val groupModalityPosition =
-                TipoEsporte.values().find { it.tipo == groupModalityPositionString }
+                TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
 
             viewModel.createGroup(
                 textNameGroup,
@@ -68,7 +68,7 @@ class CreateGroupFragment : BottomSheetDialogFragment() {
         spinnerGroupModality = binding.spinnerGroupModality
 
         val detailsSportType = TipoEsporte.values().map { esporte ->
-            "${esporte.tipo} "
+            "${esporte.modalidade} "
         }.toMutableList()
 
         adapterGroupModality =

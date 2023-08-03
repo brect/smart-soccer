@@ -1,9 +1,14 @@
 package com.padawanbr.smartsoccer.core.domain.model
 
-enum class TipoEsporte(val tipo: String, val quantidadeMinimaPorTime: Int) {
-    DEFAULT("Selecione uma modalidade", 0),
-    FUTSAL("Futsal", 5),
-    FUTEBOL("Futebol", 11),
-    FUTEBOL_7("Futebol 7", 7),
-    UNDEFINED("Undefined", 0)
+enum class TipoEsporte(
+    val id: Int,
+    val modalidade: String,
+    val tipo: String,
+    val quantidadeMinimaPorTime: Int
+) {
+    UNDEFINED(0, "Selecione uma modalidade", "-", 0),
+    FUTSAL(1, "Futsal - Quadra", "Quadra", 5),
+    FUTEBOL_CAMPO(2, "Futebol de Campo - Gramado", "Gramado", 11),
+    FUTEBOL_SOCIETY(3, "Futebol de Campo - Society", "Society", 11),
+    FUTEBOL_7_SOCIETY(4, "Futebol 7 - Society", "Society", 7);
 }

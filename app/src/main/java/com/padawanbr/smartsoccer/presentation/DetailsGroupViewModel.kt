@@ -45,7 +45,8 @@ class DetailsGroupViewModel @Inject constructor(
                                 grupo.configuracaoEsporte,
                                 jogadores,
                                 it.jogadoresDisponiveis,
-                                it.jogadoresNoDM
+                                it.jogadoresNoDM,
+                                it.mediaJogadores
                             )
                         }
 
