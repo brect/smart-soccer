@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.soccerPlayer
 
 import com.padawanbr.smartsoccer.presentation.common.ListItem
 

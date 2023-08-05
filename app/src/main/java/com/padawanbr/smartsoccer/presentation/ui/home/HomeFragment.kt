@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,18 +13,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
-import com.padawanbr.smartsoccer.databinding.FragmentGroupsBinding
+import com.padawanbr.smartsoccer.databinding.FragmentHomeBinding
+import com.padawanbr.smartsoccer.presentation.ui.groups.DetailsGroupFragment
+import com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItem
+import com.padawanbr.smartsoccer.presentation.ui.groups.SharedGroupsViewModel
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.ui.groups.DetalheGrupoItemViewArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class GroupsFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private var _binding: FragmentGroupsBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: GroupViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
     private val sharedViewModel: SharedGroupsViewModel by activityViewModels()
 
     private lateinit var bottomSheetDialog: BottomSheetDialog
@@ -35,9 +39,10 @@ class GroupsFragment : Fragment() {
 
     private val groupsAdapter by lazy {
         getCommonAdapterOf(
-            { GroupsViewHolder.create(it) },
+            { HomeItemViewHolder.create(it) },
             { item: GrupoItem ->
-                val directions = GroupsFragmentDirections.actionGroupsFragmentToDetailsGroupFragment()
+                val directions =
+                    HomeFragmentDirections.actionGroupsFragmentToDetailsGroupFragment()
 
                 directions.detailsGroupViewArgs = DetalheGrupoItemViewArgs(
                     item.id,
@@ -62,7 +67,7 @@ class GroupsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentGroupsBinding.inflate(
+    ) = FragmentHomeBinding.inflate(
         inflater,
         container,
         false
@@ -77,8 +82,8 @@ class GroupsFragment : Fragment() {
         bindingBottomSheetToExcludeGroup()
 
         binding.floatingActionButton.setOnClickListener {
-            val createGroupFragment = CreateGroupFragment()
-            createGroupFragment.show(
+            val detailsGroupFragment = DetailsGroupFragment()
+            detailsGroupFragment.show(
                 childFragmentManager,
                 "CreateGroupFragment"
             )
@@ -113,38 +118,38 @@ class GroupsFragment : Fragment() {
 
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
-            when (uiState) {
-                GroupViewModel.UiState.Error -> {
-                    Toast.makeText(
-                        context,
-                        "Groups GroupViewModel.UiState.Error",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                GroupViewModel.UiState.Loading -> {
+            binding.fliperGroup.displayedChild = when (uiState) {
+                is  HomeViewModel.UiState.Loading -> {
                     Toast.makeText(
                         context,
                         "Groups GroupViewModel.UiState.Loading",
                         Toast.LENGTH_SHORT
                     ).show()
+                    FLIPPER_CHILD_LOADING
                 }
 
-                GroupViewModel.UiState.Success -> {
+                is HomeViewModel.UiState.ShowGroups -> {
+                    groupsAdapter.submitList(uiState.groups)
+                    FLIPPER_CHILD_SUCCESS
+                }
+
+                is  HomeViewModel.UiState.Success -> {
                     viewModel.getAll()
                     Toast.makeText(
                         context,
                         "Groups GroupViewModel.UiState.Success",
                         Toast.LENGTH_SHORT
                     ).show()
+                    FLIPPER_CHILD_SUCCESS
                 }
 
-                GroupViewModel.UiState.ShowEmptyGroups -> {
+                is  HomeViewModel.UiState.ShowEmptyGroups -> {
                     groupsAdapter.submitList(emptyList())
+                    FLIPPER_CHILD_EMPTY
                 }
 
-                is GroupViewModel.UiState.ShowGroups -> {
-                    groupsAdapter.submitList(uiState.groups)
+                is HomeViewModel.UiState.Error -> {
+                    FLIPPER_CHILD_ERROR
                 }
             }
         }
@@ -184,4 +189,12 @@ class GroupsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        private const val FLIPPER_CHILD_LOADING = 0
+        private const val FLIPPER_CHILD_SUCCESS = 1
+        private const val FLIPPER_CHILD_EMPTY = 2
+        private const val FLIPPER_CHILD_ERROR = 3
+    }
+
 }

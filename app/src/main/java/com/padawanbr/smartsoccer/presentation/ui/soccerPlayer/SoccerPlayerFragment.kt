@@ -1,27 +1,18 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.soccerPlayer
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
-import com.padawanbr.smartsoccer.R
-import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
-import com.padawanbr.smartsoccer.databinding.FragmentDetailsSoccerPlayerBinding
 import com.padawanbr.smartsoccer.databinding.FragmentSoccerPlayerBinding
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
 import dagger.hilt.android.AndroidEntryPoint
 
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import java.io.Serializable
 

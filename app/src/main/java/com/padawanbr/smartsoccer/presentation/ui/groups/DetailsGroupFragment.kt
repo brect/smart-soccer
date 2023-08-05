@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import android.R
 import android.os.Bundle
@@ -17,12 +17,12 @@ import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateGroupFragment : BottomSheetDialogFragment() {
+class DetailsGroupFragment : BottomSheetDialogFragment() {
 
     private var _binding: BottonsheetCreateGroupBinding? = null
     private val binding: BottonsheetCreateGroupBinding get() = _binding!!
 
-    private val viewModel: CreateGroupViewModel by viewModels()
+    private val viewModel: DetailsGroupViewModel by viewModels()
     private val sharedViewModel: SharedGroupsViewModel by activityViewModels()
 
     private lateinit var spinnerGroupModality: Spinner
@@ -91,7 +91,7 @@ class CreateGroupFragment : BottomSheetDialogFragment() {
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
-                CreateGroupViewModel.UiState.Error -> {
+                DetailsGroupViewModel.UiState.Error -> {
                     Toast.makeText(
                         context,
                         "CreateGroupViewModel.UiState.Error",
@@ -99,7 +99,7 @@ class CreateGroupFragment : BottomSheetDialogFragment() {
                     ).show()
                 }
 
-                CreateGroupViewModel.UiState.Loading -> {
+                DetailsGroupViewModel.UiState.Loading -> {
                     Toast.makeText(
                         context,
                         "CreateGroupViewModel.UiState.Loading",
@@ -107,7 +107,7 @@ class CreateGroupFragment : BottomSheetDialogFragment() {
                     ).show()
                 }
 
-                CreateGroupViewModel.UiState.Success -> {
+                DetailsGroupViewModel.UiState.Success -> {
                     sharedViewModel.updateGroups(true)
                     this.dismiss()
                 }

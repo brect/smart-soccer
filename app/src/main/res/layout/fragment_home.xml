@@ -5,7 +5,7 @@
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.GroupsFragment">
+    tools:context=".presentation.ui.home.HomeFragment">
 
     <ViewFlipper
         android:id="@+id/fliper_group"
@@ -16,16 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_group_itens"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_group"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginVertical="8dp" />
-
         <include
             android:id="@+id/include_view_group_loading_state"
             layout="@layout/include_view_group_loading_state"
@@ -34,9 +24,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_group_itens"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_home"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginVertical="8dp" />
+
+        <include
+            android:id="@+id/include_view_group_empty_state"
+            layout="@layout/include_empty_view"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <include
             android:id="@+id/include_view_group_error_state"
-            layout="@layout/include_empty_view"
+            layout="@layout/include_error_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

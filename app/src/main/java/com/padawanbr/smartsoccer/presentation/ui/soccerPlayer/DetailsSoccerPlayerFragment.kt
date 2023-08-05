@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.soccerPlayer
 
 import android.R
 import android.os.Bundle
@@ -67,7 +67,7 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
 
             val playerIsInDM = binding.switchDetailsPlayerDM.isChecked
 
-            viewModel.createSoccer(
+            viewModel.saveSoccerPlayer(
                 playerName,
                 playerAge,
                 playerPosition,
@@ -81,7 +81,7 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
             val playerId = arguments?.getInt("id", -1) ?: -1
             if (playerId != -1) {
                 // Chamar o método de exclusão do jogador do ViewModel
-                viewModel.deletePlayer(playerId)
+                viewModel.deleteSoccerPlayer(playerId)
             } else {
                 // Tratar o caso em que o ID do jogador não está disponível
                 Toast.makeText(context, "Jogador inválido ou não encontrado", Toast.LENGTH_SHORT).show()

@@ -39,5 +39,6 @@
     <string name="game_information_single_price">R$ %s</string>
     <string name="game_information_monthly_price">R$ %s</string>
     <string name="game_information_rate_age">%1$s a %2$s anos</string>
+    <string name="menu_edit">Edit</string>
 
 </resources>

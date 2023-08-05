@@ -1,14 +1,12 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCase
-import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +14,7 @@ import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateGroupViewModel @Inject constructor(
+class DetailsGroupViewModel @Inject constructor(
     private val coroutinesDispatchers: AppCoroutinesDispatchers,
     private val addGroupUseCase: AddGroupUseCase,
 ) : ViewModel() {

@@ -1,15 +1,15 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.home
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import com.padawanbr.smartsoccer.R
-import com.padawanbr.smartsoccer.databinding.ItemGroupBinding
+import com.padawanbr.smartsoccer.databinding.ItemHomeBinding
+import com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItem
 import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
 
-class GroupsViewHolder(
-    itemBinding: ItemGroupBinding,
+class HomeItemViewHolder(
+    itemBinding: ItemHomeBinding,
     private val mContext: Context
 ): CommonViewHolder<GrupoItem>(itemBinding){
 
@@ -22,10 +22,10 @@ class GroupsViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup): GroupsViewHolder {
-            val itemBinding = ItemGroupBinding
+        fun create(parent: ViewGroup): HomeItemViewHolder {
+            val itemBinding = ItemHomeBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false)
-            return GroupsViewHolder(itemBinding, parent.context)
+            return HomeItemViewHolder(itemBinding, parent.context)
         }
     }
 }

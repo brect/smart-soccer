@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Jogador

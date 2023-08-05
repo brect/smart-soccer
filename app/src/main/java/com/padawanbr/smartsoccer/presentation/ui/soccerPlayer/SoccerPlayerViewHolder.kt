@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.soccerPlayer
 
 import android.content.Context
 import android.view.LayoutInflater

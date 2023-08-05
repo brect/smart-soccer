@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.soccerPlayer
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -73,7 +73,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
         }
     }
 
-    fun createSoccer(
+    fun saveSoccerPlayer(
         playerName: String,
         playerAge: Int,
         playerPosition: PosicaoJogador?,
@@ -91,7 +91,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
         )
     }
 
-    fun deletePlayer(playerId: Int) {
+    fun deleteSoccerPlayer(playerId: Int) {
         action.value = Action.ExcludeSoccerPlayer(playerId)
     }
 

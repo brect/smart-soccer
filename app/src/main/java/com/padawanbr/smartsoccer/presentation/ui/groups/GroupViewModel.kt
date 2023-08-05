@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresByIdUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +13,7 @@ import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsGroupViewModel @Inject constructor(
+class GroupViewModel @Inject constructor(
     private val coroutinesDispatchers: AppCoroutinesDispatchers,
     private val getGrupoComJogadoresById: GetGrupoComJogadoresByIdUseCase,
 ) : ViewModel() {

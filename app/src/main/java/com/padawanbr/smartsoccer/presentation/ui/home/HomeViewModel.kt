@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,13 +8,14 @@ import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
+import com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItem
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 
 @HiltViewModel
-class GroupViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val coroutinesDispatchers: AppCoroutinesDispatchers,
     private val getGroupsUseCase: GetGroupsUseCase,
     private val deleteGroupUseCase: DeleteGroupUseCase
@@ -85,7 +86,6 @@ class GroupViewModel @Inject constructor(
         object Loading : UiState()
         object Success : UiState()
         object Error : UiState()
-
         data class ShowGroups(val groups: List<GrupoItem>) : UiState()
         object ShowEmptyGroups : UiState()
     }

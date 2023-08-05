@@ -1,17 +1,22 @@
-package com.padawanbr.smartsoccer.presentation
+package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.padawanbr.smartsoccer.R
-import com.padawanbr.smartsoccer.databinding.FragmentDetailsGroupBinding
+import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateFab
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
@@ -20,21 +25,21 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class DetailsGroupFragment : Fragment() {
+class GroupFragment : Fragment() , MenuProvider {
 
-    private var _binding: FragmentDetailsGroupBinding? = null
+    private var _binding: FragmentGroupBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: DetailsGroupViewModel by viewModels()
+    private val viewModel: GroupViewModel by viewModels()
 
-    private val args by navArgs<DetailsGroupFragmentArgs>()
+    private val args by navArgs<GroupFragmentArgs>()
 
     var isRotate: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentDetailsGroupBinding.inflate(
+    ) = FragmentGroupBinding.inflate(
         inflater,
         container,
         false
@@ -44,6 +49,9 @@ class DetailsGroupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val menuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         args.detailsGroupViewArgs?.nome?.let { setToolbarTitle(it) }
 
@@ -60,7 +68,7 @@ class DetailsGroupFragment : Fragment() {
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
-                DetailsGroupViewModel.UiState.Error -> {
+                GroupViewModel.UiState.Error -> {
                     Toast.makeText(
                         context,
                         "DetailsGroupViewModel.UiState.Error",
@@ -68,7 +76,7 @@ class DetailsGroupFragment : Fragment() {
                     ).show()
                 }
 
-                DetailsGroupViewModel.UiState.Loading -> {
+                GroupViewModel.UiState.Loading -> {
                     Toast.makeText(
                         context,
                         "CreateGroupViewModel.UiState.Loading",
@@ -76,7 +84,7 @@ class DetailsGroupFragment : Fragment() {
                     ).show()
                 }
 
-                is DetailsGroupViewModel.UiState.Success -> {
+                is GroupViewModel.UiState.Success -> {
                     binding.textViewGroupTeamName.text = uiState.grupo.nome
                     binding.textViewGroupDate.text = "dd/mm/yyyy"
                     binding.textViewGroupLocal.text = "-"
@@ -143,7 +151,7 @@ class DetailsGroupFragment : Fragment() {
             isRotate = rotateFab(it, !isRotate)
             hideFabs()
             val directions =
-                DetailsGroupFragmentDirections.actionDetailsGroupFragmentToSoccerPlayerFragment()
+                GroupFragmentDirections.actionDetailsGroupFragmentToSoccerPlayerFragment()
             if (args.detailsGroupViewArgs != null) {
                 directions.groupId = args.detailsGroupViewArgs!!.id
             }
@@ -180,4 +188,20 @@ class DetailsGroupFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_details_group, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.action_edit -> {
+                Toast.makeText(context, "Action edit", Toast.LENGTH_LONG).show()
+                true
+            }
+
+            else -> false
+        }
+    }
+
 }
