@@ -61,7 +61,7 @@ class GroupFragment : Fragment() , MenuProvider {
         initFabs()
         configureFabMoreOptions()
         fabAddSoccerPlayerOnClick()
-        fabCreateCompetitionOnClick()
+        fabCreateQuickCompetitionOnClick()
 
         observeUiState()
     }
@@ -160,8 +160,8 @@ class GroupFragment : Fragment() , MenuProvider {
         }
     }
 
-    private fun fabCreateCompetitionOnClick() {
-        binding.fabCreateCompetition.setOnClickListener {
+    private fun fabCreateQuickCompetitionOnClick() {
+        binding.fabCreateQuickCompetition.setOnClickListener {
             isRotate = rotateFab(it, !isRotate)
             hideFabs()
             val directions =
@@ -176,6 +176,8 @@ class GroupFragment : Fragment() , MenuProvider {
     private fun initFabs() {
         init(binding.fabAddSoccerPlayer)
         init(binding.textViewAddSoccerPlayer)
+        init(binding.fabCreateQuickCompetition)
+        init(binding.textViewCreateQuickCompetition)
         init(binding.fabCreateCompetition)
         init(binding.textViewCreateCompetition)
     }
@@ -187,6 +189,8 @@ class GroupFragment : Fragment() , MenuProvider {
     private fun showFabs() {
         showIn(binding.fabAddSoccerPlayer)
         showIn(binding.textViewAddSoccerPlayer)
+        showIn(binding.fabCreateQuickCompetition)
+        showIn(binding.textViewCreateQuickCompetition)
         showIn(binding.fabCreateCompetition)
         showIn(binding.textViewCreateCompetition)
     }
@@ -194,6 +198,8 @@ class GroupFragment : Fragment() , MenuProvider {
     private fun hideFabs() {
         showOut(binding.fabAddSoccerPlayer)
         showOut(binding.textViewAddSoccerPlayer)
+        showOut(binding.fabCreateQuickCompetition)
+        showOut(binding.textViewCreateQuickCompetition)
         showOut(binding.fabCreateCompetition)
         showOut(binding.textViewCreateCompetition)
     }

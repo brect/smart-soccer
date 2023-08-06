@@ -32,6 +32,6 @@ fun GrupoEntity.toGrupoModel(): Grupo {
         id = id,
         nome = nome,
         quantidadeTimes = quantidadeTimes,
-        configuracaoEsporte = configuracaoEsporte.toConfiguracaoEsporteModel()
+        configuracaoEsporte = configuracaoEsporte.toConfiguracaoEsporteModel(),
     )
 }

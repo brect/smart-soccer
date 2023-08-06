@@ -41,6 +41,7 @@ class AddGroupUseCaseImpl @Inject constructor(
                     params.nome,
                     params.quantidadeTimes,
                     ConfiguracaoEsporte(params.tipoEsporte, params.tipoEsporte.quantidadeMinimaPorTime),
+                    arrayListOf()
                 )
             )
             ResultStatus.Success(Unit)

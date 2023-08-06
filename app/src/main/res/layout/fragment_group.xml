@@ -9,12 +9,11 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="16dp"
-        android:layout_marginTop="16dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -500,7 +499,7 @@
         app:layout_constraintTop_toTopOf="@+id/fab_add_soccerPlayer" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_createCompetition"
+        android:id="@+id/fab_createQuickCompetition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -511,11 +510,33 @@
         app:srcCompat="@drawable/ic_add_round" />
 
     <TextView
+        android:id="@+id/textView_createQuickCompetition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Sorteio rápido"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_createQuickCompetition"
+        app:layout_constraintEnd_toStartOf="@+id/fab_createQuickCompetition"
+        app:layout_constraintTop_toTopOf="@+id/fab_createQuickCompetition" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_createCompetition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/fab_createQuickCompetition"
+        app:layout_constraintEnd_toEndOf="@+id/fab_createQuickCompetition"
+        app:layout_constraintStart_toStartOf="@+id/fab_createQuickCompetition"
+        app:srcCompat="@drawable/ic_add_round" />
+
+    <TextView
         android:id="@+id/textView_createCompetition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Sortear times"
+        android:text="Criar torneio"
         app:layout_constraintBottom_toBottomOf="@+id/fab_createCompetition"
         app:layout_constraintEnd_toStartOf="@+id/fab_createCompetition"
         app:layout_constraintTop_toTopOf="@+id/fab_createCompetition" />

@@ -11,3 +11,7 @@ data class Jogador(
     var estaNoDepartamentoMedico: Boolean = false,
     val grupoId: String
 )
+
+fun Jogador.calcularMediaHabilidades(): Float {
+    return habilidades.values.average().toFloat()
+}
