@@ -38,12 +38,12 @@
         android:text="@string/exclude_groups"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/flipper_group"
+        app:layout_constraintBottom_toTopOf="@+id/flipper_createTeam_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_excludeGroup_title" />
 
     <ViewFlipper
-        android:id="@+id/flipper_group"
+        android:id="@+id/flipper_createTeam_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -61,7 +61,7 @@
             android:textAllCaps="false" />
 
         <ProgressBar
-            android:id="@+id/progress_group"
+            android:id="@+id/progress_createTeam"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center" />

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:id="@+id/container_createTeam_competition"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/flipper_createTeam_button"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="24dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInput_createTeam_qtdTeams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quantos times?"
+            app:expandedHintEnabled="false"
+            app:hintEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_textInput_groupName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Quantos times?"
+                android:inputType="text"
+                android:text="Quantos times?"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Switch
+            android:id="@+id/switch_createTeam_positions"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Considerar posições?" />
+
+        <Switch
+            android:id="@+id/switch_createTeam_abilities"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Considerar overalls?" />
+
+
+        <Switch
+            android:id="@+id/switch_createTeam_dm"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Considerar departamento médico?" />
+    </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/flipper_createTeam_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container_createTeam_competition">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_createTeam"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:text="sortear times"
+            android:textAllCaps="false" />
+
+        <ProgressBar
+            android:id="@+id/progress_createTeam"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center" />
+
+    </ViewFlipper>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

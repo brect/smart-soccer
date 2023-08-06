@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/drag_handle" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_groupName"
+        android:id="@+id/textInput_createTeam_qtdTeams"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -56,10 +56,10 @@
         android:layout_height="58dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/background_border_stroke"
-        app:layout_constraintBottom_toTopOf="@+id/flipper_group"
-        app:layout_constraintEnd_toEndOf="@+id/textInput_groupName"
-        app:layout_constraintStart_toStartOf="@+id/textInput_groupName"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_groupName" />
+        app:layout_constraintBottom_toTopOf="@+id/flipper_createTeam_button"
+        app:layout_constraintEnd_toEndOf="@+id/textInput_createTeam_qtdTeams"
+        app:layout_constraintStart_toStartOf="@+id/textInput_createTeam_qtdTeams"
+        app:layout_constraintTop_toBottomOf="@+id/textInput_createTeam_qtdTeams" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInput_qtdMinPlayers"
@@ -73,7 +73,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textInput_qtdNumberPlayersPerTeam"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_groupName">
+        app:layout_constraintTop_toBottomOf="@+id/textInput_createTeam_qtdTeams">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_textInput_qtdMinPlayers"
@@ -118,7 +118,7 @@
         app:expandedHintEnabled="false"
         app:hintEnabled="true"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/flipper_group"
+        app:layout_constraintBottom_toTopOf="@+id/flipper_createTeam_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInput_qtdNumberPlayersPerTeam">
@@ -134,7 +134,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ViewFlipper
-        android:id="@+id/flipper_group"
+        android:id="@+id/flipper_createTeam_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="58dp"
@@ -150,7 +150,7 @@
             android:textAllCaps="false" />
 
         <ProgressBar
-            android:id="@+id/progress_group"
+            android:id="@+id/progress_createTeam"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center" />

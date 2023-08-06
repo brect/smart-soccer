@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.padawanbr.smartsoccer.databinding.FragmentCreateCompetitionBinding
 import dagger.hilt.android.AndroidEntryPoint
-import com.padawanbr.smartsoccer.databinding.BottonsheetCreateCompetitionBinding
 
 @AndroidEntryPoint
 class CompetitionFragment : Fragment() {
 
-    private var _binding: BottonsheetCreateCompetitionBinding? = null
+    private var _binding: FragmentCreateCompetitionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,7 +22,7 @@ class CompetitionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = BottonsheetCreateCompetitionBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateCompetitionBinding.inflate(inflater, container, false)
         return binding.root
 
     }
