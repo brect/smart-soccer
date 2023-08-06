@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_DetailsGroupFragment_to_GroupsFragment"
             app:destination="@id/groupsFragment" />
+        <action
+            android:id="@+id/action_detailsGroupFragment_to_competitionFragment"
+            app:destination="@id/competitionFragment" />
     </fragment>
 
     <fragment
@@ -57,6 +60,14 @@
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_DetailsSoccerPlayerFragment"
             app:destination="@id/detailsSoccerPlayerFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/competitionFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionFragment"
+        android:label="@string/soccer_player_fragment_label"
+        tools:layout="@layout/bottonsheet_create_competition">
     </fragment>
 
     <fragment

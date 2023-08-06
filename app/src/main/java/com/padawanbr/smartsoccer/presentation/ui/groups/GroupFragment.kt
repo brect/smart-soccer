@@ -61,6 +61,7 @@ class GroupFragment : Fragment() , MenuProvider {
         initFabs()
         configureFabMoreOptions()
         fabAddSoccerPlayerOnClick()
+        fabCreateCompetitionOnClick()
 
         observeUiState()
     }
@@ -159,11 +160,24 @@ class GroupFragment : Fragment() , MenuProvider {
         }
     }
 
+    private fun fabCreateCompetitionOnClick() {
+        binding.fabCreateCompetition.setOnClickListener {
+            isRotate = rotateFab(it, !isRotate)
+            hideFabs()
+            val directions =
+                GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()
+//            if (args.detailsGroupViewArgs != null) {
+//                directions.groupId = args.detailsGroupViewArgs!!.id
+//            }
+            findNavController().navigate(directions)
+        }
+    }
+
     private fun initFabs() {
         init(binding.fabAddSoccerPlayer)
         init(binding.textViewAddSoccerPlayer)
-        init(binding.fabSeparateTimes)
-        init(binding.textViewSeparateTimes)
+        init(binding.fabCreateCompetition)
+        init(binding.textViewCreateCompetition)
     }
 
     private fun setToolbarTitle(title: String) {
@@ -173,15 +187,15 @@ class GroupFragment : Fragment() , MenuProvider {
     private fun showFabs() {
         showIn(binding.fabAddSoccerPlayer)
         showIn(binding.textViewAddSoccerPlayer)
-        showIn(binding.fabSeparateTimes)
-        showIn(binding.textViewSeparateTimes)
+        showIn(binding.fabCreateCompetition)
+        showIn(binding.textViewCreateCompetition)
     }
 
     private fun hideFabs() {
         showOut(binding.fabAddSoccerPlayer)
         showOut(binding.textViewAddSoccerPlayer)
-        showOut(binding.fabSeparateTimes)
-        showOut(binding.textViewSeparateTimes)
+        showOut(binding.fabCreateCompetition)
+        showOut(binding.textViewCreateCompetition)
     }
 
     override fun onDestroyView() {
