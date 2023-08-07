@@ -44,5 +44,13 @@ enum class PosicaoJogador(val funcao: String, val abreviacao: String) {
         fun fromString(posicao: String?): PosicaoJogador? {
             return values().find { "${it.funcao} (${it.abreviacao})" == posicao }
         }
+
+        fun fromAbreviacaoString(abreviacao: String?): PosicaoJogador? {
+            return values().find { "(${it.abreviacao})" == abreviacao }
+        }
+
+        fun compararAbreviacao(abreviacao: String?):  PosicaoJogador? {
+            return values().find { "${it.abreviacao}" == abreviacao }
+        }
     }
 }

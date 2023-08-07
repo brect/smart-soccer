@@ -1,17 +1,16 @@
 package com.padawanbr.smartsoccer.core.usecase
 
-import com.padawanbr.smartsoccer.core.usecase.base.CoroutinesDispatchers
 import com.padawanbr.smartsoccer.core.data.repository.GroupRepository
 import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
-import com.padawanbr.smartsoccer.core.domain.model.Sorteio
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
+import com.padawanbr.smartsoccer.core.domain.model.Torneio
+import com.padawanbr.smartsoccer.core.usecase.base.CoroutinesDispatchers
 import com.padawanbr.smartsoccer.core.usecase.base.ResultStatus
 import com.padawanbr.smartsoccer.core.usecase.base.UseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import java.util.UUID
 import javax.inject.Inject
 
 interface AddGroupUseCase {
@@ -24,7 +23,7 @@ interface AddGroupUseCase {
         val quantidadeTimes: Int,
         val tipoEsporte: TipoEsporte,
         val jogadores: MutableList<Jogador>,
-        val sorteios: MutableList<Sorteio>
+        val torneios: List<Torneio>? = null,
     )
 }
 

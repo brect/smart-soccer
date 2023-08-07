@@ -2,7 +2,6 @@ package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
-import com.padawanbr.smartsoccer.core.domain.model.Sorteio
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.presentation.common.ListItem
 import java.util.UUID
