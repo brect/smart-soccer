@@ -36,6 +36,8 @@ class GroupFragment : Fragment() , MenuProvider {
 
     var isRotate: Boolean = false
 
+    lateinit var grupo: GrupoItem
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,6 +88,8 @@ class GroupFragment : Fragment() , MenuProvider {
                 }
 
                 is GroupViewModel.UiState.Success -> {
+                    grupo = uiState.grupo
+
                     binding.textViewGroupTeamName.text = uiState.grupo.nome
                     binding.textViewGroupDate.text = "dd/mm/yyyy"
                     binding.textViewGroupLocal.text = "-"
@@ -130,6 +134,8 @@ class GroupFragment : Fragment() , MenuProvider {
                             it
                         )
                     }).toString()
+
+                    val jogadores = uiState.grupo.jogadores
                 }
             }
         }
@@ -164,11 +170,15 @@ class GroupFragment : Fragment() , MenuProvider {
         binding.fabCreateQuickCompetition.setOnClickListener {
             isRotate = rotateFab(it, !isRotate)
             hideFabs()
-            val directions =
-                GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()
-//            if (args.detailsGroupViewArgs != null) {
-//                directions.groupId = args.detailsGroupViewArgs!!.id
-//            }
+            val directions =  GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()
+
+            if (args.detailsGroupViewArgs != null) {
+                directions.competitionViewArgs = CompetitionViewArgs(
+                    grupo.id,
+                    grupo.jogadores
+                )
+            }
+
             findNavController().navigate(directions)
         }
     }

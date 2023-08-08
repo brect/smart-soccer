@@ -24,11 +24,11 @@
             app:hintEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_textInput_groupName"
+                android:id="@+id/editText_createTeam_qtdTeams"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Quantos times?"
-                android:inputType="text"
+                android:inputType="number"
                 android:text="Quantos times?"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>

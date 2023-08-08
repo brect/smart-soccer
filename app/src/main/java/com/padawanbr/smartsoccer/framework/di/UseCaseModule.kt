@@ -3,6 +3,8 @@ package com.padawanbr.smartsoccer.framework.di
 
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCaseImpl
+import com.padawanbr.smartsoccer.core.usecase.AddQuickCompetitionUseCase
+import com.padawanbr.smartsoccer.core.usecase.AddQuickCompetitionUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCase
@@ -44,5 +46,8 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetGrupoComJogadoresByIdUseCase(useCaseImpl: GetGrupoComJogadoresByIdUseCaseImpl): GetGrupoComJogadoresByIdUseCase
+
+    @Binds
+    fun bindAddQuickCompetitionUseCase(useCaseImpl: AddQuickCompetitionUseCaseImpl): AddQuickCompetitionUseCase
 
 }

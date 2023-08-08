@@ -68,6 +68,13 @@
         android:name="com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionFragment"
         android:label="@string/competition_fragment_label"
         tools:layout="@layout/fragment_create_competition">
+
+        <argument
+            android:name="competitionViewArgs"
+            app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.CompetitionViewArgs"
+            android:defaultValue="@null"
+            app:nullable="true" />
+
     </fragment>
 
     <fragment
