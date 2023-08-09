@@ -9,7 +9,9 @@ import com.padawanbr.smartsoccer.framework.db.dao.JogoDao
 import com.padawanbr.smartsoccer.framework.db.dao.PlacarDao
 import com.padawanbr.smartsoccer.framework.db.dao.PosicaoJogadorDao
 import com.padawanbr.smartsoccer.framework.db.dao.TimeDao
+import com.padawanbr.smartsoccer.framework.db.dao.TorneioDao
 import com.padawanbr.smartsoccer.framework.db.entity.ClassificacoesConverter
+import com.padawanbr.smartsoccer.framework.db.entity.CriterioDesempateItemEntity
 import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
 import com.padawanbr.smartsoccer.framework.db.entity.JogadorEntity
 import com.padawanbr.smartsoccer.framework.db.entity.JogadorPosicaoCrossRef
@@ -18,6 +20,7 @@ import com.padawanbr.smartsoccer.framework.db.entity.PlacarEntity
 import com.padawanbr.smartsoccer.framework.db.entity.PosicaoJogadorEntity
 import com.padawanbr.smartsoccer.framework.db.entity.PosicoesConverter
 import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
+import com.padawanbr.smartsoccer.framework.db.entity.TorneioEntity
 import com.padawanbr.smartsoccer.framework.db.entity.UUIDTypeConverter
 
 @Database(
@@ -26,9 +29,11 @@ import com.padawanbr.smartsoccer.framework.db.entity.UUIDTypeConverter
         GrupoEntity::class,
         PosicaoJogadorEntity::class,
         JogoEntity::class,
-        TimeEntity::class,
         PlacarEntity::class,
-        JogadorPosicaoCrossRef::class
+        JogadorPosicaoCrossRef::class,
+        TimeEntity::class,
+        TorneioEntity::class,
+        CriterioDesempateItemEntity::class
     ],
     version = 1,
     exportSchema = false
@@ -46,4 +51,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun jogoDao(): JogoDao
     abstract fun timeDao(): TimeDao
     abstract fun placarDao(): PlacarDao
+    abstract fun torneioDao(): TorneioDao
 }

@@ -9,6 +9,6 @@ data class TimeEntity(
     @PrimaryKey
     val id: String = UUID.randomUUID().toString(), // Utilizando UUID como ID
     val nome: String,
-    val mediaHabilidades: Float, // Média das habilidades dos jogadores do time
-    val torneioId: String // ID do Torneio ao qual o Time está associado
+    val mediaHabilidades: Float,
+    val torneioId: String
 )

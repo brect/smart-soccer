@@ -42,4 +42,7 @@ object DatabaseModule {
     @Provides
     fun providerPlacarDao(appDatabase: AppDatabase) = appDatabase.placarDao()
 
+    @Provides
+    fun providerTorneioDao(appDatabase: AppDatabase) = appDatabase.torneioDao()
+
 }
