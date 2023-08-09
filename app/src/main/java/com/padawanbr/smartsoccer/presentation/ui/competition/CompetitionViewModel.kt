@@ -10,6 +10,7 @@ import com.padawanbr.smartsoccer.core.usecase.AddQuickCompetitionUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,12 +28,13 @@ class CompetitionViewModel @Inject constructor(
                 is Action.CreateQuickCompetition -> {
                     addQuickCompetitionUseCase.invoke(
                         AddQuickCompetitionUseCase.Params(
-                            it.groupId,
+                            UUID.randomUUID().toString(),
                             it.jogadores,
                             it.numeroTimes,
                             it.considerarPosicoes,
                             it.considerarOveralls,
                             it.considerarDepartamentoMedico,
+                            it.groupId,
                         )
                     ).watchStatus(
                         loading = {
