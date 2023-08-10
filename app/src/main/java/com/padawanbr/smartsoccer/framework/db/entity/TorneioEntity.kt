@@ -18,20 +18,3 @@ data class TorneioEntity(
     val tipoTorneio: TipoTorneio? = null,// Converter o enum TipoTorneio para String
     val grupoId: String
 )
-
-//fun List<TorneioEntity>.toListTorneioEntityModel(): List<Torneio?> {
-//    return map { it.to() }
-//}
-
-//
-//
-//fun TorneioEntity?.toTorneioModel(): Torneio? {
-//    return this?.let {
-//        Torneio(
-//            id,
-//            nome,
-//            tipoTorneio,
-//            grupoId
-//        )
-//    }
-//}

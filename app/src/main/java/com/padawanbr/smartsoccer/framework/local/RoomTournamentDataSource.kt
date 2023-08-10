@@ -5,6 +5,8 @@ import com.padawanbr.smartsoccer.core.domain.model.Partida
 import com.padawanbr.smartsoccer.core.domain.model.Time
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import com.padawanbr.smartsoccer.framework.db.dao.TorneioDao
+import com.padawanbr.smartsoccer.framework.db.entity.PartidaEntity
+import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TorneioEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -19,7 +21,11 @@ class RoomTournamentDataSource @Inject constructor(
         times: List<Time>,
         partidas: List<Partida>
     ) {
-        torneioDao.insertTorneioWithTimesAndPartidas(torneio, times, partidas)
+        val torneioEntity = torneio.toTorneioEntity()
+        val timesEntities = times.map { it.toTimeEntity(torneioEntity.id) }
+        val partidasEntities = partidas.map { it.toPartidaEntity(torneioEntity.id) }
+
+        torneioDao.insertTorneioWithTimesAndPartidas(torneioEntity, timesEntities, partidasEntities)
     }
 
     override suspend fun saveTournament(torneio: Torneio) {
@@ -38,10 +44,27 @@ class RoomTournamentDataSource @Inject constructor(
         torneioDao.deleteTorneio(torneioId)
     }
 
-    fun Torneio.toTorneioEntity() = TorneioEntity (
+    private fun Torneio.toTorneioEntity() = TorneioEntity (
+        id = id,
         nome = nome,
         tipoTorneio = tipoTorneio,
         grupoId = grupoId
+    )
+
+    private fun Time.toTimeEntity(torneioId: String) = TimeEntity(
+        id = id,
+        nome = nome,
+        mediaHabilidades = mediaHabilidades,
+        torneioId = torneioId
+    )
+
+    private fun Partida.toPartidaEntity(torneioId: String) = PartidaEntity(
+        id = id,
+        timeCasaId = timeCasa.id,
+        timeVisitanteId = timeVisitante.id,
+        placarCasa = placarCasa,
+        placarVisitante = placarVisitante,
+        torneioId = torneioId
     )
 
 }

@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Room
 import com.padawanbr.smartsoccer.core.data.DbConstants.APP_DATABASE_NAME
 import com.padawanbr.smartsoccer.framework.db.AppDatabase
+import com.padawanbr.smartsoccer.framework.db.LoggingQueryCallback
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.Executors
 
 
 @Module
@@ -22,7 +24,8 @@ object DatabaseModule {
         context,
         AppDatabase::class.java,
         APP_DATABASE_NAME
-    ).build()
+    ) .setQueryCallback(LoggingQueryCallback(), Executors.newSingleThreadExecutor())
+        .build()
 
     @Provides
     fun providerJogadorDao(appDatabase: AppDatabase) = appDatabase.jogadorDao()

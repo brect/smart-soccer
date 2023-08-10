@@ -9,6 +9,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.ActivityMainBinding
+import com.padawanbr.smartsoccer.framework.db.AppDatabase
+import com.padawanbr.smartsoccer.framework.db.dao.GrupoDao
+import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -3,6 +3,7 @@ package com.padawanbr.smartsoccer.framework.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.framework.db.dao.GrupoDao
 import com.padawanbr.smartsoccer.framework.db.dao.JogadorDao
 import com.padawanbr.smartsoccer.framework.db.dao.JogoDao
@@ -16,6 +17,7 @@ import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
 import com.padawanbr.smartsoccer.framework.db.entity.JogadorEntity
 import com.padawanbr.smartsoccer.framework.db.entity.JogadorPosicaoCrossRef
 import com.padawanbr.smartsoccer.framework.db.entity.JogoEntity
+import com.padawanbr.smartsoccer.framework.db.entity.PartidaEntity
 import com.padawanbr.smartsoccer.framework.db.entity.PlacarEntity
 import com.padawanbr.smartsoccer.framework.db.entity.PosicaoJogadorEntity
 import com.padawanbr.smartsoccer.framework.db.entity.PosicoesConverter
@@ -34,6 +36,7 @@ import com.padawanbr.smartsoccer.framework.db.entity.UUIDTypeConverter
         JogadorPosicaoCrossRef::class,
         TimeEntity::class,
         TorneioEntity::class,
+        PartidaEntity::class,
         CriterioDesempateItemEntity::class
     ],
     version = 1,
@@ -54,4 +57,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun timeDao(): TimeDao
     abstract fun placarDao(): PlacarDao
     abstract fun torneioDao(): TorneioDao
+
 }
