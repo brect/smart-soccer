@@ -6,5 +6,6 @@ data class Torneio(
     val tipoTorneio: TipoTorneio,
     val criteriosDesempate: List<CriterioDesempateItem>,
     val times: List<Time>,
-    val partidas: List<Partida>
+    val partidas: List<Partida>,
+    val grupoId: String
 )

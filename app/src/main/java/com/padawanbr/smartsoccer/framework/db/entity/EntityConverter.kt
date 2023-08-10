@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
+import com.padawanbr.smartsoccer.core.domain.model.TipoTorneio
 import java.util.UUID
 
 class PosicoesConverter {
@@ -30,6 +31,19 @@ class PosicaoJogadorConverter {
         return tipoPosicao?.let { enumValueOf<PosicaoJogador>(it) }
     }
 }
+
+class TipoTorneioConverter {
+    @TypeConverter
+    fun fromTipoTorneio(tipoTorneio: TipoTorneio?): String? {
+        return tipoTorneio?.tipo
+    }
+
+    @TypeConverter
+    fun toTipoTorneio(tipoTorneio: String?): TipoTorneio? {
+        return tipoTorneio?.let { enumValueOf<TipoTorneio>(it) }
+    }
+}
+
 
 class ClassificacoesConverter {
     @TypeConverter

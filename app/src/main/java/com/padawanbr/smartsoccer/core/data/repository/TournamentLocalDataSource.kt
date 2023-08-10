@@ -3,11 +3,14 @@ package com.padawanbr.smartsoccer.core.data.repository
 import com.padawanbr.smartsoccer.core.domain.model.Partida
 import com.padawanbr.smartsoccer.core.domain.model.Time
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
+import com.padawanbr.smartsoccer.framework.db.entity.PartidaEntity
+import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
+import com.padawanbr.smartsoccer.framework.db.entity.TorneioEntity
 import kotlinx.coroutines.flow.Flow
 
-interface TorneioRepository {
+interface TournamentLocalDataSource {
 
-    suspend fun insertTorneioWithTimesAndPartidas(torneio: Torneio)
+    suspend fun insertTorneioWithTimesAndPartidas(torneio: Torneio, times: List<Time>, partidas: List<Partida>)
 
     suspend fun saveTournament(torneio: Torneio)
 

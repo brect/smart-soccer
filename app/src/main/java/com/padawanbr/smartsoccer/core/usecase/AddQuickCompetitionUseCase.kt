@@ -58,14 +58,15 @@ class AddQuickCompetitionUseCaseImpl @Inject constructor(
 //        }
 //
         return withContext(dispatchers.io()) {
-            repository.saveTournament(
+            repository.insertTorneioWithTimesAndPartidas(
                 Torneio(
                     params.id,
                     "QuickCompetition",
                     TipoTorneio.ELIMINATORIAS,
                     listOf(),
                     timesSorteados,
-                    listOf()
+                    listOf(),
+                    params.groupId
                 )
             )
          ResultStatus.Success(Unit)
