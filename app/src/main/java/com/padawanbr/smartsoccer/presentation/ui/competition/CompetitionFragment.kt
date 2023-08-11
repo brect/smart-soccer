@@ -5,23 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.padawanbr.smartsoccer.databinding.FragmentCreateCompetitionBinding
-import com.padawanbr.smartsoccer.presentation.ui.groups.DetailsGroupViewModel
-import com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.SoccerPlayerFragmentArgs
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.padawanbr.smartsoccer.databinding.BottonsheetCreateCompetitionBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CompetitionFragment : Fragment() {
+class CompetitionFragment : BottomSheetDialogFragment() {
 
-    private var _binding: FragmentCreateCompetitionBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private var _binding: BottonsheetCreateCompetitionBinding? = null
+    private val binding: BottonsheetCreateCompetitionBinding get() = _binding!!
 
     private val viewModel: CompetitionViewModel by viewModels()
 
@@ -32,10 +27,8 @@ class CompetitionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        _binding = FragmentCreateCompetitionBinding.inflate(inflater, container, false)
+        _binding = BottonsheetCreateCompetitionBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

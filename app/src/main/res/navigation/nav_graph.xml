@@ -35,7 +35,8 @@
             app:destination="@id/groupsFragment" />
         <action
             android:id="@+id/action_detailsGroupFragment_to_competitionFragment"
-            app:destination="@id/competitionFragment" />
+            app:destination="@id/competitionFragment"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <fragment
@@ -63,11 +64,11 @@
     </fragment>
 
 
-    <fragment
+    <dialog
         android:id="@+id/competitionFragment"
         android:name="com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionFragment"
         android:label="@string/competition_fragment_label"
-        tools:layout="@layout/fragment_create_competition">
+        tools:layout="@layout/bottonsheet_create_competition">
 
         <argument
             android:name="competitionViewArgs"
@@ -75,7 +76,7 @@
             android:defaultValue="@null"
             app:nullable="true" />
 
-    </fragment>
+    </dialog>
 
     <fragment
         android:id="@+id/detailsSoccerPlayerFragment"
