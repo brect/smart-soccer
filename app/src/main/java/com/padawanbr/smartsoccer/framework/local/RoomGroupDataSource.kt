@@ -1,12 +1,15 @@
 package com.padawanbr.smartsoccer.framework.local
 
+import android.util.Log
 import com.padawanbr.smartsoccer.core.data.repository.GroupLocalDataSource
 import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.domain.model.GrupoComJogadores
+import com.padawanbr.smartsoccer.core.domain.model.GrupoComJogadoresETorneios
 import com.padawanbr.smartsoccer.framework.db.dao.GrupoDao
 import com.padawanbr.smartsoccer.framework.db.entity.ConfiguracaoEsporteEntity
 import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
+import com.padawanbr.smartsoccer.framework.db.entity.toGrupoComJogadoresETorneiosModel
 import com.padawanbr.smartsoccer.framework.db.entity.toGrupoComJogadoresModel
 import com.padawanbr.smartsoccer.framework.db.entity.toListGroupModel
 import kotlinx.coroutines.flow.Flow
@@ -26,6 +29,13 @@ class RoomGroupDataSource @Inject constructor(
     override fun getGrupoComJogadoresById(grupoId: String?): Flow<GrupoComJogadores?> {
         return grupoDao.getGrupoComJogadoresById(grupoId).map {
             it?.toGrupoComJogadoresModel()
+        }
+    }
+
+    override fun getGrupoComJogadoresETorneiosById(grupoId: String?): Flow<GrupoComJogadoresETorneios?> {
+        return grupoDao.getGrupoComJogadoresETorneiosById(grupoId).map {
+            Log.i("RoomGroupDataSource", "getGrupoComJogadoresETorneiosById: ")
+            it?.toGrupoComJogadoresETorneiosModel()
         }
     }
 

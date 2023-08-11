@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.padawanbr.smartsoccer.core.domain.model.GrupoComJogadores
+import com.padawanbr.smartsoccer.framework.db.entity.GrupoComJogadoresETorneiosEntity
 import com.padawanbr.smartsoccer.framework.db.entity.GrupoComJogadoresEntity
 import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
 import kotlinx.coroutines.flow.Flow
@@ -32,5 +33,9 @@ interface GrupoDao {
     @Transaction
     @Query("SELECT * FROM grupo WHERE id = :grupoId")
     fun getGrupoComJogadoresById(grupoId: String?): Flow<GrupoComJogadoresEntity?>
+
+    @Transaction
+    @Query("SELECT * FROM grupo WHERE id = :grupoId")
+    fun getGrupoComJogadoresETorneiosById(grupoId: String?): Flow<GrupoComJogadoresETorneiosEntity?>
 
 }

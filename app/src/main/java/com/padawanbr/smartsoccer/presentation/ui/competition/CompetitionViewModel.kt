@@ -6,10 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
+import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import com.padawanbr.smartsoccer.core.usecase.AddQuickCompetitionUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
+import com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.JogadorItem
+import com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.SoccerPlayerViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import java.util.UUID
 import javax.inject.Inject
 
@@ -48,6 +53,26 @@ class CompetitionViewModel @Inject constructor(
                         }
                     )
                 }
+//                is Action.GetAllQuickCompetitions -> {
+//                    getAllQuickCompetitionUseCase.invoke(
+//                    ).catch {
+//
+//                    }.collect{
+//                        val competitions = it. { competition ->
+//                            Torneio(
+//
+//                            )
+//                        }
+//
+//                        val uiState = if (competitions.isEmpty()) {
+//                            UiState.ShowEmptyCompetitions
+//                        } else UiState.ShowCompetitions(competitions)
+//
+//                        emit(uiState)
+//                    }
+//                }
+
+                else -> {}
             }
         }
     }
@@ -74,6 +99,10 @@ class CompetitionViewModel @Inject constructor(
         object Loading : UiState()
         object Success : UiState()
         object Error : UiState()
+
+//        object ShowEmptyCompetitions : UiState()
+//        data class ShowCompetitions(val competitions: List<Torneio>): UiState()
+
     }
 
     sealed class Action {
@@ -85,6 +114,8 @@ class CompetitionViewModel @Inject constructor(
             val considerarOveralls: Boolean,
             val considerarDepartamentoMedico: Boolean
         ) : Action()
+
+//        data class GetAllQuickCompetitions(val grupoId: String): Action()
     }
 
 }

@@ -1,3 +1,4 @@
+--Cria grupos
 INSERT OR REPLACE INTO `grupo` (`id`,`nome`,`quantidadeTimes`,`tipoEsporte`,`quantidadeMinimaPorTime`)
 VALUES
     ('b467a7bc-4015-4e4f-844b-e16b17b0d0ae', 'Nome do grupo 1', 2, 'FUTEBOL_CAMPO', 11),
@@ -6,6 +7,7 @@ VALUES
     ('f7a1b92e-e1c2-4379-99b2-08f2e1583c5a', 'Nome do grupo 4', 2, 'FUTEBOL_CAMPO', 11),
     ('ee827d88-42d6-4ff0-bde2-b7c06d138e88', 'Nome do grupo 5', 2, 'FUTEBOL_CAMPO', 11);
 
+--Cria jogadores
 INSERT INTO `jogador` (`id`,`nome`,`idade`,`posicao`,`habilidades`,`estaNoDepartamentoMedico`,`grupoId`) VALUES
     ('6d20cf4b-6e7b-4701-948d-2d8491ad8c13', 'Nome Jogador 1', 30, 'GOLEIRO', '{"Velocidade":4.0,"Chute":4.0,"Passe":4.0,"Marcação":4.0,"Drible":4.0,"Raça":4.0}', 0, 'b467a7bc-4015-4e4f-844b-e16b17b0d0ae'),
     ('a71e3e72-1d59-415e-80d1-5b462486c51d', 'Nome Jogador 2', 35, 'GOLEIRO', '{"Velocidade":4.0,"Chute":4.0,"Passe":4.0,"Marcação":4.0,"Drible":4.0,"Raça":4.0}', 0, 'b467a7bc-4015-4e4f-844b-e16b17b0d0ae'),
@@ -33,3 +35,8 @@ INSERT INTO `jogador` (`id`,`nome`,`idade`,`posicao`,`habilidades`,`estaNoDepart
     ('4d76b9d1-319b-4ed3-9dbb-5806e4e58f82', 'Nome Jogador 24', 45, 'ATACANTE', '{"Velocidade":4.0,"Chute":4.0,"Passe":4.0,"Marcação":4.0,"Drible":4.0,"Raça":4.0}', 0, 'b467a7bc-4015-4e4f-844b-e16b17b0d0ae'),
     ('ab6894a1-9f2d-4af2-82cd-0cebc89e8704', 'Nome Jogador 25', 50, 'ATACANTE', '{"Velocidade":4.0,"Chute":4.0,"Passe":4.0,"Marcação":4.0,"Drible":4.0,"Raça":4.0}', 0, 'b467a7bc-4015-4e4f-844b-e16b17b0d0ae'),
     ('6788f11e-ebc9-4c0e-9e47-5d6f9880736f', 'Nome Jogador 26', 55, 'ATACANTE', '{"Velocidade":4.0,"Chute":4.0,"Passe":4.0,"Marcação":4.0,"Drible":4.0,"Raça":4.0}', 0, 'b467a7bc-4015-4e4f-844b-e16b17b0d0ae');
+
+--Cria torneio rápido
+INSERT OR REPLACE INTO `torneio` (`id`,`nome`,`tipoTorneio`,`grupoId`) VALUES (?,?,?,?) with bindArgs: [af2ab4b5-3859-4b6f-9a9d-4601878b27b0, QuickCompetition, ELIMINATORIAS, b467a7bc-4015-4e4f-844b-e16b17b0d0ae]
+INSERT OR REPLACE INTO `time` (`id`,`nome`,`mediaHabilidades`,`torneioId`) VALUES (?,?,?,?) with bindArgs: [b2a714d0-396d-4490-907e-cdf607302add,	Time A , 4.0 af2ab4b5-3859-4b6f-9a9d-4601878b27b0]
+INSERT OR REPLACE INTO `time` (`id`,`nome`,`mediaHabilidades`,`torneioId`) VALUES (?,?,?,?) with bindArgs: [55ec5fa5-d6ae-4cc2-9c81-ad5b385c88c0, Time B, 4.0, af2ab4b5-3859-4b6f-9a9d-4601878b27b0]

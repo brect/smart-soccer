@@ -1,7 +1,7 @@
 package com.padawanbr.smartsoccer.core.domain.model
 
 enum class TipoTorneio (val tipo: String) {
-    JOGO_UNICO("FESTIVAL"),
+    JOGO_UNICO("JOGO_UNICO"),
     ELIMINATORIAS("ELIMINATORIAS"),
     PONTOS_CORRIDOS("PONTOS_CORRIDOS"),
     GRUPOS_E_ELIMINATORIAS("GRUPOS_E_ELIMINATORIAS"),

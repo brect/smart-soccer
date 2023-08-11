@@ -17,6 +17,8 @@ import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresByIdUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresByIdUseCaseImpl
+import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresETorneiosUseCase
+import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresETorneiosUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -46,6 +48,9 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetGrupoComJogadoresByIdUseCase(useCaseImpl: GetGrupoComJogadoresByIdUseCaseImpl): GetGrupoComJogadoresByIdUseCase
+
+    @Binds
+    fun bindGetGrupoComJogadoresETorneiosUseCase(useCaseImpl: GetGrupoComJogadoresETorneiosUseCaseImpl): GetGrupoComJogadoresETorneiosUseCase
 
     @Binds
     fun bindAddQuickCompetitionUseCase(useCaseImpl: AddQuickCompetitionUseCaseImpl): AddQuickCompetitionUseCase

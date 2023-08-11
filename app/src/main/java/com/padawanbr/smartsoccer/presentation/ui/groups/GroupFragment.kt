@@ -1,6 +1,7 @@
 package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -56,9 +57,6 @@ class GroupFragment : Fragment() , MenuProvider {
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         args.detailsGroupViewArgs?.nome?.let { setToolbarTitle(it) }
-
-        var groupId = args.detailsGroupViewArgs?.id
-        viewModel.getGroupById(groupId)
 
         initFabs()
         configureFabMoreOptions()
@@ -223,6 +221,15 @@ class GroupFragment : Fragment() , MenuProvider {
         menuInflater.inflate(R.menu.menu_details_group, menu)
     }
 
+
+    override fun onResume() {
+        super.onResume()
+
+        var groupId = args.detailsGroupViewArgs?.id
+        viewModel.getGroupById(groupId)
+
+        Log.i("GROUPFRAGMENT", "onResume")
+    }
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.action_edit -> {

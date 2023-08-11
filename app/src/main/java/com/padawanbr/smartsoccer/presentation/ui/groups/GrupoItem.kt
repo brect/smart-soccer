@@ -3,6 +3,7 @@ package com.padawanbr.smartsoccer.presentation.ui.groups
 import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
+import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import com.padawanbr.smartsoccer.presentation.common.ListItem
 import java.util.UUID
 
@@ -15,6 +16,7 @@ data class GrupoItem(
     val jogadoresDisponiveis: Int?,
     val jogadoresNoDM: Int?,
     val mediaJogadores: Float?,
+    val torneios: MutableList<Torneio>?,
 
     override val key: String = id
 ) : ListItem {
@@ -23,6 +25,7 @@ data class GrupoItem(
         "",
         0,
         ConfiguracaoEsporte(TipoEsporte.UNDEFINED, TipoEsporte.UNDEFINED.quantidadeMinimaPorTime),
+        null,
         null,
         null,
         null,

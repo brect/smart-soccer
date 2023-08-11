@@ -1,9 +1,11 @@
 package com.padawanbr.smartsoccer.framework.repository
 
+import android.util.Log
 import com.padawanbr.smartsoccer.core.data.repository.GroupLocalDataSource
 import com.padawanbr.smartsoccer.core.data.repository.GroupRepository
 import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.domain.model.GrupoComJogadores
+import com.padawanbr.smartsoccer.core.domain.model.GrupoComJogadoresETorneios
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -25,6 +27,11 @@ class GroupRepositoryImpl @Inject constructor(
 
     override fun getGrupoComJogadoresById(grupoId: String?): Flow<GrupoComJogadores?> {
         return groupLocalDataSource.getGrupoComJogadoresById(grupoId)
+    }
+
+    override fun getGrupoComJogadoresETorneiosById(grupoId: String?): Flow<GrupoComJogadoresETorneios?> {
+        Log.i("GroupRepositoryImpl", "getGrupoComJogadoresETorneiosById: ")
+        return groupLocalDataSource.getGrupoComJogadoresETorneiosById(grupoId)
     }
 
 }

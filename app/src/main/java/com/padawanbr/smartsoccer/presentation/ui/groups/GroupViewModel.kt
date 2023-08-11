@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresByIdUseCase
+import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresETorneiosUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class GroupViewModel @Inject constructor(
     private val coroutinesDispatchers: AppCoroutinesDispatchers,
-    private val getGrupoComJogadoresById: GetGrupoComJogadoresByIdUseCase,
+    private val getGrupoComJogadoresById: GetGrupoComJogadoresETorneiosUseCase,
+//    private val getGrupoComJogadoresById: GetGrupoComJogadoresByIdUseCase,
 ) : ViewModel() {
 
     private val action = MutableLiveData<Action>()
@@ -25,14 +27,17 @@ class GroupViewModel @Inject constructor(
             when (it) {
                 is Action.GetGroupById -> {
                     getGrupoComJogadoresById.invoke(
-                        GetGrupoComJogadoresByIdUseCase.Params(
+                        GetGrupoComJogadoresETorneiosUseCase.Params(
                             it.groupId
                         )
-                    ).catch {
+                    ).catch {exception ->
+                        exception.printStackTrace()
+                        Log.i("GroupViewModel", "getGrupoComJogadoresETorneiosById: ")
                         emit(UiState.Error)
                     }.collect {
                         val grupo = it?.grupo
                         val jogadores = it?.jogadores?.toMutableList()
+                        val torneios = it?.torneios?.toMutableList()
 
                         var grupoItem = GrupoItem()
 
@@ -45,7 +50,8 @@ class GroupViewModel @Inject constructor(
                                 jogadores,
                                 it.jogadoresDisponiveis,
                                 it.jogadoresNoDM,
-                                it.mediaJogadores
+                                it.mediaJogadores,
+                                torneios
                             )
                         }
 
