@@ -45,31 +45,19 @@ class AddQuickCompetitionUseCaseImpl @Inject constructor(
             considerarDepartamentoMedico = params.considerarDepartamentoMedico
         )
 
-//        println("----- Times Sorteados -----")
-//        timesSorteados.forEachIndexed { index, time ->
-//            println("Time ${index + 1}")
-//            println("Nome: ${time.nome}")
-//            println("Media time: ${time.mediaHabilidades}")
-//            println("Jogadores:")
-//            time.jogadores.forEach { jogador ->
-//                println(" - ${jogador.nome} (Media Habilidades: ${jogador.calcularMediaHabilidades()}) (Posição: ${jogador.posicao}) (DM: ${jogador.estaNoDepartamentoMedico})")
-//            }
-//            println("--------------------------")
-//        }
-//
         return withContext(dispatchers.io()) {
             repository.insertTorneioWithTimesAndPartidas(
                 Torneio(
                     params.id,
                     "QuickCompetition",
-                    TipoTorneio.ELIMINATORIAS,
+                    TipoTorneio.JOGO_UNICO,
                     listOf(),
                     timesSorteados,
                     listOf(),
                     params.groupId
                 )
             )
-         ResultStatus.Success(Unit)
+            ResultStatus.Success(Unit)
         }
     }
 }

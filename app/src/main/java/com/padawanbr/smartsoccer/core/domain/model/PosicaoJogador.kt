@@ -15,6 +15,7 @@ enum class PosicaoJogador(val funcao: String, val abreviacao: String) {
     VOLANTE_DEFENSIVO("Volante Defensivo", "VOL_DEF"),
     PRIMEIRO_VOLANTE("Primeiro Volante", "1º VOL"),
     SEGUNDO_VOLANTE("Segundo Volante", "2º VOL"),
+    MEIA("Meio campo", "MEIA"),
     MEIA_DEFENSIVO("Meia Defensivo", "MEIA_DEF"),
     MEIA_DEFENSIVO_CENTRAL("Meia Defensivo Central", "MEIA_DEF_C"),
     MEIA_DEFENSIVO_DIREITO("Meia Defensivo Direito", "MEIA_DEF_DIR"),

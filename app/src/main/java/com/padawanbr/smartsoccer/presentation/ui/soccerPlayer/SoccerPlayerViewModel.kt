@@ -25,6 +25,8 @@ class SoccerPlayerViewModel @Inject constructor(
                 is Action.GetAllSoccerPlayers -> {
                     getSoccerPlayersByGroupUseCase.invoke(it.grupoId)
                         .catch {
+                            it.cause
+                            it.message
                             emit(UiState.ShowEmptySoccers)
                         }
                         .collect {
