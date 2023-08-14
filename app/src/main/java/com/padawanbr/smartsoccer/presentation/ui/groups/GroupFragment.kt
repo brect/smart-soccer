@@ -22,7 +22,8 @@ import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateFab
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showOut
-import com.padawanbr.smartsoccer.presentation.ui.competition.DatailCompetitionAdapter
+import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.ui.competition.DatailCompetitionViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,6 +41,26 @@ class GroupFragment : Fragment() , MenuProvider {
 
     lateinit var grupo: GrupoItem
 
+    private val competitionsAdapter by lazy {
+        getCommonAdapterOf(
+            { DatailCompetitionViewHolder.create(it) },
+            {
+                Toast.makeText(
+                    context,
+                    "competitionsAdapter itemClicked",
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            {
+                Toast.makeText(
+                    context,
+                    "competitionsAdapter itemLongClicked",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,12 +75,15 @@ class GroupFragment : Fragment() , MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initCompetitionAdapter()
+
         val menuHost = requireActivity()
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         args.detailsGroupViewArgs?.nome?.let { setToolbarTitle(it) }
 
         initFabs()
+
         configureFabMoreOptions()
         fabAddSoccerPlayerOnClick()
         fabCreateQuickCompetitionOnClick()
@@ -97,6 +121,8 @@ class GroupFragment : Fragment() , MenuProvider {
 
                 is GroupViewModel.UiState.Success -> {
                     grupo = uiState.grupo
+
+                    competitionsAdapter.submitList(grupo.torneios)
 
                     binding.textViewGroupTeamName.text = uiState.grupo.nome
                     binding.textViewGroupDate.text = "dd/mm/yyyy"
@@ -145,13 +171,18 @@ class GroupFragment : Fragment() , MenuProvider {
 
                     val jogadores = uiState.grupo.jogadores
 
-                    binding.recyclerViewItemCompetition.run {
-                        setHasFixedSize(true)
-                        adapter = grupo.torneios?.let { DatailCompetitionAdapter(it) }
-                    }
-                    grupo.torneios
+                    competitionsAdapter.notifyDataSetChanged()
+
                 }
             }
+        }
+    }
+
+
+    private fun initCompetitionAdapter(){
+        binding.recyclerViewItemCompetition.run {
+            setHasFixedSize(true)
+            adapter = competitionsAdapter
         }
     }
 

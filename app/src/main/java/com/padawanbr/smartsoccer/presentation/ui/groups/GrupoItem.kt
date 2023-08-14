@@ -5,6 +5,7 @@ import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import com.padawanbr.smartsoccer.presentation.common.ListItem
+import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
 import java.util.UUID
 
 data class GrupoItem(
@@ -16,7 +17,7 @@ data class GrupoItem(
     val jogadoresDisponiveis: Int?,
     val jogadoresNoDM: Int?,
     val mediaJogadores: Float?,
-    val torneios: MutableList<Torneio>?,
+    val torneios: List<CompetitionItem>?,
 
     override val key: String = id
 ) : ListItem {

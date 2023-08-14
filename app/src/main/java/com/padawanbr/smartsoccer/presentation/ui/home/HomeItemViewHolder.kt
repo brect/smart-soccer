@@ -10,8 +10,7 @@ import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
 
 class HomeItemViewHolder(
     itemBinding: ItemHomeBinding,
-    private val mContext: Context
-): CommonViewHolder<GrupoItem>(itemBinding){
+) : CommonViewHolder<GrupoItem>(itemBinding) {
 
     private val textName: TextView = itemBinding.textViewGroupTitle
     private val textType: TextView = itemBinding.textViewGroupType
@@ -22,10 +21,15 @@ class HomeItemViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup): HomeItemViewHolder {
-            val itemBinding = ItemHomeBinding
-                .inflate(LayoutInflater.from(parent.context), parent, false)
-            return HomeItemViewHolder(itemBinding, parent.context)
+        fun create(
+            parent: ViewGroup
+        ): HomeItemViewHolder {
+            val itemBinding = ItemHomeBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            return HomeItemViewHolder(itemBinding)
         }
     }
 }

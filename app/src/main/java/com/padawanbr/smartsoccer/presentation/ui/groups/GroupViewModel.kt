@@ -9,6 +9,7 @@ import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresByIdUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresETorneiosUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
+import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
@@ -37,7 +38,18 @@ class GroupViewModel @Inject constructor(
                     }.collect {
                         val grupo = it?.grupo
                         val jogadores = it?.jogadores?.toMutableList()
-                        val torneios = it?.torneios?.toMutableList()
+                        val torneios = it?.torneios?.toMutableList()?.map { torneio ->
+                            CompetitionItem(
+                                id = torneio.id,
+                                nome = torneio.nome,
+                                tipoTorneio = torneio.tipoTorneio,
+                                criteriosDesempate = torneio.criteriosDesempate,
+                                times = torneio.times,
+                                partidas = torneio.partidas,
+                                grupoId = torneio.grupoId
+
+                            )
+                        }
 
                         var grupoItem = GrupoItem()
 
