@@ -419,47 +419,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView_competitions_infos_label" />
 
-            <TextView
-                android:id="@+id/textView_competitions_ongoing_lbl"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_item_competition"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Em andamento: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_competitions_finished_lbl"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view_competitions_divider" />
-
-            <TextView
-                android:id="@+id/textView_competitions_ongoing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_competitions_ongoing_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_competitions_ongoing_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_competitions_ongoing_lbl" />
-
-            <TextView
-                android:id="@+id/textView_competitions_finished_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Finalizadas: "
-                android:textSize="14sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_competitions_ongoing_lbl" />
-
-            <TextView
-                android:id="@+id/textView_competitions_finished"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_competitions_finished_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_competitions_finished_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_competitions_finished_lbl" />
+                app:layout_constraintTop_toBottomOf="@+id/view_competitions_divider"
+                tools:listitem="@layout/item_competition" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

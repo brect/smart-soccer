@@ -22,6 +22,7 @@ import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateFab
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showOut
+import com.padawanbr.smartsoccer.presentation.ui.competition.DatailCompetitionAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -62,6 +63,15 @@ class GroupFragment : Fragment() , MenuProvider {
         configureFabMoreOptions()
         fabAddSoccerPlayerOnClick()
         fabCreateQuickCompetitionOnClick()
+
+
+        binding.imageViewCompetitionsArrow.setOnClickListener {
+            Toast.makeText(
+                context,
+                "imageViewCompetitionsArrow",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         observeUiState()
     }
@@ -134,6 +144,12 @@ class GroupFragment : Fragment() , MenuProvider {
                     }).toString()
 
                     val jogadores = uiState.grupo.jogadores
+
+                    binding.recyclerViewItemCompetition.run {
+                        setHasFixedSize(true)
+                        adapter = grupo.torneios?.let { DatailCompetitionAdapter(it) }
+                    }
+                    grupo.torneios
                 }
             }
         }
