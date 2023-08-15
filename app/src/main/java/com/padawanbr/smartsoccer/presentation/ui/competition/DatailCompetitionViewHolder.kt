@@ -21,15 +21,10 @@ class DatailCompetitionViewHolder(
     }
 
     companion object {
-        fun create(
-            parent: ViewGroup
-        ): DatailCompetitionViewHolder {
-            val itemBinding = ItemCompetitionBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-            return DatailCompetitionViewHolder(itemBinding)
+        fun create(parent: ViewGroup): DatailCompetitionViewHolder {
+            val inflater = LayoutInflater.from(parent.context)
+            val binding = ItemCompetitionBinding.inflate(inflater, parent, false)
+            return DatailCompetitionViewHolder(binding)
         }
     }
 }

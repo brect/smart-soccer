@@ -15,5 +15,7 @@ interface GroupRepository {
 
     fun getGrupoComJogadoresById(grupoId: String?): Flow<GrupoComJogadores?>
 
-    fun getGrupoComJogadoresETorneiosById(grupoId: String?): Flow<GrupoComJogadoresETorneios?>
+//    suspend fun getGrupoComJogadoresETorneiosById(grupoId: String?): GrupoComJogadoresETorneios
+
+    suspend fun getGrupoComJogadoresETorneiosById(grupoId: String): GrupoComJogadoresETorneios
 }

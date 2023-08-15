@@ -29,8 +29,7 @@ class GroupRepositoryImpl @Inject constructor(
         return groupLocalDataSource.getGrupoComJogadoresById(grupoId)
     }
 
-    override fun getGrupoComJogadoresETorneiosById(grupoId: String?): Flow<GrupoComJogadoresETorneios?> {
-        Log.i("GroupRepositoryImpl", "getGrupoComJogadoresETorneiosById: ")
+    override suspend fun getGrupoComJogadoresETorneiosById(grupoId: String): GrupoComJogadoresETorneios {
         return groupLocalDataSource.getGrupoComJogadoresETorneiosById(grupoId)
     }
 

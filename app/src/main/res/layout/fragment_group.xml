@@ -423,6 +423,7 @@
                 android:id="@+id/recyclerView_item_competition"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:minHeight="110dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
                 android:clipToPadding="false"

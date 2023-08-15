@@ -22,8 +22,8 @@ data class GrupoComJogadoresETorneiosEntity(
     val torneios: List<TorneioEntity>
 )
 
-fun GrupoComJogadoresETorneiosEntity?.toGrupoComJogadoresETorneiosModel(): GrupoComJogadoresETorneios? {
-    return this?.let {
+fun GrupoComJogadoresETorneiosEntity.toGrupoComJogadoresETorneiosModel(): GrupoComJogadoresETorneios {
+    return this.let {
         GrupoComJogadoresETorneios(
             grupo = it.grupo.toGrupoModel(),
             jogadores = it.jogadores.toListSoccerPlayerModel(),
@@ -32,6 +32,6 @@ fun GrupoComJogadoresETorneiosEntity?.toGrupoComJogadoresETorneiosModel(): Grupo
     }
 }
 
-fun List<GrupoComJogadoresETorneiosEntity>.toListGrupoComJogadoresModel(): List<GrupoComJogadoresETorneios?> {
+fun List<GrupoComJogadoresETorneiosEntity>.toListGrupoComJogadoresModel(): List<GrupoComJogadoresETorneios> {
     return map { it.toGrupoComJogadoresETorneiosModel() }
 }

@@ -9,7 +9,9 @@ import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresByIdUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresETorneiosUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
+import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
+import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
@@ -31,48 +33,53 @@ class GroupViewModel @Inject constructor(
                         GetGrupoComJogadoresETorneiosUseCase.Params(
                             it.groupId
                         )
-                    ).catch {exception ->
-                        exception.printStackTrace()
-                        Log.i("GroupViewModel", "getGrupoComJogadoresETorneiosById: ")
-                        emit(UiState.Error)
-                    }.collect {
-                        val grupo = it?.grupo
-                        val jogadores = it?.jogadores?.toMutableList()
-                        val torneios = it?.torneios?.toMutableList()?.map { torneio ->
-                            CompetitionItem(
-                                id = torneio.id,
-                                nome = torneio.nome,
-                                tipoTorneio = torneio.tipoTorneio,
-                                criteriosDesempate = torneio.criteriosDesempate,
-                                times = torneio.times,
-                                partidas = torneio.partidas,
-                                grupoId = torneio.grupoId
+                    ).watchStatus(
+                        loading = {
+                            emit(UiState.Loading)
+                        },
+                        success = {
+                            val grupo = it?.grupo
+                            val jogadores = it?.jogadores?.toMutableList()
 
-                            )
+                            val torneios = it?.torneios?.toMutableList()?.map { torneio ->
+                                CompetitionItem(
+                                    id = torneio.id,
+                                    nome = torneio.nome,
+                                    tipoTorneio = torneio.tipoTorneio,
+                                    criteriosDesempate = torneio.criteriosDesempate,
+                                    times = torneio.times,
+                                    partidas = torneio.partidas,
+                                    grupoId = torneio.grupoId
+
+                                )
+                            }
+
+                            var grupoItem = GrupoItem()
+
+                            if (grupo != null && jogadores != null) {
+                                grupoItem = GrupoItem(
+                                    grupo.id,
+                                    grupo.nome,
+                                    grupo.quantidadeTimes,
+                                    grupo.configuracaoEsporte,
+                                    jogadores,
+                                    it.jogadoresDisponiveis,
+                                    it.jogadoresNoDM,
+                                    it.mediaJogadores,
+                                    torneios
+                                )
+                            }
+
+                            val uiState = if (it == null) {
+                                UiState.Error
+                            } else UiState.Success(grupoItem)
+
+                            emit(uiState)
+                        },
+                        error = {
+                            emit(UiState.Error)
                         }
-
-                        var grupoItem = GrupoItem()
-
-                        if (grupo != null && jogadores != null){
-                            grupoItem =  GrupoItem(
-                                grupo.id,
-                                grupo.nome,
-                                grupo.quantidadeTimes,
-                                grupo.configuracaoEsporte,
-                                jogadores,
-                                it.jogadoresDisponiveis,
-                                it.jogadoresNoDM,
-                                it.mediaJogadores,
-                                torneios
-                            )
-                        }
-
-                        val uiState = if (it == null) {
-                            UiState.Error
-                        } else UiState.Success(grupoItem)
-
-                        emit(uiState)
-                    }
+                    )
                 }
 
                 else -> {
@@ -83,7 +90,7 @@ class GroupViewModel @Inject constructor(
     }
 
 
-    fun getGroupById(groupId: String?) {
+    fun getGroupById(groupId: String) {
         action.value = Action.GetGroupById(groupId)
     }
 
@@ -95,7 +102,7 @@ class GroupViewModel @Inject constructor(
 
     sealed class Action {
         data class GetGroupById(
-            val groupId: String?,
+            val groupId: String,
         ) : Action()
     }
 

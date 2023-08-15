@@ -36,6 +36,6 @@ interface GrupoDao {
 
     @Transaction
     @Query("SELECT * FROM grupo WHERE id = :grupoId")
-    fun getGrupoComJogadoresETorneiosById(grupoId: String?): Flow<GrupoComJogadoresETorneiosEntity?>
+    fun getGrupoComJogadoresETorneiosById(grupoId: String?): GrupoComJogadoresETorneiosEntity
 
 }

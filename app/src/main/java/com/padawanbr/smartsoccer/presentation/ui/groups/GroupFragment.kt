@@ -112,6 +112,8 @@ class GroupFragment : Fragment() , MenuProvider {
                 }
 
                 GroupViewModel.UiState.Loading -> {
+                    competitionsAdapter.submitList(emptyList())
+
                     Toast.makeText(
                         context,
                         "CreateGroupViewModel.UiState.Loading",
@@ -169,15 +171,10 @@ class GroupFragment : Fragment() , MenuProvider {
                         )
                     }).toString()
 
-                    val jogadores = uiState.grupo.jogadores
-
-                    competitionsAdapter.notifyDataSetChanged()
-
                 }
             }
         }
     }
-
 
     private fun initCompetitionAdapter(){
         binding.recyclerViewItemCompetition.run {
@@ -273,7 +270,9 @@ class GroupFragment : Fragment() , MenuProvider {
         super.onResume()
 
         var groupId = args.detailsGroupViewArgs?.id
-        viewModel.getGroupById(groupId)
+        if (groupId != null) {
+            viewModel.getGroupById(groupId)
+        }
 
         Log.i("GROUPFRAGMENT", "onResume")
     }

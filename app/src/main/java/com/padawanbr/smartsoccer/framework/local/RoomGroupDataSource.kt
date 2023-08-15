@@ -32,11 +32,9 @@ class RoomGroupDataSource @Inject constructor(
         }
     }
 
-    override fun getGrupoComJogadoresETorneiosById(grupoId: String?): Flow<GrupoComJogadoresETorneios?> {
-        return grupoDao.getGrupoComJogadoresETorneiosById(grupoId).map {
-            Log.i("RoomGroupDataSource", "getGrupoComJogadoresETorneiosById: ")
-            it?.toGrupoComJogadoresETorneiosModel()
-        }
+    override suspend fun getGrupoComJogadoresETorneiosById(grupoId: String?): GrupoComJogadoresETorneios {
+        return grupoDao.getGrupoComJogadoresETorneiosById(grupoId)
+            .toGrupoComJogadoresETorneiosModel()
     }
 
     override suspend fun saveGroup(grupo: Grupo) {
