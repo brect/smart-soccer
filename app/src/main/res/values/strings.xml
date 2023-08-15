@@ -6,6 +6,7 @@
     <string name="soccer_player_fragment_label">Jogadores</string>
     <string name="competition_fragment_label">Sortear times</string>
     <string name="soccer_player_details_fragment_label">Detalhes do jogador</string>
+    <string name="competition_details_fragment_label">Detalhes do torneio</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 

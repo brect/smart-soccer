@@ -45,6 +45,11 @@ class GroupFragment : Fragment() , MenuProvider {
         getCommonAdapterOf(
             { DatailCompetitionViewHolder.create(it) },
             {
+
+                val directions =  GroupFragmentDirections.actionDetailsGroupFragmentToDetailsCompetitionFragment()
+
+                findNavController().navigate(directions)
+
                 Toast.makeText(
                     context,
                     "competitionsAdapter itemClicked",
@@ -276,6 +281,7 @@ class GroupFragment : Fragment() , MenuProvider {
 
         Log.i("GROUPFRAGMENT", "onResume")
     }
+
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.action_edit -> {

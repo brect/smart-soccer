@@ -13,14 +13,14 @@ import com.padawanbr.smartsoccer.databinding.BottonsheetCreateCompetitionBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CompetitionFragment : BottomSheetDialogFragment() {
+class QuickCompetitionFragment : BottomSheetDialogFragment() {
 
     private var _binding: BottonsheetCreateCompetitionBinding? = null
     private val binding: BottonsheetCreateCompetitionBinding get() = _binding!!
 
-    private val viewModel: CompetitionViewModel by viewModels()
+    private val viewModel: QuickCompetitionViewModel by viewModels()
 
-    private val args by navArgs<CompetitionFragmentArgs>()
+    private val args by navArgs<QuickCompetitionFragmentArgs>()
 
 
     override fun onCreateView(
@@ -59,21 +59,21 @@ class CompetitionFragment : BottomSheetDialogFragment() {
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
-                CompetitionViewModel.UiState.Error -> {
+                QuickCompetitionViewModel.UiState.Error -> {
                     Toast.makeText(
                         context,
                         "CompetitionViewModel.UiState.Error",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                CompetitionViewModel.UiState.Loading -> {
+                QuickCompetitionViewModel.UiState.Loading -> {
                     Toast.makeText(
                         context,
                         "CompetitionViewModel.UiState.Loading",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                CompetitionViewModel.UiState.Success -> {
+                QuickCompetitionViewModel.UiState.Success -> {
                     Toast.makeText(
                         context,
                         "CompetitionViewModel.UiState.Success",
