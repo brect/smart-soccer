@@ -23,7 +23,7 @@ import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateFab
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showOut
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
-import com.padawanbr.smartsoccer.presentation.ui.competition.DatailCompetitionViewHolder
+import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -43,10 +43,12 @@ class GroupFragment : Fragment() , MenuProvider {
 
     private val competitionsAdapter by lazy {
         getCommonAdapterOf(
-            { DatailCompetitionViewHolder.create(it) },
+            { ItemCompetitionViewHolder.create(it) },
             {
 
                 val directions =  GroupFragmentDirections.actionDetailsGroupFragmentToDetailsCompetitionFragment()
+
+                directions.competitionId = it.id
 
                 findNavController().navigate(directions)
 

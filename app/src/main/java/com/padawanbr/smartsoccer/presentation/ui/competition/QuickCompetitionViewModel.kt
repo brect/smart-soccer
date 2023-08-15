@@ -19,7 +19,6 @@ class QuickCompetitionViewModel @Inject constructor(
     private val addQuickCompetitionUseCase: AddQuickCompetitionUseCase,
 ) : ViewModel() {
 
-
     private val action = MutableLiveData<Action>()
 
     val state: LiveData<UiState> = action.switchMap {
@@ -48,24 +47,6 @@ class QuickCompetitionViewModel @Inject constructor(
                         }
                     )
                 }
-//                is Action.GetAllQuickCompetitions -> {
-//                    getAllQuickCompetitionUseCase.invoke(
-//                    ).catch {
-//
-//                    }.collect{
-//                        val competitions = it. { competition ->
-//                            Torneio(
-//
-//                            )
-//                        }
-//
-//                        val uiState = if (competitions.isEmpty()) {
-//                            UiState.ShowEmptyCompetitions
-//                        } else UiState.ShowCompetitions(competitions)
-//
-//                        emit(uiState)
-//                    }
-//                }
 
                 else -> {}
             }
@@ -94,10 +75,6 @@ class QuickCompetitionViewModel @Inject constructor(
         object Loading : UiState()
         object Success : UiState()
         object Error : UiState()
-
-//        object ShowEmptyCompetitions : UiState()
-//        data class ShowCompetitions(val competitions: List<Torneio>): UiState()
-
     }
 
     sealed class Action {
@@ -109,8 +86,6 @@ class QuickCompetitionViewModel @Inject constructor(
             val considerarOveralls: Boolean,
             val considerarDepartamentoMedico: Boolean
         ) : Action()
-
-//        data class GetAllQuickCompetitions(val grupoId: String): Action()
     }
 
 }

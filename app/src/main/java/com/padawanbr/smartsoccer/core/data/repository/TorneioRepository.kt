@@ -13,7 +13,7 @@ interface TorneioRepository {
 
     suspend fun getTournamentsByGroup(grupoId: String): Flow<List<Torneio>>
 
-    suspend fun getTournamentById(torneioId: String): Torneio?
+    suspend fun getTournamentById(torneioId: String): Torneio
 
     suspend fun deleteTournament(torneioId: String)
 

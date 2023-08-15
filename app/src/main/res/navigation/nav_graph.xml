@@ -48,6 +48,11 @@
         android:label="@string/competition_details_fragment_label"
         tools:layout="@layout/fragment_details_competition">
 
+        <argument
+            android:name="competitionId"
+            app:argType="string"
+            android:defaultValue='""' />
+
     </fragment>
 
     <fragment

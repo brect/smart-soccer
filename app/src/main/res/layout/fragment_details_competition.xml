@@ -19,5 +19,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <TextView
+        android:id="@+id/text_details_soccer_teams"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Times"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_details_soccer_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

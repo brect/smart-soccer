@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import com.padawanbr.smartsoccer.databinding.ItemCompetitionBinding
-import com.padawanbr.smartsoccer.databinding.ItemHomeBinding
 import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
-import com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItem
 
-class DatailCompetitionViewHolder(
+class ItemCompetitionViewHolder(
     itemBinding: ItemCompetitionBinding,
 ) : CommonViewHolder<CompetitionItem>(itemBinding) {
 
@@ -21,10 +19,10 @@ class DatailCompetitionViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup): DatailCompetitionViewHolder {
+        fun create(parent: ViewGroup): ItemCompetitionViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ItemCompetitionBinding.inflate(inflater, parent, false)
-            return DatailCompetitionViewHolder(binding)
+            return ItemCompetitionViewHolder(binding)
         }
     }
 }

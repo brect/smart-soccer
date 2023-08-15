@@ -24,7 +24,7 @@ class TournamentRepositoryImpl @Inject constructor(
         return tournamentDataSource.getTournamentsByGroup(grupoId)
     }
 
-    override suspend fun getTournamentById(torneioId: String): Torneio? {
+    override suspend fun getTournamentById(torneioId: String): Torneio {
         return tournamentDataSource.getTournamentById(torneioId)
     }
 
