@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsCompetitionBinding
-import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
-import com.padawanbr.smartsoccer.presentation.ui.groups.GroupFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,23 +47,28 @@ class DetailsCompetitionFragment : Fragment() {
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
-                DetailsCompetitionViewModel.UiState.Error -> {
+                is DetailsCompetitionViewModel.UiState.Error -> {
                     Toast.makeText(
                         context,
                         "DetailsCompetitionViewModel.UiState.Error",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                DetailsCompetitionViewModel.UiState.Loading -> {
+
+                is DetailsCompetitionViewModel.UiState.Loading -> {
                     Toast.makeText(
                         context,
                         "DetailsCompetitionViewModel.UiState.Loading",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                is DetailsCompetitionViewModel.UiState.Success -> {
 
-                    binding.textDetailsSoccerTeams.text = uiState.torneio.times.toString()
+                is DetailsCompetitionViewModel.UiState.Success -> {
+                    binding.recyclerViewDetailsSoccerTeams.run {
+                        setHasFixedSize(true)
+                        adapter =  CompetitionTeamParentAdapter(uiState.torneio.times)
+                    }
+
                     Toast.makeText(
                         context,
                         "DetailsCompetitionViewModel.UiState.Success",
