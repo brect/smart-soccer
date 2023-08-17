@@ -9,7 +9,6 @@ import com.padawanbr.smartsoccer.framework.db.entity.PartidaEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TorneioEntity
 import com.padawanbr.smartsoccer.framework.db.entity.toCompetitionModel
-import com.padawanbr.smartsoccer.framework.db.entity.toTorneioModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
@@ -39,7 +38,12 @@ class RoomTournamentDataSource @Inject constructor(
     }
 
     override suspend fun getTournamentById(torneioId: String): Torneio {
-        return torneioDao.getTorneioById(torneioId).toTorneioModel()
+
+        val torneioWithTimesAndJogadores = torneioDao.getTorneioWithTimesAndJogadoresById(torneioId)
+
+        val torneio = torneioWithTimesAndJogadores.torneio.toCompetitionModel()
+
+        return torneio
     }
 
     override suspend fun deleteTournament(torneioId: String) {
@@ -54,11 +58,12 @@ class RoomTournamentDataSource @Inject constructor(
     )
 
     private fun Time.toTimeEntity(torneioId: String) = TimeEntity(
-        id = id,
+        timeId = id,
         nome = nome,
         mediaHabilidades = mediaHabilidades,
-        torneioId = torneioId
+        torneioId = torneioId,
     )
+
 
     private fun Partida.toPartidaEntity(torneioId: String) = PartidaEntity(
         id = id,

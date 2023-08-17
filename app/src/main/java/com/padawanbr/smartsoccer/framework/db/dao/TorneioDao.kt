@@ -7,11 +7,15 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.padawanbr.smartsoccer.framework.db.entity.PartidaEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
-import com.padawanbr.smartsoccer.framework.db.entity.TorneioComTimesEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TorneioEntity
+import com.padawanbr.smartsoccer.framework.db.entity.TorneioComTimesAndJogadores
 
 @Dao
 interface TorneioDao {
+
+    @Transaction
+    @Query("SELECT * FROM torneio WHERE id = :torneioId")
+    suspend fun getTorneioWithTimesAndJogadoresById(torneioId: String): TorneioComTimesAndJogadores
 
     @Transaction
     suspend fun insertTorneioWithTimesAndPartidas(torneio: TorneioEntity, times: List<TimeEntity>, partidas: List<PartidaEntity>) {
@@ -29,11 +33,6 @@ interface TorneioDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPartidas(partidas: List<PartidaEntity>)
 
-    @Query("SELECT * FROM torneio WHERE grupoId = :grupoId")
-    suspend fun getTorneiosByGrupo(grupoId: String): List<TorneioEntity>
-
-    @Query("SELECT * FROM torneio WHERE id = :torneioId")
-    suspend fun getTorneioById(torneioId: String): TorneioComTimesEntity
 
     @Query("DELETE FROM torneio WHERE id = :torneioId")
     suspend fun deleteTorneio(torneioId: String)

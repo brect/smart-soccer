@@ -43,7 +43,7 @@ class GroupViewModel @Inject constructor(
                                     id = torneio.id,
                                     nome = torneio.nome,
                                     tipoTorneio = torneio.tipoTorneio,
-                                    criteriosDesempate = torneio.criteriosDesempate,
+                                    criteriosDesempate = torneio.criteriosDesempate ?: arrayListOf(),
                                     times = torneio.times,
                                     partidas = torneio.partidas,
                                     grupoId = torneio.grupoId

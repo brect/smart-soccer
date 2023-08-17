@@ -7,6 +7,19 @@ import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.core.domain.model.TipoTorneio
 import java.util.UUID
 
+
+class Converters {
+    @TypeConverter
+    fun fromListToString(list: List<String>): String {
+        return list.joinToString(",")
+    }
+
+    @TypeConverter
+    fun fromStringToList(string: String): List<String> {
+        return string.split(",")
+    }
+}
+
 class PosicoesConverter {
     @TypeConverter
     fun fromString(value: String): Map<String, Int> {

@@ -4,6 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
+import com.padawanbr.smartsoccer.core.domain.model.Partida
+import com.padawanbr.smartsoccer.core.domain.model.Time
 import com.padawanbr.smartsoccer.core.domain.model.TipoTorneio
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import java.util.UUID
@@ -16,7 +18,11 @@ data class TorneioEntity(
     @TypeConverters(TipoTorneio::class)
     val tipoTorneio: TipoTorneio? = null,// Converter o enum TipoTorneio para String
     val grupoId: String
-)
+){
+    fun toTorneioModel(times: List<Time>, partidas: List<Partida>): Torneio {
+            return Torneio(id, nome, tipoTorneio, null, times, partidas, grupoId)
+    }
+}
 
 fun List<TorneioEntity>.toListCompetitionModel() = map {
     Torneio(
