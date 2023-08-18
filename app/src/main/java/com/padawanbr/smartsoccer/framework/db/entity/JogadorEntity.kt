@@ -52,3 +52,28 @@ fun JogadorEntity.toJogadorModel(): Jogador {
         grupoId = grupoId
     )
 }
+
+
+fun List<Jogador>.toListJogadorEntity() = map {
+    JogadorEntity(
+        nome = it.nome,
+        idade = it.idade,
+        posicao = it.posicao,
+        habilidades = it.habilidades,
+        estaNoDepartamentoMedico = it.estaNoDepartamentoMedico,
+        grupoId = it.grupoId
+    )
+}
+
+// Na extensão para JogadorEntity
+fun Jogador.toJogadorEntity(): JogadorEntity {
+    return JogadorEntity(
+        nome = nome,
+        idade = idade,
+        posicao = posicao,
+        habilidades = habilidades,
+        estaNoDepartamentoMedico = estaNoDepartamentoMedico,
+        grupoId = grupoId
+    )
+}
+

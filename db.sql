@@ -8,7 +8,7 @@ VALUES
     ('ee827d88-42d6-4ff0-bde2-b7c06d138e88', 'Nome do grupo 5', 2, 'FUTEBOL_CAMPO', 11);
 
 --Cria jogadores
-INSERT INTO `jogador` (`id`,`nome`,`idade`,`posicao`,`habilidades`,`estaNoDepartamentoMedico`,`grupoId`) VALUES
+INSERT INTO `jogador` (`jogadorId`,`nome`,`idade`,`posicao`,`habilidades`,`estaNoDepartamentoMedico`,`grupoId`) VALUES
     ('6d20cf4b-6e7b-4701-948d-2d8491ad8c13', 'Nome Jogador 1', 30, 'GOLEIRO', '{"Velocidade":4.0,"Chute":4.0,"Passe":4.0,"Marcação":4.0,"Drible":4.0,"Raça":4.0}', 0, 'b467a7bc-4015-4e4f-844b-e16b17b0d0ae'),
     ('a71e3e72-1d59-415e-80d1-5b462486c51d', 'Nome Jogador 2', 35, 'GOLEIRO', '{"Velocidade":4.0,"Chute":4.0,"Passe":4.0,"Marcação":4.0,"Drible":4.0,"Raça":4.0}', 0, 'b467a7bc-4015-4e4f-844b-e16b17b0d0ae'),
     ('6a8c605a-92f2-4da4-8eb0-1e5151ea18a0', 'Nome Jogador 3', 40, 'LATERAL', '{"Velocidade":4.0,"Chute":4.0,"Passe":4.0,"Marcação":4.0,"Drible":4.0,"Raça":4.0}', 0, 'b467a7bc-4015-4e4f-844b-e16b17b0d0ae'),

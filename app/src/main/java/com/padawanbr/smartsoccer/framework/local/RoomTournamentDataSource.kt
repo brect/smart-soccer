@@ -6,9 +6,12 @@ import com.padawanbr.smartsoccer.core.domain.model.Time
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import com.padawanbr.smartsoccer.framework.db.dao.TorneioDao
 import com.padawanbr.smartsoccer.framework.db.entity.PartidaEntity
+import com.padawanbr.smartsoccer.framework.db.entity.TimeComJogadoresEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
+import com.padawanbr.smartsoccer.framework.db.entity.TimeJogadorCrossRef
 import com.padawanbr.smartsoccer.framework.db.entity.TorneioEntity
 import com.padawanbr.smartsoccer.framework.db.entity.toCompetitionModel
+import com.padawanbr.smartsoccer.framework.db.entity.toListJogadorEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
@@ -23,10 +26,14 @@ class RoomTournamentDataSource @Inject constructor(
         partidas: List<Partida>
     ) {
         val torneioEntity = torneio.toTorneioEntity()
-        val timesEntities = times.map { it.toTimeEntity(torneioEntity.id) }
+        val timesEntities = times.map { it.toTimeComJogadoresEntity(torneioEntity.id) }
         val partidasEntities = partidas.map { it.toPartidaEntity(torneioEntity.id) }
 
-        torneioDao.insertTorneioWithTimesAndPartidas(torneioEntity, timesEntities, partidasEntities)
+        torneioDao.insertTorneioWithTimesAndPartidas(
+            torneioEntity,
+            timesEntities,
+            partidasEntities
+        )
     }
 
     override suspend fun saveTournament(torneio: Torneio) {
@@ -50,7 +57,7 @@ class RoomTournamentDataSource @Inject constructor(
         torneioDao.deleteTorneio(torneioId)
     }
 
-    private fun Torneio.toTorneioEntity() = TorneioEntity (
+    private fun Torneio.toTorneioEntity() = TorneioEntity(
         id = id,
         nome = nome,
         tipoTorneio = tipoTorneio,
@@ -75,5 +82,10 @@ class RoomTournamentDataSource @Inject constructor(
     )
 
 }
+
+private fun Time.toTimeComJogadoresEntity(torneioId: String) = TimeComJogadoresEntity(
+    TimeEntity(nome = nome, mediaHabilidades = mediaHabilidades, torneioId = torneioId),
+    jogadores.toListJogadorEntity()
+)
 
 
