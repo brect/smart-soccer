@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import com.padawanbr.smartsoccer.framework.db.entity.JogadorEntity
 import com.padawanbr.smartsoccer.framework.db.entity.PartidaEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TimeComJogadoresEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
@@ -17,7 +18,7 @@ import com.padawanbr.smartsoccer.framework.db.entity.TorneioEntity
 interface TorneioDao {
 
     @Transaction
-    @Query("SELECT * FROM torneio WHERE id = :torneioId")
+    @Query("SELECT * FROM torneio WHERE torneioId = :torneioId")
     suspend fun getTorneioWithTimesAndJogadoresById(torneioId: String): TorneioComTimesAndJogadores
 
     @Transaction
@@ -32,6 +33,7 @@ interface TorneioDao {
 
         times.forEach { timeComJogadores ->
             timeComJogadores.jogadores.forEach { jogador ->
+                insertJogadorIfNotExists(jogador)
                 insertTimeJogadorCrossRefs(
                     TimeJogadorCrossRef(
                         timeId = timeComJogadores.time.timeId,
@@ -41,6 +43,13 @@ interface TorneioDao {
             }
         }
 
+    }
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertJogador(jogador: JogadorEntity)
+
+    suspend fun insertJogadorIfNotExists(jogador: JogadorEntity) {
+        insertJogador(jogador)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -55,7 +64,7 @@ interface TorneioDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTimeJogadorCrossRefs(time: TimeJogadorCrossRef)
 
-    @Query("DELETE FROM torneio WHERE id = :torneioId")
+    @Query("DELETE FROM torneio WHERE torneioId = :torneioId")
     suspend fun deleteTorneio(torneioId: String)
 }
 

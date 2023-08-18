@@ -56,6 +56,7 @@ fun JogadorEntity.toJogadorModel(): Jogador {
 
 fun List<Jogador>.toListJogadorEntity() = map {
     JogadorEntity(
+        jogadorId = it.id,
         nome = it.nome,
         idade = it.idade,
         posicao = it.posicao,

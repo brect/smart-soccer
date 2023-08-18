@@ -1,9 +1,8 @@
 package com.padawanbr.smartsoccer.framework.db.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.padawanbr.smartsoccer.core.domain.model.GrupoComJogadores
 import com.padawanbr.smartsoccer.core.domain.model.Time
 import java.util.UUID
 
@@ -13,6 +12,7 @@ data class TimeEntity(
     val timeId: String = UUID.randomUUID().toString(), // Utilizando UUID como ID
     val nome: String,
     val mediaHabilidades: Float,
+    @ColumnInfo(name = "torneioId")
     val torneioId: String,
 )
 
@@ -24,4 +24,12 @@ fun TimeEntity.toTimeModel() = Time(
 
 fun List<TimeEntity>.toListTimeModel(): List<Time> {
     return map { it.toTimeModel() }
+}
+
+fun TimeComJogadoresEntity.toTimeModel(): Time {
+    return Time(
+        id = this.time.timeId,
+        nome = this.time.nome,
+        jogadores = this.jogadores.map { it.toJogadorModel() }.toMutableList()
+    )
 }

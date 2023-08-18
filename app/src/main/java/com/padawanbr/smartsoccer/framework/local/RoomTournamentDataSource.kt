@@ -8,10 +8,10 @@ import com.padawanbr.smartsoccer.framework.db.dao.TorneioDao
 import com.padawanbr.smartsoccer.framework.db.entity.PartidaEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TimeComJogadoresEntity
 import com.padawanbr.smartsoccer.framework.db.entity.TimeEntity
-import com.padawanbr.smartsoccer.framework.db.entity.TimeJogadorCrossRef
 import com.padawanbr.smartsoccer.framework.db.entity.TorneioEntity
 import com.padawanbr.smartsoccer.framework.db.entity.toCompetitionModel
 import com.padawanbr.smartsoccer.framework.db.entity.toListJogadorEntity
+import com.padawanbr.smartsoccer.framework.db.entity.toTimeModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
@@ -26,8 +26,8 @@ class RoomTournamentDataSource @Inject constructor(
         partidas: List<Partida>
     ) {
         val torneioEntity = torneio.toTorneioEntity()
-        val timesEntities = times.map { it.toTimeComJogadoresEntity(torneioEntity.id) }
-        val partidasEntities = partidas.map { it.toPartidaEntity(torneioEntity.id) }
+        val timesEntities = times.map { it.toTimeComJogadoresEntity(torneioEntity.torneioId) }
+        val partidasEntities = partidas.map { it.toPartidaEntity(torneioEntity.torneioId) }
 
         torneioDao.insertTorneioWithTimesAndPartidas(
             torneioEntity,
@@ -45,12 +45,11 @@ class RoomTournamentDataSource @Inject constructor(
     }
 
     override suspend fun getTournamentById(torneioId: String): Torneio {
-
         val torneioWithTimesAndJogadores = torneioDao.getTorneioWithTimesAndJogadoresById(torneioId)
 
-        val torneio = torneioWithTimesAndJogadores.torneio.toCompetitionModel()
+        val times = torneioWithTimesAndJogadores.times.map { it.toTimeModel() }
 
-        return torneio
+        return torneioWithTimesAndJogadores.torneio.toCompetitionModel(times)
     }
 
     override suspend fun deleteTournament(torneioId: String) {
@@ -58,7 +57,7 @@ class RoomTournamentDataSource @Inject constructor(
     }
 
     private fun Torneio.toTorneioEntity() = TorneioEntity(
-        id = id,
+        torneioId = id,
         nome = nome,
         tipoTorneio = tipoTorneio,
         grupoId = grupoId

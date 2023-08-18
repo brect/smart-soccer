@@ -13,20 +13,16 @@ import java.util.UUID
 @Entity(tableName = "torneio")
 data class TorneioEntity(
     @PrimaryKey
-    val id: String = UUID.randomUUID().toString(),
+    val torneioId: String = UUID.randomUUID().toString(),
     val nome: String,
     @TypeConverters(TipoTorneio::class)
     val tipoTorneio: TipoTorneio? = null,// Converter o enum TipoTorneio para String
     val grupoId: String
-){
-    fun toTorneioModel(times: List<Time>, partidas: List<Partida>): Torneio {
-            return Torneio(id, nome, tipoTorneio, null, times, partidas, grupoId)
-    }
-}
+)
 
 fun List<TorneioEntity>.toListCompetitionModel() = map {
     Torneio(
-        it.id,
+        it.torneioId,
         it.nome,
         it.tipoTorneio,
         listOf(),
@@ -38,12 +34,24 @@ fun List<TorneioEntity>.toListCompetitionModel() = map {
 
 fun TorneioEntity.toCompetitionModel(): Torneio {
     return Torneio(
-        id = id,
+        id = torneioId,
         nome = nome,
         tipoTorneio = tipoTorneio,
         listOf(),
         listOf(),
         listOf(),
         grupoId = grupoId
+    )
+}
+
+fun TorneioEntity.toCompetitionModel(times: List<Time>, partidas: List<Partida> = emptyList()): Torneio {
+    return Torneio(
+        id = this.torneioId,
+        nome = this.nome,
+        tipoTorneio = this.tipoTorneio,
+        criteriosDesempate = null, // Estou assumindo que TorneioEntity não tem essa informação
+        times = times,
+        partidas = partidas, // Você pode adicionar a lógica para as partidas também se elas estiverem disponíveis
+        grupoId = this.grupoId
     )
 }

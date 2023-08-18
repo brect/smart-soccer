@@ -40,3 +40,36 @@ INSERT INTO `jogador` (`jogadorId`,`nome`,`idade`,`posicao`,`habilidades`,`estaN
 INSERT OR REPLACE INTO `torneio` (`id`,`nome`,`tipoTorneio`,`grupoId`) VALUES (?,?,?,?) with bindArgs: [af2ab4b5-3859-4b6f-9a9d-4601878b27b0, QuickCompetition, ELIMINATORIAS, b467a7bc-4015-4e4f-844b-e16b17b0d0ae]
 INSERT OR REPLACE INTO `time` (`id`,`nome`,`mediaHabilidades`,`torneioId`) VALUES (?,?,?,?) with bindArgs: [b2a714d0-396d-4490-907e-cdf607302add,	Time A , 4.0 af2ab4b5-3859-4b6f-9a9d-4601878b27b0]
 INSERT OR REPLACE INTO `time` (`id`,`nome`,`mediaHabilidades`,`torneioId`) VALUES (?,?,?,?) with bindArgs: [55ec5fa5-d6ae-4cc2-9c81-ad5b385c88c0, Time B, 4.0, af2ab4b5-3859-4b6f-9a9d-4601878b27b0]
+
+
+
+--Consulta torneios
+input:
+SELECT * FROM torneio WHERE torneioId = ("6838c831-36dc-489f-9318-4dfbd8bbb14b")
+output:
+torneioId | nome | tipoTorneio | grupoId
+a5377866-ee0f-49a1-a88e-654476d60a74	QuickCompetition	JOGO_UNICO	b467a7bc-4015-4e4f-844b-e16b17b0d0ae
+
+
+input:
+SELECT `timeId`,`nome`,`mediaHabilidades`,`torneioId` FROM `time` WHERE `torneioId` IN ("6838c831-36dc-489f-9318-4dfbd8bbb14b")
+output:
+timeId | nome | mediaHabilidades | torneioId
+8b6fbaaf-70a1-4732-bc77-635d47ea125d	Time A	4.0	a5377866-ee0f-49a1-a88e-654476d60a74
+7183fe7b-f276-4299-bc3b-34889a0c4321	Time B	4.0	a5377866-ee0f-49a1-a88e-654476d60a74
+
+input:
+SELECT
+_junction.`timeId` ,
+`jogador`.`jogadorId` AS `jogadorId`,
+`jogador`.`nome` AS `nome`,
+`jogador`.`idade` AS `idade`,
+`jogador`.`posicao` AS `posicao`,
+`jogador`.`habilidades` AS `habilidades`,
+`jogador`.`estaNoDepartamentoMedico` AS `estaNoDepartamentoMedico`,
+`jogador`.`grupoId` AS `grupoId`
+
+
+FROM `time_jogador_cross_ref` AS _junction
+INNER JOIN `jogador` ON (_junction.`jogadorId` = `jogador`.`jogadorId`)
+WHERE _junction.`timeId` IN ("8fb16792-87d1-4138-b726-4658ebd5bfc2", "06a8462f-13c3-40ea-8ebd-8b37e80cbf5a")
