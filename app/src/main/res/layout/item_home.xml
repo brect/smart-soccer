@@ -5,9 +5,8 @@
     android:id="@+id/card_character"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
+    android:layout_marginVertical="8dp"
     android:background="@drawable/background_rounded_border"
-    android:backgroundTint="@color/md_theme_light_onPrimaryContainer"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,6 +19,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:alpha="0.4"
+            android:background="@drawable/background_top_rounded_border"
+            android:clipToOutline="true"
             android:scaleType="centerCrop"
             android:src="@drawable/background_soccer"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -68,18 +69,18 @@
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginTop="16dp"
             android:text="2 times"
-            android:visibility="gone"
             android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_gravity="bottom|center_horizontal"
             android:text="50 jogadores"
             android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/button"

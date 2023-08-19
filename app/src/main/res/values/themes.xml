@@ -30,12 +30,13 @@
 
         <item name="android:textViewStyle">@style/MyTextViewStyle</item>
         <item name="android:ratingBarStyle">@style/MyRatingBarStyle</item>
+        <item name="android:toolbarStyle">@style/MyMaterialToolbarStyle</item>
     </style>
 
     <style name="Theme.SmartSoccer" parent="Base.Theme.SmartSoccer" />
 
     <style name="MyTextViewStyle" parent="Widget.AppCompat.TextView">
-        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
         <item name="android:textSize">16sp</item>
         <!-- Outras propriedades que você quer padronizar -->
     </style>
@@ -43,6 +44,10 @@
     <style name="MyRatingBarStyle" parent="Theme.AppCompat">
         <item name="android:progressBackgroundTint">@color/md_theme_light_onPrimary</item>
         <item name="android:progressTint">@color/md_theme_mid_light_tertiary</item>
+    </style>
+
+    <style name="MyMaterialToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
     </style>
 
 </resources>
