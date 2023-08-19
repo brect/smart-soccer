@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:background="@drawable/background_group_item_rounded_border"
     android:backgroundTint="@color/black"
-    android:layout_margin="4dp"
+    android:layout_marginHorizontal="4dp"
+    android:paddingBottom="12dp"
+    android:layout_marginBottom="12dp"
+    android:paddingTop="8dp"
     android:layout_height="wrap_content">
 
     <TextView

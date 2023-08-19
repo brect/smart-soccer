@@ -2,10 +2,12 @@ package com.padawanbr.smartsoccer.presentation.ui.competition
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.core.domain.model.Time
+import com.padawanbr.smartsoccer.core.domain.model.calcularMediaHabilidades
 import com.padawanbr.smartsoccer.databinding.ItemChildCompetitionTeamBinding
 import com.padawanbr.smartsoccer.databinding.ItemParentCompetitionTeamBinding
 
@@ -26,10 +28,12 @@ class CompetitionTeamChildAdapter(val jogadores: MutableList<Jogador>) : Recycle
     ) : RecyclerView.ViewHolder(itemBinding.root) {
 
         private val textViewCompetitionPlayerName: TextView = itemBinding.textViewCompetitionPlayerName
+        private val ratingBarCompetitionAverageSoccerPlayer: RatingBar = itemBinding.ratingBarCompetitionAverageSoccerPlayer
         private val textViewCompetitionPosition: TextView = itemBinding.textViewCompetitionPosition
 
         fun bind(jogador: Jogador) {
             textViewCompetitionPlayerName.text = jogador.nome
+            ratingBarCompetitionAverageSoccerPlayer.rating = jogador.calcularMediaHabilidades()
             textViewCompetitionPosition.text = jogador.posicao?.funcao
         }
 

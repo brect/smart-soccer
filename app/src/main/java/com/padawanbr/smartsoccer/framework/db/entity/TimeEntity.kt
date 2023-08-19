@@ -30,6 +30,12 @@ fun TimeComJogadoresEntity.toTimeModel(): Time {
     return Time(
         id = this.time.timeId,
         nome = this.time.nome,
-        jogadores = this.jogadores.map { it.toJogadorModel() }.toMutableList()
+        jogadores = this.jogadores
+            .sortedBy {
+                it.posicao?.id
+            }.map {
+                it.toJogadorModel()
+            }
+            .toMutableList()
     )
 }
