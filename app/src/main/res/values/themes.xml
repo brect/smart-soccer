@@ -40,7 +40,7 @@
         <!-- Outras propriedades que você quer padronizar -->
     </style>
 
-    <style name="MyRatingBarStyle" parent="Widget.AppCompat.RatingBar">
+    <style name="MyRatingBarStyle" parent="Theme.AppCompat">
         <item name="android:progressBackgroundTint">@color/md_theme_light_onPrimary</item>
         <item name="android:progressTint">@color/md_theme_mid_light_tertiary</item>
     </style>
