@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
     android:layout_marginBottom="12dp"
-    android:background="@drawable/background_group_item_rounded_border"
+    android:background="@drawable/background_rounded_border"
     android:backgroundTint="@color/black"
     android:orientation="vertical"
     android:paddingTop="8dp"
@@ -55,6 +55,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -149,6 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="@+id/header_container_center"
