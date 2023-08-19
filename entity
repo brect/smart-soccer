@@ -1,0 +1,60 @@
+@Entity(tableName = "jogador")
+data class JogadorEntity(
+    @PrimaryKey
+    val jogadorId: String = UUID.randomUUID().toString(), // Utilizando UUID como ID
+    val nome: String,
+    val idade: Int,
+    @TypeConverters(PosicaoJogador::class)
+    val posicao: PosicaoJogador? = null,
+    @TypeConverters(ClassificacoesConverter::class)
+    val habilidades: Map<String, Float> = emptyMap(),
+    var estaNoDepartamentoMedico: Boolean = false,
+    @ColumnInfo(name = "grupoId")
+    val grupoId: String // Utilizando UUID como ID para referenciar o grupo
+)
+
+@Entity(tableName = "time")
+data class TimeEntity(
+    @PrimaryKey
+    val timeId: String = UUID.randomUUID().toString(), // Utilizando UUID como ID
+    val nome: String,
+    val mediaHabilidades: Float,
+    @ColumnInfo(name = "torneioId")
+    val torneioId: String,
+)
+
+@Entity(tableName = "torneio")
+data class TorneioEntity(
+    @PrimaryKey
+    val torneioId: String = UUID.randomUUID().toString(),
+    val nome: String,
+    @TypeConverters(TipoTorneio::class)
+    val tipoTorneio: TipoTorneio? = null,// Converter o enum TipoTorneio para String
+    val grupoId: String
+)
+
+@Entity(tableName = "time_jogador_cross_ref", primaryKeys = ["timeId", "jogadorId"])
+data class TimeJogadorCrossRef(
+    val timeId: String,
+    val jogadorId: String
+)
+
+data class TimeComJogadoresEntity(
+    @Embedded val time: TimeEntity,
+    @Relation(
+        parentColumn = "timeId",
+        entityColumn = "jogadorId",
+        associateBy = Junction(TimeJogadorCrossRef::class)
+    )
+    val jogadores: List<JogadorEntity>
+)
+
+data class TorneioComTimesAndJogadores(
+    @Embedded val torneio: TorneioEntity,
+    @Relation(
+        entity = TimeEntity::class,
+        parentColumn = "torneioId",
+        entityColumn = "torneioId",
+    )
+    val times: List<TimeComJogadoresEntity>
+)
