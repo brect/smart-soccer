@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:text="Erro ao carregar seus grupos"
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -22,7 +21,6 @@
         android:layout_height="wrap_content"
         android:text="Estamos com instabilidade para carregar seus grupos."
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textSize="12sp" />
 
     <ImageView

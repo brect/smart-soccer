@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Criar novo grupo"
-        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,8 +45,7 @@
             android:layout_height="wrap_content"
             android:hint="Nome do grupo"
             android:text="Nome do grupo"
-            android:inputType="text"
-            android:textColor="@color/black" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
@@ -81,8 +79,7 @@
             android:layout_height="wrap_content"
             android:hint="Quantidade minima de jogadores"
             android:text="22"
-            android:inputType="number"
-            android:textColor="@color/black" />
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -105,8 +102,7 @@
             android:layout_height="wrap_content"
             android:hint="Quantidade minima por time"
             android:text="11"
-            android:inputType="number"
-            android:textColor="@color/black" />
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -129,8 +125,7 @@
             android:layout_height="wrap_content"
             android:hint="Quantidade de times"
             android:text="2"
-            android:inputType="number"
-            android:textColor="@color/black" />
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <ViewFlipper

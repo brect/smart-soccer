@@ -22,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_rounded_border"
-            android:backgroundTint="@color/black"
             android:orientation="vertical"
             android:paddingHorizontal="8dp"
             android:paddingVertical="8dp">
@@ -43,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/white"
+                android:background="@color/md_theme_light_onPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView_groupTeam_infos_label" />
@@ -124,7 +123,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/background_rounded_border"
-            android:backgroundTint="@color/black"
             android:paddingHorizontal="8dp"
             android:paddingVertical="8dp">
 
@@ -144,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/white"
+                android:background="@color/md_theme_light_onPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView_game_infos_label" />
@@ -265,7 +263,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/background_rounded_border"
-            android:backgroundTint="@color/black"
             android:orientation="vertical"
             android:paddingHorizontal="8dp"
             android:paddingVertical="8dp">
@@ -286,7 +283,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/white"
+                android:background="@color/md_theme_light_onPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView_soccerPlayer_infos_label" />
@@ -384,7 +381,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp"
             android:background="@drawable/background_rounded_border"
-            android:backgroundTint="@color/black"
             android:orientation="vertical"
             android:paddingHorizontal="8dp"
             android:paddingVertical="8dp">
@@ -414,7 +410,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/white"
+                android:background="@color/md_theme_light_onPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView_competitions_infos_label" />
@@ -448,8 +444,7 @@
         android:src="@drawable/ic_add_round"
         app:backgroundTintMode="src_over"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_soccerPlayer"

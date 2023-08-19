@@ -53,7 +53,6 @@
         android:src="@drawable/ic_add_round"
         app:backgroundTintMode="src_over"
         app:layout_constraintBottom_toBottomOf="@+id/fliper_soccer_players"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

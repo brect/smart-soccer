@@ -41,8 +41,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Quantos times?"
                 android:inputType="number"
-                android:text="2"
-                android:textColor="@color/black" />
+                android:text="2" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Switch
