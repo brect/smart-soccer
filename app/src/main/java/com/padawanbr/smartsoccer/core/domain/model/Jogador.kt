@@ -21,3 +21,4 @@ fun Jogador.calcularMediaHabilidades(): Float {
     return habilidades.values.average().toFloat()
 }
 
+

@@ -25,11 +25,23 @@ class CompetitionTeamParentAdapter(
         itemBinding: ItemParentCompetitionTeamBinding,
     ) : RecyclerView.ViewHolder(itemBinding.root) {
 
-        private val textCompetitionTeam: TextView = itemBinding.textViewItemCompetitionTeam
+        private val competitionTeam: TextView = itemBinding.textViewItemCompetitionTeam
+
+        private val teamCompetitionTeamQtdPlayers: TextView = itemBinding.txtTeamCompetitionTeamQtdPlayers
+        private val teamCompetitionTeamAvgAbilityTeam: TextView = itemBinding.txtTeamCompetitionTeamAvgAbilityTeam
+        private val teamCompetitionTeamAvgAge: TextView = itemBinding.txtTeamCompetitionTeamAvgAge
+        private val teamCompetitionTeamTeamForce: TextView = itemBinding.txtTeamCompetitionTeamTeamForce
+
         private val recyclerViewChildCompetitionTeam: RecyclerView = itemBinding.recyclerViewChildCompetitionTeam
 
         fun bind(time: Time) {
-            textCompetitionTeam.text = time.nome
+
+            competitionTeam.text = time.nome
+
+            teamCompetitionTeamQtdPlayers.text = time.jogadores.size.toString()
+            teamCompetitionTeamAvgAbilityTeam.text = time.mediaHabilidades.toString()
+            teamCompetitionTeamAvgAge.text = "${time.mediaIdades} anos"
+            teamCompetitionTeamTeamForce.text = time.forcaTime.toString()
 
             recyclerViewChildCompetitionTeam.run {
                 setHasFixedSize(true)

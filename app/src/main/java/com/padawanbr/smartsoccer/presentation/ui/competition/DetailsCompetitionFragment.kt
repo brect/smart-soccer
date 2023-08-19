@@ -18,7 +18,7 @@ import com.padawanbr.smartsoccer.databinding.FragmentDetailsCompetitionBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailsCompetitionFragment : Fragment()  , MenuProvider {
+class DetailsCompetitionFragment : Fragment(), MenuProvider {
 
     private var _binding: FragmentDetailsCompetitionBinding? = null
     private val binding: FragmentDetailsCompetitionBinding get() = _binding!!
@@ -37,7 +37,6 @@ class DetailsCompetitionFragment : Fragment()  , MenuProvider {
     ).apply {
         _binding = this
     }.root
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,7 +72,7 @@ class DetailsCompetitionFragment : Fragment()  , MenuProvider {
                 is DetailsCompetitionViewModel.UiState.Success -> {
                     binding.recyclerViewDetailsSoccerTeams.run {
                         setHasFixedSize(true)
-                        adapter =  CompetitionTeamParentAdapter(uiState.torneio.times)
+                        adapter = CompetitionTeamParentAdapter(uiState.torneio.times)
                     }
 
                     Toast.makeText(
