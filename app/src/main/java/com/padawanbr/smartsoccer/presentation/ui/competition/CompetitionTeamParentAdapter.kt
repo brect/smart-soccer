@@ -87,10 +87,16 @@ class CompetitionTeamParentAdapter(
 
                         val rotationValue = if (isRotate) 0f else 180f
 
-                        isRotate = ViewAnimation.rotateView(visibilityCompetitionTeam, !isRotate, rotationValue)
+                        isRotate = ViewAnimation.rotateView(
+                            visibilityCompetitionTeam,
+                            !isRotate,
+                            rotationValue
+                        )
 
-                        recyclerViewChildCompetitionTeam.isVisible = !recyclerViewChildCompetitionTeam.isVisible
-                        itemBinding.viewDividerBottom.isVisible = !itemBinding.viewDividerBottom.isVisible
+                        recyclerViewChildCompetitionTeam.isVisible =
+                            !recyclerViewChildCompetitionTeam.isVisible
+                        itemBinding.viewDividerBottom.isVisible =
+                            !itemBinding.viewDividerBottom.isVisible
                     }
                 }
 
