@@ -17,11 +17,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
-import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateFab
+import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateView
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showOut
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
@@ -248,7 +247,7 @@ class GroupFragment : Fragment(), MenuProvider {
 
     private fun configureFabMoreOptions() {
         binding.fabMoreOptions.setOnClickListener {
-            isRotate = rotateFab(it, !isRotate)
+            isRotate = rotateView(it, !isRotate)
 
             if (isRotate) {
                 showFabs()
@@ -260,7 +259,7 @@ class GroupFragment : Fragment(), MenuProvider {
 
     private fun fabAddSoccerPlayerOnClick() {
         binding.fabAddSoccerPlayer.setOnClickListener {
-            isRotate = rotateFab(it, !isRotate)
+            isRotate = rotateView(it, !isRotate)
             hideFabs()
             val directions =
                 GroupFragmentDirections.actionDetailsGroupFragmentToSoccerPlayerFragment()
@@ -273,7 +272,7 @@ class GroupFragment : Fragment(), MenuProvider {
 
     private fun fabCreateQuickCompetitionOnClick() {
         binding.fabCreateQuickCompetition.setOnClickListener {
-            isRotate = rotateFab(it, !isRotate)
+            isRotate = rotateView(it, !isRotate)
             hideFabs()
             val directions =
                 GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()

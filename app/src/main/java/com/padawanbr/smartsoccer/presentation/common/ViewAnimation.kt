@@ -7,10 +7,11 @@ import android.view.View
 
 object ViewAnimation {
 
-    fun rotateFab(v: View, rotate: Boolean): Boolean {
+    fun rotateView(v: View, rotate: Boolean, degrees: Float? = null): Boolean {
+        val rotationValue = degrees ?: if (rotate) 135f else 0f
         v.animate().setDuration(200)
             .setListener(object : AnimatorListenerAdapter() {})
-            .rotation(if (rotate) 135f else 0f)
+            .rotation(rotationValue)
         return rotate
     }
 
