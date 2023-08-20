@@ -7,433 +7,369 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.groups.GroupFragment">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_groupInfo"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_rounded_border"
-            android:orientation="vertical"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="8dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView_groupTeam_infos_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Informações time"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/view_groupTeam_divider"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/md_theme_light_onPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView_groupTeam_infos_label" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_bottom_rounded_border"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/background_circle_border_stroke"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/textView_group_teamName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:gravity="center"
+                    android:text="Sociedade Esportiva Flor da Vila Formosa"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/textView_group_teamName_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nome time: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_group_date"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_groupTeam_divider" />
-
-            <TextView
-                android:id="@+id/textView_group_teamName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sociedade Esportiva Flor da Vila Formosa"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_group_teamName_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_group_teamName_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_group_teamName_lbl"
-                tools:layout_editor_absoluteY="8dp" />
-
-            <TextView
-                android:id="@+id/textView_group_date_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Dia do jogo: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_group_local_lbl"
-                app:layout_constraintStart_toStartOf="@+id/textView_group_teamName_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_group_teamName_lbl" />
-
-            <TextView
-                android:id="@+id/textView_group_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Domingo"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_group_date_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_group_date_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_group_date_lbl"
-                tools:layout_editor_absoluteX="8dp" />
-
-            <TextView
-                android:id="@+id/textView_group_local_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Local: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView_group_date_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_group_date_lbl" />
-
-            <TextView
-                android:id="@+id/textView_group_local"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Rua do futebol"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_group_local_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_group_local_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_group_local_lbl"
-                tools:layout_editor_absoluteX="8dp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_gameInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/background_rounded_border"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="8dp">
-
-            <TextView
-                android:id="@+id/textView_game_infos_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="Informações do jogo"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/view_game_divider"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/md_theme_light_onPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView_game_infos_label" />
-
-
-            <TextView
-                android:id="@+id/textView_gameInformation_typeOfCourt_lbl"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Tipo de quadra: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_configuration_lbl"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_game_divider" />
-
-            <TextView
-                android:id="@+id/textView_gameInformation_typeOfCourt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Society"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_gameInformation_typeOfCourt_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_typeOfCourt_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_gameInformation_typeOfCourt_lbl"
-                tools:layout_editor_absoluteX="40dp" />
-
-            <TextView
-                android:id="@+id/textView_gameInformation_configuration_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Configuração: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_typeOfCourt_lbl"
-                app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_typeOfCourt_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_typeOfCourt_lbl" />
-
-            <TextView
-                android:id="@+id/textView_gameInformation_configuration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7x7"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_configuration_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_configuration_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_configuration_lbl" />
-
-            <TextView
-                android:id="@+id/textView_gameInformation_singlePrice_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Preço avulso: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_monthlyPrice"
-                app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_configuration_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_configuration_lbl" />
-
-            <TextView
-                android:id="@+id/textView_gameInformation_singlePrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="R$ 20"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_singlePrice_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_singlePrice_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_singlePrice_lbl" />
-
-            <TextView
-                android:id="@+id/textView_gameInformation_monthlyPrice_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                android:text="Preço mensalista: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_rateAge_lbl"
-                app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_singlePrice_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_singlePrice_lbl" />
-
-            <TextView
-                android:id="@+id/textView_gameInformation_monthlyPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="R$ 60"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_monthlyPrice_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_monthlyPrice_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_monthlyPrice_lbl" />
-
-            <TextView
-                android:id="@+id/textView_gameInformation_rateAge_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Idade: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView_gameInformation_monthlyPrice_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_monthlyPrice_lbl" />
-
-
-            <TextView
-                android:id="@+id/textView_gameInformation_rateAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20 a 70 anos"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_gameInformation_rateAge_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_gameInformation_rateAge_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_gameInformation_rateAge_lbl" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_soccerPlayesInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/background_rounded_border"
-            android:orientation="vertical"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="8dp">
-
-            <TextView
-                android:id="@+id/textView_soccerPlayer_infos_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="12dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
                 android:text="Informações jogadores"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_soccer_players_info"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:scrollbars="horizontal"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_soccer_players_info" />
+
             <View
-                android:id="@+id/view_soccerPlayer_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/md_theme_light_onPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView_soccerPlayer_infos_label" />
+                android:background="?attr/colorOnPrimaryContainer" />
 
-            <TextView
-                android:id="@+id/textView_soccerPlayes_avalible_lbl"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_round_access_time_filled_24"
+                    app:tint="?attr/colorOnPrimaryContainer" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Próximo jogo"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toTopOf="@+id/textView_group_local_lbl"
+                        app:layout_constraintStart_toStartOf="@+id/textView_group_teamName_lbl"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_group_teamName_lbl" />
+
+                    <TextView
+                        android:id="@+id/textView_group_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Domingo, 18 de ago."
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_group_date_lbl"
+                        app:layout_constraintStart_toEndOf="@+id/textView_group_date_lbl"
+                        app:layout_constraintTop_toTopOf="@+id/textView_group_date_lbl"
+                        tools:layout_editor_absoluteX="8dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="4dp"
-                android:text="Jogadores disponíveis: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayes_dm_lbl"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view_soccerPlayer_divider" />
+                android:background="?attr/colorOnPrimaryContainer" />
 
-            <TextView
-                android:id="@+id/textView_soccerPlayes_avalible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_soccerPlayes_avalible_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayes_avalible_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayes_avalible_lbl" />
 
-            <TextView
-                android:id="@+id/textView_soccerPlayes_dm_lbl"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_round_location_on_24"
+                    app:tint="?attr/colorOnPrimaryContainer" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Local dos jogos"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toTopOf="@+id/textView_group_local_lbl"
+                        app:layout_constraintStart_toStartOf="@+id/textView_group_teamName_lbl"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_group_teamName_lbl" />
+
+                    <TextView
+                        android:id="@+id/textView_group_local"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rua da vila formosa, Vila Formosa "
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_group_date_lbl"
+                        app:layout_constraintStart_toEndOf="@+id/textView_group_date_lbl"
+                        app:layout_constraintTop_toTopOf="@+id/textView_group_date_lbl"
+                        tools:layout_editor_absoluteX="8dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:text="Jogadores no DM: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
-                app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayes_avalible_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayes_avalible_lbl" />
+                android:background="?attr/colorOnPrimaryContainer" />
 
             <TextView
-                android:id="@+id/textView_soccerPlayes_dm"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="10"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_soccerPlayes_dm_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayes_dm_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayes_dm_lbl" />
-
-            <TextView
-                android:id="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Mensalistas: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_soccerPlayes_teamAbilityAverage_lbl"
-                app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayes_dm_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayes_dm_lbl" />
-
-            <TextView
-                android:id="@+id/textView_soccerPlayes_monthlyWorkers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl" />
-
-            <TextView
-                android:id="@+id/textView_soccerPlayes_teamAbilityAverage_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Média habilidades: "
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayes_monthlyWorkers_lbl" />
-
-            <TextView
-                android:id="@+id/textView_soccerPlayes_teamAverage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.0"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_soccerPlayes_teamAbilityAverage_lbl"
-                app:layout_constraintStart_toEndOf="@+id/textView_soccerPlayes_teamAbilityAverage_lbl"
-                app:layout_constraintTop_toTopOf="@+id/textView_soccerPlayes_teamAbilityAverage_lbl" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_competitionsInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/background_rounded_border"
-            android:orientation="vertical"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="8dp">
-
-            <TextView
-                android:id="@+id/textView_competitions_infos_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
                 android:text="Competições"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView_competitions_arrow"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_item_competition"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_round_keyboard_arrow_right_24"
-                app:layout_constraintBottom_toTopOf="@+id/view_competitions_divider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginBottom="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_competition" />
 
             <View
-                android:id="@+id/view_competitions_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/md_theme_light_onPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView_competitions_infos_label" />
+                android:background="?attr/colorOnPrimaryContainer" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_item_competition"
-                android:layout_width="0dp"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/container_game_info"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:clipToPadding="false"
-                android:minHeight="200dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
                 android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_competitions_divider"
-                tools:listitem="@layout/item_competition" />
+                app:layout_constraintTop_toBottomOf="@+id/view_divider_top">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <TextView
+                        android:id="@+id/textView_gameInformation_typeOfCourt_lbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tipo da quadra"
+                        android:textAllCaps="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_gameInformation_typeOfCourt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Society"
+                        android:textSize="30sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/header_container_center"
+                    app:layout_constraintEnd_toStartOf="@+id/header_container_center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/header_container_center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Configuração"
+                        android:textAllCaps="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_gameInformation_configuration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="7x7 masc."
+                        android:textSize="30sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="?attr/colorOnPrimaryContainer" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/container_header_team_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_divider_top">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView_gameInformation_rateAge_lbl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Idade"
+                        android:textAllCaps="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView_gameInformation_rateAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="30 a 60"
+                        android:textSize="30sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/header_container_center"
+                    app:layout_constraintEnd_toStartOf="@+id/header_container_center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/header_container_center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Valor"
+                        android:textAllCaps="true"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_gameInformation_monthlyPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="R$ 60,00"
+                        android:textSize="30sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="?attr/colorOnPrimaryContainer" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_moreOptions"

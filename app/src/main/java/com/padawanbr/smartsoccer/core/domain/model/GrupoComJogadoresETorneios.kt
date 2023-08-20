@@ -14,16 +14,11 @@ data class GrupoComJogadoresETorneios(
         get() = jogadores?.count { it.estaNoDepartamentoMedico ?: false } ?: 0
 
     // Propriedade calculada para armazenar a média de habilidades dos jogadores
-    val mediaJogadores: Float
-        get() {
-            val totalHabilidades = jogadores.sumByDouble { jogador ->
-                jogador.habilidades?.values?.average() ?: 0.0
-            }
-            return if (jogadores.isNotEmpty()) {
-                (totalHabilidades / jogadores.size).toFloat()
-            } else {
-                0.0F
-            }
-        }
+
+    val mediaHabilidades: Float
+        get() = jogadores.map { it.calcularMediaHabilidades() }.average().toFloat()
+
 }
+
+
 

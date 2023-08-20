@@ -16,6 +16,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
@@ -28,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class GroupFragment : Fragment() , MenuProvider {
+class GroupFragment : Fragment(), MenuProvider {
 
     private var _binding: FragmentGroupBinding? = null
     private val binding get() = _binding!!
@@ -46,12 +48,33 @@ class GroupFragment : Fragment() , MenuProvider {
             { ItemCompetitionViewHolder.create(it) },
             {
 
-                val directions =  GroupFragmentDirections.actionDetailsGroupFragmentToDetailsCompetitionFragment()
+                val directions =
+                    GroupFragmentDirections.actionDetailsGroupFragmentToDetailsCompetitionFragment()
 
                 directions.competitionId = it.id
 
                 findNavController().navigate(directions)
 
+                Toast.makeText(
+                    context,
+                    "competitionsAdapter itemClicked",
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            {
+                Toast.makeText(
+                    context,
+                    "competitionsAdapter itemLongClicked",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        )
+    }
+
+    private val playersInfoAdapter by lazy {
+        getCommonAdapterOf(
+            { ItemGroupPlayersInfoViewHolder.create(it) },
+            {
                 Toast.makeText(
                     context,
                     "competitionsAdapter itemClicked",
@@ -82,6 +105,7 @@ class GroupFragment : Fragment() , MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initPlayersInfoAdapter()
         initCompetitionAdapter()
 
         val menuHost = requireActivity()
@@ -96,13 +120,13 @@ class GroupFragment : Fragment() , MenuProvider {
         fabCreateQuickCompetitionOnClick()
 
 
-        binding.imageViewCompetitionsArrow.setOnClickListener {
-            Toast.makeText(
-                context,
-                "imageViewCompetitionsArrow",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+//        binding.imageViewCompetitionsArrow.setOnClickListener {
+//            Toast.makeText(
+//                context,
+//                "imageViewCompetitionsArrow",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
 
         observeUiState()
     }
@@ -138,7 +162,7 @@ class GroupFragment : Fragment() , MenuProvider {
                     binding.textViewGroupLocal.text = "-"
 
                     binding.textViewGameInformationTypeOfCourt.text =
-                        uiState.grupo.configuracaoEsporte.tipoEsporte.modalidade
+                        uiState.grupo.configuracaoEsporte.tipoEsporte.tipo
                     val quantidadeMinimaPorTime =
                         uiState.grupo.configuracaoEsporte.quantidadeMinimaPorTime
 
@@ -146,10 +170,6 @@ class GroupFragment : Fragment() , MenuProvider {
                         R.string.game_information_configuration,
                         quantidadeMinimaPorTime.toString(),
                         quantidadeMinimaPorTime.toString()
-                    )
-                    binding.textViewGameInformationSinglePrice.text = context?.getString(
-                        R.string.game_information_single_price,
-                        30.00.toString()
                     )
 
                     binding.textViewGameInformationMonthlyPrice.text = context?.getString(
@@ -163,29 +183,65 @@ class GroupFragment : Fragment() , MenuProvider {
                         60.toString()
                     )
 
-                    val jogadoresDisponiveis = uiState.grupo.jogadoresDisponiveis
-                    val jogadoresNoDM = uiState.grupo.jogadoresNoDM
-
-                    binding.textViewSoccerPlayesAvalible.text = jogadoresDisponiveis.toString()
-                    binding.textViewSoccerPlayesDm.text = jogadoresNoDM.toString()
-
-                    binding.textViewSoccerPlayesTeamAverage.text =
-                        uiState.grupo.mediaJogadores.toString()
-
-                    binding.textViewSoccerPlayesMonthlyWorkers.text = (jogadoresNoDM?.let {
-                        jogadoresDisponiveis?.plus(
-                            it
-                        )
-                    }).toString()
+                    setSoccerPlayersInfos(uiState)
 
                 }
             }
         }
     }
 
-    private fun initCompetitionAdapter(){
+    private fun setSoccerPlayersInfos(uiState: GroupViewModel.UiState.Success) {
+        val jogadoresDisponiveis = uiState.grupo.jogadoresDisponiveis
+        val jogadoresNoDM = uiState.grupo.jogadoresNoDM
+        val mediaJogadores = uiState.grupo.mediaJogadores
+        val jogadoresGrupo = (jogadoresNoDM?.let {
+            jogadoresDisponiveis?.plus(
+                it
+            )
+        })
+
+        val soccerPlayersInfo = arrayListOf<GroupoJogadoresInfo>()
+
+        soccerPlayersInfo.add(
+            GroupoJogadoresInfo(
+                R.drawable.ic_round_access_time_filled_24,
+                "$jogadoresDisponiveis jogadores dispoíveis"
+            )
+        )
+
+        soccerPlayersInfo.add(
+            GroupoJogadoresInfo(
+                R.drawable.ic_round_access_time_filled_24,
+                "$jogadoresNoDM jogadores no departamento médico"
+            )
+        )
+
+        soccerPlayersInfo.add(
+            GroupoJogadoresInfo(
+                R.drawable.ic_round_access_time_filled_24,
+                "A média de habilidade do grupo é de $mediaJogadores"
+            )
+        )
+
+        soccerPlayersInfo.add(
+            GroupoJogadoresInfo(
+                R.drawable.ic_round_access_time_filled_24,
+                "Possui $jogadoresGrupo cadastrados no grupo"
+            )
+        )
+
+        playersInfoAdapter.submitList(soccerPlayersInfo)
+    }
+
+    private fun initPlayersInfoAdapter() {
+        binding.recyclerViewSoccerPlayersInfo.run {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = playersInfoAdapter
+        }
+    }
+
+    private fun initCompetitionAdapter() {
         binding.recyclerViewItemCompetition.run {
-            setHasFixedSize(true)
             adapter = competitionsAdapter
         }
     }
@@ -219,7 +275,8 @@ class GroupFragment : Fragment() , MenuProvider {
         binding.fabCreateQuickCompetition.setOnClickListener {
             isRotate = rotateFab(it, !isRotate)
             hideFabs()
-            val directions =  GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()
+            val directions =
+                GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()
 
             if (args.detailsGroupViewArgs != null) {
                 directions.competitionViewArgs = CompetitionViewArgs(

@@ -62,7 +62,7 @@ class GroupViewModel @Inject constructor(
                                     jogadores,
                                     it.jogadoresDisponiveis,
                                     it.jogadoresNoDM,
-                                    it.mediaJogadores,
+                                    it.mediaHabilidades,
                                     torneios
                                 )
                             }

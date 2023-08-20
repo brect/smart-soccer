@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="58dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="6dp"
+    android:background="@drawable/background_group_item_rounded_border"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/textView_soccerPlayerGroup_info"
+        android:layout_width="160dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:text="27 jogadores disponíveis"
+        android:paddingEnd="8dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_soccerPlayerGroup_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView_soccerPlayerGroup_info"
+        app:layout_constraintTop_toTopOf="@+id/imageView_soccerPlayerGroup_info" />
+
+    <ImageView
+        android:id="@+id/imageView_soccerPlayerGroup_info"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="4dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:src="@drawable/ic_round_access_time_filled_24"
+        android:text="4,5"
+        android:textAlignment="center"
+        android:textColor="@color/md_theme_light_onSecondary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/colorOnPrimaryContainer" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
