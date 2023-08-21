@@ -16,6 +16,7 @@ interface AddSoccerPlayerUseCase {
     operator fun invoke(params: Params): Flow<ResultStatus<Unit>>
 
     data class Params(
+        val id: String,
         val playerName: String,
         val playerAge: Int,
         val playerPosition: PosicaoJogador?,
@@ -34,6 +35,7 @@ class AddSoccerPlayerUseCaseImpl @Inject constructor(
         return withContext(dispatchers.io()) {
             repository.saveSoccerPlayer(
                 Jogador(
+                    id = params.id,
                     nome = params.playerName,
                     idade = params.playerAge,
                     posicao = params.playerPosition,

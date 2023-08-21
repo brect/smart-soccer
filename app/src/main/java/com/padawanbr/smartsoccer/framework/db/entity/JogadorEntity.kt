@@ -66,15 +66,3 @@ fun List<Jogador>.toListJogadorEntity() = map {
     )
 }
 
-// Na extensão para JogadorEntity
-fun Jogador.toJogadorEntity(): JogadorEntity {
-    return JogadorEntity(
-        nome = nome,
-        idade = idade,
-        posicao = posicao,
-        habilidades = habilidades,
-        estaNoDepartamentoMedico = estaNoDepartamentoMedico,
-        grupoId = grupoId
-    )
-}
-

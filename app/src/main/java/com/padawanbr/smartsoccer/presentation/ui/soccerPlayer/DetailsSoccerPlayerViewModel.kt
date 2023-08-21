@@ -12,6 +12,7 @@ import com.padawanbr.smartsoccer.core.usecase.DeleteSoccerPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +30,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
                 is Action.CreateSoccerPlayer -> {
                     addSoccerPlayerUseCase.invoke(
                         AddSoccerPlayerUseCase.Params(
+                            it.id ?: UUID.randomUUID().toString(),
                             it.playerName,
                             it.playerAge,
                             it.playerPosition,
@@ -66,6 +68,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
                         }
                     )
                 }
+
                 else -> {
                     Log.i("DetailsSoccerPlayerViewModel", "DetailsSoccerPlayerViewModel: else")
                 }
@@ -74,6 +77,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
     }
 
     fun saveSoccerPlayer(
+        soccerId: String?,
         playerName: String,
         playerAge: Int,
         playerPosition: PosicaoJogador?,
@@ -82,6 +86,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
         groupId: String,
     ) {
         action.value = Action.CreateSoccerPlayer(
+            soccerId,
             playerName,
             playerAge,
             playerPosition,
@@ -104,6 +109,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
 
     sealed class Action {
         data class CreateSoccerPlayer(
+            val id: String?,
             val playerName: String,
             val playerAge: Int,
             val playerPosition: PosicaoJogador?,

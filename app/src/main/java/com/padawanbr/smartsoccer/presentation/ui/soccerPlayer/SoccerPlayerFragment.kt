@@ -82,7 +82,7 @@ class SoccerPlayerFragment : Fragment() {
 
             // Verifica se o jogador não é nulo e, em seguida, adiciona seus atributos individualmente no Bundle
             jogador?.let {
-                bundle.putString("id", it.id ?: "")
+                bundle.putString("id", it.id)
                 bundle.putString("nome", it.nome)
                 bundle.putInt("idade", it.idade ?: 0)
                 bundle.putString("posicao", it.posicao)

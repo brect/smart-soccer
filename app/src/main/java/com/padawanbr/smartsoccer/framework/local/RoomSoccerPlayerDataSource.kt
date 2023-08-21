@@ -28,6 +28,7 @@ class RoomSoccerPlayerDataSource @Inject constructor(
     }
 
     private fun Jogador.toJogadorEntity() = JogadorEntity(
+        jogadorId = id,
         nome = nome,
         idade = idade,
         posicao = posicao,

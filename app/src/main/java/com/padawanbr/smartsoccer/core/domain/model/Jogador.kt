@@ -8,7 +8,7 @@ import java.util.UUID
 @Keep
 @Parcelize
 data class Jogador(
-    val id: String = UUID.randomUUID().toString(),
+    val id: String,
     val nome: String,
     val idade: Int,
     val posicao: PosicaoJogador? = null,
