@@ -80,13 +80,12 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
         }
 
         binding.buttonExcludeItem.setOnClickListener {
-            val playerId = arguments?.getInt("id", -1) ?: -1
-            if (playerId != -1) {
-                // Chamar o método de exclusão do jogador do ViewModel
-                viewModel.deleteSoccerPlayer(playerId)
+            val playerId = arguments?.getString("id")
+            if (playerId.isNullOrBlank()) {
+                Toast.makeText(context, "Jogador inválido ou não encontrado", Toast.LENGTH_SHORT)
+                    .show()
             } else {
-                // Tratar o caso em que o ID do jogador não está disponível
-                Toast.makeText(context, "Jogador inválido ou não encontrado", Toast.LENGTH_SHORT).show()
+                viewModel.deleteSoccerPlayer(playerId)
             }
         }
 
@@ -96,7 +95,8 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
     private fun populatePlayerDetails() {
         val nome = arguments?.getString("nome")
         val idade = arguments?.getInt("idade")
-        val estaNoDepartamentoMedico = arguments?.getBoolean("estaNoDepartamentoMedico", false) ?: false
+        val estaNoDepartamentoMedico =
+            arguments?.getBoolean("estaNoDepartamentoMedico", false) ?: false
         val selectedPosition = arguments?.getString("posicao")
         val habilidades = arguments?.getSerializable("habilidades") as? Map<String, Float>
 

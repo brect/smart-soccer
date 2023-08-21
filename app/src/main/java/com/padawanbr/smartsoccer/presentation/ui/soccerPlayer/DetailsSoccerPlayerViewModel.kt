@@ -96,7 +96,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
         )
     }
 
-    fun deleteSoccerPlayer(playerId: Int) {
+    fun deleteSoccerPlayer(playerId: String) {
         action.value = Action.ExcludeSoccerPlayer(playerId)
     }
 
@@ -118,7 +118,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
             val groupId: String,
         ) : Action()
 
-        data class ExcludeSoccerPlayer(val playerId: Int) : Action()
+        data class ExcludeSoccerPlayer(val playerId: String) : Action()
     }
 
 }

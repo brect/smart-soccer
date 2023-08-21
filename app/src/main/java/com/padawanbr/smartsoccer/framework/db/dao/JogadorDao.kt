@@ -30,6 +30,6 @@ interface JogadorDao {
     fun update(jogador: JogadorEntity)
 
     @Query("DELETE FROM jogador WHERE jogadorId = :jogadorId")
-    fun delete(jogadorId: Int)
+    fun delete(jogadorId: String)
 
 }

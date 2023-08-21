@@ -11,7 +11,7 @@ import javax.inject.Inject
 interface DeleteSoccerPlayerUseCase {
     operator fun invoke(params: Params): Flow<ResultStatus<Unit>>
     data class Params(
-        val soccerPlayerId: Int,
+        val soccerPlayerId: String,
     )
 }
 

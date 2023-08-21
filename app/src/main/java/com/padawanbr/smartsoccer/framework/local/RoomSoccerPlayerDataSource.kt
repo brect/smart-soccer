@@ -23,7 +23,7 @@ class RoomSoccerPlayerDataSource @Inject constructor(
         jogadorDao.insert(jogador.toJogadorEntity())
     }
 
-    override suspend fun deleteSoccerPlayer(jogadorId: Int) {
+    override suspend fun deleteSoccerPlayer(jogadorId: String) {
         jogadorDao.delete(jogadorId)
     }
 
