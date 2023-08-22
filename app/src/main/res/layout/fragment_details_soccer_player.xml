@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bottom_sheet_rounded_border"
+    android:background="@drawable/background_top_rounded_border"
+
     android:padding="24dp">
 
     <View
@@ -53,8 +54,8 @@
                     android:id="@+id/editText_textInput_detailsPlayerName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nome jogador"
-                    android:hint="@string/hint_text_input_name_item" />
+                    android:hint="@string/hint_text_input_name_item"
+                    android:text="Nome jogador" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -73,10 +74,10 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_textInput_detailsPlayerAge"
                     android:layout_width="match_parent"
-                    android:text="10"
-                    android:inputType="number"
                     android:layout_height="wrap_content"
-                    android:hint="Digite a idade do jogador" />
+                    android:hint="Digite a idade do jogador"
+                    android:inputType="number"
+                    android:text="10" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,6 +138,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="58dp"
                     android:text="@string/save"
+                    style="@style/MyButtonStyle"
                     android:textAllCaps="false" />
 
                 <ProgressBar
@@ -160,6 +162,7 @@
                     android:id="@+id/button_exclude_item"
                     android:layout_width="match_parent"
                     android:layout_height="58dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="@string/exclude"
                     android:textAllCaps="false" />
 

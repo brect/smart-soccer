@@ -1,5 +1,6 @@
 package com.padawanbr.smartsoccer.presentation.ui.groups
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +9,11 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Filter
 import android.widget.Toast
+import androidx.annotation.LayoutRes
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -110,7 +115,7 @@ class GroupFragment : Fragment(), MenuProvider {
         val menuHost = requireActivity()
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        args.detailsGroupViewArgs?.nome?.let { setToolbarTitle(it) }
+        args.detalheGrupoItemViewArgs?.nome?.let { setToolbarTitle(it) }
 
         initFabs()
 
@@ -263,8 +268,8 @@ class GroupFragment : Fragment(), MenuProvider {
             hideFabs()
             val directions =
                 GroupFragmentDirections.actionDetailsGroupFragmentToSoccerPlayerFragment()
-            if (args.detailsGroupViewArgs != null) {
-                directions.groupId = args.detailsGroupViewArgs!!.id
+            if (args.detalheGrupoItemViewArgs != null) {
+                directions.groupId = args.detalheGrupoItemViewArgs!!.id
             }
             findNavController().navigate(directions)
         }
@@ -277,7 +282,7 @@ class GroupFragment : Fragment(), MenuProvider {
             val directions =
                 GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()
 
-            if (args.detailsGroupViewArgs != null) {
+            if (args.detalheGrupoItemViewArgs != null) {
                 directions.competitionViewArgs = CompetitionViewArgs(
                     grupo.id,
                     grupo.jogadores
@@ -332,7 +337,7 @@ class GroupFragment : Fragment(), MenuProvider {
     override fun onResume() {
         super.onResume()
 
-        var groupId = args.detailsGroupViewArgs?.id
+        var groupId = args.detalheGrupoItemViewArgs?.id
         if (groupId != null) {
             viewModel.getGroupById(groupId)
         }
@@ -352,3 +357,4 @@ class GroupFragment : Fragment(), MenuProvider {
     }
 
 }
+

@@ -2,6 +2,7 @@ package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import android.R
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -25,9 +27,6 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
     private val viewModel: DetailsGroupViewModel by viewModels()
     private val sharedViewModel: SharedGroupsViewModel by activityViewModels()
 
-    private lateinit var spinnerGroupModality: Spinner
-    private lateinit var adapterGroupModality: ArrayAdapter<String>
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,14 +41,12 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
 
         binding.buttonCreateGroup.setOnClickListener {
             val textNameGroup = binding.editTextTextInputGroupName.text.toString()
-            val qtdTeam = binding.editTextTextInputQtdTeam.text.toString().toInt()
+            val qtdTeam = binding.editTextNumberOfVacancies.text.toString().toInt()
 
             // Obtenha o enum PosicaoJogador selecionado no Spinner
-            val selectedPosition = spinnerGroupModality.selectedItem as String
-            val groupModalityPositionString = selectedPosition.substringBefore("(")
-                .trim() // Obtém apenas a posição, ignorando a abreviação
-            val groupModalityPosition =
-                TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
+            val selectedPosition = binding.editTextTextInputGroupModality.text.toString()
+            val groupModalityPositionString = selectedPosition.substringBefore("(").trim()
+            val groupModalityPosition = TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
 
             viewModel.createGroup(
                 textNameGroup,
@@ -65,27 +62,12 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
     }
 
     private fun initSpinnerGroupModalityAdapter() {
-        spinnerGroupModality = binding.spinnerGroupModality
-
         val detailsSportType = TipoEsporte.values().map { esporte ->
-            "${esporte.modalidade} "
+            "${esporte.modalidade}"
         }.toMutableList()
 
-        adapterGroupModality =
-            ArrayAdapter(requireContext(), R.layout.simple_list_item_1, detailsSportType)
-
-        spinnerGroupModality.adapter = adapterGroupModality
-
-        spinnerGroupModality.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    // Obtenha o enum TipoEsporte selecionado no Spinner
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    // Lida com o caso em que nada foi selecionado
-                }
-            }
+        val adapterGroupModality = ArrayAdapter(requireContext(), R.layout.simple_list_item_1, detailsSportType)
+        binding.editTextTextInputGroupModality.setAdapter(adapterGroupModality)
     }
 
     private fun observeUiState() {

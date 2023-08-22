@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
                 val directions =
                     HomeFragmentDirections.actionGroupsFragmentToDetailsGroupFragment()
 
-                directions.detailsGroupViewArgs = DetalheGrupoItemViewArgs(
+                directions.detalheGrupoItemViewArgs = DetalheGrupoItemViewArgs(
                     item.id,
                     item.nome,
                     item.quantidadeTimes,
@@ -57,7 +57,8 @@ class HomeFragment : Fragment() {
 
                 selectedItem = item
 
-                bottomSheetBinding.textExcludeGroupContent.text = context?.getString(R.string.exclude_groups, item.nome)
+                bottomSheetBinding.textExcludeGroupContent.text =
+                    context?.getString(R.string.exclude_groups, item.nome)
 
                 bottomSheetDialog.show()
             }
@@ -82,11 +83,9 @@ class HomeFragment : Fragment() {
         bindingBottomSheetToExcludeGroup()
 
         binding.floatingActionButton.setOnClickListener {
-            val detailsGroupFragment = DetailsGroupFragment()
-            detailsGroupFragment.show(
-                childFragmentManager,
-                "CreateGroupFragment"
-            )
+            val directions =
+                HomeFragmentDirections.actionGroupsFragmentToCreateDetailsGroupFragment()
+            findNavController().navigate(directions)
         }
 
         observeUiState()
@@ -119,7 +118,7 @@ class HomeFragment : Fragment() {
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             binding.fliperGroup.displayedChild = when (uiState) {
-                is  HomeViewModel.UiState.Loading -> {
+                is HomeViewModel.UiState.Loading -> {
                     Toast.makeText(
                         context,
                         "Groups GroupViewModel.UiState.Loading",
@@ -133,7 +132,7 @@ class HomeFragment : Fragment() {
                     FLIPPER_CHILD_SUCCESS
                 }
 
-                is  HomeViewModel.UiState.Success -> {
+                is HomeViewModel.UiState.Success -> {
                     viewModel.getAll()
                     Toast.makeText(
                         context,
@@ -143,7 +142,7 @@ class HomeFragment : Fragment() {
                     FLIPPER_CHILD_SUCCESS
                 }
 
-                is  HomeViewModel.UiState.ShowEmptyGroups -> {
+                is HomeViewModel.UiState.ShowEmptyGroups -> {
                     groupsAdapter.submitList(emptyList())
                     FLIPPER_CHILD_EMPTY
                 }

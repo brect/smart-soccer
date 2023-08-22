@@ -31,6 +31,7 @@
         <item name="android:textViewStyle">@style/MyTextViewStyle</item>
         <item name="android:ratingBarStyle">@style/MyRatingBarStyle</item>
         <item name="android:toolbarStyle">@style/MyMaterialToolbarStyle</item>
+
     </style>
 
     <style name="Theme.SmartSoccer" parent="Base.Theme.SmartSoccer" />
@@ -55,6 +56,11 @@
 
     <style name="MyMaterialToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="MyButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:backgroundTint">?attr/colorPrimary</item>
     </style>
 
 </resources>

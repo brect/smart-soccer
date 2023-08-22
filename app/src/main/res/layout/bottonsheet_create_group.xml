@@ -1,155 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_top_rounded_border"
     android:padding="24dp">
 
-    <View
-        android:id="@+id/drag_handle"
-        android:layout_width="80dp"
-        android:layout_height="4dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/drag_handle_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_createGroup_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Criar novo grupo"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/drag_handle" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_createTeam_qtdTeams"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Nome do grupo"
-        app:expandedHintEnabled="false"
-        app:hintEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_groupModality"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_createGroup_title">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_textInput_groupName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome do grupo"
-            android:text="Nome do grupo"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/spinner_groupModality"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/background_border_stroke"
-        app:layout_constraintBottom_toTopOf="@+id/flipper_createTeam_button"
-        app:layout_constraintEnd_toEndOf="@+id/textInput_createTeam_qtdTeams"
-        app:layout_constraintStart_toStartOf="@+id/textInput_createTeam_qtdTeams"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_createTeam_qtdTeams" />
+            <TextView
+                android:id="@+id/text_createGroup_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Criar novo grupo"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_qtdMinPlayers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"
-        android:hint="Quantidade minima de jogadores"
-        app:expandedHintEnabled="false"
-        app:hintEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/textInput_qtdNumberPlayersPerTeam"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_createTeam_qtdTeams">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_createTeam_qtdTeams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Nome do grupo"
+                app:expandedHintEnabled="false"
+                app:hintEnabled="true">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_textInput_qtdMinPlayers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Quantidade minima de jogadores"
-            android:text="22"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_textInput_groupName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nome do grupo"
+                    android:inputType="text"
+                    android:text="Nome do grupo" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_qtdNumberPlayersPerTeam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Quantidade minima por time"
-        app:expandedHintEnabled="false"
-        app:hintEnabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/textInput_qtdTeam"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_qtdMinPlayers">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Local ou endereço"
+                app:expandedHintEnabled="false">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_textInput_qtdNumberPlayersPerTeam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Quantidade minima por time"
-            android:text="11"
-            android:inputType="number"/>
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_textInput_place"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Local ou endereço"
+                    android:text="Campo do flor" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInput_qtdTeam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Quantidade de times"
-        app:expandedHintEnabled="false"
-        app:hintEnabled="true"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/flipper_createTeam_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_qtdNumberPlayersPerTeam">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_textInput_qtdTeam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Quantidade de times"
-            android:text="2"
-            android:inputType="number"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_groupModality"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Tipo de jogo"
+                app:expandedHintEnabled="false">
 
-    <ViewFlipper
-        android:id="@+id/flipper_createTeam_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="58dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_groupModality">
+                <AutoCompleteTextView
+                    android:id="@+id/editText_textInput_groupModality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_createGroup"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="criar"
-            android:textAllCaps="false" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_gameDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Dia do jogo"
+                app:expandedHintEnabled="false">
 
-        <ProgressBar
-            android:id="@+id/progress_createTeam"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_textInput_gameDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Domingo"
+                    android:text="Domingo" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </ViewFlipper>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_startTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Horário de início"
+                app:expandedHintEnabled="false"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_textInput_startTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Horário de início"
+                    android:text="09:30" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_durationTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Quantidade de times"
+                android:visibility="gone"
+                app:expandedHintEnabled="false"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_textInput_durationTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Quantidade de times"
+                    android:inputType="number"
+                    android:text="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_numberOfVacancies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Quantidade de times"
+                app:expandedHintEnabled="false"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_numberOfVacancies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Quantidade de times"
+                    android:inputType="number"
+                    android:text="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ViewFlipper
+                android:id="@+id/flipper_createTeam_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="58dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_createGroup"
+                    style="@style/MyButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:text="criar"
+                    android:textAllCaps="false" />
+
+                <ProgressBar
+                    android:id="@+id/progress_createTeam"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+
+            </ViewFlipper>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,8 +13,19 @@
         <action
             android:id="@+id/action_GroupsFragment_to_DetailsGroupFragment"
             app:destination="@id/detailsGroupFragment" />
+        <action
+            android:id="@+id/action_groupsFragment_to_createDetailsGroupFragment"
+            app:destination="@id/createDetailsGroupFragment" />
 
     </fragment>
+
+    <dialog
+        android:id="@+id/createDetailsGroupFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.groups.DetailsGroupFragment"
+        android:label="@string/competition_group_fragment_label"
+        tools:layout="@layout/bottonsheet_create_group">
+
+    </dialog>
 
     <fragment
         android:id="@+id/detailsGroupFragment"
@@ -22,7 +33,7 @@
         tools:layout="@layout/fragment_group">
 
         <argument
-            android:name="detailsGroupViewArgs"
+            android:name="detalheGrupoItemViewArgs"
             app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.DetalheGrupoItemViewArgs"
             android:defaultValue="@null"
             app:nullable="true" />
