@@ -25,7 +25,7 @@ data class GrupoItem(
         UUID.randomUUID().toString(),
         "",
         0,
-        ConfiguracaoEsporte(TipoEsporte.UNDEFINED, TipoEsporte.UNDEFINED.quantidadeMinimaPorTime),
+        ConfiguracaoEsporte(TipoEsporte.FUTEBOL_CAMPO, TipoEsporte.FUTEBOL_CAMPO.quantidadeMinimaPorTime),
         null,
         null,
         null,

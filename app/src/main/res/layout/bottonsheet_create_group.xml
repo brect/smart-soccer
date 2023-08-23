@@ -81,23 +81,29 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:focusableInTouchMode="false"
+                    android:hint="Selecione um tipo de jogo"
                     android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInput_gameDay"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Dia do jogo"
                 app:expandedHintEnabled="false">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/editText_textInput_gameDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Domingo"
-                    android:text="Domingo" />
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="false"
+                    android:hint="Selecione o dia do jogo"
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -154,6 +160,57 @@
                     android:inputType="number"
                     android:text="2" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/textView_age_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Idade"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView_age_valueFrom_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10 - anos"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/textView_age_valueTo_lbl"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_age_lbl" />
+
+
+                <TextView
+                    android:id="@+id/textView_age_valueTo_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="70 - anos"
+                    android:textSize="12sp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView_age_valueFrom_lbl"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_age_lbl" />
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/seekBar_ratingAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1.0"
+                    android:valueFrom="10.0"
+                    android:valueTo="70.0"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_age_valueFrom_lbl"
+                    app:tickVisible="false"
+                    app:values="@array/initial_range_slider_values" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ViewFlipper
                 android:id="@+id/flipper_createTeam_button"
