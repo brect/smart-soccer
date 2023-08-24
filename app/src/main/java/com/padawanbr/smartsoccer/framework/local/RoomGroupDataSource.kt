@@ -6,6 +6,7 @@ import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.domain.model.GrupoComJogadores
 import com.padawanbr.smartsoccer.core.domain.model.GrupoComJogadoresETorneios
+import com.padawanbr.smartsoccer.core.domain.model.toRangeIdadeEntity
 import com.padawanbr.smartsoccer.framework.db.dao.GrupoDao
 import com.padawanbr.smartsoccer.framework.db.entity.ConfiguracaoEsporteEntity
 import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
@@ -48,8 +49,12 @@ class RoomGroupDataSource @Inject constructor(
     private fun Grupo.toGrupoEntity() = GrupoEntity(
         id,
         nome,
+        endereco,
+        configuracaoEsporte.toConfiguracaoEsporteEntity(),
+        diaDoJogo,
+        horarioInicio,
         quantidadeTimes,
-        configuracaoEsporte.toConfiguracaoEsporteEntity() // Utilize a função de conversão aqui
+        rangeIdade.toRangeIdadeEntity()
     )
 
     private fun ConfiguracaoEsporte.toConfiguracaoEsporteEntity() = ConfiguracaoEsporteEntity(
