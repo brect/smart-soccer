@@ -30,10 +30,12 @@ class DetailsGroupViewModel @Inject constructor(
                         AddGroupUseCase.Params(
                             UUID.randomUUID().toString(),
                             it.groupName,
-                            it.quantidadeTimes,
+                            it.textPlaceGroup,
                             it.tipoEsporte,
-                            arrayListOf(),
-                            arrayListOf()
+                            it.textGameDay,
+                            it.textBeginningOfTheGame,
+                            it.quantidadeTimes,
+                            it.rangeIdade
                         )
                     ).watchStatus(
                         loading = {
