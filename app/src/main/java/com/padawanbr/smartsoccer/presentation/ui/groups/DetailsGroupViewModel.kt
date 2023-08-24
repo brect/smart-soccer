@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
+import com.padawanbr.smartsoccer.core.domain.model.RangeIdade
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
@@ -53,13 +54,21 @@ class DetailsGroupViewModel @Inject constructor(
 
     fun createGroup(
         groupName: String,
+        textPlaceGroup: String,
+        tipoEsporte: TipoEsporte,
+        textGameDay: String,
+        textBeginningOfTheGame: String,
         quantidadeTimes: Int,
-        tipoEsporte: TipoEsporte
+        rangeIdade: RangeIdade
     ) {
         action.value = Action.CreateGroup(
             groupName,
+            textPlaceGroup,
+            tipoEsporte,
+            textGameDay,
+            textBeginningOfTheGame,
             quantidadeTimes,
-            tipoEsporte
+            rangeIdade
         )
     }
 
@@ -72,8 +81,12 @@ class DetailsGroupViewModel @Inject constructor(
     sealed class Action {
         data class CreateGroup(
             val groupName: String,
+            val textPlaceGroup: String,
+            val tipoEsporte: TipoEsporte,
+            val textGameDay: String,
+            val textBeginningOfTheGame: String,
             val quantidadeTimes: Int,
-            val tipoEsporte: TipoEsporte
+            val rangeIdade: RangeIdade
         ) : Action()
     }
 

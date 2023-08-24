@@ -4,6 +4,7 @@ import com.padawanbr.smartsoccer.core.data.repository.GroupRepository
 import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
+import com.padawanbr.smartsoccer.core.domain.model.RangeIdade
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import com.padawanbr.smartsoccer.core.usecase.base.CoroutinesDispatchers
@@ -20,10 +21,12 @@ interface AddGroupUseCase {
     data class Params(
         val id: String,
         val nome: String,
-        val quantidadeTimes: Int,
+        val endereco: String,
         val tipoEsporte: TipoEsporte,
-        val jogadores: MutableList<Jogador>,
-        val torneios: List<Torneio>? = null,
+        val diaDoJogo: String,
+        val horarioInicio: String,
+        val quantidadeTimes: Int,
+        val rangeIdade: RangeIdade
     )
 }
 
@@ -38,8 +41,12 @@ class AddGroupUseCaseImpl @Inject constructor(
                 Grupo(
                     params.id,
                     params.nome,
-                    params.quantidadeTimes,
+                    params.endereco,
                     ConfiguracaoEsporte(params.tipoEsporte, params.tipoEsporte.quantidadeMinimaPorTime),
+                    params.diaDoJogo,
+                    params.horarioInicio,
+                    params.quantidadeTimes,
+                    params.rangeIdade
                 )
             )
             ResultStatus.Success(Unit)

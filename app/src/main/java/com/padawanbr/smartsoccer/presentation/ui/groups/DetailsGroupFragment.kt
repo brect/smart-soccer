@@ -16,6 +16,7 @@ import com.google.android.material.slider.RangeSlider
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.padawanbr.smartsoccer.core.domain.model.DiaDaSemana
+import com.padawanbr.smartsoccer.core.domain.model.RangeIdade
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,8 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
     private val sharedViewModel: SharedGroupsViewModel by activityViewModels()
 
     private lateinit var timePicker: TimePicker
+
+    private var rangeIdade = RangeIdade(10, 70)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +62,7 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
     private fun buttonCreateGroupListener() {
         binding.buttonCreateGroup.setOnClickListener {
             val textNameGroup = binding.editTextTextInputGroupName.text.toString()
-            val qtdTeam = binding.editTextNumberOfVacancies.text.toString().toInt()
+            val textPlaceGroup = binding.editTextTextInputPlace.text.toString()
 
             // Obtenha o enum PosicaoJogador selecionado no Spinner
             val selectedPosition = binding.editTextTextInputGroupModality.text.toString()
@@ -67,10 +70,19 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
             val groupModalityPosition =
                 TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
 
+            val textGameDay = binding.editTextTextInputGameDay.text.toString()
+            val textBeginningOfTheGame = binding.textViewBeginningOfTheGame.text.toString()
+
+            val qtdTeam = binding.editTextNumberOfVacancies.text.toString().toInt()
+
             viewModel.createGroup(
                 textNameGroup,
+                textPlaceGroup,
+                groupModalityPosition ?: TipoEsporte.FUTEBOL_CAMPO,
+                textGameDay,
+                textBeginningOfTheGame,
                 qtdTeam,
-                groupModalityPosition ?: TipoEsporte.FUTEBOL_CAMPO
+                rangeIdade
             )
 
             Toast.makeText(context, "buttonSaveItem", Toast.LENGTH_SHORT).show()
@@ -81,8 +93,14 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         binding.seekBarRatingAge.addOnChangeListener(RangeSlider.OnChangeListener { slider, value, fromUser ->
             val values = binding.seekBarRatingAge.values
 
-            binding.textViewAgeValueFromLbl.text = "${values[0].roundToInt()} - anos"
-            binding.textViewAgeValueToLbl.text = "${values[1].roundToInt()} - anos"
+            val minAge = values[0].roundToInt()
+            val maxAge = values[1].roundToInt()
+
+            binding.textViewAgeValueFromLbl.text = "$minAge - anos"
+            binding.textViewAgeValueToLbl.text = "$maxAge - anos"
+
+            rangeIdade.minAge
+            rangeIdade.maxAge
 
             binding.textViewAgeValueFromLbl.text
 
