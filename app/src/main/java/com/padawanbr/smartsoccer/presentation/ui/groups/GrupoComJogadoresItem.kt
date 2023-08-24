@@ -1,12 +1,14 @@
 package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
+import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.core.domain.model.RangeIdade
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.presentation.common.ListItem
+import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
 import java.util.UUID
 
-data class GrupoItem(
+data class GrupoComJogadoresItem(
     val id: String,
     val nome: String,
     val endereco: String,
@@ -15,6 +17,11 @@ data class GrupoItem(
     val horarioInicio: String?,
     val quantidadeTimes: Int?,
     val rangeIdade: RangeIdade?,
+    val jogadores: MutableList<Jogador>?,
+    val jogadoresDisponiveis: Int?,
+    val jogadoresNoDM: Int?,
+    val mediaJogadores: Float?,
+    val torneios: List<CompetitionItem>?,
 
     override val key: String = id
 ) : ListItem {
@@ -30,7 +37,11 @@ data class GrupoItem(
         null,
         null,
         null,
-        UUID.randomUUID().toString()
+        null,
+        null,
+        null,
+        null,
+        null
     )
 }
 

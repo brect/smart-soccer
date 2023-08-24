@@ -51,14 +51,18 @@ class GroupViewModel @Inject constructor(
                                 )
                             }
 
-                            var grupoItem = GrupoItem()
+                            var grupoItem = GrupoComJogadoresItem()
 
                             if (grupo != null && jogadores != null) {
-                                grupoItem = GrupoItem(
+                                grupoItem = GrupoComJogadoresItem(
                                     grupo.id,
                                     grupo.nome,
-                                    grupo.quantidadeTimes,
+                                    grupo.endereco,
                                     grupo.configuracaoEsporte,
+                                    grupo.diaDoJogo,
+                                    grupo.horarioInicio,
+                                    grupo.quantidadeTimes,
+                                    grupo.rangeIdade,
                                     jogadores,
                                     it.jogadoresDisponiveis,
                                     it.jogadoresNoDM,
@@ -93,7 +97,7 @@ class GroupViewModel @Inject constructor(
 
     sealed class UiState {
         object Loading : UiState()
-        data class Success(val grupo: GrupoItem) : UiState()
+        data class Success(val grupo: GrupoComJogadoresItem) : UiState()
         object Error : UiState()
     }
 

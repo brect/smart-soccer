@@ -32,17 +32,16 @@ class HomeViewModel @Inject constructor(
                             emit(UiState.ShowEmptyGroups)
                         }
                         .collect {
-                            val items = it.map { groups ->
+                            val items = it.map { grupo ->
                                 GrupoItem(
-                                    groups.id,
-                                    groups.nome,
-                                    groups.quantidadeTimes,
-                                    groups.configuracaoEsporte,
-                                    arrayListOf(),
-                                    null,
-                                    null,
-                                    null,
-                                    null
+                                    grupo.id,
+                                    grupo.nome,
+                                    grupo.endereco,
+                                    grupo.configuracaoEsporte,
+                                    grupo.diaDoJogo,
+                                    grupo.horarioInicio,
+                                    grupo.quantidadeTimes,
+                                    grupo.rangeIdade,
                                 )
                             }
 

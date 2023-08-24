@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
                 directions.detalheGrupoItemViewArgs = DetalheGrupoItemViewArgs(
                     item.id,
                     item.nome,
-                    item.quantidadeTimes,
+                    item.quantidadeTimes ?: 0,
                     item.configuracaoEsporte.tipoEsporte
                 )
 

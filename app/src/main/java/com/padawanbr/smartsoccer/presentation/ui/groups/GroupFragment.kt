@@ -1,6 +1,5 @@
 package com.padawanbr.smartsoccer.presentation.ui.groups
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,11 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Filter
 import android.widget.Toast
-import androidx.annotation.LayoutRes
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -45,7 +40,7 @@ class GroupFragment : Fragment(), MenuProvider {
 
     var isRotate: Boolean = false
 
-    lateinit var grupo: GrupoItem
+    lateinit var grupo: GrupoComJogadoresItem
 
     private val competitionsAdapter by lazy {
         getCommonAdapterOf(
@@ -162,8 +157,8 @@ class GroupFragment : Fragment(), MenuProvider {
                     competitionsAdapter.submitList(grupo.torneios)
 
                     binding.textViewGroupTeamName.text = uiState.grupo.nome
-                    binding.textViewGroupDate.text = "dd/mm/yyyy"
-                    binding.textViewGroupLocal.text = "-"
+                    binding.textViewGroupDate.text = "${grupo.diaDoJogo}"
+                    binding.textViewGroupLocal.text = "${grupo.endereco}"
 
                     binding.textViewGameInformationTypeOfCourt.text =
                         uiState.grupo.configuracaoEsporte.tipoEsporte.tipo
@@ -178,13 +173,13 @@ class GroupFragment : Fragment(), MenuProvider {
 
                     binding.textViewGameInformationMonthlyPrice.text = context?.getString(
                         R.string.game_information_monthly_price,
-                        80.00.toString()
+                        00.00.toString()
                     )
 
                     binding.textViewGameInformationRateAge.text = context?.getString(
                         R.string.game_information_rate_age,
-                        20.toString(),
-                        60.toString()
+                        grupo.rangeIdade?.minAge.toString(),
+                        grupo.rangeIdade?.maxAge.toString(),
                     )
 
                     setSoccerPlayersInfos(uiState)
