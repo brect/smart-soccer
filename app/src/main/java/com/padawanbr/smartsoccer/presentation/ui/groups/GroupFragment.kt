@@ -17,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
@@ -38,7 +39,7 @@ class GroupFragment : Fragment(), MenuProvider {
 
     private val args by navArgs<GroupFragmentArgs>()
 
-    var isRotate: Boolean = false
+    private var isRotate: Boolean = false
 
     lateinit var grupo: GrupoComJogadoresItem
 
@@ -104,8 +105,8 @@ class GroupFragment : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initPlayersInfoAdapter()
-        initCompetitionAdapter()
+        initRecyclerView(binding.recyclerViewItemCompetition, competitionsAdapter, LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
+        initRecyclerView(binding.recyclerViewSoccerPlayersInfo, playersInfoAdapter, LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
 
         val menuHost = requireActivity()
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
@@ -117,15 +118,6 @@ class GroupFragment : Fragment(), MenuProvider {
         configureFabMoreOptions()
         fabAddSoccerPlayerOnClick()
         fabCreateQuickCompetitionOnClick()
-
-
-//        binding.imageViewCompetitionsArrow.setOnClickListener {
-//            Toast.makeText(
-//                context,
-//                "imageViewCompetitionsArrow",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
 
         observeUiState()
     }
@@ -142,19 +134,17 @@ class GroupFragment : Fragment(), MenuProvider {
                 }
 
                 GroupViewModel.UiState.Loading -> {
+                    binding.flipperItemCompetition.displayedChild = FLIPPER_CHILD_COMPETITION_EMPTY
                     competitionsAdapter.submitList(emptyList())
-
-                    Toast.makeText(
-                        context,
-                        "CreateGroupViewModel.UiState.Loading",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
 
                 is GroupViewModel.UiState.Success -> {
                     grupo = uiState.grupo
 
-                    competitionsAdapter.submitList(grupo.torneios)
+                    if (grupo.torneios?.size!! > 0) {
+                        binding.flipperItemCompetition.displayedChild = FLIPPER_CHILD_COMPETITION_SUCCESS
+                        competitionsAdapter.submitList(grupo.torneios)
+                    }
 
                     binding.textViewGroupTeamName.text = uiState.grupo.nome
                     binding.textViewGroupDate.text = "${grupo.diaDoJogo}"
@@ -193,55 +183,39 @@ class GroupFragment : Fragment(), MenuProvider {
         val jogadoresDisponiveis = uiState.grupo.jogadoresDisponiveis
         val jogadoresNoDM = uiState.grupo.jogadoresNoDM
         val mediaJogadores = uiState.grupo.mediaJogadores
-        val jogadoresGrupo = (jogadoresNoDM?.let {
-            jogadoresDisponiveis?.plus(
-                it
-            )
-        })
+        val jogadoresGrupo = jogadoresNoDM?.let { jogadoresDisponiveis?.plus(it) }
 
-        val soccerPlayersInfo = arrayListOf<GroupoJogadoresInfo>()
-
-        soccerPlayersInfo.add(
-            GroupoJogadoresInfo(
-                R.drawable.ic_round_access_time_filled_24,
-                "$jogadoresDisponiveis jogadores dispoíveis"
-            )
-        )
-
-        soccerPlayersInfo.add(
-            GroupoJogadoresInfo(
-                R.drawable.ic_round_access_time_filled_24,
-                "$jogadoresNoDM jogadores no departamento médico"
-            )
-        )
-
-        soccerPlayersInfo.add(
-            GroupoJogadoresInfo(
-                R.drawable.ic_round_access_time_filled_24,
-                "A média de habilidade do grupo é de $mediaJogadores"
-            )
-        )
-
-        soccerPlayersInfo.add(
-            GroupoJogadoresInfo(
-                R.drawable.ic_round_access_time_filled_24,
-                "Possui $jogadoresGrupo cadastrados no grupo"
-            )
-        )
+        val soccerPlayersInfo = createSoccerPlayerInfoList(jogadoresDisponiveis, jogadoresNoDM, mediaJogadores, jogadoresGrupo)
 
         playersInfoAdapter.submitList(soccerPlayersInfo)
     }
 
-    private fun initPlayersInfoAdapter() {
-        binding.recyclerViewSoccerPlayersInfo.run {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = playersInfoAdapter
-        }
+    private fun createSoccerPlayerInfoList(
+        jogadoresDisponiveis: Int?,
+        jogadoresNoDM: Int?,
+        mediaJogadores: Float?,
+        jogadoresGrupo: Int?
+    ): List<GroupoJogadoresInfo> {
+        return arrayListOf(
+            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "$jogadoresDisponiveis jogadores disponíveis"),
+            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "$jogadoresNoDM jogadores no departamento médico"),
+            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "A média de habilidade do grupo é de $mediaJogadores"),
+            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "Possui $jogadoresGrupo jogadores cadastrados no grupo")
+        )
     }
 
-    private fun initCompetitionAdapter() {
-        binding.recyclerViewItemCompetition.run {
-            adapter = competitionsAdapter
+    private fun createGroupJogadoresInfo(icon: Int, description: String): GroupoJogadoresInfo {
+        return GroupoJogadoresInfo(icon, description)
+    }
+
+    private fun initRecyclerView(
+        recyclerView: RecyclerView,
+        adapter: RecyclerView.Adapter<*>,
+        layoutManager: RecyclerView.LayoutManager? = null
+    ) {
+        recyclerView.run {
+            this.layoutManager = layoutManager ?: this.layoutManager
+            this.adapter = adapter
         }
     }
 
@@ -297,9 +271,6 @@ class GroupFragment : Fragment(), MenuProvider {
         init(binding.textViewCreateCompetition)
     }
 
-    private fun setToolbarTitle(title: String) {
-        (activity as AppCompatActivity).supportActionBar?.title = title
-    }
 
     private fun showFabs() {
         showIn(binding.fabAddSoccerPlayer)
@@ -317,6 +288,11 @@ class GroupFragment : Fragment(), MenuProvider {
         showOut(binding.textViewCreateQuickCompetition)
         showOut(binding.fabCreateCompetition)
         showOut(binding.textViewCreateCompetition)
+    }
+
+
+    private fun setToolbarTitle(title: String) {
+        (activity as AppCompatActivity).supportActionBar?.title = title
     }
 
     override fun onDestroyView() {
@@ -350,6 +326,12 @@ class GroupFragment : Fragment(), MenuProvider {
             else -> false
         }
     }
+
+    companion object {
+        private const val FLIPPER_CHILD_COMPETITION_EMPTY = 0
+        private const val FLIPPER_CHILD_COMPETITION_SUCCESS = 1
+    }
+
 
 }
 
