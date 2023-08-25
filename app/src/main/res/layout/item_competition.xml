@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="6dp"
-    android:elevation="2dp"
     android:background="@drawable/background_rounded_border"
+    android:elevation="2dp"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,11 +61,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:backgroundTint="#646464"
         android:orientation="vertical"
         android:paddingHorizontal="16dp">
 
         <TextView
+            android:id="@+id/textView_qtd_teams_competition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
@@ -75,6 +77,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/textView_qtd_players_competition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"

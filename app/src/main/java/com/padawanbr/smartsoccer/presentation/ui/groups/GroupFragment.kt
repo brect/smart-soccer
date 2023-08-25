@@ -25,8 +25,11 @@ import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateView
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showOut
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
 import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
 import dagger.hilt.android.AndroidEntryPoint
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
 @AndroidEntryPoint
@@ -199,7 +202,7 @@ class GroupFragment : Fragment(), MenuProvider {
         return arrayListOf(
             createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "$jogadoresDisponiveis jogadores disponíveis"),
             createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "$jogadoresNoDM jogadores no departamento médico"),
-            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "A média de habilidade do grupo é de $mediaJogadores"),
+            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "A média de habilidade do grupo é de ${mediaJogadores?.roundToTwoDecimalPlaces()}"),
             createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "Possui $jogadoresGrupo jogadores cadastrados no grupo")
         )
     }
@@ -334,4 +337,3 @@ class GroupFragment : Fragment(), MenuProvider {
 
 
 }
-

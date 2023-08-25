@@ -12,6 +12,7 @@ import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.core.domain.model.Time
 import com.padawanbr.smartsoccer.databinding.ItemParentCompetitionTeamBinding
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation
+import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
 
 class CompetitionTeamParentAdapter(
     private val times: List<Time>
@@ -57,7 +58,7 @@ class CompetitionTeamParentAdapter(
             competitionTeam.text = time.nome
 
             teamCompetitionTeamQtdPlayers.text = time.jogadores.size.toString()
-            teamCompetitionTeamAvgAbilityTeam.text = time.mediaHabilidades.toString()
+            teamCompetitionTeamAvgAbilityTeam.text = time.mediaHabilidades.roundToTwoDecimalPlaces().toString()
             teamCompetitionTeamAvgAge.text = "${time.mediaIdades} anos"
             teamCompetitionTeamTeamForce.text = time.forcaTime.toString()
 
