@@ -1,26 +1,36 @@
 package com.padawanbr.smartsoccer.presentation.common
 
 import android.app.Activity
-import android.content.Context
 import android.content.pm.PackageManager
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 
-open class PermissionsUtil {
+object PermissionsUtil {
 
-    companion object {
-        const val WRITE_EXTERNAL_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE"
-        const val REQUEST_WRITE_EXTERNAL_STORAGE_CODE = 1
-        const val REQUEST_PICK_IMAGE = 1
-    }
+    const val WRITE_EXTERNAL_STORAGE = "android.permission.WRITE_EXTERNAL_STORAGE"
+    const val REQUEST_EXTERNAL_STORAGE_CODE = 1
+    const val REQUEST_PICK_IMAGE = 1
+
+    val permissionsExternalStorage = arrayOf(
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+    )
 
     fun checkSelfPermission(context: Activity, permission: String) =
         ContextCompat.checkSelfPermission(
             context,
             permission
         ) == PackageManager.PERMISSION_DENIED
+
+    fun checkPermissions(context: Activity, permissions: Array<String>): Boolean {
+        for (permission in permissions) {
+            if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_DENIED) {
+                return false
+            }
+        }
+        return true
+    }
 
     fun requestPermissionIfDanied(
         context: Activity,
@@ -29,4 +39,9 @@ open class PermissionsUtil {
     ) {
         ActivityCompat.requestPermissions(context, arrayOf(permission), requestCode)
     }
+
+    fun requestPermissionsIfDanied(activity: Activity, permissions: Array<String>, requestCode: Int) {
+        ActivityCompat.requestPermissions(activity, permissions, requestCode)
+    }
+
 }

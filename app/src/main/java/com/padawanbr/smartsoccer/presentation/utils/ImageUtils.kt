@@ -1,5 +1,6 @@
 package com.padawanbr.smartsoccer.presentation.utils
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -7,6 +8,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.LruCache
 import android.view.View
 import android.widget.Toast
@@ -78,14 +80,14 @@ object ImageUtils {
                 if (drawingCache != null) {
                     bitmaCache.put(i.toString(), drawingCache)
                 }
-//                holder.itemView.setDrawingCacheEnabled(false);
-//                holder.itemView.destroyDrawingCache();
+
                 height += holder.itemView.measuredHeight
             }
             bigBitmap = Bitmap.createBitmap(view.measuredWidth, height, Bitmap.Config.ARGB_8888)
-//            bigBitmap = Bitmap.createBitmap(view.drawingCache)
+
             val bigCanvas = Canvas(bigBitmap)
             bigCanvas.drawColor(Color.WHITE)
+
             for (i in 0 until size) {
                 val bitmap: Bitmap = bitmaCache.get(i.toString())
                 bigCanvas.drawBitmap(bitmap, 0f, iHeight.toFloat(), paint)
@@ -95,6 +97,93 @@ object ImageUtils {
         }
 
         return bigBitmap
+    }
+
+    fun getBitmapsFromRecyclerView(view: RecyclerView): List<Bitmap> {
+        val adapter = view.adapter
+        val bitmaps = mutableListOf<Bitmap>()
+
+        if (adapter != null) {
+            val size = adapter.itemCount
+            val paint = Paint()
+
+            for (i in 0 until size) {
+                val holder = adapter.createViewHolder(view, adapter.getItemViewType(i))
+                adapter.onBindViewHolder(holder, i)
+
+                val itemView = holder.itemView
+                itemView.measure(
+                    View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                )
+                itemView.layout(
+                    0,
+                    0,
+                    itemView.measuredWidth,
+                    itemView.measuredHeight
+                )
+
+                itemView.isDrawingCacheEnabled = true
+                itemView.buildDrawingCache(true)
+
+                val drawingCache = itemView.drawingCache
+                if (drawingCache != null) {
+                    bitmaps.add(Bitmap.createBitmap(drawingCache))
+                }
+
+                itemView.isDrawingCacheEnabled = false
+            }
+        }
+
+        return bitmaps
+    }
+
+    fun saveBitmapsToStorage(context: Context, bitmaps: List<Bitmap>): List<Uri> {
+        val uriList = mutableListOf<Uri>()
+
+        for ((index, bitmap) in bitmaps.withIndex()) {
+            val imagefolder = File(context?.cacheDir, "images")
+            imagefolder.mkdirs()
+
+            val file = File(imagefolder, "shared_image_$index.png")
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+
+            val uri = FileProvider.getUriForFile(
+                context,
+                "com.anni.shareimage.fileprovider",
+                file
+            )
+            uriList.add(uri)
+        }
+
+        return uriList
+    }
+
+    fun saveBitmapsToGallery(context: Context, bitmaps: List<Bitmap>, filePrefixName: String): List<Uri> {
+        val uriList = mutableListOf<Uri>()
+
+        for ((index, bitmap) in bitmaps.withIndex()) {
+            val contentResolver = context.contentResolver
+            val contentValues = ContentValues().apply {
+                put(MediaStore.Images.Media.DISPLAY_NAME, "shared_image_${filePrefixName}_${index}.png")
+                put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+            }
+
+            val uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+            uri?.let {
+                val outputStream = contentResolver.openOutputStream(it)
+                outputStream?.use { stream ->
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                }
+                uriList.add(uri)
+            }
+        }
+
+        return uriList
     }
 
     fun shareImageAndText(context: Context, bitmap: Bitmap) {
@@ -122,8 +211,6 @@ object ImageUtils {
         // calling startactivity() to share
         context.startActivity(Intent.createChooser(intent, "Share Via"))
     }
-
-
 
     private fun getImageToShare(context: Context, bitmap: Bitmap): Uri? {
         val imageFolder = File(context.cacheDir, "images")

@@ -1,16 +1,7 @@
 package com.padawanbr.smartsoccer.presentation.ui.competition
 
-import android.Manifest.permission.READ_MEDIA_IMAGES
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.net.Uri
 import android.os.Bundle
-import android.util.LruCache
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -18,22 +9,26 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.FileProvider
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padawanbr.smartsoccer.R
+import com.padawanbr.smartsoccer.core.domain.model.Torneio
+import com.padawanbr.smartsoccer.databinding.BottonsheetSharedTeamBinding
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsCompetitionBinding
 import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil
-import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.Companion.REQUEST_WRITE_EXTERNAL_STORAGE_CODE
+import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.REQUEST_EXTERNAL_STORAGE_CODE
+import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.checkPermissions
+import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.requestPermissionsIfDanied
+import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getBitmapsFromRecyclerView
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getScreenshotFromRecyclerView
+import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.saveBitmapsToGallery
+import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.saveBitmapsToStorage
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.shareImageAndText
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
-import java.io.FileOutputStream
 
 
 @AndroidEntryPoint
@@ -46,6 +41,11 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
 
     private val args by navArgs<DetailsCompetitionFragmentArgs>()
 
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var _bottomSheetBinding: BottonsheetSharedTeamBinding? = null
+    private val bottomSheetBinding: BottonsheetSharedTeamBinding get() = _bottomSheetBinding!!
+
+    lateinit var torneio: Torneio
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +65,8 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         observeUiState()
+
+        bindingBottomSharedCompetitions()
 
         viewModel.getCompetition(args.competitionId)
     }
@@ -91,14 +93,9 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
                 is DetailsCompetitionViewModel.UiState.Success -> {
                     binding.recyclerViewDetailsSoccerTeams.run {
                         setHasFixedSize(true)
-                        adapter = CompetitionTeamParentAdapter(uiState.torneio.times)
+                        torneio = uiState.torneio
+                        adapter = CompetitionTeamParentAdapter(torneio.times)
                     }
-
-//                    Toast.makeText(
-//                        context,
-//                        "DetailsCompetitionViewModel.UiState.Success",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
                 }
             }
         }
@@ -115,34 +112,51 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         menu.findItem(R.id.action_share_teams).icon?.setTint(requireContext().getColor(R.color.md_theme_light_onPrimaryContainer))
     }
 
+    fun bindingBottomSharedCompetitions() {
+        // Crie um novo BottomSheetDialog aqui
+        bottomSheetDialog = BottomSheetDialog(requireContext())
+
+        // Inflate your custom layout with ViewBinding
+        _bottomSheetBinding = BottonsheetSharedTeamBinding.inflate(layoutInflater)
+
+        // Set the custom layout as the content view of the BottomSheetDialog
+        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+
+        val recyclerView = binding.recyclerViewDetailsSoccerTeams
+
+        bottomSheetBinding.buttonSharedTeams.setOnClickListener {
+            val createBitmapFromView = getScreenshotFromRecyclerView(recyclerView)
+            shareImageAndText(requireContext(), createBitmapFromView)
+
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetBinding.buttonSaveTeams.setOnClickListener {
+            val bitmapsFromRecyclerView = getBitmapsFromRecyclerView(recyclerView)
+            saveBitmapsToGallery(requireContext(), bitmapsFromRecyclerView, torneio.id)
+
+            bottomSheetDialog.dismiss()
+        }
+    }
+
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.action_share_teams -> {
+                when (checkPermissions(requireActivity(), PermissionsUtil.permissionsExternalStorage)) {
+                    true -> {
+                        requestPermissionsIfDanied(
+                            requireActivity(),
+                            PermissionsUtil.permissionsExternalStorage,
+                            REQUEST_EXTERNAL_STORAGE_CODE
+                        )
+                    }
 
-
-                activity?.let {
-                    if (it != null) {
-                        val permissionsUtil = PermissionsUtil()
-                        if (permissionsUtil.checkSelfPermission(it, READ_MEDIA_IMAGES)
-                        ) {
-                            // Requesting the permission
-                            permissionsUtil.requestPermissionIfDanied(
-                                it,
-                                READ_MEDIA_IMAGES,
-                                REQUEST_WRITE_EXTERNAL_STORAGE_CODE
-                            )
-                        } else {
-
-                            val recyclerView = binding.recyclerViewDetailsSoccerTeams
-
-                            val createBitmapFromView = getScreenshotFromRecyclerView(recyclerView)
-                            shareImageAndText(requireContext(), createBitmapFromView)
-                        }
+                    false -> {
+                        bottomSheetDialog.show()
                     }
                 }
                 true
             }
-
             else -> false
         }
     }
@@ -154,7 +168,7 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE_CODE) {
+        if (requestCode == REQUEST_EXTERNAL_STORAGE_CODE) {
 
             // Checking whether user granted the permission or not.
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

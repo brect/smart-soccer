@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_top_rounded_border"
+    android:padding="24dp">
+
+    <View
+        android:id="@+id/drag_handle"
+        android:layout_width="80dp"
+        android:layout_height="4dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/drag_handle_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_excludeGroup_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Compartilhamento"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/text_excludeGroup_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_excludeGroup_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:text="Você poderá compartilhar ou salvar direto em seu dispositivo.\n\nVocê deseja compartilhar os times gerados?"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/flipper_createTeam_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_excludeGroup_title" />
+
+    <ViewFlipper
+        android:id="@+id/flipper_createTeam_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/flipper_save_teams"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_excludeGroup_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_shared_teams"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:text="compartilhar times"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            app:icon="@drawable/ic_round_share_24"
+            app:iconPadding="8dp" />
+
+        <ProgressBar
+            android:id="@+id/progress_shared_teams"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center" />
+
+    </ViewFlipper>
+
+    <ViewFlipper
+        android:id="@+id/flipper_save_teams"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flipper_createTeam_button">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_save_teams"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:text="salvar na galeria"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            app:icon="@drawable/ic_round_save_alt_24"
+            app:iconPadding="8dp" />
+
+        <ProgressBar
+            android:id="@+id/progress_createTeam"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center" />
+
+    </ViewFlipper>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
