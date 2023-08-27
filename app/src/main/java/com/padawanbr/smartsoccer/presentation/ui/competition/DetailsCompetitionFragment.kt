@@ -26,7 +26,7 @@ import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.requestPerm
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getBitmapsFromRecyclerView
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getScreenshotFromRecyclerView
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.saveBitmapsToGallery
-import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.saveBitmapsToStorage
+import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.shareBitmapList
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.shareImageAndText
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -125,8 +125,10 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         val recyclerView = binding.recyclerViewDetailsSoccerTeams
 
         bottomSheetBinding.buttonSharedTeams.setOnClickListener {
-            val createBitmapFromView = getScreenshotFromRecyclerView(recyclerView)
-            shareImageAndText(requireContext(), createBitmapFromView)
+//            val createBitmapFromView = getScreenshotFromRecyclerView(recyclerView)
+//            shareImageAndText(requireContext(), createBitmapFromView)
+            val bitmapsFromRecyclerView = getBitmapsFromRecyclerView(recyclerView)
+            shareBitmapList(requireContext(), bitmapsFromRecyclerView)
 
             bottomSheetDialog.dismiss()
         }

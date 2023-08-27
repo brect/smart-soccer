@@ -16,7 +16,7 @@ import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
 import java.io.FileOutputStream
-
+import java.util.UUID
 
 
 //    https://medium.com/@atifsayings/get-save-bitmap-from-any-ui-android-studio-kotlin-cd9ea422eb7c
@@ -60,7 +60,7 @@ object ImageUtils {
 
             // Use 1/8th of the available memory for this memory cache.
             val cacheSize = maxMemory / 2
-            val bitmaCache: LruCache<String, Bitmap> = LruCache(cacheSize)
+            val bitmapCache: LruCache<String, Bitmap> = LruCache(cacheSize)
             for (i in 0 until size) {
                 val holder = adapter.createViewHolder(view, adapter.getItemViewType(i))
                 adapter.onBindViewHolder(holder, i)
@@ -78,7 +78,7 @@ object ImageUtils {
                 holder.itemView.buildDrawingCache()
                 val drawingCache = holder.itemView.drawingCache
                 if (drawingCache != null) {
-                    bitmaCache.put(i.toString(), drawingCache)
+                    bitmapCache.put(i.toString(), drawingCache)
                 }
 
                 height += holder.itemView.measuredHeight
@@ -89,7 +89,7 @@ object ImageUtils {
             bigCanvas.drawColor(Color.WHITE)
 
             for (i in 0 until size) {
-                val bitmap: Bitmap = bitmaCache.get(i.toString())
+                val bitmap: Bitmap = bitmapCache.get(i.toString())
                 bigCanvas.drawBitmap(bitmap, 0f, iHeight.toFloat(), paint)
                 iHeight += bitmap.height
                 bitmap.recycle()
@@ -162,7 +162,7 @@ object ImageUtils {
         return uriList
     }
 
-    fun saveBitmapsToGallery(context: Context, bitmaps: List<Bitmap>, filePrefixName: String): List<Uri> {
+    fun saveBitmapsToGallery(context: Context, bitmaps: List<Bitmap>, filePrefixName: String = UUID.randomUUID().toString()): List<Uri> {
         val uriList = mutableListOf<Uri>()
 
         for ((index, bitmap) in bitmaps.withIndex()) {
@@ -211,6 +211,25 @@ object ImageUtils {
         // calling startactivity() to share
         context.startActivity(Intent.createChooser(intent, "Share Via"))
     }
+
+    fun shareBitmapList(context: Context, bitmaps: List<Bitmap>) {
+        val uris = saveBitmapsToGallery(context, bitmaps)
+        val intent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
+            putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
+            type = "image/*"
+            putExtra(Intent.EXTRA_TEXT, "Sharing Images")
+            putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+        }
+
+        context.grantUriPermission(
+            "com.package.name.of.target.app", // Substitua pelo pacote do aplicativo de destino
+            uris[0], // Use uma das URIs da lista, dependendo do seu requisito
+            Intent.FLAG_GRANT_READ_URI_PERMISSION
+        )
+
+        context.startActivity(Intent.createChooser(intent, "Share Via"))
+    }
+
 
     private fun getImageToShare(context: Context, bitmap: Bitmap): Uri? {
         val imageFolder = File(context.cacheDir, "images")
