@@ -5,6 +5,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 <item
     android:id="@+id/action_share_teams"
     android:icon="@drawable/ic_round_share_24"
+    android:iconTint="?attr/colorOnPrimaryContainer"
     android:contentDescription="@string/menu_edit"
     android:title="@string/menu_edit"
     android:orderInCategory="100"
