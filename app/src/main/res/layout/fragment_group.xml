@@ -24,19 +24,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="2dp"
                 android:background="@drawable/background_bottom_rounded_border"
+                android:elevation="2dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/imageView_group_profile"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
-                    android:elevation="2dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/background_circle_border_stroke"
                     android:clipToOutline="true"
+                    android:elevation="2dp"
                     android:scaleType="centerCrop" />
 
                 <TextView
@@ -416,7 +417,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:background="@color/md_theme_light_onSecondary"
         android:text="Gerenciar jogadores"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/fab_add_soccerPlayer"
         app:layout_constraintEnd_toStartOf="@+id/fab_add_soccerPlayer"
         app:layout_constraintTop_toTopOf="@+id/fab_add_soccerPlayer" />
@@ -437,31 +440,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:background="@color/md_theme_light_onSecondary"
         android:text="Sorteio rápido"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/fab_createQuickCompetition"
         app:layout_constraintEnd_toStartOf="@+id/fab_createQuickCompetition"
         app:layout_constraintTop_toTopOf="@+id/fab_createQuickCompetition" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_createCompetition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@+id/fab_createQuickCompetition"
-        app:layout_constraintEnd_toEndOf="@+id/fab_createQuickCompetition"
-        app:layout_constraintStart_toStartOf="@+id/fab_createQuickCompetition"
-        app:srcCompat="@drawable/ic_add_round" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab_createCompetition"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="24dp"-->
+<!--        app:fabSize="mini"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/fab_createQuickCompetition"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/fab_createQuickCompetition"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/fab_createQuickCompetition"-->
+<!--        app:srcCompat="@drawable/ic_add_round" />-->
 
-    <TextView
-        android:id="@+id/textView_createCompetition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="Criar torneio"
-        app:layout_constraintBottom_toBottomOf="@+id/fab_createCompetition"
-        app:layout_constraintEnd_toStartOf="@+id/fab_createCompetition"
-        app:layout_constraintTop_toTopOf="@+id/fab_createCompetition" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView_createCompetition"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:background="@color/md_theme_light_onSecondary"-->
+<!--        android:text="Criar torneio"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/fab_createCompetition"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/fab_createCompetition"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/fab_createCompetition" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

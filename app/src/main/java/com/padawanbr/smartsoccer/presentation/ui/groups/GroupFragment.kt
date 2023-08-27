@@ -1,5 +1,12 @@
 package com.padawanbr.smartsoccer.presentation.ui.groups
 
+import ImagePickerUtils.PICK_IMAGE_REQUEST
+import ImagePickerUtils.loadImageFromPreferences
+import ImagePickerUtils.openGallery
+import ImagePickerUtils.saveImageUri
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,8 +35,6 @@ import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
 import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
 import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
 import dagger.hilt.android.AndroidEntryPoint
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 
 @AndroidEntryPoint
@@ -108,8 +113,16 @@ class GroupFragment : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView(binding.recyclerViewItemCompetition, competitionsAdapter, LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
-        initRecyclerView(binding.recyclerViewSoccerPlayersInfo, playersInfoAdapter, LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
+        initRecyclerView(
+            binding.recyclerViewItemCompetition,
+            competitionsAdapter,
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        )
+        initRecyclerView(
+            binding.recyclerViewSoccerPlayersInfo,
+            playersInfoAdapter,
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        )
 
         val menuHost = requireActivity()
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
@@ -123,6 +136,10 @@ class GroupFragment : Fragment(), MenuProvider {
         fabCreateQuickCompetitionOnClick()
 
         observeUiState()
+
+        binding.imageViewGroupProfile.setOnClickListener {
+            openGallery(this)
+        }
     }
 
     private fun observeUiState() {
@@ -144,8 +161,15 @@ class GroupFragment : Fragment(), MenuProvider {
                 is GroupViewModel.UiState.Success -> {
                     grupo = uiState.grupo
 
+                    loadImageFromPreferences(
+                        requireContext(),
+                        grupo.id,
+                        binding.imageViewGroupProfile
+                    )
+
                     if (grupo.torneios?.size!! > 0) {
-                        binding.flipperItemCompetition.displayedChild = FLIPPER_CHILD_COMPETITION_SUCCESS
+                        binding.flipperItemCompetition.displayedChild =
+                            FLIPPER_CHILD_COMPETITION_SUCCESS
                         competitionsAdapter.submitList(grupo.torneios)
                     }
 
@@ -188,7 +212,12 @@ class GroupFragment : Fragment(), MenuProvider {
         val mediaJogadores = uiState.grupo.mediaJogadores
         val jogadoresGrupo = jogadoresNoDM?.let { jogadoresDisponiveis?.plus(it) }
 
-        val soccerPlayersInfo = createSoccerPlayerInfoList(jogadoresDisponiveis, jogadoresNoDM, mediaJogadores, jogadoresGrupo)
+        val soccerPlayersInfo = createSoccerPlayerInfoList(
+            jogadoresDisponiveis,
+            jogadoresNoDM,
+            mediaJogadores,
+            jogadoresGrupo
+        )
 
         playersInfoAdapter.submitList(soccerPlayersInfo)
     }
@@ -200,10 +229,22 @@ class GroupFragment : Fragment(), MenuProvider {
         jogadoresGrupo: Int?
     ): List<GroupoJogadoresInfo> {
         return arrayListOf(
-            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "$jogadoresDisponiveis jogadores disponíveis"),
-            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "$jogadoresNoDM jogadores no departamento médico"),
-            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "A média de habilidade do grupo é de ${mediaJogadores?.roundToTwoDecimalPlaces()}"),
-            createGroupJogadoresInfo(R.drawable.ic_round_access_time_filled_24, "Possui $jogadoresGrupo jogadores cadastrados no grupo")
+            createGroupJogadoresInfo(
+                R.drawable.ic_round_access_time_filled_24,
+                "$jogadoresDisponiveis jogadores disponíveis"
+            ),
+            createGroupJogadoresInfo(
+                R.drawable.ic_round_access_time_filled_24,
+                "$jogadoresNoDM jogadores no departamento médico"
+            ),
+            createGroupJogadoresInfo(
+                R.drawable.ic_round_access_time_filled_24,
+                "A média de habilidade do grupo é de ${mediaJogadores?.roundToTwoDecimalPlaces()}"
+            ),
+            createGroupJogadoresInfo(
+                R.drawable.ic_round_access_time_filled_24,
+                "Possui $jogadoresGrupo jogadores cadastrados no grupo"
+            )
         )
     }
 
@@ -270,8 +311,6 @@ class GroupFragment : Fragment(), MenuProvider {
         init(binding.textViewAddSoccerPlayer)
         init(binding.fabCreateQuickCompetition)
         init(binding.textViewCreateQuickCompetition)
-        init(binding.fabCreateCompetition)
-        init(binding.textViewCreateCompetition)
     }
 
 
@@ -280,8 +319,6 @@ class GroupFragment : Fragment(), MenuProvider {
         showIn(binding.textViewAddSoccerPlayer)
         showIn(binding.fabCreateQuickCompetition)
         showIn(binding.textViewCreateQuickCompetition)
-        showIn(binding.fabCreateCompetition)
-        showIn(binding.textViewCreateCompetition)
     }
 
     private fun hideFabs() {
@@ -289,8 +326,6 @@ class GroupFragment : Fragment(), MenuProvider {
         showOut(binding.textViewAddSoccerPlayer)
         showOut(binding.fabCreateQuickCompetition)
         showOut(binding.textViewCreateQuickCompetition)
-        showOut(binding.fabCreateCompetition)
-        showOut(binding.textViewCreateCompetition)
     }
 
 
@@ -327,6 +362,16 @@ class GroupFragment : Fragment(), MenuProvider {
             }
 
             else -> false
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+            val imageUri: Uri = data.data ?: return
+
+            saveImageUri(requireContext(), imageUri, grupo.id)
+            binding.imageViewGroupProfile.setImageURI(imageUri)
         }
     }
 
