@@ -18,7 +18,7 @@
         android:layout_marginHorizontal="4dp"
         android:gravity="center"
         android:padding="8dp"
-        android:src="@drawable/ic_round_access_time_filled_24"
+        android:src="@drawable/ic_round_info_24"
         android:text="4,5"
         android:textAlignment="center"
         android:textColor="@color/md_theme_light_onSecondary"

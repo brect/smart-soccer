@@ -259,19 +259,19 @@ class GroupFragment : Fragment(), MenuProvider {
     ): List<GroupoJogadoresInfo> {
         return arrayListOf(
             createGroupJogadoresInfo(
-                R.drawable.ic_round_access_time_filled_24,
+                R.drawable.ic_round_check_box_24,
                 "$jogadoresDisponiveis jogadores disponíveis"
             ),
             createGroupJogadoresInfo(
-                R.drawable.ic_round_access_time_filled_24,
+                R.drawable.ic_round_healing_24,
                 "$jogadoresNoDM jogadores no departamento médico"
             ),
             createGroupJogadoresInfo(
-                R.drawable.ic_round_access_time_filled_24,
+                R.drawable.ic_round_ssid_chart_24,
                 "A média de habilidade do grupo é de ${mediaJogadores?.roundToTwoDecimalPlaces()}"
             ),
             createGroupJogadoresInfo(
-                R.drawable.ic_round_access_time_filled_24,
+                R.drawable.ic_sharp_groups_24,
                 "Possui $jogadoresGrupo jogadores cadastrados no grupo"
             )
         )
