@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateCompetitionBinding
+import com.padawanbr.smartsoccer.presentation.ui.groups.SharedGroupsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +21,7 @@ class QuickCompetitionFragment : BottomSheetDialogFragment() {
     private val binding: BottonsheetCreateCompetitionBinding get() = _binding!!
 
     private val viewModel: QuickCompetitionViewModel by viewModels()
+    private val sharedViewModel: SharedGroupsViewModel by activityViewModels()
 
     private val args by navArgs<QuickCompetitionFragmentArgs>()
 
@@ -74,11 +77,7 @@ class QuickCompetitionFragment : BottomSheetDialogFragment() {
                     ).show()
                 }
                 QuickCompetitionViewModel.UiState.Success -> {
-                    Toast.makeText(
-                        context,
-                        "CompetitionViewModel.UiState.Success",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    sharedViewModel.updateGroups(true)
                     findNavController().popBackStack()
                 }
             }

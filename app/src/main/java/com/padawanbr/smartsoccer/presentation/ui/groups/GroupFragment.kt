@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
@@ -50,6 +51,7 @@ class GroupFragment : Fragment(), MenuProvider {
     private val binding get() = _binding!!
 
     private val viewModel: GroupViewModel by viewModels()
+    private val sharedViewModel: SharedGroupsViewModel by activityViewModels()
 
     private val args by navArgs<GroupFragmentArgs>()
 
@@ -151,6 +153,7 @@ class GroupFragment : Fragment(), MenuProvider {
         bindingBottomSharedCompetitions()
 
         observeUiState()
+        observeSharedUiState()
 
         binding.imageViewGroupProfile.setOnClickListener {
             openGallery(this)
@@ -219,9 +222,16 @@ class GroupFragment : Fragment(), MenuProvider {
                 }
 
                 GroupViewModel.UiState.SuccessDeleteCompetition -> {
+                    getGroupItemView()
                     showShortToast("Competição deletada com sucesso")
                 }
             }
+        }
+    }
+
+    private fun observeSharedUiState() {
+        sharedViewModel.updateGroups.observe(viewLifecycleOwner) {
+            getGroupItemView()
         }
     }
 
@@ -403,12 +413,16 @@ class GroupFragment : Fragment(), MenuProvider {
     override fun onResume() {
         super.onResume()
 
+        getGroupItemView()
+
+        Log.i("GROUPFRAGMENT", "onResume")
+    }
+
+    private fun getGroupItemView() {
         var groupId = args.detalheGrupoItemViewArgs?.id
         if (groupId != null) {
             viewModel.getGroupById(groupId)
         }
-
-        Log.i("GROUPFRAGMENT", "onResume")
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
