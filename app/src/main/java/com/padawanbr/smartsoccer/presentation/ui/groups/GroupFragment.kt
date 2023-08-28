@@ -15,6 +15,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
@@ -25,7 +26,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padawanbr.smartsoccer.R
+import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeCompetitionBinding
 import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateView
@@ -33,6 +37,7 @@ import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showOut
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
 import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
+import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
 import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,11 +56,16 @@ class GroupFragment : Fragment(), MenuProvider {
 
     lateinit var grupo: GrupoComJogadoresItem
 
+    private lateinit var bottomSheetDialogExcludeCompetition: BottomSheetDialog
+    private var _bottonsheetExcludeCompetitionBinding: BottonsheetExcludeCompetitionBinding? = null
+    private val bottonsheetExcludeCompetitionBinding: BottonsheetExcludeCompetitionBinding get() = _bottonsheetExcludeCompetitionBinding!!
+
+    private var competitionItemClicked: CompetitionItem? = null
+
     private val competitionsAdapter by lazy {
         getCommonAdapterOf(
             { ItemCompetitionViewHolder.create(it) },
             {
-
                 val directions =
                     GroupFragmentDirections.actionDetailsGroupFragmentToDetailsCompetitionFragment()
 
@@ -69,12 +79,13 @@ class GroupFragment : Fragment(), MenuProvider {
                     Toast.LENGTH_SHORT
                 ).show()
             },
-            {
-                Toast.makeText(
-                    context,
-                    "competitionsAdapter itemLongClicked",
-                    Toast.LENGTH_SHORT
-                ).show()
+            { item ->
+
+                competitionItemClicked = item
+                bottonsheetExcludeCompetitionBinding.textExcludeCompetitionContent.text =
+                    context?.getString(R.string.exclude_competition, item.nome)
+
+                bottomSheetDialogExcludeCompetition.show()
             }
         )
     }
@@ -118,6 +129,7 @@ class GroupFragment : Fragment(), MenuProvider {
             competitionsAdapter,
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         )
+
         initRecyclerView(
             binding.recyclerViewSoccerPlayersInfo,
             playersInfoAdapter,
@@ -134,6 +146,8 @@ class GroupFragment : Fragment(), MenuProvider {
         configureFabMoreOptions()
         fabAddSoccerPlayerOnClick()
         fabCreateQuickCompetitionOnClick()
+
+        bindingBottomSharedCompetitions()
 
         observeUiState()
 
@@ -328,6 +342,44 @@ class GroupFragment : Fragment(), MenuProvider {
         showOut(binding.textViewCreateQuickCompetition)
     }
 
+
+    private fun bindingBottomSharedCompetitions() {
+        _bottonsheetExcludeCompetitionBinding =
+            BottonsheetExcludeCompetitionBinding.inflate(layoutInflater)
+
+        bottomSheetDialogExcludeCompetition =
+            createBottomSheetDialog(bottonsheetExcludeCompetitionBinding)
+
+        setButtonClickListener(
+            bottonsheetExcludeCompetitionBinding.buttonExcludeCompetition,
+            bottomSheetDialogExcludeCompetition,
+            competitionItemClicked?.id
+        ) { competitionId ->
+            onClickToExcludeCompetition(competitionId)
+        }
+    }
+
+    private fun onClickToExcludeCompetition(idTorneio: String?) {
+        viewModel.deleteCompetition(idTorneio)
+    }
+
+    private fun createBottomSheetDialog(binding: ViewBinding): BottomSheetDialog {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog.setContentView(binding.root)
+        return bottomSheetDialog
+    }
+
+    private fun <T> setButtonClickListener(
+        button: Button,
+        bottomSheetDialog: BottomSheetDialog?,
+        param: T?,
+        onClickListener: (param: T?) -> Unit
+    ) {
+        button.setOnClickListener {
+            onClickListener.invoke(param)
+            bottomSheetDialog?.dismiss()
+        }
+    }
 
     private fun setToolbarTitle(title: String) {
         (activity as AppCompatActivity).supportActionBar?.title = title

@@ -10,3 +10,10 @@ fun Fragment.showShortToast(@StringRes textResId: Int) =
         textResId,
         Toast.LENGTH_LONG
     ).show()
+
+fun Fragment.showShortToast(text: String) =
+    Toast.makeText(
+        requireContext(),
+        text,
+        Toast.LENGTH_LONG
+    ).show()

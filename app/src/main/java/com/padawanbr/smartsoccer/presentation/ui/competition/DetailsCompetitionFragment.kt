@@ -8,26 +8,31 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.padawanbr.alfred.app.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
+import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeCompetitionBinding
+import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
 import com.padawanbr.smartsoccer.databinding.BottonsheetSharedTeamBinding
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsCompetitionBinding
 import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil
 import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.REQUEST_EXTERNAL_STORAGE_CODE
 import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.checkPermissions
 import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.requestPermissionsIfDanied
+import com.padawanbr.smartsoccer.presentation.utils.BottomSheetDialogUtils
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getBitmapsFromRecyclerView
-import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getScreenshotFromRecyclerView
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.saveBitmapsToGallery
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.shareBitmapList
-import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.shareImageAndText
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -41,11 +46,10 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
 
     private val args by navArgs<DetailsCompetitionFragmentArgs>()
 
-    private lateinit var bottomSheetDialog: BottomSheetDialog
-    private var _bottomSheetBinding: BottonsheetSharedTeamBinding? = null
-    private val bottomSheetBinding: BottonsheetSharedTeamBinding get() = _bottomSheetBinding!!
+    private lateinit var bottomSheetDialogSharedTeam: BottomSheetDialog
 
     lateinit var torneio: Torneio
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,19 +79,11 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 is DetailsCompetitionViewModel.UiState.Error -> {
-//                    Toast.makeText(
-//                        context,
-//                        "DetailsCompetitionViewModel.UiState.Error",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+                    showShortToast("DetailsCompetitionViewModel.UiState.Error")
                 }
 
                 is DetailsCompetitionViewModel.UiState.Loading -> {
-//                    Toast.makeText(
-//                        context,
-//                        "DetailsCompetitionViewModel.UiState.Loading",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
+                    showShortToast("DetailsCompetitionViewModel.UiState.Loading")
                 }
 
                 is DetailsCompetitionViewModel.UiState.Success -> {
@@ -112,39 +108,80 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         menu.findItem(R.id.action_share_teams).icon?.setTint(requireContext().getColor(R.color.md_theme_light_onPrimaryContainer))
     }
 
-    fun bindingBottomSharedCompetitions() {
-        // Crie um novo BottomSheetDialog aqui
-        bottomSheetDialog = BottomSheetDialog(requireContext())
+    private fun createBottomSheetDialog(
+        binding: ViewBinding,
+        buttonIds: List<Int>,
+        onClickListener: () -> Unit
+    ): BottomSheetDialog {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog.setContentView(binding.root)
 
-        // Inflate your custom layout with ViewBinding
-        _bottomSheetBinding = BottonsheetSharedTeamBinding.inflate(layoutInflater)
+        setButtonClickListener(bottomSheetDialog, buttonIds, onClickListener)
 
-        // Set the custom layout as the content view of the BottomSheetDialog
-        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+        return bottomSheetDialog
+    }
 
+    private fun setButtonClickListener(
+        bottomSheetDialog: BottomSheetDialog,
+        buttonIds: List<Int>,
+        onClickListener: () -> Unit
+    ) {
+
+        for (buttonId in buttonIds) {
+            val button = bottomSheetDialog.findViewById<Button>(buttonId)
+            button?.setOnClickListener {
+                onClickListener()
+                bottomSheetDialog.dismiss()
+            }
+        }
+    }
+
+    private fun createBottomSheetDialog(binding: ViewBinding): BottomSheetDialog {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog.setContentView(binding.root)
+        return bottomSheetDialog
+    }
+
+
+    private fun setButtonClickListener(button: Button, bottomSheetDialog: BottomSheetDialog?, onClickListener: () -> Unit) {
+        button.setOnClickListener {
+            onClickListener.invoke()
+            bottomSheetDialog?.dismiss()
+        }
+    }
+
+    private fun bindingBottomSharedCompetitions() {
         val recyclerView = binding.recyclerViewDetailsSoccerTeams
 
-        bottomSheetBinding.buttonSharedTeams.setOnClickListener {
-//            val createBitmapFromView = getScreenshotFromRecyclerView(recyclerView)
-//            shareImageAndText(requireContext(), createBitmapFromView)
-            val bitmapsFromRecyclerView = getBitmapsFromRecyclerView(recyclerView)
-            shareBitmapList(requireContext(), bitmapsFromRecyclerView)
+        val bottomSheetSharedTeamBinding = BottonsheetSharedTeamBinding.inflate(layoutInflater)
+        bottomSheetDialogSharedTeam = createBottomSheetDialog(bottomSheetSharedTeamBinding)
 
-            bottomSheetDialog.dismiss()
+        setButtonClickListener(bottomSheetSharedTeamBinding.buttonSharedTeams, bottomSheetDialogSharedTeam) {
+            onClickToShare(recyclerView)
         }
 
-        bottomSheetBinding.buttonSaveTeams.setOnClickListener {
-            val bitmapsFromRecyclerView = getBitmapsFromRecyclerView(recyclerView)
-            saveBitmapsToGallery(requireContext(), bitmapsFromRecyclerView, torneio.id)
-
-            bottomSheetDialog.dismiss()
+        setButtonClickListener(bottomSheetSharedTeamBinding.buttonSaveTeams, bottomSheetDialogSharedTeam) {
+            onClickToSave(recyclerView)
         }
+    }
+
+    private fun onClickToSave(recyclerView: RecyclerView) {
+        val bitmapsFromRecyclerView = getBitmapsFromRecyclerView(recyclerView)
+        saveBitmapsToGallery(requireContext(), bitmapsFromRecyclerView, torneio.id)
+    }
+
+    private fun onClickToShare(recyclerView: RecyclerView) {
+        val bitmapsFromRecyclerView = getBitmapsFromRecyclerView(recyclerView)
+        shareBitmapList(requireContext(), bitmapsFromRecyclerView)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.action_share_teams -> {
-                when (checkPermissions(requireActivity(), PermissionsUtil.permissionsExternalStorage)) {
+                when (checkPermissions(
+                    requireActivity(),
+                    PermissionsUtil.permissionsExternalStorage
+                )) {
                     true -> {
                         requestPermissionsIfDanied(
                             requireActivity(),
@@ -154,11 +191,12 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
                     }
 
                     false -> {
-                        bottomSheetDialog.show()
+                        bottomSheetDialogSharedTeam.show()
                     }
                 }
                 true
             }
+
             else -> false
         }
     }

@@ -95,6 +95,10 @@ class GroupViewModel @Inject constructor(
         action.value = Action.GetGroupById(groupId)
     }
 
+    fun deleteCompetition(idTorneio: String?) {
+
+    }
+
     sealed class UiState {
         object Loading : UiState()
         data class Success(val grupo: GrupoComJogadoresItem) : UiState()
