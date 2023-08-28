@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.padawanbr.alfred.app.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeCompetitionBinding
 import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
@@ -216,6 +217,10 @@ class GroupFragment : Fragment(), MenuProvider {
                     setSoccerPlayersInfos(uiState)
 
                 }
+
+                GroupViewModel.UiState.SuccessDeleteCompetition -> {
+                    showShortToast("Competição deletada com sucesso")
+                }
             }
         }
     }
@@ -354,13 +359,13 @@ class GroupFragment : Fragment(), MenuProvider {
             bottonsheetExcludeCompetitionBinding.buttonExcludeCompetition,
             bottomSheetDialogExcludeCompetition,
             competitionItemClicked?.id
-        ) { competitionId ->
-            onClickToExcludeCompetition(competitionId)
+        ) {
+            onClickToExcludeCompetition(competitionItemClicked?.id)
         }
     }
 
     private fun onClickToExcludeCompetition(idTorneio: String?) {
-        viewModel.deleteCompetition(idTorneio)
+        idTorneio?.let { viewModel.deleteCompetition(it) }
     }
 
     private fun createBottomSheetDialog(binding: ViewBinding): BottomSheetDialog {
