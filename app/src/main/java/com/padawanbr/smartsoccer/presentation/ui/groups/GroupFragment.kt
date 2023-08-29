@@ -319,7 +319,7 @@ class GroupFragment : Fragment(), MenuProvider {
 
     private fun fabCreateQuickCompetitionOnClick() {
         binding.fabCreateQuickCompetition.setOnClickListener {
-            isRotate = rotateView(it, !isRotate)
+            isRotate = rotateView(binding.fabMoreOptions, !isRotate)
             hideFabs()
             val directions =
                 GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()

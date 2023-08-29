@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/background_top_rounded_border"
+    android:orientation="vertical"
     android:padding="24dp">
 
     <View
-        android:id="@+id/add_item_drag_handle"
+        android:id="@+id/view_item_drag_handle"
         android:layout_width="80dp"
         android:layout_height="4dp"
-        android:background="@drawable/drag_handle_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:background="@drawable/drag_handle_background" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/containert_infos_soccer_player"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/container_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -53,8 +56,7 @@
                     android:id="@+id/editText_textInput_detailsPlayerName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_text_input_name_item"
-                    android:text="Nome jogador" />
+                    android:hint="@string/hint_text_input_name_player"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -75,19 +77,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Digite a idade do jogador"
-                    android:inputType="number"
-                    android:text="10" />
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/spinner_detailsPlayerPosition"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_detailsPlayerPosition"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/background_border_stroke"
-                app:layout_constraintTop_toBottomOf="@+id/textInput_dueDate"
-                tools:layout_editor_absoluteX="24dp" />
+                android:hint="Posição jogador"
+                app:expandedHintEnabled="false">
+
+                <AutoCompleteTextView
+                    android:id="@+id/editText_textInput_detailsPlayerPosition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="false"
+                    android:hint="Selecione uma posição"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Switch
                 android:id="@+id/switch_detailsPlayerDM"
@@ -123,57 +136,52 @@
                 android:id="@+id/item_player_rating_race"
                 layout="@layout/item_player_rating" />
 
-            <ViewFlipper
-                android:id="@+id/flipper_save_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/flipper_exclude_item"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_save_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:text="@string/save"
-                    style="@style/MyButtonStyle"
-                    android:textAllCaps="false" />
-
-                <ProgressBar
-                    android:id="@+id/progress_save_item"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center" />
-            </ViewFlipper>
-
-            <ViewFlipper
-                android:id="@+id/flipper_exclude_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/flipper_save_item"
-                app:layout_constraintStart_toStartOf="@+id/flipper_save_item"
-                app:layout_constraintTop_toBottomOf="@+id/flipper_save_item">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_exclude_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:text="@string/exclude"
-                    android:textAllCaps="false" />
-
-                <ProgressBar
-                    android:id="@+id/progress_exclude_item"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center" />
-
-            </ViewFlipper>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <ViewFlipper
+        android:id="@+id/flipper_save_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_save_item"
+            style="@style/MyButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:text="@string/save"
+            android:textAllCaps="false" />
+
+        <ProgressBar
+            android:id="@+id/progress_save_item"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center" />
+    </ViewFlipper>
+
+    <ViewFlipper
+        android:id="@+id/flipper_exclude_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_exclude_item"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:text="@string/exclude"
+            android:textAllCaps="false"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <ProgressBar
+            android:id="@+id/progress_exclude_item"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center" />
+
+    </ViewFlipper>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

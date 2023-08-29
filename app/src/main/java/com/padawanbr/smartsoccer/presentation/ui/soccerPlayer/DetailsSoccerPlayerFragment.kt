@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsSoccerPlayerBinding
@@ -25,9 +24,6 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
     private val viewModel: DetailsSoccerPlayerViewModel by viewModels()
     private val sharedViewModel: SharedSoccerPlayerViewModel by activityViewModels()
 
-    private lateinit var spinnerDetailsPlayerPosition: Spinner
-    private lateinit var adapterDetailsPlayerPosition: ArrayAdapter<String>
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +34,11 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.root.parent as View)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetBehavior.isDraggable = true
+
         initSpinnerDetailsPlayerAdapter()
 
         ratingBarAbilityBinding()
@@ -54,12 +55,11 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
         }
 
         binding.buttonSaveItem.setOnClickListener {
-
             val playerName = binding.editTextTextInputDetailsPlayerName.text.toString()
             val playerAge = binding.editTextTextInputDetailsPlayerAge.text.toString().toInt()
 
             // Obtenha o enum PosicaoJogador selecionado no Spinner
-            val selectedPosition = spinnerDetailsPlayerPosition.selectedItem as String
+            val selectedPosition = binding.editTextTextInputDetailsPlayerPosition.text.toString()
             val playerPositionString = selectedPosition.substringBefore("(")
                 .trim() // Obtém apenas a posição, ignorando a abreviação
             val playerPosition = PosicaoJogador.values().find { it.funcao == playerPositionString }
@@ -105,8 +105,7 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
         binding.switchDetailsPlayerDM.isChecked = estaNoDepartamentoMedico
 
         val posicaoJogador = PosicaoJogador.fromString(selectedPosition)
-        val positionIndex = PosicaoJogador.values().indexOf(posicaoJogador)
-        spinnerDetailsPlayerPosition.setSelection(positionIndex)
+        binding.editTextTextInputDetailsPlayerPosition.setText("${posicaoJogador?.funcao} (${posicaoJogador?.abreviacao})", false)
 
         setPlayerAbilities(habilidades)
     }
@@ -207,32 +206,12 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
     }
 
     private fun initSpinnerDetailsPlayerAdapter() {
-        spinnerDetailsPlayerPosition = binding.spinnerDetailsPlayerPosition
-
         val detailsPlayerPositions = PosicaoJogador.values().map { posicao ->
             "${posicao.funcao} (${posicao.abreviacao})"
         }.toMutableList()
 
-        adapterDetailsPlayerPosition =
-            ArrayAdapter(requireContext(), R.layout.simple_list_item_1, detailsPlayerPositions)
-
-        spinnerDetailsPlayerPosition.adapter = adapterDetailsPlayerPosition
-
-        spinnerDetailsPlayerPosition.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    // Obtenha o enum PosicaoJogador selecionado no Spinner
-                    val selectedPosition = PosicaoJogador.values()[p2]
-                    // Agora você pode usar o enum PosicaoJogador diretamente, por exemplo:
-                    val posicao = selectedPosition.funcao // Nome da posição
-                    val abreviacao = selectedPosition.abreviacao // Abreviação da posição
-                    // Outras ações que você deseja realizar com o enum PosicaoJogador
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    // Lida com o caso em que nada foi selecionado
-                }
-            }
+        val adapterDetailsPlayerPositions = ArrayAdapter(requireContext(), R.layout.simple_list_item_1, detailsPlayerPositions)
+        binding.editTextTextInputDetailsPlayerPosition.setAdapter(adapterDetailsPlayerPositions)
     }
 
     private fun observeUiState() {

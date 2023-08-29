@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="soccerPlayerAbility"
             type="String" />
@@ -13,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
-        android:backgroundTint="@color/md_theme_light_onPrimary"
-        android:background="@drawable/background_group_item_rounded_border">
+        android:background="@drawable/background_group_item_rounded_border"
+        android:backgroundTint="@color/md_theme_light_onPrimary">
 
         <TextView
             android:id="@+id/textView_soccerPlayerAbility"
@@ -31,13 +32,15 @@
 
         <RatingBar
             android:id="@+id/ratingBar_ability"
-            style="@android:style/Widget.Material.RatingBar"
+            style="@android:style/Widget.DeviceDefault.Light.RatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:numStars="5"
-            android:rating="4"
+            android:progressBackgroundTint="@color/md_theme_light_outline_50"
+            android:rating="0"
+            android:secondaryProgressTint="@color/md_theme_light_onPrimaryContainer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView_soccerPlayerAbility"
             app:layout_constraintTop_toBottomOf="@+id/textView_soccerPlayerAbility" />

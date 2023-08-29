@@ -23,4 +23,6 @@
 
         <attr name="backgroundColor" format="color" />
     </declare-styleable>
+
+    <attr name="disabledAlpha" format="float" />
 </resources>

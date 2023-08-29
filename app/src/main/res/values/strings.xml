@@ -15,9 +15,8 @@
     <string name="minimo_por_time">Mínimo por time: %s</string>
     <string name="quantidade_de_times">Times: %s</string>
 
-
-
     <string name="hint_text_input_name_item">Digite um nome para o item</string>
+    <string name="hint_text_input_name_player">Digite um nome para o jogador</string>
     <string name="valor_unitario">Valor unit</string>
     <string name="desconto">Desconto</string>
     <string name="hint_text_input_dueDate">dd/mm/aaaa</string>

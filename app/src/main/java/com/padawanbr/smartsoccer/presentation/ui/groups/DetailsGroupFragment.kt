@@ -11,6 +11,7 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -48,6 +49,11 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.root.parent as View)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetBehavior.isDraggable = false
+
         initSpinnerGroupModalityAdapter()
         initSpinnerGroupGameDayAdapter()
 
@@ -67,8 +73,7 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
             // Obtenha o enum PosicaoJogador selecionado no Spinner
             val selectedPosition = binding.editTextTextInputGroupModality.text.toString()
             val groupModalityPositionString = selectedPosition.substringBefore("(").trim()
-            val groupModalityPosition =
-                TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
+            val groupModalityPosition = TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
 
             val textGameDay = binding.editTextTextInputGameDay.text.toString()
             val textBeginningOfTheGame = binding.textViewBeginningOfTheGame.text.toString()
