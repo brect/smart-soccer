@@ -1,6 +1,9 @@
 package com.padawanbr.smartsoccer.presentation.ui.competition
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -15,26 +18,28 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.canhub.cropper.CropImageActivity
+import com.canhub.cropper.CropImageActivity.*
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padawanbr.alfred.app.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
-import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeCompetitionBinding
-import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
 import com.padawanbr.smartsoccer.databinding.BottonsheetSharedTeamBinding
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsCompetitionBinding
 import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil
 import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.REQUEST_EXTERNAL_STORAGE_CODE
 import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.checkPermissions
 import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.requestPermissionsIfDanied
-import com.padawanbr.smartsoccer.presentation.utils.BottomSheetDialogUtils
+import com.padawanbr.smartsoccer.presentation.cropper.SampleUsingImageViewFragment
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getBitmapsFromRecyclerView
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.saveBitmapsToGallery
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.shareBitmapList
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class DetailsCompetitionFragment : Fragment(), MenuProvider {
@@ -139,7 +144,11 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         return bottomSheetDialog
     }
 
-    private fun setButtonClickListener(button: Button, bottomSheetDialog: BottomSheetDialog?, onClickListener: () -> Unit) {
+    private fun setButtonClickListener(
+        button: Button,
+        bottomSheetDialog: BottomSheetDialog?,
+        onClickListener: () -> Unit
+    ) {
         button.setOnClickListener {
             onClickListener.invoke()
             bottomSheetDialog?.dismiss()
@@ -152,11 +161,17 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         val bottomSheetSharedTeamBinding = BottonsheetSharedTeamBinding.inflate(layoutInflater)
         bottomSheetDialogSharedTeam = createBottomSheetDialog(bottomSheetSharedTeamBinding)
 
-        setButtonClickListener(bottomSheetSharedTeamBinding.buttonSharedTeams, bottomSheetDialogSharedTeam) {
+        setButtonClickListener(
+            bottomSheetSharedTeamBinding.buttonSharedTeams,
+            bottomSheetDialogSharedTeam
+        ) {
             onClickToShare(recyclerView)
         }
 
-        setButtonClickListener(bottomSheetSharedTeamBinding.buttonSaveTeams, bottomSheetDialogSharedTeam) {
+        setButtonClickListener(
+            bottomSheetSharedTeamBinding.buttonSaveTeams,
+            bottomSheetDialogSharedTeam
+        ) {
             onClickToSave(recyclerView)
         }
     }

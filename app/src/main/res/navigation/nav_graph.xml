@@ -60,6 +60,22 @@
         <action
             android:id="@+id/action_detailsGroupFragment_to_createDetailsGroupFragment"
             app:destination="@id/createDetailsGroupFragment" />
+        <action
+            android:id="@+id/action_detailsGroupFragment_to_sampleUsingImageViewFragment"
+            app:destination="@id/sampleUsingImageViewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sampleUsingImageViewFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.cropper.SampleUsingImageViewFragment"
+        android:label="SampleUsingImageViewFragment"
+        tools:layout="@layout/fragment_crop_image_view">
+
+        <argument
+            android:name="groupId"
+            android:defaultValue='""'
+            app:argType="string" />
+
     </fragment>
 
     <fragment

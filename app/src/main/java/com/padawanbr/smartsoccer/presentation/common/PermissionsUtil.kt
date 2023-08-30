@@ -14,7 +14,9 @@ object PermissionsUtil {
 
     val permissionsExternalStorage = arrayOf(
         "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE"
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.CAMERA",
+
     )
 
     fun checkSelfPermission(context: Activity, permission: String) =

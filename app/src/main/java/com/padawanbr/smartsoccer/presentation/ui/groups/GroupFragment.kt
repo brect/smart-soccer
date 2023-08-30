@@ -28,6 +28,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.canhub.cropper.CropImage
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padawanbr.alfred.app.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.R
@@ -38,6 +42,7 @@ import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateView
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showOut
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.cropper.SampleUsingImageViewFragment
 import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
 import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
 import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
@@ -157,9 +162,19 @@ class GroupFragment : Fragment(), MenuProvider {
         observeSharedUiState()
 
         binding.imageViewGroupProfile.setOnClickListener {
-            openGallery(this)
+
+            val directions = GroupFragmentDirections.actionDetailsGroupFragmentToSampleUsingImageViewFragment()
+
+            if (args.detalheGrupoItemViewArgs != null) {
+                directions.groupId = args.detalheGrupoItemViewArgs!!.id
+            }
+
+            findNavController().navigate(directions)
+
+//            openGallery(this)
         }
     }
+
 
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
