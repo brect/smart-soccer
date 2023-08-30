@@ -76,6 +76,7 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         binding.editTextTextInputGroupModality.setText(viewArgs?.tipoEsporte?.modalidade)
         binding.editTextTextInputGameDay.setText(viewArgs?.diaDoJogo)
         binding.textViewBeginningOfTheGame.setText(viewArgs?.horarioInicio)
+        setTextAgeValueLabel(viewArgs?.minAge?.toInt(), viewArgs?.maxAge?.toInt())
         binding.seekBarRatingAge.setValues(viewArgs?.minAge, viewArgs?.maxAge)
         binding.editTextNumberOfVacancies.setText(viewArgs?.quantidadeTimes.toString())
 
@@ -98,6 +99,7 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
             val qtdTeam = binding.editTextNumberOfVacancies.text.toString().toInt()
 
             viewModel.createGroup(
+                args.grupoItemViewArgs?.id,
                 textNameGroup,
                 textPlaceGroup,
                 groupModalityPosition ?: TipoEsporte.FUTEBOL_CAMPO,
@@ -115,16 +117,10 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         binding.seekBarRatingAge.addOnChangeListener(RangeSlider.OnChangeListener { slider, value, fromUser ->
             val values = binding.seekBarRatingAge.values
 
-            val minAge = values[0].roundToInt()
-            val maxAge = values[1].roundToInt()
+            rangeIdade.minAge = values[0].roundToInt()
+            rangeIdade.maxAge = values[1].roundToInt()
 
-            binding.textViewAgeValueFromLbl.text = "$minAge - anos"
-            binding.textViewAgeValueToLbl.text = "$maxAge - anos"
-
-            rangeIdade.minAge
-            rangeIdade.maxAge
-
-            binding.textViewAgeValueFromLbl.text
+            setTextAgeValueLabel(rangeIdade.minAge, rangeIdade.maxAge)
 
             Log.d("From", values[0].toString())
             Log.d("T0", values[1].toString())
@@ -133,6 +129,11 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
             Log.d("value", "$value")
             Log.d("fromUser", "$fromUser")
         })
+    }
+
+    private fun setTextAgeValueLabel(minAge: Int?, maxAge: Int?) {
+        binding.textViewAgeValueFromLbl.text = "$minAge - anos"
+        binding.textViewAgeValueToLbl.text = "$maxAge - anos"
     }
 
     private fun beginningOfTheGameTimerPickerListener() {

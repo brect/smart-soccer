@@ -28,7 +28,7 @@ class DetailsGroupViewModel @Inject constructor(
                 is Action.CreateGroup -> {
                     addGroupUseCase.invoke(
                         AddGroupUseCase.Params(
-                            UUID.randomUUID().toString(),
+                            it.groupId ?: UUID.randomUUID().toString(),
                             it.groupName,
                             it.textPlaceGroup,
                             it.tipoEsporte,
@@ -49,12 +49,14 @@ class DetailsGroupViewModel @Inject constructor(
                         }
                     )
                 }
+
                 else -> {}
             }
         }
     }
 
     fun createGroup(
+        groupId: String?,
         groupName: String,
         textPlaceGroup: String,
         tipoEsporte: TipoEsporte,
@@ -64,6 +66,7 @@ class DetailsGroupViewModel @Inject constructor(
         rangeIdade: RangeIdade
     ) {
         action.value = Action.CreateGroup(
+            groupId,
             groupName,
             textPlaceGroup,
             tipoEsporte,
@@ -82,6 +85,7 @@ class DetailsGroupViewModel @Inject constructor(
 
     sealed class Action {
         data class CreateGroup(
+            val groupId: String?,
             val groupName: String,
             val textPlaceGroup: String,
             val tipoEsporte: TipoEsporte,
