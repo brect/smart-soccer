@@ -103,36 +103,33 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-
         menuInflater.inflate(R.menu.menu_details_competition, menu)
         menu.findItem(R.id.action_share_teams).icon?.setTint(requireContext().getColor(R.color.md_theme_light_onPrimaryContainer))
     }
 
-    private fun createBottomSheetDialog(
-        binding: ViewBinding,
-        buttonIds: List<Int>,
-        onClickListener: () -> Unit
-    ): BottomSheetDialog {
-        val bottomSheetDialog = BottomSheetDialog(requireContext())
-        bottomSheetDialog.setContentView(binding.root)
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.action_share_teams -> {
+                when (checkPermissions(
+                    requireActivity(),
+                    PermissionsUtil.permissionsExternalStorage
+                )) {
+                    true -> {
+                        requestPermissionsIfDanied(
+                            requireActivity(),
+                            PermissionsUtil.permissionsExternalStorage,
+                            REQUEST_EXTERNAL_STORAGE_CODE
+                        )
+                    }
 
-        setButtonClickListener(bottomSheetDialog, buttonIds, onClickListener)
-
-        return bottomSheetDialog
-    }
-
-    private fun setButtonClickListener(
-        bottomSheetDialog: BottomSheetDialog,
-        buttonIds: List<Int>,
-        onClickListener: () -> Unit
-    ) {
-
-        for (buttonId in buttonIds) {
-            val button = bottomSheetDialog.findViewById<Button>(buttonId)
-            button?.setOnClickListener {
-                onClickListener()
-                bottomSheetDialog.dismiss()
+                    false -> {
+                        bottomSheetDialogSharedTeam.show()
+                    }
+                }
+                true
             }
+
+            else -> false
         }
     }
 
@@ -141,7 +138,6 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         bottomSheetDialog.setContentView(binding.root)
         return bottomSheetDialog
     }
-
 
     private fun setButtonClickListener(button: Button, bottomSheetDialog: BottomSheetDialog?, onClickListener: () -> Unit) {
         button.setOnClickListener {
@@ -175,32 +171,6 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         shareBitmapList(requireContext(), bitmapsFromRecyclerView)
     }
 
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return when (menuItem.itemId) {
-            R.id.action_share_teams -> {
-                when (checkPermissions(
-                    requireActivity(),
-                    PermissionsUtil.permissionsExternalStorage
-                )) {
-                    true -> {
-                        requestPermissionsIfDanied(
-                            requireActivity(),
-                            PermissionsUtil.permissionsExternalStorage,
-                            REQUEST_EXTERNAL_STORAGE_CODE
-                        )
-                    }
-
-                    false -> {
-                        bottomSheetDialogSharedTeam.show()
-                    }
-                }
-                true
-            }
-
-            else -> false
-        }
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -209,10 +179,8 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == REQUEST_EXTERNAL_STORAGE_CODE) {
-
             // Checking whether user granted the permission or not.
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                 // Showing the toast message
                 Toast.makeText(
                     requireContext(),
@@ -230,5 +198,4 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
             }
         }
     }
-
 }

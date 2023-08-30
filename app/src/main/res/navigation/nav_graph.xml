@@ -25,6 +25,12 @@
         android:label="@string/competition_group_fragment_label"
         tools:layout="@layout/bottonsheet_create_group">
 
+        <argument
+            android:name="grupoItemViewArgs"
+            android:defaultValue="@null"
+            app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItemViewArgs"
+            app:nullable="true" />
+
     </dialog>
 
     <fragment
@@ -34,8 +40,8 @@
 
         <argument
             android:name="detalheGrupoItemViewArgs"
-            app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.DetalheGrupoItemViewArgs"
             android:defaultValue="@null"
+            app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.DetalheGrupoItemViewArgs"
             app:nullable="true" />
 
         <action
@@ -47,10 +53,13 @@
         <action
             android:id="@+id/action_detailsGroupFragment_to_competitionFragment"
             app:destination="@id/competitionFragment"
-            app:launchSingleTop="true"/>
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_detailsGroupFragment_to_DetailsCompetitionFragment"
             app:destination="@id/detailsCompetitionFragment" />
+        <action
+            android:id="@+id/action_detailsGroupFragment_to_createDetailsGroupFragment"
+            app:destination="@id/createDetailsGroupFragment" />
     </fragment>
 
     <fragment
@@ -61,8 +70,8 @@
 
         <argument
             android:name="competitionId"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:defaultValue='""'
+            app:argType="string" />
 
     </fragment>
 
@@ -74,13 +83,13 @@
 
         <argument
             android:name="isEditing"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
 
         <argument
             android:name="groupId"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:defaultValue='""'
+            app:argType="string" />
 
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_DetailsGroupFragment"
@@ -99,8 +108,8 @@
 
         <argument
             android:name="competitionViewArgs"
-            app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.CompetitionViewArgs"
             android:defaultValue="@null"
+            app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.CompetitionViewArgs"
             app:nullable="true" />
 
     </dialog>

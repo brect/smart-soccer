@@ -41,6 +41,7 @@ import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
 import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
 import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
 import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
+import com.padawanbr.smartsoccer.presentation.ui.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -407,6 +408,7 @@ class GroupFragment : Fragment(), MenuProvider {
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_details_group, menu)
+        menu.findItem(R.id.action_edit_group).icon?.setTint(requireContext().getColor(R.color.md_theme_light_onPrimaryContainer))
     }
 
 
@@ -427,8 +429,23 @@ class GroupFragment : Fragment(), MenuProvider {
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
-            R.id.action_edit -> {
-                Toast.makeText(context, "Action edit", Toast.LENGTH_LONG).show()
+            R.id.action_edit_group -> {
+                val directions =
+                    GroupFragmentDirections.actionDetailsGroupFragmentToCreateDetailsGroupFragment()
+
+                directions.grupoItemViewArgs = GrupoItemViewArgs(
+                    grupo.id,
+                    grupo.nome,
+                    grupo.endereco,
+                    grupo.configuracaoEsporte.tipoEsporte,
+                    grupo.diaDoJogo,
+                    grupo.horarioInicio,
+                    grupo.quantidadeTimes,
+                    grupo.rangeIdade?.minAge?.toFloat(),
+                    grupo.rangeIdade?.maxAge?.toFloat(),
+                )
+
+                findNavController().navigate(directions)
                 true
             }
 

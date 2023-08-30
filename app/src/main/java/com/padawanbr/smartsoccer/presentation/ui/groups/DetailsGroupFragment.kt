@@ -11,6 +11,7 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.slider.RangeSlider
@@ -37,6 +38,8 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
 
     private lateinit var timePicker: TimePicker
 
+    private val args by navArgs<DetailsGroupFragmentArgs>()
+
     private var rangeIdade = RangeIdade(10, 70)
 
     override fun onCreateView(
@@ -50,6 +53,12 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        beginningOfTheGameTimerPickerListener()
+        seekBarRatingAgeListener()
+        buttonCreateGroupListener()
+
+        populateGroupDetails(args.grupoItemViewArgs)
+
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.root.parent as View)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetBehavior.isDraggable = false
@@ -57,11 +66,18 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         initSpinnerGroupModalityAdapter()
         initSpinnerGroupGameDayAdapter()
 
-        beginningOfTheGameTimerPickerListener()
-        seekBarRatingAgeListener()
-        buttonCreateGroupListener()
-
         observeUiState()
+
+    }
+
+    private fun populateGroupDetails(viewArgs: GrupoItemViewArgs?) {
+        binding.editTextTextInputGroupName.setText(viewArgs?.nome)
+        binding.editTextTextInputPlace.setText(viewArgs?.endereco)
+        binding.editTextTextInputGroupModality.setText(viewArgs?.tipoEsporte?.modalidade)
+        binding.editTextTextInputGameDay.setText(viewArgs?.diaDoJogo)
+        binding.textViewBeginningOfTheGame.setText(viewArgs?.horarioInicio)
+        binding.seekBarRatingAge.setValues(viewArgs?.minAge, viewArgs?.maxAge)
+        binding.editTextNumberOfVacancies.setText(viewArgs?.quantidadeTimes.toString())
 
     }
 
@@ -73,7 +89,8 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
             // Obtenha o enum PosicaoJogador selecionado no Spinner
             val selectedPosition = binding.editTextTextInputGroupModality.text.toString()
             val groupModalityPositionString = selectedPosition.substringBefore("(").trim()
-            val groupModalityPosition = TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
+            val groupModalityPosition =
+                TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
 
             val textGameDay = binding.editTextTextInputGameDay.text.toString()
             val textBeginningOfTheGame = binding.textViewBeginningOfTheGame.text.toString()

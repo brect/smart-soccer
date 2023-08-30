@@ -10,6 +10,6 @@ data class RangeIdadeEntity(
 fun RangeIdadeEntity.toRangeIdadeModel(): RangeIdade {
     return RangeIdade(
         minAge = minAge,
-        maxAge =  minAge
+        maxAge =  maxAge
     )
 }

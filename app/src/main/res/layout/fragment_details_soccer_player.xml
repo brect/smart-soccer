@@ -97,6 +97,7 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
+                    android:padding="16dp"
                     android:focusableInTouchMode="false"
                     android:hint="Selecione uma posição"
                     android:inputType="none" />
