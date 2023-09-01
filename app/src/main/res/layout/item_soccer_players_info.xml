@@ -16,7 +16,7 @@
         android:layout_marginStart="8dp"
         android:gravity="center_vertical"
         android:paddingEnd="8dp"
-        android:text="27 jogadores disponíveis"
+        android:text="0 jogadores disponíveis"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView_soccerPlayerGroup_info"
         app:layout_constraintEnd_toEndOf="parent"

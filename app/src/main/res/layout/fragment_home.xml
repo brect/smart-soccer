@@ -8,7 +8,7 @@
     tools:context=".presentation.ui.home.HomeFragment">
 
     <ViewFlipper
-        android:id="@+id/fliper_group"
+        android:id="@+id/fliper_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
@@ -17,8 +17,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <include
-            android:id="@+id/include_view_group_loading_state"
-            layout="@layout/include_view_group_loading_state"
+            android:id="@+id/include_view_home_loading_state"
+            layout="@layout/include_view_home_loading_state"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
             tools:listitem="@layout/item_home" />
 
         <include
-            android:id="@+id/include_view_group_empty_state"
+            android:id="@+id/include_view_home_empty_state"
             layout="@layout/include_empty_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/include_view_group_error_state"
+            android:id="@+id/include_view_home_error_state"
             layout="@layout/include_error_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -117,7 +117,7 @@ class HomeFragment : Fragment() {
 
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
-            binding.fliperGroup.displayedChild = when (uiState) {
+            binding.fliperHome.displayedChild = when (uiState) {
                 is HomeViewModel.UiState.Loading -> {
                     Toast.makeText(
                         context,

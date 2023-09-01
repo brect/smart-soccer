@@ -28,7 +28,7 @@
 
         <include
             android:id="@+id/include_view_soccers_loading_state"
-            layout="@layout/include_view_group_loading_state"
+            layout="@layout/include_view_home_loading_state"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

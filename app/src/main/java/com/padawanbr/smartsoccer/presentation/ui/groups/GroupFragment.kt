@@ -180,18 +180,20 @@ class GroupFragment : Fragment(), MenuProvider {
 
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
-            when (uiState) {
+            binding.fliperGroup.displayedChild = when (uiState) {
+                GroupViewModel.UiState.DeleteSuccess -> {
+                    navControllerAndClearStack()
+                    FLIPPER_CHILD_GROUP_SUCCESS
+                }
+
                 GroupViewModel.UiState.Error -> {
-                    Toast.makeText(
-                        context,
-                        "DetailsGroupViewModel.UiState.Error",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    FLIPPER_CHILD_GROUP_ERROR
                 }
 
                 GroupViewModel.UiState.Loading -> {
                     binding.flipperItemCompetition.displayedChild = FLIPPER_CHILD_COMPETITION_EMPTY
                     competitionsAdapter.submitList(emptyList())
+                    FLIPPER_CHILD_GROUP_LOADING
                 }
 
                 is GroupViewModel.UiState.Success -> {
@@ -236,20 +238,18 @@ class GroupFragment : Fragment(), MenuProvider {
                     )
 
                     setSoccerPlayersInfos(uiState)
-
+                    FLIPPER_CHILD_GROUP_SUCCESS
                 }
 
                 GroupViewModel.UiState.SuccessDeleteCompetition -> {
                     getGroupItemView()
                     showShortToast("Competição deletada com sucesso")
-                }
-
-                GroupViewModel.UiState.DeleteSuccess -> {
-                    navControllerAndClearStack()
+                    FLIPPER_CHILD_GROUP_SUCCESS
                 }
             }
         }
     }
+
 
     private fun observeSharedUiState() {
         sharedViewModel.updateGroups.observe(viewLifecycleOwner) {
@@ -511,6 +511,11 @@ class GroupFragment : Fragment(), MenuProvider {
     }
 
     companion object {
+        private const val FLIPPER_CHILD_GROUP_LOADING = 0
+        private const val FLIPPER_CHILD_GROUP_SUCCESS = 1
+        private const val FLIPPER_CHILD_GROUP_EMPTY = 2
+        private const val FLIPPER_CHILD_GROUP_ERROR = 3
+
         private const val FLIPPER_CHILD_COMPETITION_EMPTY = 0
         private const val FLIPPER_CHILD_COMPETITION_SUCCESS = 1
     }
