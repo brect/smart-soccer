@@ -4,8 +4,9 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/groupsFragment">
 
-    <action android:id="@+id/action_global_mainFragment"
-        app:destination="@id/groupsFragment"/>
+    <action
+        android:id="@+id/action_global_mainFragment"
+        app:destination="@id/groupsFragment" />
 
     <fragment
         android:id="@+id/groupsFragment"
@@ -15,10 +16,18 @@
 
         <action
             android:id="@+id/action_GroupsFragment_to_DetailsGroupFragment"
-            app:destination="@id/detailsGroupFragment" />
+            app:destination="@id/detailsGroupFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_groupsFragment_to_createDetailsGroupFragment"
-            app:destination="@id/createDetailsGroupFragment" />
+            app:destination="@id/createDetailsGroupFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
     </fragment>
 
@@ -49,23 +58,43 @@
 
         <action
             android:id="@+id/action_DetailsGroupFragment_to_SoccerPlayerFragment"
-            app:destination="@id/soccerPlayerFragment" />
-<!--        <action-->
-<!--            android:id="@+id/action_DetailsGroupFragment_to_GroupsFragment"-->
-<!--            app:destination="@id/groupsFragment" />-->
+            app:destination="@id/soccerPlayerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_DetailsGroupFragment_to_GroupsFragment"-->
+        <!--            app:destination="@id/groupsFragment" />-->
         <action
             android:id="@+id/action_detailsGroupFragment_to_competitionFragment"
             app:destination="@id/competitionFragment"
-            app:launchSingleTop="true" />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_detailsGroupFragment_to_DetailsCompetitionFragment"
-            app:destination="@id/detailsCompetitionFragment" />
+            app:destination="@id/detailsCompetitionFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_detailsGroupFragment_to_createDetailsGroupFragment"
-            app:destination="@id/createDetailsGroupFragment" />
+            app:destination="@id/createDetailsGroupFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_detailsGroupFragment_to_sampleUsingImageViewFragment"
-            app:destination="@id/sampleUsingImageViewFragment" />
+            app:destination="@id/sampleUsingImageViewFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -112,10 +141,18 @@
 
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_DetailsGroupFragment"
-            app:destination="@id/detailsGroupFragment" />
+            app:destination="@id/detailsGroupFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_DetailsSoccerPlayerFragment"
-            app:destination="@id/detailsSoccerPlayerFragment" />
+            app:destination="@id/detailsSoccerPlayerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
 
