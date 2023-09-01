@@ -492,6 +492,7 @@ class GroupFragment : Fragment(), MenuProvider {
             }
 
             R.id.action_delete_group -> {
+                bottomSheetBinding.textExcludeGroupContent.text = context?.getString(R.string.exclude_groups, grupo.nome)
                 bottomSheetDialog.show()
                 true
             }
