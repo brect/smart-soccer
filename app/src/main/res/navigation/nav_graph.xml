@@ -39,9 +39,7 @@
     <fragment
         android:id="@+id/detailsGroupFragment"
         android:name="com.padawanbr.smartsoccer.presentation.ui.groups.GroupFragment"
-        tools:layout="@layout/fragment_group"
-        app:popUpTo="@id/nav_graph"
-        app:popUpToInclusive="true">
+        tools:layout="@layout/fragment_group">
 
         <argument
             android:name="detalheGrupoItemViewArgs"
@@ -52,9 +50,9 @@
         <action
             android:id="@+id/action_DetailsGroupFragment_to_SoccerPlayerFragment"
             app:destination="@id/soccerPlayerFragment" />
-        <action
-            android:id="@+id/action_DetailsGroupFragment_to_GroupsFragment"
-            app:destination="@id/groupsFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_DetailsGroupFragment_to_GroupsFragment"-->
+<!--            app:destination="@id/groupsFragment" />-->
         <action
             android:id="@+id/action_detailsGroupFragment_to_competitionFragment"
             app:destination="@id/competitionFragment"

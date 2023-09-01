@@ -2,7 +2,6 @@ package com.padawanbr.smartsoccer.presentation.ui.groups
 
 import ImagePickerUtils.PICK_IMAGE_REQUEST
 import ImagePickerUtils.loadImageFromPreferences
-import ImagePickerUtils.openGallery
 import ImagePickerUtils.saveImageUri
 import android.app.Activity
 import android.content.Intent
@@ -23,19 +22,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.canhub.cropper.CropImage
-import com.canhub.cropper.CropImageContract
-import com.canhub.cropper.CropImageContractOptions
-import com.canhub.cropper.CropImageOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.padawanbr.alfred.app.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeCompetitionBinding
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
@@ -45,11 +37,11 @@ import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateView
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showOut
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
-import com.padawanbr.smartsoccer.presentation.cropper.SampleUsingImageViewFragment
+import com.padawanbr.smartsoccer.presentation.extensions.navControllerAndClearStack
 import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
+import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
 import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
-import com.padawanbr.smartsoccer.presentation.ui.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -253,15 +245,7 @@ class GroupFragment : Fragment(), MenuProvider {
                 }
 
                 GroupViewModel.UiState.DeleteSuccess -> {
-
-//                    findNavController().navigate(GroupFragmentDirections.actionDetailsGroupFragmentToGroupsFragment())
-
-
-                    findNavController().navigate(
-                        R.id.nav_graph, null,
-                        NavOptions.Builder()
-                            .setPopUpTo(findNavController().graph.startDestinationId, true).build()
-                    )
+                    navControllerAndClearStack()
                 }
             }
         }
