@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.usecase.DeleteCompetitionUseCase
+import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresETorneiosUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
@@ -19,6 +20,7 @@ class GroupViewModel @Inject constructor(
     private val coroutinesDispatchers: AppCoroutinesDispatchers,
     private val getGrupoComJogadoresById: GetGrupoComJogadoresETorneiosUseCase,
     private val deleteCompetitionUseCase: DeleteCompetitionUseCase,
+    private val deleteGroupUseCase: DeleteGroupUseCase
 ) : ViewModel() {
 
     private val action = MutableLiveData<Action>()
@@ -84,6 +86,7 @@ class GroupViewModel @Inject constructor(
                         }
                     )
                 }
+
                 is Action.DeleteCompetitionById -> {
                     deleteCompetitionUseCase.invoke(
                         DeleteCompetitionUseCase.Params(
@@ -95,6 +98,24 @@ class GroupViewModel @Inject constructor(
                         },
                         success = {
                             emit(UiState.SuccessDeleteCompetition)
+                        },
+                        error = {
+                            emit(UiState.Error)
+                        }
+                    )
+                }
+
+                is Action.DeleteGroup -> {
+                    deleteGroupUseCase.invoke(
+                        DeleteGroupUseCase.Params(
+                            it.groupId
+                        )
+                    ).watchStatus(
+                        loading = {
+                            emit(UiState.Loading)
+                        },
+                        success = {
+                            emit(UiState.DeleteSuccess)
                         },
                         error = {
                             emit(UiState.Error)
@@ -117,18 +138,23 @@ class GroupViewModel @Inject constructor(
         action.value = Action.DeleteCompetitionById(idTorneio)
     }
 
+    fun deleteGroup(groupId: String) {
+        action.value = Action.DeleteGroup(groupId)
+    }
+
     sealed class UiState {
         object Loading : UiState()
         data class Success(val grupo: GrupoComJogadoresItem) : UiState()
         object SuccessDeleteCompetition : UiState()
         object Error : UiState()
+        object DeleteSuccess : UiState()
     }
 
     sealed class Action {
         data class GetGroupById(
             val groupId: String,
         ) : Action()
-
+        data class DeleteGroup(val groupId: String) : Action()
         data class DeleteCompetitionById(
             val idTorneio: String
         ) : Action()

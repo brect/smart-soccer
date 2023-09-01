@@ -96,4 +96,5 @@
     <string name="crop_corner__shape">Corner Shape</string>
     <string name="show_crop_label_text">Show Crop Label Text</string>
     <string name="default_crop_label_text">Sample crop label</string>
+    <string name="menu_delete">Excluir\n</string>
 </resources>

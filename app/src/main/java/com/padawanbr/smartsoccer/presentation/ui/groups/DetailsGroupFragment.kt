@@ -25,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.text.MessageFormat
 import java.util.Locale
 import kotlin.math.roundToInt
-
+import androidx.navigation.fragment.findNavController
 
 @AndroidEntryPoint
 class DetailsGroupFragment : BottomSheetDialogFragment() {
@@ -57,7 +57,9 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         seekBarRatingAgeListener()
         buttonCreateGroupListener()
 
-        populateGroupDetails(args.grupoItemViewArgs)
+        if (isEditingMode()) {
+            populateGroupDetails(args.grupoItemViewArgs)
+        }
 
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.root.parent as View)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -67,8 +69,9 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         initSpinnerGroupGameDayAdapter()
 
         observeUiState()
-
     }
+
+    private fun isEditingMode() = args.grupoItemViewArgs != null
 
     private fun populateGroupDetails(viewArgs: GrupoItemViewArgs?) {
         binding.editTextTextInputGroupName.setText(viewArgs?.nome)
@@ -79,11 +82,10 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         setTextAgeValueLabel(viewArgs?.minAge?.toInt(), viewArgs?.maxAge?.toInt())
         binding.seekBarRatingAge.setValues(viewArgs?.minAge, viewArgs?.maxAge)
         binding.editTextNumberOfVacancies.setText(viewArgs?.quantidadeTimes.toString())
-
     }
 
     private fun buttonCreateGroupListener() {
-        binding.buttonCreateGroup.setOnClickListener {
+        binding.buttonSaveGroup.setOnClickListener {
             val textNameGroup = binding.editTextTextInputGroupName.text.toString()
             val textPlaceGroup = binding.editTextTextInputPlace.text.toString()
 
@@ -98,7 +100,7 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
 
             val qtdTeam = binding.editTextNumberOfVacancies.text.toString().toInt()
 
-            viewModel.createGroup(
+            viewModel.saveGroup(
                 args.grupoItemViewArgs?.id,
                 textNameGroup,
                 textPlaceGroup,
@@ -204,7 +206,7 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
 
                 DetailsGroupViewModel.UiState.Success -> {
                     sharedViewModel.updateGroups(true)
-                    this.dismiss()
+                    dismiss()
                 }
             }
         }

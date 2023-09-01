@@ -8,6 +8,7 @@ import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.domain.model.RangeIdade
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.core.usecase.AddGroupUseCase
+import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class DetailsGroupViewModel @Inject constructor(
     private val coroutinesDispatchers: AppCoroutinesDispatchers,
     private val addGroupUseCase: AddGroupUseCase,
+    private val deleteGroupUseCase: DeleteGroupUseCase
 ) : ViewModel() {
 
     private val action = MutableLiveData<Action>()
@@ -55,7 +57,7 @@ class DetailsGroupViewModel @Inject constructor(
         }
     }
 
-    fun createGroup(
+    fun saveGroup(
         groupId: String?,
         groupName: String,
         textPlaceGroup: String,

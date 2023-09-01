@@ -23,6 +23,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +38,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padawanbr.alfred.app.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeCompetitionBinding
+import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
 import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
 import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateView
@@ -68,6 +71,11 @@ class GroupFragment : Fragment(), MenuProvider {
     private lateinit var bottomSheetDialogExcludeCompetition: BottomSheetDialog
     private var _bottonsheetExcludeCompetitionBinding: BottonsheetExcludeCompetitionBinding? = null
     private val bottonsheetExcludeCompetitionBinding: BottonsheetExcludeCompetitionBinding get() = _bottonsheetExcludeCompetitionBinding!!
+
+
+    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var _bottomSheetBinding: BottonsheetExcludeGroupBinding? = null
+    private val bottomSheetBinding: BottonsheetExcludeGroupBinding get() = _bottomSheetBinding!!
 
     private var competitionItemClicked: CompetitionItem? = null
 
@@ -157,13 +165,15 @@ class GroupFragment : Fragment(), MenuProvider {
         fabCreateQuickCompetitionOnClick()
 
         bindingBottomSharedCompetitions()
+        bindingBottomSheetToExcludeGroup()
 
         observeUiState()
         observeSharedUiState()
 
         binding.imageViewGroupProfile.setOnClickListener {
 
-            val directions = GroupFragmentDirections.actionDetailsGroupFragmentToSampleUsingImageViewFragment()
+            val directions =
+                GroupFragmentDirections.actionDetailsGroupFragmentToSampleUsingImageViewFragment()
 
             if (args.detalheGrupoItemViewArgs != null) {
                 directions.groupId = args.detalheGrupoItemViewArgs!!.id
@@ -240,6 +250,18 @@ class GroupFragment : Fragment(), MenuProvider {
                 GroupViewModel.UiState.SuccessDeleteCompetition -> {
                     getGroupItemView()
                     showShortToast("Competição deletada com sucesso")
+                }
+
+                GroupViewModel.UiState.DeleteSuccess -> {
+
+//                    findNavController().navigate(GroupFragmentDirections.actionDetailsGroupFragmentToGroupsFragment())
+
+
+                    findNavController().navigate(
+                        R.id.nav_graph, null,
+                        NavOptions.Builder()
+                            .setPopUpTo(findNavController().graph.startDestinationId, true).build()
+                    )
                 }
             }
         }
@@ -424,6 +446,7 @@ class GroupFragment : Fragment(), MenuProvider {
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_details_group, menu)
         menu.findItem(R.id.action_edit_group).icon?.setTint(requireContext().getColor(R.color.md_theme_light_onPrimaryContainer))
+        menu.findItem(R.id.action_delete_group).icon?.setTint(requireContext().getColor(R.color.md_theme_light_onPrimaryContainer))
     }
 
 
@@ -439,6 +462,26 @@ class GroupFragment : Fragment(), MenuProvider {
         var groupId = args.detalheGrupoItemViewArgs?.id
         if (groupId != null) {
             viewModel.getGroupById(groupId)
+        }
+    }
+
+    fun bindingBottomSheetToExcludeGroup() {
+        // Crie um novo BottomSheetDialog aqui
+        bottomSheetDialog = BottomSheetDialog(requireContext())
+
+        // Inflate your custom layout with ViewBinding
+        _bottomSheetBinding = BottonsheetExcludeGroupBinding.inflate(layoutInflater)
+
+        // Set the custom layout as the content view of the BottomSheetDialog
+        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+
+        bottomSheetBinding.buttonExcludeGroup.setOnClickListener {
+
+            var groupId = args.detalheGrupoItemViewArgs?.id
+            if (groupId != null) {
+                viewModel.deleteGroup(groupId)
+                bottomSheetDialog.dismiss()
+            }
         }
     }
 
@@ -461,6 +504,11 @@ class GroupFragment : Fragment(), MenuProvider {
                 )
 
                 findNavController().navigate(directions)
+                true
+            }
+
+            R.id.action_delete_group -> {
+                bottomSheetDialog.show()
                 true
             }
 

@@ -4,6 +4,9 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/groupsFragment">
 
+    <action android:id="@+id/action_global_mainFragment"
+        app:destination="@id/groupsFragment"/>
+
     <fragment
         android:id="@+id/groupsFragment"
         android:name="com.padawanbr.smartsoccer.presentation.ui.home.HomeFragment"
@@ -36,7 +39,9 @@
     <fragment
         android:id="@+id/detailsGroupFragment"
         android:name="com.padawanbr.smartsoccer.presentation.ui.groups.GroupFragment"
-        tools:layout="@layout/fragment_group">
+        tools:layout="@layout/fragment_group"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true">
 
         <argument
             android:name="detalheGrupoItemViewArgs"
@@ -68,7 +73,7 @@
     <fragment
         android:id="@+id/sampleUsingImageViewFragment"
         android:name="com.padawanbr.smartsoccer.presentation.cropper.SampleUsingImageViewFragment"
-        android:label="SampleUsingImageViewFragment"
+        android:label="Escolha sua imagem"
         tools:layout="@layout/fragment_crop_image_view">
 
         <argument

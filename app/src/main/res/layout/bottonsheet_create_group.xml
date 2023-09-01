@@ -81,10 +81,10 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="16dp"
                     android:focusableInTouchMode="false"
                     android:hint="Selecione um tipo de jogo"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:padding="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -103,10 +103,10 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="16dp"
                     android:focusableInTouchMode="false"
                     android:hint="Selecione o dia do jogo"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:padding="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -127,11 +127,11 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="16dp"
                     android:focusableInTouchMode="false"
                     android:hint="00:00"
                     android:inputType="none"
                     android:minHeight="48dip"
+                    android:padding="16dp"
                     android:paddingHorizontal="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -224,13 +224,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ViewFlipper
-                android:id="@+id/flipper_createTeam_button"
+                android:id="@+id/flipper_saveTeam_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="58dp">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_createGroup"
+                    android:id="@+id/button_saveGroup"
                     style="@style/MyButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="58dp"
@@ -242,7 +242,6 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center" />
-
             </ViewFlipper>
         </LinearLayout>
     </ScrollView>
