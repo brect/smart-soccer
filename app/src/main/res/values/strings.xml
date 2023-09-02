@@ -86,7 +86,7 @@
     <string name="show_progress_bar">Show Progress Bar</string>
     <string name="flip_horizontal">Flip Horizontal</string>
     <string name="flip_vertical">Flip Vertical</string>
-    <string name="reset">Reset Crop Rect</string>
+    <string name="reset">Redefinir alterações</string>
     <string name="sample_using_cropimageview">Sample using CropImageView</string>
     <string name="sample_of_customactivity">Sample of CustomActivity</string>
     <string name="sample_calling_cropimage">Sample calling CropImage</string>

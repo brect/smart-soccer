@@ -33,9 +33,10 @@
     </style>
 
     <style name="Sample.Button" parent="Widget.AppCompat.Button.Colored">
-        <item name="colorButtonNormal">@color/md_theme_light_primary</item>
+        <item name="colorButtonNormal">@color/md_theme_light_primaryContainer</item>
         <item name="android:textColor">@color/md_theme_light_onTertiary</item>
     </style>
+
     <style name="OptionChip" parent="@style/Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/chip_bg_states</item>
         <item name="checkedIconVisible">true</item>

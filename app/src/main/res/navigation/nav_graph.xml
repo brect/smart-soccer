@@ -100,8 +100,8 @@
 
     <fragment
         android:id="@+id/sampleUsingImageViewFragment"
-        android:name="com.padawanbr.smartsoccer.presentation.cropper.SampleUsingImageViewFragment"
-        android:label="Escolha sua imagem"
+        android:name="com.padawanbr.smartsoccer.presentation.cropper.UsingImageViewFragment"
+        android:label="Editar imagem"
         tools:layout="@layout/fragment_crop_image_view">
 
         <argument

@@ -1,15 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-  <item
-      android:id="@+id/action_cropper_rotate"
-      android:icon="@android:drawable/ic_menu_rotate"
-      android:title="@string/action_cropper_rotate"
-      app:showAsAction="ifRoom"/>
+
   <item
       android:id="@+id/action_cropper_flip"
-      android:icon="@drawable/ic_flip_24"
+      android:icon="@drawable/ic_round_flip_24"
       android:title="@string/ic_flip_24"
-      app:showAsAction="ifRoom">
+      app:showAsAction="always">
     <menu>
       <item
           android:id="@+id/action_cropper_flip_horizontally"
@@ -20,7 +16,13 @@
     </menu>
   </item>
   <item
+      android:id="@+id/action_cropper_rotate"
+      android:icon="@drawable/ic_round_crop_rotate_24"
+      android:title="@string/action_cropper_rotate"
+      app:showAsAction="always"/>
+  <item
       android:id="@+id/action_cropper_crop"
       android:title="@string/action_cropper_crop"
+      android:icon="@drawable/ic_round_save_24"
       app:showAsAction="always"/>
 </menu>

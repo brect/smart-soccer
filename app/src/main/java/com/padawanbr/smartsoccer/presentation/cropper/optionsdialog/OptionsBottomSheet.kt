@@ -12,7 +12,7 @@ import com.canhub.cropper.parcelable
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.padawanbr.smartsoccer.databinding.FragmentOptionsBinding
 
-internal class SampleOptionsBottomSheet : BottomSheetDialogFragment() {
+internal class OptionsBottomSheet : BottomSheetDialogFragment() {
   fun interface Listener {
     fun onOptionsApplySelected(options: CropImageOptions)
   }
@@ -237,7 +237,7 @@ internal class SampleOptionsBottomSheet : BottomSheetDialogFragment() {
       listener: Listener,
     ) {
       Companion.listener = listener
-      SampleOptionsBottomSheet().apply {
+      OptionsBottomSheet().apply {
         arguments = Bundle().apply { putParcelable(OPTIONS_KEY, options) }
         show(fragmentManager, null)
       }
