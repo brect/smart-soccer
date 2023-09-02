@@ -148,7 +148,7 @@ class GroupFragment : Fragment(), MenuProvider {
         val menuHost = requireActivity()
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        args.detalheGrupoItemViewArgs?.nome?.let { setToolbarTitle(it) }
+//        args.detalheGrupoItemViewArgs?.nome?.let { setToolbarTitle(it) }
 
         initFabs()
 

@@ -43,7 +43,9 @@
     <string name="game_information_single_price">R$ %s</string>
     <string name="game_information_monthly_price">R$ %s</string>
     <string name="game_information_rate_age">%1$s a %2$s anos</string>
-    <string name="menu_edit">Edit</string>
+
+    <string name="menu_edit">Editar</string>
+    <string name="menu_delete">Excluir</string>
 
     <string name="action_cropper_rotate">Rotate 90 degrees clockwise</string>
     <string name="action_cropper_crop">CROP</string>
@@ -96,5 +98,5 @@
     <string name="crop_corner__shape">Corner Shape</string>
     <string name="show_crop_label_text">Show Crop Label Text</string>
     <string name="default_crop_label_text">Sample crop label</string>
-    <string name="menu_delete">Excluir\n</string>
+
 </resources>

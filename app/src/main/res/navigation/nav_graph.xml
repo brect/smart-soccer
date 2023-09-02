@@ -47,6 +47,7 @@
 
     <fragment
         android:id="@+id/detailsGroupFragment"
+        android:label="@string/competition_group_fragment_label"
         android:name="com.padawanbr.smartsoccer.presentation.ui.groups.GroupFragment"
         tools:layout="@layout/fragment_group">
 

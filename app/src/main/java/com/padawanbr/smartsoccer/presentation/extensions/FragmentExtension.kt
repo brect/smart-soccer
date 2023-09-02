@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.padawanbr.smartsoccer.R
 
 fun Fragment.showShortToast(@StringRes textResId: Int) =
@@ -29,3 +30,11 @@ fun Fragment.navControllerAndClearStack() =
         NavOptions.Builder()
             .setPopUpTo(findNavController().graph.startDestinationId, true).build()
     )
+
+fun RecyclerView.initRecyclerView(
+    adapter: RecyclerView.Adapter<*>,
+    layoutManager: RecyclerView.LayoutManager? = null
+) {
+    this.layoutManager = layoutManager ?: this.layoutManager
+    this.adapter = adapter
+}
