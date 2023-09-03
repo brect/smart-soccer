@@ -15,7 +15,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -36,14 +35,12 @@ import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.init
 import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.rotateView
 import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.showIn
 import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.showOut
-import com.padawanbr.smartsoccer.presentation.common.adapter.getCommonAdapterOf
 import com.padawanbr.smartsoccer.presentation.extensions.navControllerAndClearStack
 import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
 import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.presentation.modelView.GroupoJogadoresInfo
 import com.padawanbr.smartsoccer.presentation.modelView.GrupoComJogadoresItem
 import com.padawanbr.smartsoccer.presentation.modelView.CompetitionItem
-import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
 import com.padawanbr.smartsoccer.presentation.viewArgs.CompetitionViewArgs
 import com.padawanbr.smartsoccer.presentation.viewArgs.GrupoItemViewArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,60 +65,13 @@ class GroupFragment : Fragment(), MenuProvider {
     private var _bottonsheetExcludeCompetitionBinding: BottonsheetExcludeCompetitionBinding? = null
     private val bottonsheetExcludeCompetitionBinding: BottonsheetExcludeCompetitionBinding get() = _bottonsheetExcludeCompetitionBinding!!
 
-
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private var _bottomSheetBinding: BottonsheetExcludeGroupBinding? = null
     private val bottomSheetBinding: BottonsheetExcludeGroupBinding get() = _bottomSheetBinding!!
 
     private var competitionItemClicked: CompetitionItem? = null
 
-    private val competitionsAdapter by lazy {
-        getCommonAdapterOf(
-            { ItemCompetitionViewHolder.create(it) },
-            {
-                val directions =
-                    GroupFragmentDirections.actionDetailsGroupFragmentToDetailsCompetitionFragment()
-
-                directions.competitionId = it.id
-
-                findNavController().navigate(directions)
-
-                Toast.makeText(
-                    context,
-                    "competitionsAdapter itemClicked",
-                    Toast.LENGTH_SHORT
-                ).show()
-            },
-            { item ->
-
-                competitionItemClicked = item
-                bottonsheetExcludeCompetitionBinding.textExcludeCompetitionContent.text =
-                    context?.getString(R.string.exclude_competition, item.nome)
-
-                bottomSheetDialogExcludeCompetition.show()
-            }
-        )
-    }
-
-    private val playersInfoAdapter by lazy {
-        getCommonAdapterOf(
-            { ItemGroupPlayersInfoViewHolder.create(it) },
-            {
-                Toast.makeText(
-                    context,
-                    "competitionsAdapter itemClicked",
-                    Toast.LENGTH_SHORT
-                ).show()
-            },
-            {
-                Toast.makeText(
-                    context,
-                    "competitionsAdapter itemLongClicked",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        )
-    }
+    private lateinit var adapterManager: GroupAdapterManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -137,37 +87,33 @@ class GroupFragment : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerView(
-            binding.recyclerViewItemCompetition,
-            competitionsAdapter,
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        )
+        bindingBottomSharedCompetitions()
+        bindingBottomSheetToExcludeGroup()
 
-        initRecyclerView(
-            binding.recyclerViewSoccerPlayersInfo,
-            playersInfoAdapter,
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        )
-
-        val menuHost = requireActivity()
-        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-//        args.detalheGrupoItemViewArgs?.nome?.let { setToolbarTitle(it) }
-
+        initMenuProvider()
         initFabs()
 
         configureFabMoreOptions()
         fabAddSoccerPlayerOnClick()
         fabCreateQuickCompetitionOnClick()
 
-        bindingBottomSharedCompetitions()
-        bindingBottomSheetToExcludeGroup()
-
         observeUiState()
         observeSharedUiState()
 
-        binding.imageViewGroupProfile.setOnClickListener {
+        adapterManager = GroupAdapterManager(
+            requireContext(),
+            findNavController(),
+            bottonsheetExcludeCompetitionBinding,
+            bottomSheetDialogExcludeCompetition,
+            competitionItemClicked
+        )
 
+        initRecyclerView()
+        imageProfileOnListener()
+    }
+
+    private fun imageProfileOnListener() {
+        binding.imageViewGroupProfile.setOnClickListener {
             val directions =
                 GroupFragmentDirections.actionDetailsGroupFragmentToSampleUsingImageViewFragment()
 
@@ -176,9 +122,26 @@ class GroupFragment : Fragment(), MenuProvider {
             }
 
             findNavController().navigate(directions)
-
-//            openGallery(this)
         }
+    }
+
+    private fun initRecyclerView() {
+        initRecyclerView(
+            binding.recyclerViewItemCompetition,
+            adapterManager.competitionsAdapter,
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        )
+
+        initRecyclerView(
+            binding.recyclerViewSoccerPlayersInfo,
+            adapterManager.playersInfoAdapter,
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        )
+    }
+
+    private fun initMenuProvider() {
+        val menuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
 
@@ -196,7 +159,7 @@ class GroupFragment : Fragment(), MenuProvider {
 
                 GroupViewModel.UiState.Loading -> {
                     binding.flipperItemCompetition.displayedChild = FLIPPER_CHILD_COMPETITION_EMPTY
-                    competitionsAdapter.submitList(emptyList())
+                    adapterManager.competitionsAdapter.submitList(emptyList())
                     FLIPPER_CHILD_GROUP_LOADING
                 }
 
@@ -212,7 +175,7 @@ class GroupFragment : Fragment(), MenuProvider {
                     if (grupo.torneios?.size!! > 0) {
                         binding.flipperItemCompetition.displayedChild =
                             FLIPPER_CHILD_COMPETITION_SUCCESS
-                        competitionsAdapter.submitList(grupo.torneios)
+                        adapterManager.competitionsAdapter.submitList(grupo.torneios)
                     }
 
                     binding.textViewGroupTeamName.text = uiState.grupo.nome
@@ -274,7 +237,7 @@ class GroupFragment : Fragment(), MenuProvider {
             jogadoresGrupo
         )
 
-        playersInfoAdapter.submitList(soccerPlayersInfo)
+        adapterManager.playersInfoAdapter.submitList(soccerPlayersInfo)
     }
 
     private fun createSoccerPlayerInfoList(
