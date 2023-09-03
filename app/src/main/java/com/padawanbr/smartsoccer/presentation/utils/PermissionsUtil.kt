@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation.common
+package com.padawanbr.smartsoccer.presentation.utils
 
 import android.app.Activity
 import android.content.pm.PackageManager

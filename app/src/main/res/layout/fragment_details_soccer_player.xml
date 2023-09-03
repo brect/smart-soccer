@@ -144,7 +144,7 @@
         android:id="@+id/flipper_save_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="4dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_save_item"
@@ -164,8 +164,7 @@
     <ViewFlipper
         android:id="@+id/flipper_exclude_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_exclude_item"
@@ -173,8 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:text="@string/exclude"
-            android:textAllCaps="false"
-            tools:layout_editor_absoluteX="8dp" />
+            android:textAllCaps="false"/>
 
         <ProgressBar
             android:id="@+id/progress_exclude_item"

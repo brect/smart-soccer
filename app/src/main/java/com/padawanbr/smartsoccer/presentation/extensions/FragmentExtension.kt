@@ -14,7 +14,7 @@ fun Fragment.showShortToast(@StringRes textResId: Int) =
     Toast.makeText(
         requireContext(),
         textResId,
-        Toast.LENGTH_LONG
+        Toast.LENGTH_SHORT
     ).show()
 
 fun Fragment.showShortToast(text: String) =

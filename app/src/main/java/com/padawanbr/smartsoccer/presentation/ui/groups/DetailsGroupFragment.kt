@@ -11,6 +11,7 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -21,11 +22,21 @@ import com.padawanbr.smartsoccer.core.domain.model.DiaDaSemana
 import com.padawanbr.smartsoccer.core.domain.model.RangeIdade
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
+import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
+import com.padawanbr.smartsoccer.presentation.validation.formfields.FormFieldAutoCompleteText
+import com.padawanbr.smartsoccer.presentation.validation.formfields.FormFieldRangeSlider
+import com.padawanbr.smartsoccer.presentation.validation.formfields.FormFieldText
+import com.padawanbr.smartsoccer.presentation.validation.formfields.disable
+import com.padawanbr.smartsoccer.presentation.validation.formfields.enable
+import com.padawanbr.smartsoccer.presentation.validation.formfields.validate
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import reactivecircus.flowbinding.android.view.clicks
 import java.text.MessageFormat
 import java.util.Locale
 import kotlin.math.roundToInt
-import androidx.navigation.fragment.findNavController
 
 @AndroidEntryPoint
 class DetailsGroupFragment : BottomSheetDialogFragment() {
@@ -42,6 +53,109 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
 
     private var rangeIdade = RangeIdade(10, 70)
 
+    private val fieldNameGroup by lazy {
+        FormFieldText(
+            scope = lifecycleScope,
+            textInputLayout = binding.textInputLayoutGroupName,
+            textInputEditText = binding.editTextTextInputGroupName,
+            validation = { value ->
+                when {
+                    value.isNullOrBlank() -> "Nome do grupo obrigatório"
+                    else -> null
+                }
+            }
+        )
+    }
+
+    private val fieldPlaceGroup by lazy {
+        FormFieldText(
+            scope = lifecycleScope,
+            textInputLayout = binding.textInputPlace,
+            textInputEditText = binding.editTextTextInputPlace,
+            validation = { value ->
+                when {
+                    value.isNullOrBlank() -> "Local/Endereço é obrigatório"
+                    else -> null
+                }
+            }
+        )
+    }
+
+    private val fieldModalityGroup by lazy {
+        FormFieldAutoCompleteText(
+            scope = lifecycleScope,
+            textInputLayout = binding.textInputGroupModality,
+            autoCompleteTextView = binding.editTextTextInputGroupModality,
+            validation = { value ->
+                when {
+                    value.isNullOrBlank() -> "Selecione uma modalidade"
+                    else -> null
+                }
+            }
+        )
+    }
+
+    private val fieldGameDay by lazy {
+        FormFieldAutoCompleteText(
+            scope = lifecycleScope,
+            textInputLayout = binding.textInputGameDay,
+            autoCompleteTextView = binding.editTextTextInputGameDay,
+            validation = { value ->
+                when {
+                    value.isNullOrBlank() -> "Selecione o dia do seu jogo"
+                    else -> null
+                }
+            }
+        )
+    }
+
+    private val fieldBeginningOfTheGame by lazy {
+        FormFieldAutoCompleteText(
+            scope = lifecycleScope,
+            textInputLayout = binding.textInputBeginningOfTheGame,
+            autoCompleteTextView = binding.textViewBeginningOfTheGame,
+            validation = { value ->
+                when {
+                    value.isNullOrBlank() -> "Selecione o horário de início do seu jogo"
+                    else -> null
+                }
+            }
+        )
+    }
+
+    private val fieldNumberOfVacancies by lazy {
+        FormFieldText(
+            scope = lifecycleScope,
+            textInputLayout = binding.textInputNumberOfVacancies,
+            textInputEditText = binding.editTextNumberOfVacancies,
+            validation = { value ->
+                when {
+                    value.isNullOrBlank() -> "Digite a quantidade minima de times"
+                    else -> null
+                }
+            }
+        )
+    }
+
+    private val fieldSeekBarRatingAge by lazy {
+        FormFieldRangeSlider(
+            scope = lifecycleScope,
+            rangeSlider = binding.seekBarRatingAge,
+        )
+    }
+
+    private val formFields by lazy {
+        listOf(
+            fieldNameGroup,
+            fieldPlaceGroup,
+            fieldModalityGroup,
+            fieldGameDay,
+            fieldBeginningOfTheGame,
+            fieldNumberOfVacancies,
+            fieldSeekBarRatingAge
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +169,6 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
 
         beginningOfTheGameTimerPickerListener()
         seekBarRatingAgeListener()
-        buttonCreateGroupListener()
 
         if (isEditingMode()) {
             populateGroupDetails(args.grupoItemViewArgs)
@@ -69,6 +182,44 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         initSpinnerGroupGameDayAdapter()
 
         observeUiState()
+
+        initFormFields()
+
+        binding.buttonSaveGroup.clicks().onEach {
+            submit()
+        }.launchIn(lifecycleScope)
+
+    }
+
+    private fun initFormFields() {
+        formFields
+    }
+
+    private fun submit() = lifecycleScope.launch {
+        binding.buttonSaveGroup.isEnabled = false
+
+        formFields.disable()
+        if (formFields.validate(validateAll = true)) {
+
+            viewModel.saveGroup(
+                args.grupoItemViewArgs?.id,
+                fieldNameGroup.value.toString(),
+                fieldPlaceGroup.value.toString(),
+                tipoEsporte(fieldModalityGroup.value) ?: TipoEsporte.FUTEBOL_CAMPO,
+                fieldGameDay.value.toString(),
+                fieldBeginningOfTheGame.value.toString(),
+                fieldNumberOfVacancies.value.toString().toInt(),
+                RangeIdade(
+                    fieldSeekBarRatingAge.value?.get(0)?.toInt() ?: 0,
+                    fieldSeekBarRatingAge.value?.get(1)?.toInt() ?: 70,
+                )
+            )
+
+            showShortToast("Novo grupo criado com sucesso!")
+        }
+
+        formFields.enable()
+        binding.buttonSaveGroup.isEnabled = true
     }
 
     private fun isEditingMode() = args.grupoItemViewArgs != null
@@ -84,35 +235,9 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         binding.editTextNumberOfVacancies.setText(viewArgs?.quantidadeTimes.toString())
     }
 
-    private fun buttonCreateGroupListener() {
-        binding.buttonSaveGroup.setOnClickListener {
-            val textNameGroup = binding.editTextTextInputGroupName.text.toString()
-            val textPlaceGroup = binding.editTextTextInputPlace.text.toString()
-
-            // Obtenha o enum PosicaoJogador selecionado no Spinner
-            val selectedPosition = binding.editTextTextInputGroupModality.text.toString()
-            val groupModalityPositionString = selectedPosition.substringBefore("(").trim()
-            val groupModalityPosition =
-                TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
-
-            val textGameDay = binding.editTextTextInputGameDay.text.toString()
-            val textBeginningOfTheGame = binding.textViewBeginningOfTheGame.text.toString()
-
-            val qtdTeam = binding.editTextNumberOfVacancies.text.toString().toInt()
-
-            viewModel.saveGroup(
-                args.grupoItemViewArgs?.id,
-                textNameGroup,
-                textPlaceGroup,
-                groupModalityPosition ?: TipoEsporte.FUTEBOL_CAMPO,
-                textGameDay,
-                textBeginningOfTheGame,
-                qtdTeam,
-                rangeIdade
-            )
-
-            Toast.makeText(context, "buttonSaveItem", Toast.LENGTH_SHORT).show()
-        }
+    private fun tipoEsporte(selectedPosition: String?): TipoEsporte? {
+        val groupModalityPositionString = selectedPosition?.substringBefore("(")?.trim()
+        return TipoEsporte.values().find { it.modalidade == groupModalityPositionString }
     }
 
     private fun seekBarRatingAgeListener() {

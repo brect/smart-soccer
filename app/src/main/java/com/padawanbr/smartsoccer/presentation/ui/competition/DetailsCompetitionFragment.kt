@@ -23,10 +23,10 @@ import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import com.padawanbr.smartsoccer.databinding.BottonsheetSharedTeamBinding
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsCompetitionBinding
-import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil
-import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.REQUEST_EXTERNAL_STORAGE_CODE
-import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.checkPermissions
-import com.padawanbr.smartsoccer.presentation.common.PermissionsUtil.requestPermissionsIfDanied
+import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil
+import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil.REQUEST_EXTERNAL_STORAGE_CODE
+import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil.checkPermissions
+import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil.requestPermissionsIfDanied
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getBitmapsFromRecyclerView
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.saveBitmapsToGallery
 import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.shareBitmapList

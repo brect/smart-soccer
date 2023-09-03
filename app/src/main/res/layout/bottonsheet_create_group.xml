@@ -33,7 +33,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInput_createTeam_qtdTeams"
+                android:id="@+id/textInputLayout_groupName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

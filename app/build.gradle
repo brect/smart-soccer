@@ -76,6 +76,10 @@ dependencies {
     implementation "androidx.room:room-paging:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
+    def flowbinding_version = '1.2.0'
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-android:$flowbinding_version"
+    implementation "io.github.reactivecircus.flowbinding:flowbinding-material:${flowbinding_version}"
+
     // Other Libs
     implementation 'com.vanniktech:android-image-cropper:4.5.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
