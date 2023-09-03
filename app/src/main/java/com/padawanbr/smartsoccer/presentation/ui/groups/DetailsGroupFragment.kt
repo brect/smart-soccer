@@ -53,114 +53,14 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
 
     private var rangeIdade = RangeIdade(10, 70)
 
-    private val fieldNameGroup by lazy {
-        FormFieldText(
-            scope = lifecycleScope,
-            textInputLayout = binding.textInputLayoutGroupName,
-            textInputEditText = binding.editTextTextInputGroupName,
-            validation = { value ->
-                when {
-                    value.isNullOrBlank() -> "Nome do grupo obrigatório"
-                    else -> null
-                }
-            }
-        )
-    }
-
-    private val fieldPlaceGroup by lazy {
-        FormFieldText(
-            scope = lifecycleScope,
-            textInputLayout = binding.textInputPlace,
-            textInputEditText = binding.editTextTextInputPlace,
-            validation = { value ->
-                when {
-                    value.isNullOrBlank() -> "Local/Endereço é obrigatório"
-                    else -> null
-                }
-            }
-        )
-    }
-
-    private val fieldModalityGroup by lazy {
-        FormFieldAutoCompleteText(
-            scope = lifecycleScope,
-            textInputLayout = binding.textInputGroupModality,
-            autoCompleteTextView = binding.editTextTextInputGroupModality,
-            validation = { value ->
-                when {
-                    value.isNullOrBlank() -> "Selecione uma modalidade"
-                    else -> null
-                }
-            }
-        )
-    }
-
-    private val fieldGameDay by lazy {
-        FormFieldAutoCompleteText(
-            scope = lifecycleScope,
-            textInputLayout = binding.textInputGameDay,
-            autoCompleteTextView = binding.editTextTextInputGameDay,
-            validation = { value ->
-                when {
-                    value.isNullOrBlank() -> "Selecione o dia do seu jogo"
-                    else -> null
-                }
-            }
-        )
-    }
-
-    private val fieldBeginningOfTheGame by lazy {
-        FormFieldAutoCompleteText(
-            scope = lifecycleScope,
-            textInputLayout = binding.textInputBeginningOfTheGame,
-            autoCompleteTextView = binding.textViewBeginningOfTheGame,
-            validation = { value ->
-                when {
-                    value.isNullOrBlank() -> "Selecione o horário de início do seu jogo"
-                    else -> null
-                }
-            }
-        )
-    }
-
-    private val fieldNumberOfVacancies by lazy {
-        FormFieldText(
-            scope = lifecycleScope,
-            textInputLayout = binding.textInputNumberOfVacancies,
-            textInputEditText = binding.editTextNumberOfVacancies,
-            validation = { value ->
-                when {
-                    value.isNullOrBlank() -> "Digite a quantidade minima de times"
-                    else -> null
-                }
-            }
-        )
-    }
-
-    private val fieldSeekBarRatingAge by lazy {
-        FormFieldRangeSlider(
-            scope = lifecycleScope,
-            rangeSlider = binding.seekBarRatingAge,
-        )
-    }
-
-    private val formFields by lazy {
-        listOf(
-            fieldNameGroup,
-            fieldPlaceGroup,
-            fieldModalityGroup,
-            fieldGameDay,
-            fieldBeginningOfTheGame,
-            fieldNumberOfVacancies,
-            fieldSeekBarRatingAge
-        )
-    }
+    private lateinit var formFieldManager: FormFieldManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = BottonsheetCreateGroupBinding.inflate(inflater, container, false)
+        formFieldManager = FormFieldManager(binding, lifecycleScope)
         return binding.root
     }
 
@@ -192,33 +92,33 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
     }
 
     private fun initFormFields() {
-        formFields
+        formFieldManager.formFields
     }
 
     private fun submit() = lifecycleScope.launch {
         binding.buttonSaveGroup.isEnabled = false
 
-        formFields.disable()
-        if (formFields.validate(validateAll = true)) {
+        formFieldManager.formFields.disable()
+        if (formFieldManager.formFields.validate(validateAll = true)) {
 
             viewModel.saveGroup(
                 args.grupoItemViewArgs?.id,
-                fieldNameGroup.value.toString(),
-                fieldPlaceGroup.value.toString(),
-                tipoEsporte(fieldModalityGroup.value) ?: TipoEsporte.FUTEBOL_CAMPO,
-                fieldGameDay.value.toString(),
-                fieldBeginningOfTheGame.value.toString(),
-                fieldNumberOfVacancies.value.toString().toInt(),
+                formFieldManager.fieldNameGroup.value.toString(),
+                formFieldManager.fieldPlaceGroup.value.toString(),
+                tipoEsporte(formFieldManager.fieldModalityGroup.value) ?: TipoEsporte.FUTEBOL_CAMPO,
+                formFieldManager.fieldGameDay.value.toString(),
+                formFieldManager.fieldBeginningOfTheGame.value.toString(),
+                formFieldManager.fieldNumberOfVacancies.value.toString().toInt(),
                 RangeIdade(
-                    fieldSeekBarRatingAge.value?.get(0)?.toInt() ?: 0,
-                    fieldSeekBarRatingAge.value?.get(1)?.toInt() ?: 70,
+                    formFieldManager.fieldSeekBarRatingAge.value?.get(0)?.toInt() ?: 0,
+                    formFieldManager.fieldSeekBarRatingAge.value?.get(1)?.toInt() ?: 70,
                 )
             )
 
             showShortToast("Novo grupo criado com sucesso!")
         }
 
-        formFields.enable()
+        formFieldManager.formFields.enable()
         binding.buttonSaveGroup.isEnabled = true
     }
 
