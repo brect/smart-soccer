@@ -21,9 +21,6 @@ import java.io.Serializable
 class SoccerPlayerFragment : Fragment() {
 
     private var _binding: FragmentSoccerPlayerBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val args by navArgs<SoccerPlayerFragmentArgs>()
@@ -35,12 +32,11 @@ class SoccerPlayerFragment : Fragment() {
         getCommonAdapterOf(
             { SoccerPlayerViewHolder.create(it) },
             { item: JogadorItem ->
-                Toast.makeText(context, "productsAdapter $item", Toast.LENGTH_SHORT).show()
                 val grupoId = args.groupId
                 showDetailsSoccerPlayerFragment(grupoId, item, true)
             },
             { item: JogadorItem ->
-                Toast.makeText(context, "productsAdapter onLongClicked $item", Toast.LENGTH_SHORT).show()
+                showShortToast("Jogador ${item.nome}")
             }
         )
     }
@@ -63,7 +59,7 @@ class SoccerPlayerFragment : Fragment() {
         observeUiState()
         observeSharedUiState()
 
-        val grupoId = args.groupId ?: ""
+        val grupoId = args.groupId
 
         binding.floatingActionButtonAddSoccer.setOnClickListener {
             showDetailsSoccerPlayerFragment(grupoId)
@@ -73,7 +69,11 @@ class SoccerPlayerFragment : Fragment() {
 
     }
 
-    private fun showDetailsSoccerPlayerFragment(grupoId: String, jogador: JogadorItem? = null, isEditing: Boolean = false) {
+    private fun showDetailsSoccerPlayerFragment(
+        grupoId: String,
+        jogador: JogadorItem? = null,
+        isEditing: Boolean = false
+    ) {
         grupoId?.let {
             val detailsSoccerPlayerFragment = DetailsSoccerPlayerFragment()
             val bundle = Bundle()
