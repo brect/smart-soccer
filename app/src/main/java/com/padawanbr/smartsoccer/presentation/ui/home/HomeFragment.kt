@@ -9,16 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
 import com.padawanbr.smartsoccer.databinding.FragmentHomeBinding
-import com.padawanbr.smartsoccer.presentation.ui.groups.DetailsGroupFragment
+import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.extensions.attachHideShowFab
+import com.padawanbr.smartsoccer.presentation.ui.groups.DetalheGrupoItemViewArgs
 import com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItem
 import com.padawanbr.smartsoccer.presentation.ui.groups.SharedGroupsViewModel
-import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
-import com.padawanbr.smartsoccer.presentation.ui.groups.DetalheGrupoItemViewArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -99,19 +98,7 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
             adapter = groupsAdapter
 
-            binding.recyclerGroupItens.addOnScrollListener(object :
-                RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    if (dy > 0 && binding.floatingActionButton.isShown) {
-                        // Scroll para baixo e o FloatingActionButton está visível, oculta o FAB.
-                        binding.floatingActionButton.hide()
-                    } else if (dy < 0 && !binding.floatingActionButton.isShown) {
-                        // Scroll para cima e o FloatingActionButton está oculto, mostra o FAB.
-                        binding.floatingActionButton.show()
-                    }
-                }
-            })
+            binding.recyclerGroupItens.attachHideShowFab(binding.floatingActionButton)
         }
     }
 

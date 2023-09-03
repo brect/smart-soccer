@@ -11,9 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.padawanbr.smartsoccer.databinding.FragmentSoccerPlayerBinding
 import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.extensions.attachHideShowFab
+import com.padawanbr.smartsoccer.presentation.extensions.showLoadingToast
+import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import dagger.hilt.android.AndroidEntryPoint
-
-import androidx.recyclerview.widget.RecyclerView
 import java.io.Serializable
 
 @AndroidEntryPoint
@@ -109,20 +110,7 @@ class SoccerPlayerFragment : Fragment() {
             setHasFixedSize(true)
             adapter = soccerPlayersAdapter
 
-            binding.recyclerSoccerPlayers.addOnScrollListener(object :
-                RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-
-                    if (dy > 0 && binding.floatingActionButtonAddSoccer.isShown) {
-                        // Scroll para baixo e o FloatingActionButton está visível, oculta o FAB.
-                        binding.floatingActionButtonAddSoccer.hide()
-                    } else if (dy < 0 && !binding.floatingActionButtonAddSoccer.isShown) {
-                        // Scroll para cima e o FloatingActionButton está oculto, mostra o FAB.
-                        binding.floatingActionButtonAddSoccer.show()
-                    }
-                }
-            })
+            binding.recyclerSoccerPlayers.attachHideShowFab(binding.floatingActionButtonAddSoccer)
         }
     }
 
@@ -138,37 +126,22 @@ class SoccerPlayerFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 SoccerPlayerViewModel.UiState.Error -> {
-                    Toast.makeText(
-                        context,
-                        "SoccerPlayerViewModel.UiState.Error",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast("Erro ao carregar sua lista")
                 }
 
                 SoccerPlayerViewModel.UiState.Loading -> {
-                    Toast.makeText(
-                        context,
-                        "SoccerPlayerViewModel.UiState.Loading",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showLoadingToast()
                 }
 
                 SoccerPlayerViewModel.UiState.ShowEmptySoccers -> {
-                    Toast.makeText(
-                        context,
-                        "SoccerPlayerViewModel.UiState.ShowEmptySoccers",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast("Você não possui jogadores cadastrados")
                     soccerPlayersAdapter.submitList(emptyList())
                 }
+
                 is SoccerPlayerViewModel.UiState.ShowSoccers -> {
-                    Toast.makeText(
-                        context,
-                        "SoccerPlayerViewModel.UiState.ShowSoccers",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     soccerPlayersAdapter.submitList(uiState.soccerPlayers)
                 }
+
                 SoccerPlayerViewModel.UiState.Success -> {
                     Toast.makeText(
                         context,

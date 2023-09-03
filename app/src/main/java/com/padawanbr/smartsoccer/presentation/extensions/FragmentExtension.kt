@@ -24,17 +24,16 @@ fun Fragment.showShortToast(text: String) =
         Toast.LENGTH_LONG
     ).show()
 
+fun Fragment.showLoadingToast(text: String = "Carregando...") =
+    Toast.makeText(
+        requireContext(),
+        text,
+        Toast.LENGTH_LONG
+    ).show()
+
 fun Fragment.navControllerAndClearStack() =
     NavHostFragment.findNavController(this).navigate(
         R.id.nav_graph, null,
         NavOptions.Builder()
             .setPopUpTo(findNavController().graph.startDestinationId, true).build()
     )
-
-fun RecyclerView.initRecyclerView(
-    adapter: RecyclerView.Adapter<*>,
-    layoutManager: RecyclerView.LayoutManager? = null
-) {
-    this.layoutManager = layoutManager ?: this.layoutManager
-    this.adapter = adapter
-}
