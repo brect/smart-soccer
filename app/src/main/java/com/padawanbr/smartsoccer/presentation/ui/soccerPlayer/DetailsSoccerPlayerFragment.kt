@@ -13,14 +13,11 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
-import com.padawanbr.smartsoccer.core.domain.model.RangeIdade
-import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsSoccerPlayerBinding
 import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.presentation.validation.formfields.disable
 import com.padawanbr.smartsoccer.presentation.validation.formfields.enable
 import com.padawanbr.smartsoccer.presentation.validation.formfields.validate
-import com.padawanbr.smartsoccer.presentation.validation.managers.DetailsGroupFormFieldManager
 import com.padawanbr.smartsoccer.presentation.validation.managers.DetailsSoccerPlayerFormFieldManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -38,7 +35,6 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
     private val sharedViewModel: SharedSoccerPlayerViewModel by activityViewModels()
 
     private lateinit var formFieldManager: DetailsSoccerPlayerFormFieldManager
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +58,6 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
 
         ratingBarAbilityBinding()
 
-
         val isEditing = arguments?.getBoolean("isEditing", false)
 
         binding.flipperExcludeItem.visibility = View.GONE
@@ -77,16 +72,19 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
         }.launchIn(lifecycleScope)
 
         binding.buttonExcludeItem.setOnClickListener {
-            val playerId = arguments?.getString("id")
-            if (playerId.isNullOrBlank()) {
-                Toast.makeText(context, "Jogador inválido ou não encontrado", Toast.LENGTH_SHORT)
-                    .show()
-            } else {
-                viewModel.deleteSoccerPlayer(playerId)
-            }
+            deleteSoccerPlayer()
         }
 
         observeUiState()
+    }
+
+    private fun deleteSoccerPlayer() {
+        val playerId = arguments?.getString("id")
+        if (playerId.isNullOrBlank()) {
+            showShortToast("Jogador inválido ou não encontrado")
+        } else {
+            viewModel.deleteSoccerPlayer(playerId)
+        }
     }
 
     private fun posicaoJogador(selectedPosition: String): PosicaoJogador? {
@@ -109,7 +107,6 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
             val playerAbilitiesMap = createPlayerAbilitiesMap()
             val playerIsInDM = binding.switchDetailsPlayerDM.isChecked
 
-
             viewModel.saveSoccerPlayer(
                 soccerId,
                 formFieldManager.fieldPlayerName.value.toString(),
@@ -119,8 +116,6 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
                 playerIsInDM,
                 grupoId,
             )
-
-            showShortToast("Novo grupo criado com sucesso!")
         }
 
         formFieldManager.formFields.enable()
@@ -273,32 +268,21 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
                 }
 
                 is DetailsSoccerPlayerViewModel.UiState.Success -> {
-                    Toast.makeText(
-                        context,
-                        "DetailsSoccerPlayerViewModel.UiState.Success",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    // Atualize a lista de jogadores no SoccerPlayerFragment
-                    sharedViewModel.updateSoccerPlayers(true)
-
-                    this.dismiss()
+                    atualizaListaDeJogadores()
+                    showShortToast("Jogador adicionado com sucesso!")
                 }
 
                 DetailsSoccerPlayerViewModel.UiState.Delete -> {
-                    Toast.makeText(
-                        context,
-                        "DetailsSoccerPlayerViewModel.UiState.Delete",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    // Atualize a lista de jogadores no SoccerPlayerFragment
-                    sharedViewModel.updateSoccerPlayers(true)
-
-                    this.dismiss()
+                    atualizaListaDeJogadores()
+                    showShortToast("Jogador deletado com sucesso!")
                 }
             }
         }
+    }
+
+    private fun atualizaListaDeJogadores() {
+        sharedViewModel.updateSoccerPlayers(true)
+        this.dismiss()
     }
 
     override fun onDestroyView() {
