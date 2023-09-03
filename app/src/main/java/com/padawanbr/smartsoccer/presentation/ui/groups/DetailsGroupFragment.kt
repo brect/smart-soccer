@@ -23,12 +23,10 @@ import com.padawanbr.smartsoccer.core.domain.model.RangeIdade
 import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
-import com.padawanbr.smartsoccer.presentation.validation.formfields.FormFieldAutoCompleteText
-import com.padawanbr.smartsoccer.presentation.validation.formfields.FormFieldRangeSlider
-import com.padawanbr.smartsoccer.presentation.validation.formfields.FormFieldText
 import com.padawanbr.smartsoccer.presentation.validation.formfields.disable
 import com.padawanbr.smartsoccer.presentation.validation.formfields.enable
 import com.padawanbr.smartsoccer.presentation.validation.formfields.validate
+import com.padawanbr.smartsoccer.presentation.validation.managers.DetailsGroupFormFieldManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -53,19 +51,21 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
 
     private var rangeIdade = RangeIdade(10, 70)
 
-    private lateinit var formFieldManager: FormFieldManager
+    private lateinit var formFieldManager: DetailsGroupFormFieldManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = BottonsheetCreateGroupBinding.inflate(inflater, container, false)
-        formFieldManager = FormFieldManager(binding, lifecycleScope)
+        formFieldManager = DetailsGroupFormFieldManager(binding, lifecycleScope)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initFormFields()
 
         beginningOfTheGameTimerPickerListener()
         seekBarRatingAgeListener()
@@ -82,8 +82,6 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         initSpinnerGroupGameDayAdapter()
 
         observeUiState()
-
-        initFormFields()
 
         binding.buttonSaveGroup.clicks().onEach {
             submit()

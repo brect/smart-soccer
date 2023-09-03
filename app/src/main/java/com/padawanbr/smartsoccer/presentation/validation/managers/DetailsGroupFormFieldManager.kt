@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation.ui.groups
+package com.padawanbr.smartsoccer.presentation.validation.managers
 
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateGroupBinding
 import com.padawanbr.smartsoccer.presentation.validation.formfields.FormFieldAutoCompleteText
@@ -6,7 +6,7 @@ import com.padawanbr.smartsoccer.presentation.validation.formfields.FormFieldRan
 import com.padawanbr.smartsoccer.presentation.validation.formfields.FormFieldText
 import kotlinx.coroutines.CoroutineScope
 
-class FormFieldManager(val binding: BottonsheetCreateGroupBinding, private val lifecycleScope: CoroutineScope) {
+class DetailsGroupFormFieldManager(val binding: BottonsheetCreateGroupBinding, private val lifecycleScope: CoroutineScope) {
 
     val fieldNameGroup by lazy {
         FormFieldText(

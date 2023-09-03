@@ -9,11 +9,24 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
+import com.padawanbr.smartsoccer.core.domain.model.RangeIdade
+import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsSoccerPlayerBinding
+import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
+import com.padawanbr.smartsoccer.presentation.validation.formfields.disable
+import com.padawanbr.smartsoccer.presentation.validation.formfields.enable
+import com.padawanbr.smartsoccer.presentation.validation.formfields.validate
+import com.padawanbr.smartsoccer.presentation.validation.managers.DetailsGroupFormFieldManager
+import com.padawanbr.smartsoccer.presentation.validation.managers.DetailsSoccerPlayerFormFieldManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import reactivecircus.flowbinding.android.view.clicks
 
 @AndroidEntryPoint
 class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
@@ -24,16 +37,22 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
     private val viewModel: DetailsSoccerPlayerViewModel by viewModels()
     private val sharedViewModel: SharedSoccerPlayerViewModel by activityViewModels()
 
+    private lateinit var formFieldManager: DetailsSoccerPlayerFormFieldManager
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailsSoccerPlayerBinding.inflate(inflater, container, false)
+        formFieldManager = DetailsSoccerPlayerFormFieldManager(binding, lifecycleScope)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initFormFields()
 
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.root.parent as View)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -43,8 +62,7 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
 
         ratingBarAbilityBinding()
 
-        val grupoId = arguments?.getString("grupoId", "") ?: ""
-        val soccerId = arguments?.getString("id", "")
+
         val isEditing = arguments?.getBoolean("isEditing", false)
 
         binding.flipperExcludeItem.visibility = View.GONE
@@ -54,30 +72,9 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
             populatePlayerDetails()
         }
 
-        binding.buttonSaveItem.setOnClickListener {
-            val playerName = binding.editTextTextInputDetailsPlayerName.text.toString()
-            val playerAge = binding.editTextTextInputDetailsPlayerAge.text.toString().toInt()
-
-            // Obtenha o enum PosicaoJogador selecionado no Spinner
-            val selectedPosition = binding.editTextTextInputDetailsPlayerPosition.text.toString()
-            val playerPositionString = selectedPosition.substringBefore("(")
-                .trim() // Obtém apenas a posição, ignorando a abreviação
-            val playerPosition = PosicaoJogador.values().find { it.funcao == playerPositionString }
-
-            val playerAbilitiesMap = createPlayerAbilitiesMap()
-
-            val playerIsInDM = binding.switchDetailsPlayerDM.isChecked
-
-            viewModel.saveSoccerPlayer(
-                soccerId,
-                playerName,
-                playerAge,
-                playerPosition,
-                playerAbilitiesMap,
-                playerIsInDM,
-                grupoId,
-            )
-        }
+        binding.buttonSaveItem.clicks().onEach {
+            submit()
+        }.launchIn(lifecycleScope)
 
         binding.buttonExcludeItem.setOnClickListener {
             val playerId = arguments?.getString("id")
@@ -90,6 +87,44 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
         }
 
         observeUiState()
+    }
+
+    private fun posicaoJogador(selectedPosition: String): PosicaoJogador? {
+        val playerPositionString = selectedPosition.substringBefore("(").trim()
+        return PosicaoJogador.values().find { it.funcao == playerPositionString }
+    }
+
+    private fun initFormFields() {
+        formFieldManager.formFields
+    }
+
+    private fun submit() = lifecycleScope.launch {
+        binding.buttonSaveItem.isEnabled = false
+
+        formFieldManager.formFields.disable()
+        if (formFieldManager.formFields.validate(validateAll = true)) {
+
+            val grupoId = arguments?.getString("grupoId", "") ?: ""
+            val soccerId = arguments?.getString("id", "")
+            val playerAbilitiesMap = createPlayerAbilitiesMap()
+            val playerIsInDM = binding.switchDetailsPlayerDM.isChecked
+
+
+            viewModel.saveSoccerPlayer(
+                soccerId,
+                formFieldManager.fieldPlayerName.value.toString(),
+                formFieldManager.fieldPlayerAge.value.toString().toInt(),
+                posicaoJogador(formFieldManager.fieldPlayerPosition.value.toString()),
+                playerAbilitiesMap,
+                playerIsInDM,
+                grupoId,
+            )
+
+            showShortToast("Novo grupo criado com sucesso!")
+        }
+
+        formFieldManager.formFields.enable()
+        binding.buttonSaveItem.isEnabled = true
     }
 
     private fun populatePlayerDetails() {
@@ -105,7 +140,10 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
         binding.switchDetailsPlayerDM.isChecked = estaNoDepartamentoMedico
 
         val posicaoJogador = PosicaoJogador.fromString(selectedPosition)
-        binding.editTextTextInputDetailsPlayerPosition.setText("${posicaoJogador?.funcao} (${posicaoJogador?.abreviacao})", false)
+        binding.editTextTextInputDetailsPlayerPosition.setText(
+            "${posicaoJogador?.funcao} (${posicaoJogador?.abreviacao})",
+            false
+        )
 
         setPlayerAbilities(habilidades)
     }
@@ -210,7 +248,8 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
             "${posicao.funcao} (${posicao.abreviacao})"
         }.toMutableList()
 
-        val adapterDetailsPlayerPositions = ArrayAdapter(requireContext(), R.layout.simple_list_item_1, detailsPlayerPositions)
+        val adapterDetailsPlayerPositions =
+            ArrayAdapter(requireContext(), R.layout.simple_list_item_1, detailsPlayerPositions)
         binding.editTextTextInputDetailsPlayerPosition.setAdapter(adapterDetailsPlayerPositions)
     }
 
