@@ -6,9 +6,7 @@ import androidx.navigation.NavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeCompetitionBinding
-import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
 import com.padawanbr.smartsoccer.presentation.common.adapter.getCommonAdapterOf
-import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.presentation.modelView.CompetitionItem
 import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
 

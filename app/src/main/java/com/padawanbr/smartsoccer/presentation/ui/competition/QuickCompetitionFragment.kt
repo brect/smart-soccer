@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.padawanbr.smartsoccer.databinding.BottonsheetCreateCompetitionBinding
+import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.presentation.ui.groups.SharedGroupsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,18 +63,10 @@ class QuickCompetitionFragment : BottomSheetDialogFragment() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 QuickCompetitionViewModel.UiState.Error -> {
-                    Toast.makeText(
-                        context,
-                        "CompetitionViewModel.UiState.Error",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast("Erro ao criar a competição")
                 }
                 QuickCompetitionViewModel.UiState.Loading -> {
-                    Toast.makeText(
-                        context,
-                        "CompetitionViewModel.UiState.Loading",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast("Carregando...")
                 }
                 QuickCompetitionViewModel.UiState.Success -> {
                     sharedViewModel.updateGroups(true)

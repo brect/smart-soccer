@@ -75,11 +75,11 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 is DetailsCompetitionViewModel.UiState.Error -> {
-                    showShortToast("DetailsCompetitionViewModel.UiState.Error")
+                    showShortToast("Erro ao carregar as informações")
                 }
 
                 is DetailsCompetitionViewModel.UiState.Loading -> {
-                    showShortToast("DetailsCompetitionViewModel.UiState.Loading")
+                    showShortToast("Carregando...")
                 }
 
                 is DetailsCompetitionViewModel.UiState.Success -> {
@@ -187,20 +187,9 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
         if (requestCode == REQUEST_EXTERNAL_STORAGE_CODE) {
             // Checking whether user granted the permission or not.
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Showing the toast message
-                Toast.makeText(
-                    requireContext(),
-                    "EXTERNAL_STORAGE Permission Granted",
-                    Toast.LENGTH_SHORT
-                )
-                    .show();
+                showShortToast("Permissão de armazenamento concedida! 😊")
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    "EXTERNAL_STORAGE Permission Denied",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                showShortToast("Permissão de armazenamento negada. 😢")
             }
         }
     }
