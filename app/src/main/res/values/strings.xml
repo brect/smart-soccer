@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Smart Soccer</string>
+    <string name="app_name">daVázea</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="group_fragment_label">Meus grupos</string>
