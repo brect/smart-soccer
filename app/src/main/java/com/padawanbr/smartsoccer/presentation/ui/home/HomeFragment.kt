@@ -13,10 +13,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
 import com.padawanbr.smartsoccer.databinding.FragmentHomeBinding
-import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.common.adapter.getCommonAdapterOf
+
 import com.padawanbr.smartsoccer.presentation.extensions.attachHideShowFab
-import com.padawanbr.smartsoccer.presentation.ui.groups.DetalheGrupoItemViewArgs
-import com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItem
+import com.padawanbr.smartsoccer.presentation.modelView.GrupoItem
+import com.padawanbr.smartsoccer.presentation.viewArgs.DetalheGrupoItemViewArgs
+
 import com.padawanbr.smartsoccer.presentation.ui.groups.SharedGroupsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

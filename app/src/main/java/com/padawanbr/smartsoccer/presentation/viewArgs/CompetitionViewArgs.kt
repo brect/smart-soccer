@@ -1,12 +1,8 @@
-package com.padawanbr.smartsoccer.presentation.ui.groups
+package com.padawanbr.smartsoccer.presentation.viewArgs
 
 import android.os.Parcelable
 import androidx.annotation.Keep
-import com.padawanbr.smartsoccer.core.domain.model.Grupo
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
-import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
-import com.padawanbr.smartsoccer.framework.db.entity.GrupoEntity
-import com.padawanbr.smartsoccer.framework.db.entity.toConfiguracaoEsporteModel
 import kotlinx.parcelize.Parcelize
 
 

@@ -1,6 +1,6 @@
-package com.padawanbr.smartsoccer.presentation.ui.soccerPlayer
+package com.padawanbr.smartsoccer.presentation.modelView
 
-import com.padawanbr.smartsoccer.presentation.common.ListItem
+import com.padawanbr.smartsoccer.presentation.common.adapter.ListItem
 
 data class JogadorItem(
     val id: String,

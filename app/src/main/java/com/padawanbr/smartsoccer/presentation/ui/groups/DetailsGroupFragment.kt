@@ -27,6 +27,7 @@ import com.padawanbr.smartsoccer.presentation.validation.formfields.disable
 import com.padawanbr.smartsoccer.presentation.validation.formfields.enable
 import com.padawanbr.smartsoccer.presentation.validation.formfields.validate
 import com.padawanbr.smartsoccer.presentation.validation.managers.DetailsGroupFormFieldManager
+import com.padawanbr.smartsoccer.presentation.viewArgs.GrupoItemViewArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

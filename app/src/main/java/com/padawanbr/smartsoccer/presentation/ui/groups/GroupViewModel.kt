@@ -11,7 +11,8 @@ import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGrupoComJogadoresETorneiosUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
-import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
+import com.padawanbr.smartsoccer.presentation.modelView.GrupoComJogadoresItem
+import com.padawanbr.smartsoccer.presentation.modelView.CompetitionItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.padawanbr.smartsoccer.core.domain.model.calcularMediaHabilidades
 import com.padawanbr.smartsoccer.databinding.ItemCompetitionBinding
-import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
+import com.padawanbr.smartsoccer.presentation.common.adapter.CommonViewHolder
+import com.padawanbr.smartsoccer.presentation.modelView.CompetitionItem
 
 class ItemCompetitionViewHolder(
     itemBinding: ItemCompetitionBinding,

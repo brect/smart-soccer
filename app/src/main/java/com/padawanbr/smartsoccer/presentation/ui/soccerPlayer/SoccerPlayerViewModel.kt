@@ -7,6 +7,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.usecase.GetSoccerPlayersByGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
+import com.padawanbr.smartsoccer.presentation.modelView.JogadorItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject

@@ -4,12 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.padawanbr.smartsoccer.databinding.ItemCompetitionBinding
-import com.padawanbr.smartsoccer.databinding.ItemHomeBinding
 import com.padawanbr.smartsoccer.databinding.ItemSoccerPlayersInfoBinding
-import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
-import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
-import com.padawanbr.smartsoccer.presentation.ui.home.HomeItemViewHolder
+import com.padawanbr.smartsoccer.presentation.common.adapter.CommonViewHolder
+import com.padawanbr.smartsoccer.presentation.modelView.GroupoJogadoresInfo
 
 class ItemGroupPlayersInfoViewHolder(
     itemBinding: ItemSoccerPlayersInfoBinding,

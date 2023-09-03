@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation.cropper.optionsdialog
+package com.padawanbr.smartsoccer.presentation.common.cropper.optionsdialog
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -232,9 +232,9 @@ internal class OptionsBottomSheet : BottomSheetDialogFragment() {
 
   companion object {
     fun show(
-      fragmentManager: FragmentManager,
-      options: CropImageOptions?,
-      listener: Listener,
+        fragmentManager: FragmentManager,
+        options: CropImageOptions?,
+        listener: Listener,
     ) {
       Companion.listener = listener
       OptionsBottomSheet().apply {

@@ -1,15 +1,10 @@
-package com.padawanbr.smartsoccer.presentation.ui.competition
+package com.padawanbr.smartsoccer.presentation.modelView
 
-import com.padawanbr.smartsoccer.core.domain.model.ConfiguracaoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.CriterioDesempateItem
-import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.core.domain.model.Partida
 import com.padawanbr.smartsoccer.core.domain.model.Time
-import com.padawanbr.smartsoccer.core.domain.model.TipoEsporte
 import com.padawanbr.smartsoccer.core.domain.model.TipoTorneio
-import com.padawanbr.smartsoccer.core.domain.model.Torneio
-import com.padawanbr.smartsoccer.presentation.common.ListItem
-import java.util.UUID
+import com.padawanbr.smartsoccer.presentation.common.adapter.ListItem
 
 data class CompetitionItem(
     val id: String,

@@ -10,10 +10,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.padawanbr.smartsoccer.databinding.FragmentSoccerPlayerBinding
-import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.common.adapter.getCommonAdapterOf
 import com.padawanbr.smartsoccer.presentation.extensions.attachHideShowFab
 import com.padawanbr.smartsoccer.presentation.extensions.showLoadingToast
 import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
+import com.padawanbr.smartsoccer.presentation.modelView.JogadorItem
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
 

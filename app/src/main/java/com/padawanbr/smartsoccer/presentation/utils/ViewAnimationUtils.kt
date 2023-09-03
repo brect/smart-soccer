@@ -1,11 +1,11 @@
-package com.padawanbr.smartsoccer.presentation.common
+package com.padawanbr.smartsoccer.presentation.utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.view.View
 
 
-object ViewAnimation {
+object ViewAnimationUtils {
 
     fun rotateView(v: View, rotate: Boolean, degrees: Float? = null): Boolean {
         val rotationValue = degrees ?: if (rotate) 135f else 0f

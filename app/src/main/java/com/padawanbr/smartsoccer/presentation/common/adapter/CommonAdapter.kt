@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation.common
+package com.padawanbr.smartsoccer.presentation.common.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter

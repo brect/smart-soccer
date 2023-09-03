@@ -1,12 +1,11 @@
 package com.padawanbr.smartsoccer.presentation.ui.home
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import com.padawanbr.smartsoccer.databinding.ItemHomeBinding
-import com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItem
-import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
+import com.padawanbr.smartsoccer.presentation.modelView.GrupoItem
+import com.padawanbr.smartsoccer.presentation.common.adapter.CommonViewHolder
 
 class HomeItemViewHolder(
     itemBinding: ItemHomeBinding,

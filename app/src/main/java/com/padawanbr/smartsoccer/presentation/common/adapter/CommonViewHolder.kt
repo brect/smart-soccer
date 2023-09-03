@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation.common
+package com.padawanbr.smartsoccer.presentation.common.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding

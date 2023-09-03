@@ -8,7 +8,7 @@ import androidx.lifecycle.switchMap
 import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetGroupsUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
-import com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItem
+import com.padawanbr.smartsoccer.presentation.modelView.GrupoItem
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch

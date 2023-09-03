@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.padawanbr.smartsoccer.databinding.ItemSoccerPlayerBinding
-import com.padawanbr.smartsoccer.presentation.common.CommonViewHolder
+import com.padawanbr.smartsoccer.presentation.common.adapter.CommonViewHolder
+import com.padawanbr.smartsoccer.presentation.modelView.JogadorItem
 
 class SoccerPlayerViewHolder(
     itemBinding: ItemSoccerPlayerBinding,

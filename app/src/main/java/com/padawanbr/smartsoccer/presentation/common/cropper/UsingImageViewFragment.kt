@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation.cropper
+package com.padawanbr.smartsoccer.presentation.common.cropper
 
 import ImagePickerUtils.saveImageUri
 import android.graphics.Rect
@@ -25,7 +25,7 @@ import com.canhub.cropper.CropImageView.OnCropImageCompleteListener
 import com.canhub.cropper.CropImageView.OnSetImageUriCompleteListener
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.FragmentCropImageViewBinding
-import com.padawanbr.smartsoccer.presentation.cropper.optionsdialog.OptionsBottomSheet
+import com.padawanbr.smartsoccer.presentation.common.cropper.optionsdialog.OptionsBottomSheet
 
 class UsingImageViewFragment : Fragment(), OptionsBottomSheet.Listener,
     OnSetImageUriCompleteListener, OnCropImageCompleteListener, MenuProvider {

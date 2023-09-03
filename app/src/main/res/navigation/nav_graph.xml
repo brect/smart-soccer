@@ -40,7 +40,7 @@
         <argument
             android:name="grupoItemViewArgs"
             android:defaultValue="@null"
-            app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.GrupoItemViewArgs"
+            app:argType="com.padawanbr.smartsoccer.presentation.viewArgs.GrupoItemViewArgs"
             app:nullable="true" />
 
     </dialog>
@@ -54,7 +54,7 @@
         <argument
             android:name="detalheGrupoItemViewArgs"
             android:defaultValue="@null"
-            app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.DetalheGrupoItemViewArgs"
+            app:argType="com.padawanbr.smartsoccer.presentation.viewArgs.DetalheGrupoItemViewArgs"
             app:nullable="true" />
 
         <action
@@ -100,7 +100,7 @@
 
     <fragment
         android:id="@+id/sampleUsingImageViewFragment"
-        android:name="com.padawanbr.smartsoccer.presentation.cropper.UsingImageViewFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.common.cropper.UsingImageViewFragment"
         android:label="Editar imagem"
         tools:layout="@layout/fragment_crop_image_view">
 
@@ -166,7 +166,7 @@
         <argument
             android:name="competitionViewArgs"
             android:defaultValue="@null"
-            app:argType="com.padawanbr.smartsoccer.presentation.ui.groups.CompetitionViewArgs"
+            app:argType="com.padawanbr.smartsoccer.presentation.viewArgs.CompetitionViewArgs"
             app:nullable="true" />
 
     </dialog>

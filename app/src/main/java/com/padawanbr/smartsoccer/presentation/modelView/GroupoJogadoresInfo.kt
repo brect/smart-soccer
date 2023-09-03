@@ -1,7 +1,7 @@
-package com.padawanbr.smartsoccer.presentation.ui.groups
+package com.padawanbr.smartsoccer.presentation.modelView
 
 import androidx.annotation.DrawableRes
-import com.padawanbr.smartsoccer.presentation.common.ListItem
+import com.padawanbr.smartsoccer.presentation.common.adapter.ListItem
 
 data class GroupoJogadoresInfo(
 

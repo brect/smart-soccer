@@ -32,16 +32,20 @@ import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeCompetitionBinding
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
 import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
-import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.init
-import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.rotateView
-import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showIn
-import com.padawanbr.smartsoccer.presentation.common.ViewAnimation.showOut
-import com.padawanbr.smartsoccer.presentation.common.getCommonAdapterOf
+import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.init
+import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.rotateView
+import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.showIn
+import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.showOut
+import com.padawanbr.smartsoccer.presentation.common.adapter.getCommonAdapterOf
 import com.padawanbr.smartsoccer.presentation.extensions.navControllerAndClearStack
 import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
 import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
-import com.padawanbr.smartsoccer.presentation.ui.competition.CompetitionItem
+import com.padawanbr.smartsoccer.presentation.modelView.GroupoJogadoresInfo
+import com.padawanbr.smartsoccer.presentation.modelView.GrupoComJogadoresItem
+import com.padawanbr.smartsoccer.presentation.modelView.CompetitionItem
 import com.padawanbr.smartsoccer.presentation.ui.competition.ItemCompetitionViewHolder
+import com.padawanbr.smartsoccer.presentation.viewArgs.CompetitionViewArgs
+import com.padawanbr.smartsoccer.presentation.viewArgs.GrupoItemViewArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 

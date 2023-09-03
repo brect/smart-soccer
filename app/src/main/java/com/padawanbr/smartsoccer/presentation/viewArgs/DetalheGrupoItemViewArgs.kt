@@ -1,4 +1,4 @@
-package com.padawanbr.smartsoccer.presentation.ui.groups
+package com.padawanbr.smartsoccer.presentation.viewArgs
 
 import android.os.Parcelable
 import androidx.annotation.Keep

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.core.domain.model.Time
 import com.padawanbr.smartsoccer.databinding.ItemParentCompetitionTeamBinding
-import com.padawanbr.smartsoccer.presentation.common.ViewAnimation
+import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils
 import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
 
 class CompetitionTeamParentAdapter(
@@ -88,7 +88,7 @@ class CompetitionTeamParentAdapter(
 
                         val rotationValue = if (isRotate) 0f else 180f
 
-                        isRotate = ViewAnimation.rotateView(
+                        isRotate = ViewAnimationUtils.rotateView(
                             visibilityCompetitionTeam,
                             !isRotate,
                             rotationValue
