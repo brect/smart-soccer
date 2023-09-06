@@ -14,13 +14,15 @@
         android:id="@+id/container_competition_top"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
         android:layout_gravity="bottom">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:alpha="0.4"
-            android:background="@drawable/background_top_rounded_border"
+            android:alpha="0.1"
+            android:background="@drawable/background_rounded_border"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
             android:src="@drawable/background_image_01"
@@ -63,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:backgroundTint="#646464"
+        android:visibility="gone"
         android:orientation="vertical"
         android:paddingHorizontal="16dp">
 
@@ -86,13 +89,15 @@
             android:textSize="10sp"
             android:textStyle="bold" />
 
-        <Button
+        <TextView
             android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="16dp"
-            android:text="ver jogo"
+            android:text="ver competição"
             android:textSize="10sp" />
     </LinearLayout>
 

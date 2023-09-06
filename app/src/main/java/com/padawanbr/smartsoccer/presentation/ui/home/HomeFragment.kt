@@ -96,11 +96,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun initGroupsAdapter() {
-        binding.recyclerGroupItens.run {
+        binding.includeRecyclerGroupItensState.recyclerGroupItens.run {
             setHasFixedSize(true)
             adapter = groupsAdapter
 
-            binding.recyclerGroupItens.attachHideShowFab(binding.floatingActionButton)
+            binding.includeRecyclerGroupItensState.recyclerGroupItens.attachHideShowFab(binding.floatingActionButton)
         }
     }
 
