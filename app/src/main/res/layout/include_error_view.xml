@@ -6,27 +6,27 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:src="@drawable/davarzea_green_dark" />
+
     <TextView
         android:id="@+id/text_title_empty_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Erro ao carregar seus grupos"
+        android:layout_marginTop="38dp"
+        android:text="Ocorreu um erro ao carregar suas informações"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/text_subtitle_empty_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estamos com instabilidade para carregar seus grupos."
+        android:text="Aguarde um momento e realize uma nova tentativa em breve"
         android:textAlignment="center"
         android:textSize="12sp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:src="@drawable/empty_box" />
 
 </LinearLayout>

@@ -113,7 +113,7 @@ class GroupFragment : Fragment(), MenuProvider {
     }
 
     private fun imageProfileOnListener() {
-        binding.imageViewGroupProfile.setOnClickListener {
+        binding.includeGroupViewState.imageViewGroupProfile.setOnClickListener {
             val directions =
                 GroupFragmentDirections.actionDetailsGroupFragmentToSampleUsingImageViewFragment()
 
@@ -127,13 +127,13 @@ class GroupFragment : Fragment(), MenuProvider {
 
     private fun initRecyclerView() {
         initRecyclerView(
-            binding.recyclerViewItemCompetition,
+            binding.includeGroupViewState.recyclerViewItemCompetition,
             adapterManager.competitionsAdapter,
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         )
 
         initRecyclerView(
-            binding.recyclerViewSoccerPlayersInfo,
+            binding.includeGroupViewState.recyclerViewSoccerPlayersInfo,
             adapterManager.playersInfoAdapter,
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         )
@@ -158,7 +158,7 @@ class GroupFragment : Fragment(), MenuProvider {
                 }
 
                 GroupViewModel.UiState.Loading -> {
-                    binding.flipperItemCompetition.displayedChild = FLIPPER_CHILD_COMPETITION_EMPTY
+                    binding.includeGroupViewState.flipperItemCompetition.displayedChild = FLIPPER_CHILD_COMPETITION_EMPTY
                     adapterManager.competitionsAdapter.submitList(emptyList())
                     FLIPPER_CHILD_GROUP_LOADING
                 }
@@ -169,36 +169,36 @@ class GroupFragment : Fragment(), MenuProvider {
                     loadImageFromPreferences(
                         requireContext(),
                         grupo.id,
-                        binding.imageViewGroupProfile
+                        binding.includeGroupViewState.imageViewGroupProfile
                     )
 
                     if (grupo.torneios?.size!! > 0) {
-                        binding.flipperItemCompetition.displayedChild =
+                        binding.includeGroupViewState.flipperItemCompetition.displayedChild =
                             FLIPPER_CHILD_COMPETITION_SUCCESS
                         adapterManager.competitionsAdapter.submitList(grupo.torneios)
                     }
 
-                    binding.textViewGroupTeamName.text = uiState.grupo.nome
-                    binding.textViewGroupDate.text = "${grupo.diaDoJogo}"
-                    binding.textViewGroupLocal.text = "${grupo.endereco}"
+                    binding.includeGroupViewState.textViewGroupTeamName.text = uiState.grupo.nome
+                    binding.includeGroupViewState.textViewGroupDate.text = "${grupo.diaDoJogo}"
+                    binding.includeGroupViewState.textViewGroupLocal.text = "${grupo.endereco}"
 
-                    binding.textViewGameInformationTypeOfCourt.text =
+                    binding.includeGroupViewState.textViewGameInformationTypeOfCourt.text =
                         uiState.grupo.configuracaoEsporte.tipoEsporte.tipo
                     val quantidadeMinimaPorTime =
                         uiState.grupo.configuracaoEsporte.quantidadeMinimaPorTime
 
-                    binding.textViewGameInformationConfiguration.text = context?.getString(
+                    binding.includeGroupViewState.textViewGameInformationConfiguration.text = context?.getString(
                         R.string.game_information_configuration,
                         quantidadeMinimaPorTime.toString(),
                         quantidadeMinimaPorTime.toString()
                     )
 
-                    binding.textViewGameInformationMonthlyPrice.text = context?.getString(
+                    binding.includeGroupViewState.textViewGameInformationMonthlyPrice.text = context?.getString(
                         R.string.game_information_monthly_price,
                         00.00.toString()
                     )
 
-                    binding.textViewGameInformationRateAge.text = context?.getString(
+                    binding.includeGroupViewState.textViewGameInformationRateAge.text = context?.getString(
                         R.string.game_information_rate_age,
                         grupo.rangeIdade?.minAge.toString(),
                         grupo.rangeIdade?.maxAge.toString(),
@@ -282,7 +282,7 @@ class GroupFragment : Fragment(), MenuProvider {
     }
 
     private fun configureFabMoreOptions() {
-        binding.fabMoreOptions.setOnClickListener {
+        binding.includeGroupViewState.fabMoreOptions.setOnClickListener {
             isRotate = rotateView(it, !isRotate)
 
             if (isRotate) {
@@ -294,7 +294,7 @@ class GroupFragment : Fragment(), MenuProvider {
     }
 
     private fun fabAddSoccerPlayerOnClick() {
-        binding.fabAddSoccerPlayer.setOnClickListener {
+        binding.includeGroupViewState.fabAddSoccerPlayer.setOnClickListener {
             isRotate = rotateView(it, !isRotate)
             hideFabs()
             val directions =
@@ -307,8 +307,8 @@ class GroupFragment : Fragment(), MenuProvider {
     }
 
     private fun fabCreateQuickCompetitionOnClick() {
-        binding.fabCreateQuickCompetition.setOnClickListener {
-            isRotate = rotateView(binding.fabMoreOptions, !isRotate)
+        binding.includeGroupViewState.fabCreateQuickCompetition.setOnClickListener {
+            isRotate = rotateView(binding.includeGroupViewState.fabMoreOptions, !isRotate)
             hideFabs()
             val directions =
                 GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()
@@ -325,25 +325,25 @@ class GroupFragment : Fragment(), MenuProvider {
     }
 
     private fun initFabs() {
-        init(binding.fabAddSoccerPlayer)
-        init(binding.textViewAddSoccerPlayer)
-        init(binding.fabCreateQuickCompetition)
-        init(binding.textViewCreateQuickCompetition)
+        init(binding.includeGroupViewState.fabAddSoccerPlayer)
+        init(binding.includeGroupViewState.textViewAddSoccerPlayer)
+        init(binding.includeGroupViewState.fabCreateQuickCompetition)
+        init(binding.includeGroupViewState.textViewCreateQuickCompetition)
     }
 
 
     private fun showFabs() {
-        showIn(binding.fabAddSoccerPlayer)
-        showIn(binding.textViewAddSoccerPlayer)
-        showIn(binding.fabCreateQuickCompetition)
-        showIn(binding.textViewCreateQuickCompetition)
+        showIn(binding.includeGroupViewState.fabAddSoccerPlayer)
+        showIn(binding.includeGroupViewState.textViewAddSoccerPlayer)
+        showIn(binding.includeGroupViewState.fabCreateQuickCompetition)
+        showIn(binding.includeGroupViewState.textViewCreateQuickCompetition)
     }
 
     private fun hideFabs() {
-        showOut(binding.fabAddSoccerPlayer)
-        showOut(binding.textViewAddSoccerPlayer)
-        showOut(binding.fabCreateQuickCompetition)
-        showOut(binding.textViewCreateQuickCompetition)
+        showOut(binding.includeGroupViewState.fabAddSoccerPlayer)
+        showOut(binding.includeGroupViewState.textViewAddSoccerPlayer)
+        showOut(binding.includeGroupViewState.fabCreateQuickCompetition)
+        showOut(binding.includeGroupViewState.textViewCreateQuickCompetition)
     }
 
 
@@ -474,7 +474,7 @@ class GroupFragment : Fragment(), MenuProvider {
             val imageUri: Uri = data.data ?: return
 
             saveImageUri(requireContext(), imageUri, grupo.id)
-            binding.imageViewGroupProfile.setImageURI(imageUri)
+            binding.includeGroupViewState.imageViewGroupProfile.setImageURI(imageUri)
         }
     }
 
