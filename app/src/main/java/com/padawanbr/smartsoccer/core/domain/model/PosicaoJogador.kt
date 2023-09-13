@@ -1,7 +1,6 @@
 package com.padawanbr.smartsoccer.core.domain.model
 
 enum class PosicaoJogador(val id: Int, val funcao: String, val abreviacao: String, zona: String) {
-    DEFAULT(0, "Selecione uma posição", "", ""),
     GOLEIRO(1, "Goleiro", "GK", "GOL"),
     LATERAL(2, "Lateral", "LAT", "DEFESA"),
     LATERAL_DIREITO(3, "Lateral Direito", "LD", "DEFESA"),

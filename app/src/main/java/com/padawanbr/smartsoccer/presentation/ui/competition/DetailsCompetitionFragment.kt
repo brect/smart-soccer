@@ -26,6 +26,7 @@ import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import com.padawanbr.smartsoccer.databinding.BottonsheetSharedTeamBinding
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsCompetitionBinding
+import com.padawanbr.smartsoccer.presentation.extensions.getAttrColor
 import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil
 import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil.REQUEST_EXTERNAL_STORAGE_CODE
 import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil.checkPermissions
@@ -103,6 +104,9 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_details_competition, menu)
+
+        val color = requireContext().getAttrColor(com.google.android.material.R.attr.colorSurfaceInverse)
+        menu.findItem(R.id.action_share_teams).icon?.setTint(color)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

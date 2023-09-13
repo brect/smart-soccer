@@ -46,6 +46,7 @@
 
     <string name="menu_edit">Editar</string>
     <string name="menu_delete">Excluir</string>
+    <string name="menu_shared">Compartilhar</string>
 
     <string name="action_cropper_rotate">Rotate 90 degrees clockwise</string>
     <string name="action_cropper_crop">CROP</string>

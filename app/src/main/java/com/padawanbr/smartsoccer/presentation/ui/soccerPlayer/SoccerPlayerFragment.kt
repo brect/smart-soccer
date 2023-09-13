@@ -125,22 +125,26 @@ class SoccerPlayerFragment : Fragment() {
 
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
-            when (uiState) {
+            binding.fliperSoccerPlayers.displayedChild = when (uiState) {
                 SoccerPlayerViewModel.UiState.Error -> {
                     showShortToast("Erro ao carregar sua lista")
+                    FLIPPER_CHILD_SOCCER_PLAYER_ERROR
                 }
 
                 SoccerPlayerViewModel.UiState.Loading -> {
                     showLoadingToast()
+                    FLIPPER_CHILD_SOCCER_PLAYER_LOADING
                 }
 
                 SoccerPlayerViewModel.UiState.ShowEmptySoccers -> {
                     showShortToast("Você não possui jogadores cadastrados")
                     soccerPlayersAdapter.submitList(emptyList())
+                    FLIPPER_CHILD_SOCCER_PLAYER_EMPTY
                 }
 
                 is SoccerPlayerViewModel.UiState.ShowSoccers -> {
                     soccerPlayersAdapter.submitList(uiState.soccerPlayers)
+                    FLIPPER_CHILD_SOCCER_PLAYER_SUCCESS
                 }
 
                 SoccerPlayerViewModel.UiState.Success -> {
@@ -149,13 +153,24 @@ class SoccerPlayerFragment : Fragment() {
                         "SoccerPlayerViewModel.UiState.Success",
                         Toast.LENGTH_SHORT
                     ).show()
+                    FLIPPER_CHILD_SOCCER_PLAYER_SUCCESS
                 }
             }
+
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val FLIPPER_CHILD_SOCCER_PLAYER_LOADING = 0
+        private const val FLIPPER_CHILD_SOCCER_PLAYER_SUCCESS = 1
+        private const val FLIPPER_CHILD_SOCCER_PLAYER_EMPTY = 2
+        private const val FLIPPER_CHILD_SOCCER_PLAYER_ERROR = 3
+
     }
 }

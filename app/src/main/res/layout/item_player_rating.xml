@@ -12,8 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
-        android:background="@drawable/background_group_item_rounded_border">
+        android:layout_marginVertical="8dp">
 
         <TextView
             android:id="@+id/textView_soccerPlayerAbility"
@@ -30,7 +29,7 @@
 
         <RatingBar
             android:id="@+id/ratingBar_ability"
-            style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+            style="@style/Widget.AppCompat.RatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
