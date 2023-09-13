@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="6dp"
-    android:background="@drawable/background_group_item_rounded_border"
+    android:background="@drawable/background_transparent_rounded_stroke"
     android:elevation="2dp"
     android:padding="8dp">
 

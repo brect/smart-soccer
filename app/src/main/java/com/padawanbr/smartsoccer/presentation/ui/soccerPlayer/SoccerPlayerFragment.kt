@@ -148,11 +148,6 @@ class SoccerPlayerFragment : Fragment() {
                 }
 
                 SoccerPlayerViewModel.UiState.Success -> {
-                    Toast.makeText(
-                        context,
-                        "SoccerPlayerViewModel.UiState.Success",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     FLIPPER_CHILD_SOCCER_PLAYER_SUCCESS
                 }
             }

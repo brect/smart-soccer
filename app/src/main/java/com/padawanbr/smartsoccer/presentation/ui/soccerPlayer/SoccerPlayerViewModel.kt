@@ -65,7 +65,6 @@ class SoccerPlayerViewModel @Inject constructor(
         object Error : UiState()
 
         data class ShowSoccers(val soccerPlayers: List<JogadorItem>) : UiState()
-
         object ShowEmptySoccers : UiState()
     }
 

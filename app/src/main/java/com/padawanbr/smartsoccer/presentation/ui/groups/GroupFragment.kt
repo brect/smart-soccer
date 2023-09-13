@@ -179,26 +179,18 @@ class GroupFragment : Fragment(), MenuProvider {
                     }
 
                     binding.includeGroupViewState.textViewGroupTeamName.text = uiState.grupo.nome
-                    binding.includeGroupViewState.textViewGroupDate.text = "${grupo.diaDoJogo}"
-                    binding.includeGroupViewState.textViewGroupLocal.text = "${grupo.endereco}"
 
-                    binding.includeGroupViewState.textViewGameInformationTypeOfCourt.text =
-                        uiState.grupo.configuracaoEsporte.tipoEsporte.tipo
-                    val quantidadeMinimaPorTime =
-                        uiState.grupo.configuracaoEsporte.quantidadeMinimaPorTime
+                    binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupDate.text = "${grupo.diaDoJogo}"
+                    binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.text = "${grupo.endereco}"
 
-                    binding.includeGroupViewState.textViewGameInformationConfiguration.text = context?.getString(
+                    val quantidadeMinimaPorTime = uiState.grupo.configuracaoEsporte.quantidadeMinimaPorTime
+                    binding.includeGroupViewState.includeGroupInfoView.textViewGameInformationTypeOfCourt.text =  uiState.grupo.configuracaoEsporte.tipoEsporte.tipo
+                    binding.includeGroupViewState.includeGroupInfoView.textViewGameInformationConfiguration.text = context?.getString(
                         R.string.game_information_configuration,
                         quantidadeMinimaPorTime.toString(),
                         quantidadeMinimaPorTime.toString()
                     )
-
-                    binding.includeGroupViewState.textViewGameInformationMonthlyPrice.text = context?.getString(
-                        R.string.game_information_monthly_price,
-                        00.00.toString()
-                    )
-
-                    binding.includeGroupViewState.textViewGameInformationRateAge.text = context?.getString(
+                    binding.includeGroupViewState.includeGroupInfoView.textViewGameInformationRateAge.text = context?.getString(
                         R.string.game_information_rate_age,
                         grupo.rangeIdade?.minAge.toString(),
                         grupo.rangeIdade?.maxAge.toString(),

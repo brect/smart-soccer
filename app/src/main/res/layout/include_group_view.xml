@@ -93,6 +93,32 @@
                     android:layout_marginTop="12dp"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
+                    android:text="Informações do grupo"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:id="@+id/include_group_info_view"
+                    layout="@layout/include_group_info_view" />
+
+                <include
+                    android:id="@+id/include_group_game_info_view"
+                    layout="@layout/include_group_game_info_view" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="6dp"
+                    android:background="?attr/colorOnPrimaryContainer" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
                     android:text="Informações jogadores"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -106,102 +132,6 @@
                     android:scrollbars="none"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_soccer_players_info" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="6dp"
-                    android:background="?attr/colorOnPrimaryContainer" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_round_access_time_filled_24"
-                        app:tint="?attr/colorOnPrimaryContainer" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Próximo jogo"
-                            android:textSize="12sp"
-                            app:layout_constraintBottom_toTopOf="@+id/textView_group_local_lbl"
-                            app:layout_constraintStart_toStartOf="@+id/textView_group_teamName_lbl"
-                            app:layout_constraintTop_toBottomOf="@+id/textView_group_teamName_lbl" />
-
-                        <TextView
-                            android:id="@+id/textView_group_date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="Data não informada"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView_group_date_lbl"
-                            app:layout_constraintStart_toEndOf="@+id/textView_group_date_lbl"
-                            app:layout_constraintTop_toTopOf="@+id/textView_group_date_lbl"
-                            tools:layout_editor_absoluteX="8dp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="4dp"
-                    android:background="?attr/colorOnPrimaryContainer" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_round_location_on_24"
-                        app:tint="?attr/colorOnPrimaryContainer" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Local dos jogos"
-                            android:textSize="12sp"
-                            app:layout_constraintBottom_toTopOf="@+id/textView_group_local_lbl"
-                            app:layout_constraintStart_toStartOf="@+id/textView_group_teamName_lbl"
-                            app:layout_constraintTop_toBottomOf="@+id/textView_group_teamName_lbl" />
-
-                        <TextView
-                            android:id="@+id/textView_group_local"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="Endereço não informado"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView_group_date_lbl"
-                            app:layout_constraintStart_toEndOf="@+id/textView_group_date_lbl"
-                            app:layout_constraintTop_toTopOf="@+id/textView_group_date_lbl"
-                            tools:layout_editor_absoluteX="8dp" />
-                    </LinearLayout>
-                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -224,6 +154,7 @@
                 <ViewFlipper
                     android:id="@+id/flipper_item_competition"
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="96dp"
                     android:layout_height="wrap_content">
 
                     <include
@@ -238,188 +169,12 @@
                         android:id="@+id/recyclerView_item_competition"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
                         android:clipToPadding="false"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_competition" />
 
                 </ViewFlipper>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="4dp"
-                    android:background="?attr/colorOnPrimaryContainer" />
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/container_game_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="4dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_divider_top">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView_gameInformation_typeOfCourt_lbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Tipo da quadra"
-                            android:textAllCaps="true"
-                            android:textSize="10sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/textView_gameInformation_typeOfCourt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Society"
-                            android:textSize="30sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="@+id/header_container_center"
-                        app:layout_constraintEnd_toStartOf="@+id/header_container_center"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/header_container_center">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Configuração"
-                            android:textAllCaps="true"
-                            android:textSize="10sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/textView_gameInformation_configuration"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="7x7 masc."
-                            android:textSize="30sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="4dp"
-                    android:background="?attr/colorOnPrimaryContainer" />
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/container_header_team_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="4dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_divider_top">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView_gameInformation_rateAge_lbl"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Idade"
-                            android:textAllCaps="true"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/textView_gameInformation_rateAge"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="30 a 60"
-                            android:textSize="30sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="@+id/header_container_center"
-                        app:layout_constraintEnd_toStartOf="@+id/header_container_center"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/header_container_center">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Valor"
-                            android:textAllCaps="true"
-                            android:textSize="10sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/textView_gameInformation_monthlyPrice"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="R$ 60,00"
-                            android:textSize="30sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="4dp"
-                    android:background="?attr/colorOnPrimaryContainer" />
 
             </LinearLayout>
         </ScrollView>
