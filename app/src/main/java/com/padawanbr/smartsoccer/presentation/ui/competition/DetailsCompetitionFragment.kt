@@ -1,7 +1,9 @@
 package com.padawanbr.smartsoccer.presentation.ui.competition
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -10,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -100,7 +103,6 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_details_competition, menu)
-        menu.findItem(R.id.action_share_teams).icon?.setTint(requireContext().getColor(R.color.md_theme_light_onPrimaryContainer))
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -169,7 +171,9 @@ class DetailsCompetitionFragment : Fragment(), MenuProvider {
 
     private fun onClickToSave(recyclerView: RecyclerView) {
         val bitmapsFromRecyclerView = getBitmapsFromRecyclerView(recyclerView)
-        saveBitmapsToGallery(requireContext(), bitmapsFromRecyclerView, torneio.id)
+        saveBitmapsToGallery(requireContext(), bitmapsFromRecyclerView, torneio.id).also {
+            showShortToast("Times salvos com sucesso em sua galeria! \uD83D\uDE80")
+        }
     }
 
     private fun onClickToShare(recyclerView: RecyclerView) {

@@ -8,6 +8,7 @@
     android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="4dp"
     android:clipToOutline="true"
+    android:elevation="4dp"
     android:background="@drawable/background_rounded_border"
     android:orientation="vertical">
 
@@ -19,7 +20,7 @@
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="80dp"
+            android:layout_height="0dp"
             android:alpha="0.1"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
@@ -36,7 +37,7 @@
             android:layout_marginTop="34dp"
             android:text="FUTEBOL"
             android:textAllCaps="true"
-            android:textSize="8sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/textView_group_title"
             app:layout_constraintStart_toStartOf="@+id/textView_group_title"
             app:layout_constraintTop_toTopOf="parent"
@@ -50,7 +51,7 @@
             android:layout_marginBottom="16dp"
             android:text="Nome do grupo"
             android:textAlignment="textStart"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

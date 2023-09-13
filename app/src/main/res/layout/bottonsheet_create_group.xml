@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_top_rounded_border"
+    android:clipToPadding="true"
     android:padding="24dp"
-    app:behavior_hideable="false"
-    app:behavior_peekHeight="90dp"
+    android:orientation="vertical"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <View
+        android:id="@+id/view_item_drag_handle"
+        android:layout_width="80dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:alpha="0.2"
+        android:background="@drawable/drag_handle_background" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,7 +71,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInput_groupModality"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                style="@style/MyExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -84,12 +88,13 @@
                     android:focusableInTouchMode="false"
                     android:hint="Selecione um tipo de jogo"
                     android:inputType="none"
-                    android:padding="16dp" />
+                    android:padding="16dp"
+                    android:popupTheme="@style/MyPopupMenu" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInput_gameDay"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                style="@style/MyExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -106,12 +111,13 @@
                     android:focusableInTouchMode="false"
                     android:hint="Selecione o dia do jogo"
                     android:inputType="none"
-                    android:padding="16dp" />
+                    android:padding="16dp"
+                    android:popupTheme="@style/MyPopupMenu" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInput_beginningOfTheGame"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                style="@style/MyExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -227,7 +233,7 @@
                 android:id="@+id/flipper_saveTeam_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="58dp">
+                android:layout_marginTop="28dp">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_saveGroup"
@@ -246,4 +252,4 @@
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
