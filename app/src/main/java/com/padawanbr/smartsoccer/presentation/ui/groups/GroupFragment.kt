@@ -105,8 +105,9 @@ class GroupFragment : Fragment(), MenuProvider {
             findNavController(),
             bottonsheetExcludeCompetitionBinding,
             bottomSheetDialogExcludeCompetition,
-            competitionItemClicked
-        )
+        ) {
+            competitionItemClicked = it
+        }
 
         initRecyclerView()
         imageProfileOnListener()
@@ -115,9 +116,8 @@ class GroupFragment : Fragment(), MenuProvider {
     }
 
     private fun groupLocalOnClickListener() {
-        binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.setOnClickListener {
-            val gmmIntentUri =
-                Uri.parse("geo:0,0?q=${binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.text}")
+        binding.includeGroupViewState.includeGroupGameInfoView.containerGroupLocal.setOnClickListener {
+            val gmmIntentUri = Uri.parse("geo:0,0?q=${binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.text}")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)

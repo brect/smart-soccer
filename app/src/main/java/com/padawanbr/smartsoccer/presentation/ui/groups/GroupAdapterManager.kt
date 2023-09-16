@@ -15,7 +15,7 @@ class GroupAdapterManager(
     private val navController: NavController,
     private val bottonsheetExcludeCompetitionBinding: BottonsheetExcludeCompetitionBinding,
     private val bottomSheetDialogExcludeCompetition: BottomSheetDialog,
-    private var competitionItemClicked: CompetitionItem?
+    private val onCompetitionItemClicked: (CompetitionItem?) -> Unit
 ) {
 
     val competitionsAdapter by lazy {
@@ -27,7 +27,7 @@ class GroupAdapterManager(
                 navController.navigate(directions)
             },
             { item ->
-                competitionItemClicked = item
+                onCompetitionItemClicked(item)
                 bottonsheetExcludeCompetitionBinding.textExcludeCompetitionContent.text = context.getString(R.string.exclude_competition, item.nome)
                 bottomSheetDialogExcludeCompetition.show()
             }
