@@ -1,9 +1,7 @@
 package com.padawanbr.smartsoccer.presentation.ui.competition
 
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,8 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,19 +17,19 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
 import com.padawanbr.smartsoccer.databinding.BottonsheetSharedTeamBinding
 import com.padawanbr.smartsoccer.databinding.FragmentDetailsCompetitionBinding
 import com.padawanbr.smartsoccer.presentation.extensions.getAttrColor
+import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
+import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getBitmapsFromRecyclerView
+import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.saveBitmapsToGallery
+import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.shareBitmapList
 import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil
 import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil.REQUEST_EXTERNAL_STORAGE_CODE
 import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil.checkPermissions
 import com.padawanbr.smartsoccer.presentation.utils.PermissionsUtil.requestPermissionsIfDanied
-import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.getBitmapsFromRecyclerView
-import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.saveBitmapsToGallery
-import com.padawanbr.smartsoccer.presentation.utils.ImageUtils.shareBitmapList
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

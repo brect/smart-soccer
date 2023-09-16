@@ -3,11 +3,9 @@ package com.padawanbr.smartsoccer.presentation.extensions
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.padawanbr.smartsoccer.R
 
 fun Fragment.showShortToast(@StringRes textResId: Int) =

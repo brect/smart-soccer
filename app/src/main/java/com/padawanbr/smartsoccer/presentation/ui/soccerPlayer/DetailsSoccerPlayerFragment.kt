@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -270,20 +269,12 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
     private fun observeUiState() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
-                DetailsSoccerPlayerViewModel.UiState.Error -> {
-                    Toast.makeText(
-                        context,
-                        "Category GroupViewModel.UiState.Error",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                is DetailsSoccerPlayerViewModel.UiState.Error -> {
+                    showShortToast(uiState.message)
                 }
 
                 DetailsSoccerPlayerViewModel.UiState.Loading -> {
-                    Toast.makeText(
-                        context,
-                        "Category GroupViewModel.UiState.Loading",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast("Carregando...")
                 }
 
                 is DetailsSoccerPlayerViewModel.UiState.Success -> {
@@ -295,6 +286,8 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
                     atualizaListaDeJogadores()
                     showShortToast("Jogador deletado com sucesso!")
                 }
+
+                is DetailsSoccerPlayerViewModel.UiState.Error -> TODO()
             }
         }
     }

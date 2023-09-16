@@ -49,7 +49,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
                             emit(UiState.Success)
                         },
                         error = {
-                            emit(UiState.Error)
+                            emit(UiState.Error("Erro ao adicionar jogador"))
                         }
                     )
                 }
@@ -67,7 +67,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
                             emit(UiState.Delete)
                         },
                         error = {
-                            emit(UiState.Error)
+                            emit(UiState.Error("Erro ao excluir jogador"))
                         }
                     )
                 }
@@ -106,7 +106,7 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
     sealed class UiState {
         object Loading : UiState()
         object Success : UiState()
-        object Error : UiState()
+        data class Error(val message: String) : UiState()
         object Delete : UiState()
     }
 
