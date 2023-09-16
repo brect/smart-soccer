@@ -178,26 +178,45 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
         }
     }
 
+    private fun initAbilityViewBindings(): List<AbilityViewBinding> {
+        return listOf(
+            AbilityViewBinding(
+                binding.itemPlayerRatingSpeed.textViewSoccerPlayerAbility,
+                binding.itemPlayerRatingSpeed.ratingBarAbility
+            ),
+            AbilityViewBinding(
+                binding.itemPlayerRatingKick.textViewSoccerPlayerAbility,
+                binding.itemPlayerRatingKick.ratingBarAbility
+            ),
+            AbilityViewBinding(
+                binding.itemPlayerRatingPass.textViewSoccerPlayerAbility,
+                binding.itemPlayerRatingPass.ratingBarAbility
+            ),
+            AbilityViewBinding(
+                binding.itemPlayerRatingMarking.textViewSoccerPlayerAbility,
+                binding.itemPlayerRatingMarking.ratingBarAbility
+            ),
+            AbilityViewBinding(
+                binding.itemPlayerRatingDribble.textViewSoccerPlayerAbility,
+                binding.itemPlayerRatingDribble.ratingBarAbility
+            ),
+            AbilityViewBinding(
+                binding.itemPlayerRatingRace.textViewSoccerPlayerAbility,
+                binding.itemPlayerRatingRace.ratingBarAbility
+            )
+        )
+    }
+
     private fun createPlayerAbilitiesMap(): Map<String, Float> {
         val playerAbilitiesMap = mutableMapOf<String, Float>()
 
-        playerAbilitiesMap[binding.itemPlayerRatingSpeed.textViewSoccerPlayerAbility.text.toString()] =
-            binding.itemPlayerRatingSpeed.ratingBarAbility.rating
+        val abilityViewBindings = initAbilityViewBindings()
 
-        playerAbilitiesMap[binding.itemPlayerRatingKick.textViewSoccerPlayerAbility.text.toString()] =
-            binding.itemPlayerRatingKick.ratingBarAbility.rating
-
-        playerAbilitiesMap[binding.itemPlayerRatingPass.textViewSoccerPlayerAbility.text.toString()] =
-            binding.itemPlayerRatingPass.ratingBarAbility.rating
-
-        playerAbilitiesMap[binding.itemPlayerRatingMarking.textViewSoccerPlayerAbility.text.toString()] =
-            binding.itemPlayerRatingMarking.ratingBarAbility.rating
-
-        playerAbilitiesMap[binding.itemPlayerRatingDribble.textViewSoccerPlayerAbility.text.toString()] =
-            binding.itemPlayerRatingDribble.ratingBarAbility.rating
-
-        playerAbilitiesMap[binding.itemPlayerRatingRace.textViewSoccerPlayerAbility.text.toString()] =
-            binding.itemPlayerRatingRace.ratingBarAbility.rating
+        abilityViewBindings.forEach { abilityViewBinding ->
+            val abilityName = abilityViewBinding.textView.text.toString()
+            val abilityRating = abilityViewBinding.ratingBar.rating.takeIf { it > 0 } ?: 0f
+            playerAbilitiesMap[abilityName] = abilityRating
+        }
 
         return playerAbilitiesMap
     }

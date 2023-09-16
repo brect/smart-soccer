@@ -7,14 +7,11 @@ fun sortearTimes(
     numeroTimes: Int,
     considerarPosicoes: Boolean = true,
     considerarOveralls: Boolean = true,
-    considerarDepartamentoMedico: Boolean = false
+    considerarDepartamentoMedico: Boolean = true
 ): List<Time> {
+
     val jogadoresDisponiveis = jogadores.filter { jogador ->
-        if (considerarDepartamentoMedico) {
-            !jogador.estaNoDepartamentoMedico
-        } else {
-            true
-        }
+        considerarDepartamentoMedico || !jogador.estaNoDepartamentoMedico
     }.sortedByDescending { jogador ->
         if (considerarOveralls) {
             jogador.calcularMediaHabilidades()

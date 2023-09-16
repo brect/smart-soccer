@@ -28,9 +28,12 @@ class DetailsSoccerPlayerViewModel @Inject constructor(
         liveData(coroutinesDispatchers.main()) {
             when (it) {
                 is Action.CreateSoccerPlayer -> {
+
+                   val id =  it.id.takeIf { !it.isNullOrEmpty() } ?: UUID.randomUUID().toString()
+
                     addSoccerPlayerUseCase.invoke(
                         AddSoccerPlayerUseCase.Params(
-                            it.id ?: UUID.randomUUID().toString(),
+                            id,
                             it.playerName,
                             it.playerAge,
                             it.playerPosition,

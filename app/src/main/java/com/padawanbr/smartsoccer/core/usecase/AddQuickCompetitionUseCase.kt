@@ -1,11 +1,9 @@
 package com.padawanbr.smartsoccer.core.usecase
 
-import com.padawanbr.smartsoccer.core.data.repository.GroupRepository
 import com.padawanbr.smartsoccer.core.data.repository.TorneioRepository
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.core.domain.model.TipoTorneio
 import com.padawanbr.smartsoccer.core.domain.model.Torneio
-import com.padawanbr.smartsoccer.core.domain.model.calcularMediaHabilidades
 import com.padawanbr.smartsoccer.core.domain.model.sortearTimes
 import com.padawanbr.smartsoccer.core.usecase.base.CoroutinesDispatchers
 import com.padawanbr.smartsoccer.core.usecase.base.ResultStatus
