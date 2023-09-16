@@ -71,7 +71,8 @@
             app:tint="?attr/colorOnPrimaryContainer" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -95,6 +96,14 @@
                 app:layout_constraintStart_toEndOf="@+id/textView_group_date_lbl"
                 app:layout_constraintTop_toTopOf="@+id/textView_group_date_lbl" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:src="@drawable/ic_round_keyboard_arrow_right_24"
+            app:tint="?attr/colorOnPrimaryContainer" />
+
     </LinearLayout>
 
 </LinearLayout>

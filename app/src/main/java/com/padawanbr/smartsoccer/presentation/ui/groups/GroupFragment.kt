@@ -31,16 +31,16 @@ import com.padawanbr.smartsoccer.R
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeCompetitionBinding
 import com.padawanbr.smartsoccer.databinding.BottonsheetExcludeGroupBinding
 import com.padawanbr.smartsoccer.databinding.FragmentGroupBinding
+import com.padawanbr.smartsoccer.presentation.extensions.navControllerAndClearStack
+import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
+import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
+import com.padawanbr.smartsoccer.presentation.modelView.CompetitionItem
+import com.padawanbr.smartsoccer.presentation.modelView.GroupoJogadoresInfo
+import com.padawanbr.smartsoccer.presentation.modelView.GrupoComJogadoresItem
 import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.init
 import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.rotateView
 import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.showIn
 import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils.showOut
-import com.padawanbr.smartsoccer.presentation.extensions.navControllerAndClearStack
-import com.padawanbr.smartsoccer.presentation.extensions.roundToTwoDecimalPlaces
-import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
-import com.padawanbr.smartsoccer.presentation.modelView.GroupoJogadoresInfo
-import com.padawanbr.smartsoccer.presentation.modelView.GrupoComJogadoresItem
-import com.padawanbr.smartsoccer.presentation.modelView.CompetitionItem
 import com.padawanbr.smartsoccer.presentation.viewArgs.CompetitionViewArgs
 import com.padawanbr.smartsoccer.presentation.viewArgs.GrupoItemViewArgs
 import dagger.hilt.android.AndroidEntryPoint
@@ -110,6 +110,18 @@ class GroupFragment : Fragment(), MenuProvider {
 
         initRecyclerView()
         imageProfileOnListener()
+
+        groupLocalOnClickListener()
+    }
+
+    private fun groupLocalOnClickListener() {
+        binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.setOnClickListener {
+            val gmmIntentUri =
+                Uri.parse("geo:0,0?q=${binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.text}")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
+        }
     }
 
     private fun imageProfileOnListener() {
