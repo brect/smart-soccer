@@ -153,7 +153,7 @@ object ImageUtils {
 
             val uri = FileProvider.getUriForFile(
                 context,
-                "com.anni.shareimage.fileprovider",
+                "com.blimas.smartsoccer.shareimage.fileprovider",
                 file
             )
             uriList.add(uri)
@@ -243,7 +243,7 @@ object ImageUtils {
             outputStream.close()
             uri = FileProvider.getUriForFile(
                 context,
-                "com.anni.shareimage.fileprovider",
+                "com.blimas.smartsoccer.shareimage.fileprovider",
                 file
             )
         } catch (e: Exception) {
