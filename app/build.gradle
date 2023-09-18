@@ -9,7 +9,7 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: "androidx.navigation.safeargs"
 
 android {
-    namespace 'com.padawanbr.smartsoccer'
+    namespace 'com.blimas.smartsoccer'
     compileSdk 33
 
     defaultConfig {
