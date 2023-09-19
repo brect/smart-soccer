@@ -221,7 +221,6 @@ class GroupFragment : Fragment(), MenuProvider {
         }
     }
 
-
     private fun observeSharedUiState() {
         sharedViewModel.updateGroups.observe(viewLifecycleOwner) {
             getGroupItemView()
