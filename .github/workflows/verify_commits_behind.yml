@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Debug - List branches and commits
+        run: |
+          git branch -a
+          git log --oneline -n 10
+
       - name: Check Commits Behind
         run: |
           PR_BRANCH=${{ github.head_ref }}
@@ -27,10 +32,15 @@ jobs:
             echo "A branch não requer verificação de commits atrasados."
             exit 0
           fi
-          
-          # Fetch the base branch to get a full git history
+
+          # Fetch the base branch and the PR branch to get a full git history
           git fetch origin $BASE_BRANCH
-          
+          git fetch origin $PR_BRANCH:$PR_BRANCH
+
+          # Debug - List branches and commits after fetch
+          git branch -a
+          git log --oneline -n 10
+
           # Check if the feature or hotfix branch is behind its respective base branch
           COMMITS_BEHIND=$(git rev-list --count $BASE_BRANCH..$PR_BRANCH)
           
