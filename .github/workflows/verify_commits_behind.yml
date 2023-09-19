@@ -1,0 +1,42 @@
+name: Verify Commits Behind
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  check-commits-behind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check Commits Behind
+        run: |
+          PR_BRANCH=${{ github.head_ref }}
+          BASE_BRANCH=""
+          
+          # Determine the base branch based on the naming convention
+          if [[ "$PR_BRANCH" == feature/* ]]; then
+            BASE_BRANCH="develop"
+          elif [[ "$PR_BRANCH" == hotfix/* ]]; then
+            BASE_BRANCH="main"
+          else
+            echo "A branch não requer verificação de commits atrasados."
+            exit 0
+          fi
+          
+          # Fetch the base branch to get a full git history
+          git fetch origin $BASE_BRANCH
+          
+          # Check if the feature or hotfix branch is behind its respective base branch
+          COMMITS_BEHIND=$(git rev-list --count $BASE_BRANCH..$PR_BRANCH)
+          
+          if [ "$COMMITS_BEHIND" -gt 0 ]; then
+            echo "Erro: $PR_BRANCH está $COMMITS_BEHIND commits atrás de $BRANCH_BASE. Por favor, atualize sua branch."
+            exit 1
+          else
+            echo "$PR_BRANCH is up to date with $BASE_BRANCH."
+          fi
