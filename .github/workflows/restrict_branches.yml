@@ -1,0 +1,20 @@
+name: Restrict branches for PRs to main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR source branch
+        run: |
+          PR_BRANCH=${{ github.event.pull_request.head.ref }}
+          if [[ "$PR_BRANCH" == hotfix/* || "$PR_BRANCH" == release/* ]]; then
+            echo "PR branch $PR_BRANCH is allowed to merge into main."
+          else
+            echo "PR branch $PR_BRANCH is not allowed to merge into main."
+            exit 1
+          fi
