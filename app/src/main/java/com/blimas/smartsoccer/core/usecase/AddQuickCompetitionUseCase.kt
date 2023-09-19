@@ -47,7 +47,7 @@ class AddQuickCompetitionUseCaseImpl @Inject constructor(
             repository.insertTorneioWithTimesAndPartidas(
                 Torneio(
                     params.id,
-                    "QuickCompetition",
+                    "Competição Rápida",
                     TipoTorneio.JOGO_UNICO,
                     listOf(),
                     timesSorteados,
