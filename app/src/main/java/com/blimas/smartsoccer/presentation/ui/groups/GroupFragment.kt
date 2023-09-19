@@ -251,6 +251,14 @@ class GroupFragment : Fragment(), MenuProvider {
         adapterManager.playersInfoAdapter.submitList(soccerPlayersInfo)
     }
 
+    private fun formatJogadoresMessage(count: Int?, singular: String, plural: String): String {
+        return if (count == 1) {
+            "$count $singular"
+        } else {
+            "$count $plural"
+        }
+    }
+
     private fun createSoccerPlayerInfoList(
         jogadoresDisponiveis: Int?,
         jogadoresNoDM: Int?,
@@ -260,11 +268,11 @@ class GroupFragment : Fragment(), MenuProvider {
         return arrayListOf(
             createGroupJogadoresInfo(
                 R.drawable.ic_round_check_box_24,
-                "$jogadoresDisponiveis jogadores disponíveis"
+                formatJogadoresMessage(jogadoresDisponiveis, "jogador disponível", "jogadores disponíveis")
             ),
             createGroupJogadoresInfo(
                 R.drawable.ic_round_healing_24,
-                "$jogadoresNoDM jogadores no departamento médico"
+                formatJogadoresMessage(jogadoresNoDM, "jogador no departamento médico", "jogadores no departamento médico")
             ),
             createGroupJogadoresInfo(
                 R.drawable.ic_round_ssid_chart_24,
@@ -272,10 +280,11 @@ class GroupFragment : Fragment(), MenuProvider {
             ),
             createGroupJogadoresInfo(
                 R.drawable.ic_sharp_groups_24,
-                "Possui $jogadoresGrupo jogadores cadastrados no grupo"
+                formatJogadoresMessage(jogadoresGrupo, "jogador cadastrado no grupo", "jogadores cadastrados no grupo")
             )
         )
     }
+
 
     private fun createGroupJogadoresInfo(icon: Int, description: String): GroupoJogadoresInfo {
         return GroupoJogadoresInfo(icon, description)
@@ -319,21 +328,37 @@ class GroupFragment : Fragment(), MenuProvider {
 
     private fun fabCreateQuickCompetitionOnClick() {
         binding.includeGroupViewState.fabCreateQuickCompetition.setOnClickListener {
+
+            // Rotacionar e esconder FABs
             isRotate = rotateView(binding.includeGroupViewState.fabMoreOptions, !isRotate)
             hideFabs()
-            val directions =
-                GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()
 
-            if (args.detalheGrupoItemViewArgs != null) {
-                directions.competitionViewArgs = CompetitionViewArgs(
-                    grupo.id,
-                    grupo.jogadores
-                )
+            // Verificar jogadores
+            val jogadores = grupo.jogadores
+            if (jogadores.isNullOrEmpty()) {
+                showShortToast("Não é possível criar uma competição sem jogadores cadastrados.")
+                return@setOnClickListener
             }
 
+            // Configurar direções
+            val directions =
+                GroupFragmentDirections.actionDetailsGroupFragmentToCompetitionFragment()
+            configureCompetitionArgs(directions)
+
+            // Navegar
             findNavController().navigate(directions)
         }
     }
+
+    private fun configureCompetitionArgs(directions: GroupFragmentDirections.ActionDetailsGroupFragmentToCompetitionFragment) {
+        args.detalheGrupoItemViewArgs?.let {
+            directions.competitionViewArgs = CompetitionViewArgs(
+                grupo.id,
+                grupo.jogadores
+            )
+        }
+    }
+
 
     private fun initFabs() {
         init(binding.includeGroupViewState.fabAddSoccerPlayer)

@@ -1,6 +1,27 @@
+
+# Arquivos do IntelliJ
 *.iml
+.idea
+
+# Arquivos locais de propriedades do projeto
+local.properties
+
+# Arquivos de build do Gradle
 .gradle
-/local.properties
+build/
+release/
+
+# Pasta de capturas (usada para capturas de tela, por exemplo)
+captures/
+
+# Arquivos gerados pelo CMake
+.externalNativeBuild
+.cxx
+
+# Arquivos do sistema
+.DS_Store
+
+# Outros arquivos do IntelliJ
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
@@ -8,9 +29,3 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 /.idea/gradle.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties

@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.blimas.smartsoccer.core.domain.model.Jogador
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.blimas.smartsoccer.databinding.BottonsheetCreateCompetitionBinding
 import com.blimas.smartsoccer.presentation.extensions.showShortToast
@@ -40,11 +41,29 @@ class QuickCompetitionFragment : BottomSheetDialogFragment() {
         val grupoId = args.competitionViewArgs?.grupoId ?: ""
         val jogadores = args.competitionViewArgs?.jogadores ?: mutableListOf()
 
+        createTeamOnClickListener(jogadores, grupoId)
+
+        observeUiState()
+    }
+
+    private fun createTeamOnClickListener(
+        jogadores: MutableList<Jogador>,
+        grupoId: String
+    ) {
         binding.buttonCreateTeam.setOnClickListener {
             val qtdTeams = binding.editTextCreateTeamQtdTeams.text.toString().toInt()
+
+            // Verificar se o número de times é pelo menos igual ao número mínimo de jogadores
+            if (jogadores.size < qtdTeams) {
+                val jogadorOuJogadores = if (jogadores.size == 1) "jogador" else "jogadores"
+                showShortToast("Não é possível criar $qtdTeams times com apenas ${jogadores.size} $jogadorOuJogadores.")
+                findNavController().popBackStack()
+                return@setOnClickListener
+            }
+
             val teamPositionsChecked = binding.switchCreateTeamPositions.isChecked
             val teamAbilitiesChecked = binding.switchCreateTeamAbilities.isChecked
-            val teamDmChecked =  binding.switchCreateTeamDm.isChecked
+            val teamDmChecked = binding.switchCreateTeamDm.isChecked
 
             viewModel.createQuickCompetition(
                 grupoId,
@@ -55,8 +74,6 @@ class QuickCompetitionFragment : BottomSheetDialogFragment() {
                 teamDmChecked
             )
         }
-
-        observeUiState()
     }
 
     private fun observeUiState() {
