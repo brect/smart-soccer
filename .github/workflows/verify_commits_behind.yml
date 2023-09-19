@@ -13,10 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Debug - List branches and commits
-        run: |
-          git branch -a
-          git log --oneline -n 10
+      - name: Fetch all branches
+        run: git fetch --all
 
       - name: Check Commits Behind
         run: |
@@ -33,13 +31,9 @@ jobs:
             exit 0
           fi
 
-          # Fetch the base branch and the PR branch to get a full git history
-          git fetch origin $BASE_BRANCH
-          git fetch origin $PR_BRANCH:$PR_BRANCH
-
-          # Debug - List branches and commits after fetch
-          git branch -a
-          git log --oneline -n 10
+          # Explicitly checkout base branch and pull request branch
+          git checkout $BASE_BRANCH
+          git checkout $PR_BRANCH
 
           # Check if the feature or hotfix branch is behind its respective base branch
           COMMITS_BEHIND=$(git rev-list --count $BASE_BRANCH..$PR_BRANCH)
