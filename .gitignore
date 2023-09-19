@@ -9,6 +9,7 @@ local.properties
 # Arquivos de build do Gradle
 .gradle
 build/
+release/
 
 # Pasta de capturas (usada para capturas de tela, por exemplo)
 captures/

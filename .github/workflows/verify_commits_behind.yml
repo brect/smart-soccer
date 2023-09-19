@@ -35,7 +35,7 @@ jobs:
           COMMITS_BEHIND=$(git rev-list --count $BASE_BRANCH..$PR_BRANCH)
           
           if [ "$COMMITS_BEHIND" -gt 0 ]; then
-            echo "Erro: $PR_BRANCH está $COMMITS_BEHIND commits atrás de $BRANCH_BASE. Por favor, atualize sua branch."
+            echo "Erro: $PR_BRANCH está $COMMITS_BEHIND commits atrás de $BASE_BRANCH. Por favor, atualize sua branch."
             exit 1
           else
             echo "$PR_BRANCH is up to date with $BASE_BRANCH."

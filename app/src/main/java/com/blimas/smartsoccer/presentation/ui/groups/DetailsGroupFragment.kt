@@ -114,7 +114,8 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
                 )
             )
 
-            showShortToast("Novo grupo criado com sucesso!")
+            val msgUpdateGroup = isEditingMode().takeIf { it }?.let { "Grupo atualizado com sucesso!" } ?: "Novo grupo criado com sucesso!"
+            showShortToast(msgUpdateGroup)
         }
 
         formFieldManager.formFields.enable()
@@ -213,19 +214,11 @@ class DetailsGroupFragment : BottomSheetDialogFragment() {
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 DetailsGroupViewModel.UiState.Error -> {
-                    Toast.makeText(
-                        context,
-                        "CreateGroupViewModel.UiState.Error",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast("Erro ao processar solicitação")
                 }
 
                 DetailsGroupViewModel.UiState.Loading -> {
-                    Toast.makeText(
-                        context,
-                        "CreateGroupViewModel.UiState.Loading",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast("Carregando...")
                 }
 
                 DetailsGroupViewModel.UiState.Success -> {
