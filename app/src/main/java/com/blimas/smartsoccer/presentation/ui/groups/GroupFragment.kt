@@ -117,7 +117,8 @@ class GroupFragment : Fragment(), MenuProvider {
 
     private fun groupLocalOnClickListener() {
         binding.includeGroupViewState.includeGroupGameInfoView.containerGroupLocal.setOnClickListener {
-            val gmmIntentUri = Uri.parse("geo:0,0?q=${binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.text}")
+            val gmmIntentUri =
+                Uri.parse("geo:0,0?q=${binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.text}")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)
@@ -170,7 +171,8 @@ class GroupFragment : Fragment(), MenuProvider {
                 }
 
                 GroupViewModel.UiState.Loading -> {
-                    binding.includeGroupViewState.flipperItemCompetition.displayedChild = FLIPPER_CHILD_COMPETITION_EMPTY
+                    binding.includeGroupViewState.flipperItemCompetition.displayedChild =
+                        FLIPPER_CHILD_COMPETITION_EMPTY
                     adapterManager.competitionsAdapter.submitList(emptyList())
                     FLIPPER_CHILD_GROUP_LOADING
                 }
@@ -192,21 +194,27 @@ class GroupFragment : Fragment(), MenuProvider {
 
                     binding.includeGroupViewState.textViewGroupTeamName.text = uiState.grupo.nome
 
-                    binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupDate.text = "${grupo.diaDoJogo}"
-                    binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.text = "${grupo.endereco}"
+                    binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupDate.text =
+                        "${grupo.diaDoJogo}"
+                    binding.includeGroupViewState.includeGroupGameInfoView.textViewGroupLocal.text =
+                        "${grupo.endereco}"
 
-                    val quantidadeMinimaPorTime = uiState.grupo.configuracaoEsporte.quantidadeMinimaPorTime
-                    binding.includeGroupViewState.includeGroupInfoView.textViewGameInformationTypeOfCourt.text =  uiState.grupo.configuracaoEsporte.tipoEsporte.tipo
-                    binding.includeGroupViewState.includeGroupInfoView.textViewGameInformationConfiguration.text = context?.getString(
-                        R.string.game_information_configuration,
-                        quantidadeMinimaPorTime.toString(),
-                        quantidadeMinimaPorTime.toString()
-                    )
-                    binding.includeGroupViewState.includeGroupInfoView.textViewGameInformationRateAge.text = context?.getString(
-                        R.string.game_information_rate_age,
-                        grupo.rangeIdade?.minAge.toString(),
-                        grupo.rangeIdade?.maxAge.toString(),
-                    )
+                    val quantidadeMinimaPorTime =
+                        uiState.grupo.configuracaoEsporte.quantidadeMinimaPorTime
+                    binding.includeGroupViewState.includeGroupInfoView.textViewGameInformationTypeOfCourt.text =
+                        uiState.grupo.configuracaoEsporte.tipoEsporte.tipo
+                    binding.includeGroupViewState.includeGroupInfoView.textViewGameInformationConfiguration.text =
+                        context?.getString(
+                            R.string.game_information_configuration,
+                            quantidadeMinimaPorTime.toString(),
+                            quantidadeMinimaPorTime.toString()
+                        )
+                    binding.includeGroupViewState.includeGroupInfoView.textViewGameInformationRateAge.text =
+                        context?.getString(
+                            R.string.game_information_rate_age,
+                            grupo.rangeIdade?.minAge.toString(),
+                            grupo.rangeIdade?.maxAge.toString(),
+                        )
 
                     setSoccerPlayersInfos(uiState)
                     FLIPPER_CHILD_GROUP_SUCCESS
@@ -462,7 +470,8 @@ class GroupFragment : Fragment(), MenuProvider {
             }
 
             R.id.action_delete_group -> {
-                bottomSheetBinding.textExcludeGroupContent.text = context?.getString(R.string.exclude_groups, grupo.nome)
+                bottomSheetBinding.textExcludeGroupContent.text =
+                    context?.getString(R.string.exclude_groups, grupo.nome)
                 bottomSheetDialog.show()
                 true
             }
