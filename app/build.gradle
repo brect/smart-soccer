@@ -90,6 +90,11 @@ dependencies {
     implementation "io.github.reactivecircus.flowbinding:flowbinding-android:$flowbinding_version"
     implementation "io.github.reactivecircus.flowbinding:flowbinding-material:${flowbinding_version}"
 
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     // Other Libs
     implementation 'com.vanniktech:android-image-cropper:4.5.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
