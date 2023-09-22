@@ -13,7 +13,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.blimas.smartsoccer"
+        applicationId "com.padawanbr.smartsoccer"
         minSdk 26
         targetSdk 33
         versionCode 4
