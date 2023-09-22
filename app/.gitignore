@@ -1,1 +1,66 @@
-/build
+
+# Arquivos do IntelliJ
+*.iml
+.idea
+
+# Arquivos locais de propriedades do projeto
+local.properties
+
+# Arquivos de build do Gradle
+.gradle
+build/
+release/
+
+# Pasta de capturas (usada para capturas de tela, por exemplo)
+captures/
+
+# Arquivos gerados pelo CMake
+.externalNativeBuild
+.cxx
+
+# Arquivos do sistema
+.DS_Store
+
+# Outros arquivos do IntelliJ
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/gradle.xml
+
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log/OS Files
+*.log
+
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+output.json
+
+# IntelliJ
+*.iml
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Android Profiling
+*.hprof
