@@ -16,7 +16,7 @@ android {
         applicationId "com.blimas.smartsoccer"
         minSdk 26
         targetSdk 33
-        versionCode 3
+        versionCode 4
         def version = rootProject.file('VERSION').text.trim()
         versionName version
 
