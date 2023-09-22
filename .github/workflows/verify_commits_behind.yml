@@ -13,9 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Fetch all branches
-        run: git fetch --all
-
       - name: Check Commits Behind
         run: |
           PR_BRANCH=${{ github.head_ref }}
@@ -30,16 +27,15 @@ jobs:
             echo "A branch não requer verificação de commits atrasados."
             exit 0
           fi
-
-          # Explicitly checkout base branch and pull request branch
-          git checkout $BASE_BRANCH
-          git checkout $PR_BRANCH
-
+          
+          # Fetch the base branch to get a full git history
+          git fetch origin $BASE_BRANCH
+          
           # Check if the feature or hotfix branch is behind its respective base branch
           COMMITS_BEHIND=$(git rev-list --count $BASE_BRANCH..$PR_BRANCH)
           
           if [ "$COMMITS_BEHIND" -gt 0 ]; then
-            echo "Erro: $PR_BRANCH está $COMMITS_BEHIND commits atrás de $BASE_BRANCH. Por favor, atualize sua branch."
+            echo "Erro: $PR_BRANCH está $COMMITS_BEHIND commits atrás de $BRANCH_BASE. Por favor, atualize sua branch."
             exit 1
           else
             echo "$PR_BRANCH is up to date with $BASE_BRANCH."
