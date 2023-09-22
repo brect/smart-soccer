@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
 
       - name: Check Commits Behind
         run: |
@@ -28,14 +30,15 @@ jobs:
             exit 0
           fi
           
-          # Fetch the base branch to get a full git history
-          git fetch origin $BASE_BRANCH
+          # Fetch the base branch and PR branch to get a full git history
+          git fetch origin $BASE_BRANCH:$BASE_BRANCH
+          git fetch origin $PR_BRANCH:$PR_BRANCH
           
           # Check if the feature or hotfix branch is behind its respective base branch
           COMMITS_BEHIND=$(git rev-list --count $BASE_BRANCH..$PR_BRANCH)
           
           if [ "$COMMITS_BEHIND" -gt 0 ]; then
-            echo "Erro: $PR_BRANCH está $COMMITS_BEHIND commits atrás de $BRANCH_BASE. Por favor, atualize sua branch."
+            echo "Erro: $PR_BRANCH está $COMMITS_BEHIND commits atrás de $BASE_BRANCH. Por favor, atualize sua branch."
             exit 1
           else
             echo "$PR_BRANCH is up to date with $BASE_BRANCH."
