@@ -10,6 +10,7 @@ local.properties
 .gradle
 build/
 release/
+app/release/app-release.aab
 
 # Pasta de capturas (usada para capturas de tela, por exemplo)
 captures/
