@@ -1,0 +1,36 @@
+name: Create Tag and Release
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && (startsWith(github.event.pull_request.head.ref, 'hotfix/') || startsWith(github.event.pull_request.head.ref, 'release/'))
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set Tag Name
+        id: vars
+        run: |
+          BRANCH_NAME=${{ github.event.pull_request.head.ref }}
+          TAG_NAME=$(echo $BRANCH_NAME | sed 's/\//-/g')
+          echo ::set-output name=tag_name::$TAG_NAME
+
+      - name: Create Tag
+        run: |
+          git tag ${{ steps.vars.outputs.tag_name }}
+          git push origin ${{ steps.vars.outputs.tag_name }}
+
+      - name: Create Release
+        uses: gh-actions/github-release@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.vars.outputs.tag_name }}
+          title: Release ${{ steps.vars.outputs.tag_name }}
+          body: 'Release for branch ${{ github.event.pull_request.head.ref }}'
