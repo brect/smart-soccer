@@ -28,9 +28,9 @@ jobs:
           git push origin ${{ steps.vars.outputs.tag_name }}
 
       - name: Create Release
-        uses: gh-actions/github-release@master
+        uses: gh-release/create@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.vars.outputs.tag_name }}
+          tag_name: ${{ steps.vars.outputs.tag_name }}
           title: Release ${{ steps.vars.outputs.tag_name }}
           body: 'Release for branch ${{ github.event.pull_request.head.ref }}'
