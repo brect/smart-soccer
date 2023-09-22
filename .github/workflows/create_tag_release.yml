@@ -15,12 +15,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set Tag Name
+      - name: Set Tag and Release Name
         id: vars
         run: |
           BRANCH_NAME=${{ github.event.pull_request.head.ref }}
-          TAG_NAME=$(echo $BRANCH_NAME | sed 's/\//-/g')
+          
+          # Para branches hotfix
+          if [[ "$BRANCH_NAME" == hotfix/* ]]; then
+            VERSION="${BRANCH_NAME#hotfix/}"
+            TAG_NAME="v$VERSION"
+            RELEASE_NAME="Release $VERSION"
+          # Para branches release
+          elif [[ "$BRANCH_NAME" == release/* ]]; then
+            VERSION="${BRANCH_NAME#release/}"
+            TAG_NAME="v$VERSION"
+            RELEASE_NAME="Release $VERSION"
+          fi
+
           echo ::set-output name=tag_name::$TAG_NAME
+          echo ::set-output name=release_name::$RELEASE_NAME
 
       - name: Create Tag
         run: |
@@ -33,7 +46,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.vars.outputs.tag_name }}
-          release_name: Release ${{ steps.vars.outputs.tag_name }}
+          release_name: ${{ steps.vars.outputs.release_name }}
           body: 'Release for branch ${{ github.event.pull_request.head.ref }}'
           draft: false
           prerelease: false
