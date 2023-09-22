@@ -20,3 +20,9 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keep class androidx.appcompat.widget.** { *; }
+
+# Enable this while debugging
+-keep class **
+
+-keepattributes LineNumberTable,SourceFile
+-renamesourcefileattribute SourceFile
