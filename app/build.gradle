@@ -93,6 +93,7 @@ dependencies {
     implementation "io.github.reactivecircus.flowbinding:flowbinding-material:${flowbinding_version}"
 
     // Firebase
+//    https://medium.com/androiddevelopers/see-crashlytics-issue-reports-directly-in-android-studio-with-app-quality-insights-db0ff27454f0
     implementation platform('com.google.firebase:firebase-bom:32.3.1')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
