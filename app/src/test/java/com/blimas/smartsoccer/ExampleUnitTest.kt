@@ -1,9 +1,9 @@
-package com.blimas.smartsoccer
+package com.padawanbr.smartsoccer
 
-import com.blimas.smartsoccer.core.domain.model.Jogador
-import com.blimas.smartsoccer.core.domain.model.PosicaoJogador
-import com.blimas.smartsoccer.core.domain.model.calcularMediaHabilidades
-import com.blimas.smartsoccer.core.domain.model.sortearTimes
+import com.padawanbr.smartsoccer.core.domain.model.Jogador
+import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
+import com.padawanbr.smartsoccer.core.domain.model.calcularMediaHabilidades
+import com.padawanbr.smartsoccer.core.domain.model.sortearTimes
 import org.junit.Test
 
 /**

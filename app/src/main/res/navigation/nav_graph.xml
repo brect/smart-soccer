@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/groupsFragment"
-        android:name="com.blimas.smartsoccer.presentation.ui.home.HomeFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.home.HomeFragment"
         android:label="@string/group_fragment_label"
         tools:layout="@layout/fragment_home">
 
@@ -33,14 +33,14 @@
 
     <dialog
         android:id="@+id/createDetailsGroupFragment"
-        android:name="com.blimas.smartsoccer.presentation.ui.groups.DetailsGroupFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.groups.DetailsGroupFragment"
         android:label="@string/competition_group_fragment_label"
         tools:layout="@layout/bottonsheet_create_group">
 
         <argument
             android:name="grupoItemViewArgs"
             android:defaultValue="@null"
-            app:argType="com.blimas.smartsoccer.presentation.viewArgs.GrupoItemViewArgs"
+            app:argType="com.padawanbr.smartsoccer.presentation.viewArgs.GrupoItemViewArgs"
             app:nullable="true" />
 
     </dialog>
@@ -48,13 +48,13 @@
     <fragment
         android:id="@+id/detailsGroupFragment"
         android:label="@string/competition_group_fragment_label"
-        android:name="com.blimas.smartsoccer.presentation.ui.groups.GroupFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.groups.GroupFragment"
         tools:layout="@layout/fragment_group">
 
         <argument
             android:name="detalheGrupoItemViewArgs"
             android:defaultValue="@null"
-            app:argType="com.blimas.smartsoccer.presentation.viewArgs.DetalheGrupoItemViewArgs"
+            app:argType="com.padawanbr.smartsoccer.presentation.viewArgs.DetalheGrupoItemViewArgs"
             app:nullable="true" />
 
         <action
@@ -100,7 +100,7 @@
 
     <fragment
         android:id="@+id/sampleUsingImageViewFragment"
-        android:name="com.blimas.smartsoccer.presentation.common.cropper.UsingImageViewFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.common.cropper.UsingImageViewFragment"
         android:label="Editar imagem"
         tools:layout="@layout/fragment_crop_image_view">
 
@@ -113,7 +113,7 @@
 
     <fragment
         android:id="@+id/detailsCompetitionFragment"
-        android:name="com.blimas.smartsoccer.presentation.ui.competition.DetailsCompetitionFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.competition.DetailsCompetitionFragment"
         android:label="@string/competition_details_fragment_label"
         tools:layout="@layout/fragment_details_competition">
 
@@ -126,7 +126,7 @@
 
     <fragment
         android:id="@+id/soccerPlayerFragment"
-        android:name="com.blimas.smartsoccer.presentation.ui.soccerPlayer.SoccerPlayerFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.SoccerPlayerFragment"
         android:label="@string/soccer_player_fragment_label"
         tools:layout="@layout/fragment_soccer_player">
 
@@ -159,21 +159,21 @@
 
     <dialog
         android:id="@+id/competitionFragment"
-        android:name="com.blimas.smartsoccer.presentation.ui.competition.QuickCompetitionFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.competition.QuickCompetitionFragment"
         android:label="@string/competition_fragment_label"
         tools:layout="@layout/bottonsheet_create_competition">
 
         <argument
             android:name="competitionViewArgs"
             android:defaultValue="@null"
-            app:argType="com.blimas.smartsoccer.presentation.viewArgs.CompetitionViewArgs"
+            app:argType="com.padawanbr.smartsoccer.presentation.viewArgs.CompetitionViewArgs"
             app:nullable="true" />
 
     </dialog>
 
     <fragment
         android:id="@+id/detailsSoccerPlayerFragment"
-        android:name="com.blimas.smartsoccer.presentation.ui.soccerPlayer.DetailsSoccerPlayerFragment"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.DetailsSoccerPlayerFragment"
         android:label="@string/soccer_player_details_fragment_label"
         tools:layout="@layout/fragment_details_soccer_player">
 

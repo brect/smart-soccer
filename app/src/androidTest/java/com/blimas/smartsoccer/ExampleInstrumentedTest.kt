@@ -1,4 +1,4 @@
-package com.blimas.smartsoccer
+package com.padawanbr.smartsoccer
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

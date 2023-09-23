@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
     <application
         android:name=".SmartSoccerApp"
@@ -36,7 +37,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.blimas.smartsoccer.shareimage.fileprovider"
+            android:authorities="com.padawanbr.smartsoccer.shareimage.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
