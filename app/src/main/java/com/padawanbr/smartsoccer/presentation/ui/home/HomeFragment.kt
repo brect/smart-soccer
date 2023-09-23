@@ -85,10 +85,9 @@ class HomeFragment : Fragment() {
         bindingBottomSheetToExcludeGroup()
 
         binding.floatingActionButton.setOnClickListener {
-            throw RuntimeException("Test Crash") // Force a crash
-//            val directions =
-//                HomeFragmentDirections.actionGroupsFragmentToCreateDetailsGroupFragment()
-//            findNavController().navigate(directions)
+            val directions =
+                HomeFragmentDirections.actionGroupsFragmentToCreateDetailsGroupFragment()
+            findNavController().navigate(directions)
         }
 
         observeUiState()
