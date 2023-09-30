@@ -53,6 +53,53 @@
     </ViewFlipper>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_createQuickCompetition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/fab_add_soccerPlayer"
+        app:layout_constraintEnd_toEndOf="@+id/fab_add_soccerPlayer"
+        app:layout_constraintStart_toStartOf="@+id/fab_add_soccerPlayer"
+        app:srcCompat="@drawable/ic_round_playlist_add_24" />
+
+    <TextView
+        android:id="@+id/textView_createQuickCompetition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_group_item_rounded_border"
+        android:padding="6dp"
+        android:text="Importar jogadores"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_createQuickCompetition"
+        app:layout_constraintEnd_toStartOf="@+id/fab_createQuickCompetition"
+        app:layout_constraintTop_toTopOf="@+id/fab_createQuickCompetition" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_soccerPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonAddSoccer"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButtonAddSoccer"
+        app:layout_constraintStart_toStartOf="@+id/floatingActionButtonAddSoccer"
+        app:srcCompat="@drawable/ic_round_person_add_24" />
+
+    <TextView
+        android:id="@+id/textView_add_soccerPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_group_item_rounded_border"
+        android:padding="6dp"
+        android:text="Adicionar jogador"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_add_soccerPlayer"
+        app:layout_constraintEnd_toStartOf="@+id/fab_add_soccerPlayer"
+        app:layout_constraintTop_toTopOf="@+id/fab_add_soccerPlayer" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonAddSoccer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
