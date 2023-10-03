@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.padawanbr.smartsoccer.databinding.FragmentSoccerPlayerBinding
 import com.padawanbr.smartsoccer.presentation.common.adapter.getCommonAdapterOf
@@ -14,6 +15,7 @@ import com.padawanbr.smartsoccer.presentation.extensions.attachHideShowFab
 import com.padawanbr.smartsoccer.presentation.extensions.showLoadingToast
 import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.presentation.modelView.JogadorItem
+import com.padawanbr.smartsoccer.presentation.ui.groups.GroupFragmentDirections
 import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
@@ -68,9 +70,26 @@ class SoccerPlayerFragment : Fragment() {
         val grupoId = args.groupId
 
         fabAddSoccerPlayerOnClick(grupoId)
+        fabImportPlayersOnClick(grupoId)
 
         getAllSoccers(grupoId)
 
+    }
+
+    private fun fabImportPlayersOnClick(grupoId: String) {
+        binding.fabImportPlayers.setOnClickListener {
+            resetFabs()
+
+            val directions =
+                SoccerPlayerFragmentDirections.actionSoccerPlayerFragmentToImportSoccerPlayersFragment()
+
+//            if (args.detalheGrupoItemViewArgs != null) {
+//                directions.groupId = args.detalheGrupoItemViewArgs!!.id
+//            }
+
+            findNavController().navigate(directions)
+
+        }
     }
 
     private fun fabAddSoccerPlayerOnClick(grupoId: String) {

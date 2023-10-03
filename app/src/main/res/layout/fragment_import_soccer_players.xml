@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_top_rounded_border"
+    android:clipToPadding="true"
+    android:orientation="vertical">
+
+<!--    https://stackoverflow.com/questions/15963244/android-how-to-store-input-from-edittext-to-a-csv-->
+
+    <View
+        android:id="@+id/view_item_drag_handle"
+        android:layout_width="80dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:alpha="0.2"
+        android:background="@drawable/drag_handle_background" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/containert_infos_soccer_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingHorizontal="24dp">
+
+        <LinearLayout
+            android:id="@+id/container_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_details_soccers_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tooltipText="Xurupita"
+                android:drawableEnd="@drawable/ic_round_info_24"
+                android:layout_marginTop="24dp"
+                android:text="Adicionar jogadores"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
+
+            <TextView
+                android:id="@+id/text_description_soccers_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Adicione uma lista de jogadores de forma rápida, seguindo o padrão abaixo."
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
+
+            <TextView
+                android:id="@+id/text_description_soccers_regex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Padrão 1: Nome|Idade;\nPadrão 2: Nome|Idade|Posição;\nPadrão 3: Nome|Idade|Posição|DM|Velocidade|Chute|Passe|Marcação|Drible|Raça;\n\nPara posição considere o padrão GK, ZAG, LAT, MEI, ATA"
+                android:textSize="9sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInput_detailsPlayersName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:hint="@string/players"
+                app:expandedHintEnabled="false"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_details_soccer_title">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_textInput_detailsPlayersName"
+                    android:layout_width="match_parent"
+                    android:gravity="start"
+                    android:layout_height="match_parent"
+                    android:hint="@string/hint_text_input_list_players" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ViewFlipper
+        android:id="@+id/flipper_save_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="6dp"
+        android:paddingHorizontal="24dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_save_item"
+            style="@style/MyButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:text="@string/save"
+            android:textAllCaps="false" />
+
+        <ProgressBar
+            android:id="@+id/progress_save_item"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center" />
+    </ViewFlipper>
+
+</LinearLayout>
