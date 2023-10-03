@@ -14,6 +14,7 @@ import com.padawanbr.smartsoccer.presentation.extensions.attachHideShowFab
 import com.padawanbr.smartsoccer.presentation.extensions.showLoadingToast
 import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import com.padawanbr.smartsoccer.presentation.modelView.JogadorItem
+import com.padawanbr.smartsoccer.presentation.utils.ViewAnimationUtils
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
 
@@ -27,6 +28,8 @@ class SoccerPlayerFragment : Fragment() {
 
     private val viewModel: SoccerPlayerViewModel by viewModels()
     private val sharedViewModel: SharedSoccerPlayerViewModel by activityViewModels()
+
+    private var isRotate: Boolean = false
 
     private val soccerPlayersAdapter by lazy {
         getCommonAdapterOf(
@@ -56,17 +59,66 @@ class SoccerPlayerFragment : Fragment() {
 
         initSoccerPlayersAdapter()
 
+        initFabs()
+        configureFabMoreOptions()
+
         observeUiState()
         observeSharedUiState()
 
         val grupoId = args.groupId
 
-        binding.floatingActionButtonAddSoccer.setOnClickListener {
-            showDetailsSoccerPlayerFragment(grupoId)
-        }
+        fabAddSoccerPlayerOnClick(grupoId)
 
         getAllSoccers(grupoId)
 
+    }
+
+    private fun fabAddSoccerPlayerOnClick(grupoId: String) {
+        binding.fabAddSoccerPlayer.setOnClickListener {
+            resetFabs()
+            showDetailsSoccerPlayerFragment(grupoId)
+        }
+    }
+
+    private fun resetFabs() {
+        isRotate = ViewAnimationUtils.rotateView(
+            binding.fabSoccerAddOptions,
+            !isRotate
+        )
+        hideFabs()
+    }
+
+    private fun initFabs() {
+        ViewAnimationUtils.init(binding.fabImportPlayers)
+        ViewAnimationUtils.init(binding.textViewImportPlayers)
+        ViewAnimationUtils.init(binding.fabAddSoccerPlayer)
+        ViewAnimationUtils.init(binding.textViewAddSoccerPlayer)
+    }
+
+    private fun configureFabMoreOptions() {
+        binding.fabSoccerAddOptions.setOnClickListener {
+            isRotate = ViewAnimationUtils.rotateView(it, !isRotate)
+
+            if (isRotate) {
+                showFabs()
+            } else {
+                hideFabs()
+            }
+        }
+    }
+
+    private fun showFabs() {
+        ViewAnimationUtils.showIn(binding.fabImportPlayers)
+        ViewAnimationUtils.showIn(binding.textViewImportPlayers)
+        ViewAnimationUtils.showIn(binding.fabAddSoccerPlayer)
+        ViewAnimationUtils.showIn(binding.textViewAddSoccerPlayer)
+    }
+
+    private fun hideFabs() {
+        ViewAnimationUtils.showOut(binding.fabImportPlayers)
+        ViewAnimationUtils.showOut(binding.textViewImportPlayers)
+        ViewAnimationUtils.showOut(binding.fabAddSoccerPlayer)
+        ViewAnimationUtils.showOut(binding.textViewAddSoccerPlayer)
     }
 
     private fun showDetailsSoccerPlayerFragment(
@@ -110,7 +162,7 @@ class SoccerPlayerFragment : Fragment() {
             setHasFixedSize(true)
             adapter = soccerPlayersAdapter
 
-            binding.recyclerSoccerPlayers.attachHideShowFab(binding.floatingActionButtonAddSoccer)
+            binding.recyclerSoccerPlayers.attachHideShowFab(binding.fabSoccerAddOptions)
         }
     }
 
