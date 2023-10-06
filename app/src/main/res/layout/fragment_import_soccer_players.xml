@@ -50,7 +50,7 @@
                 android:id="@+id/text_description_soccers_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:text="Adicione uma lista de jogadores de forma rápida, seguindo o padrão abaixo."
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
