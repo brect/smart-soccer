@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Padrão 1: Nome|Idade;\nPadrão 2: Nome|Idade|Posição;\nPadrão 3: Nome|Idade|Posição|DM|Velocidade|Chute|Passe|Marcação|Drible|Raça;\n\nPara posição considere o padrão GK, ZAG, LAT, MEI, ATA"
+                android:text="Padrão 1: Nome|Idade|Posição;\nPadrão 2: Nome|Idade|Posição|DM|Velocidade|Chute|Passe|Marcação|Drible|Raça;\n\nPara posição considere o padrão GK, ZAG, LAT, MEI, ATA"
                 android:textSize="9sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
