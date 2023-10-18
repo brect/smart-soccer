@@ -3,25 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_top_rounded_border"
+    android:background="?attr/colorSurface"
     android:clipToPadding="true"
     android:orientation="vertical">
 
-<!--    https://stackoverflow.com/questions/15963244/android-how-to-store-input-from-edittext-to-a-csv-->
-
-    <View
-        android:id="@+id/view_item_drag_handle"
-        android:layout_width="80dp"
-        android:layout_height="4dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:alpha="0.2"
-        android:background="@drawable/drag_handle_background" />
+    <!--    https://stackoverflow.com/questions/15963244/android-how-to-store-input-from-edittext-to-a-csv-->
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/containert_infos_soccer_player"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginBottom="16dp"
         android:layout_weight="1"
         android:fillViewport="true"
@@ -32,19 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/text_details_soccers_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:tooltipText="Xurupita"
-                android:drawableEnd="@drawable/ic_round_info_24"
-                android:layout_marginTop="24dp"
-                android:text="Adicionar jogadores"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
 
             <TextView
                 android:id="@+id/text_description_soccers_subtitle"
@@ -81,8 +59,12 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_textInput_detailsPlayersName"
                     android:layout_width="match_parent"
-                    android:gravity="start"
                     android:layout_height="match_parent"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:scrollbarStyle="insideInset"
+                    android:padding="10dp"
+                    android:gravity="start"
                     android:hint="@string/hint_text_input_list_players" />
             </com.google.android.material.textfield.TextInputLayout>
 

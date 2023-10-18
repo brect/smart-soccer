@@ -177,7 +177,7 @@
 
     </dialog>
 
-    <fragment
+    <dialog
         android:id="@+id/detailsSoccerPlayerFragment"
         android:name="com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.DetailsSoccerPlayerFragment"
         android:label="@string/soccer_player_details_fragment_label"
@@ -187,11 +187,12 @@
             android:name="grupoId"
             app:argType="integer" />
 
-    </fragment>
-    <dialog
+    </dialog>
+
+    <fragment
         android:id="@+id/importSoccerPlayersFragment"
         tools:layout="@layout/fragment_import_soccer_players"
         android:name="com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.ImportSoccerPlayersFragment"
-        android:label="ImportSoccerPlayersFragment" />
+        android:label="Importar jogadores" />
 
 </navigation>
