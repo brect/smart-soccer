@@ -16,13 +16,7 @@ interface AddSoccersPlayerUseCase {
     operator fun invoke(params: Params): Flow<ResultStatus<Unit>>
 
     data class Params(
-        val id: String,
-        val playerName: String,
-        val playerAge: Int,
-        val playerPosition: PosicaoJogador?,
-        val playerAbilitiesMap: Map<String, Float>,
-        val playerIsInDM: Boolean,
-        val groupId: String,
+        val jogadores: List<Jogador>?
     )
 }
 
@@ -33,17 +27,17 @@ class AddSoccersPlayerUseCaseImpl @Inject constructor(
 
     override suspend fun doWork(params: AddSoccersPlayerUseCase.Params): ResultStatus<Unit> {
         return withContext(dispatchers.io()) {
-            repository.saveSoccerPlayer(
-                Jogador(
-                    id = params.id,
-                    nome = params.playerName,
-                    idade = params.playerAge,
-                    posicao = params.playerPosition,
-                    habilidades = params.playerAbilitiesMap,
-                    estaNoDepartamentoMedico = params.playerIsInDM,
-                    grupoId =  params.groupId
-                ),
-            )
+//            repository.saveSoccerPlayer(
+//                Jogador(
+//                    id = params.id,
+//                    nome = params.playerName,
+//                    idade = params.playerAge,
+//                    posicao = params.playerPosition,
+//                    habilidades = params.playerAbilitiesMap,
+//                    estaNoDepartamentoMedico = params.playerIsInDM,
+//                    grupoId =  params.groupId
+//                ),
+//            )
             ResultStatus.Success(Unit)
         }
     }

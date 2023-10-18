@@ -30,7 +30,23 @@ class ImportSoccerPlayersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonSaveItem.setOnClickListener {
+            save()
+        }
+
         observeUiState()
+    }
+
+    private fun save() {
+        val text = binding.editTextTextInputDetailsPlayersName.text.toString()
+        val grupoId = arguments?.getString("groupId", "") ?: ""
+
+        if (text.isNullOrBlank()) {
+            showShortToast("Erro de input em branco")
+        } else {
+            viewModel.saveSoccerPlayers(text, grupoId)
+        }
     }
 
     private fun observeUiState() {
@@ -53,6 +69,7 @@ class ImportSoccerPlayersFragment : Fragment() {
             }
         }
     }
+
 
     private fun atualizaListaDeJogadores() {
         sharedViewModel.updateSoccerPlayers(true)

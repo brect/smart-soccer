@@ -193,6 +193,13 @@
         android:id="@+id/importSoccerPlayersFragment"
         tools:layout="@layout/fragment_import_soccer_players"
         android:name="com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.ImportSoccerPlayersFragment"
-        android:label="Importar jogadores" />
+        android:label="Importar jogadores" >
+
+        <argument
+            android:name="groupId"
+            android:defaultValue='""'
+            app:argType="string" />
+
+    </fragment>
 
 </navigation>

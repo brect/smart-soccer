@@ -6,12 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
+import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.core.domain.model.PosicaoJogador
 import com.padawanbr.smartsoccer.core.usecase.AddSoccersPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.base.AppCoroutinesDispatchers
 import com.padawanbr.smartsoccer.presentation.extensions.watchStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.UUID
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,28 +28,27 @@ class ImportSoccerPlayersViewModel @Inject constructor(
         liveData(coroutinesDispatchers.main()) {
             when (it) {
                 is Action.CreateSoccerPlayers -> {
-                   val id =  it.id.takeIf { !it.isNullOrEmpty() } ?: UUID.randomUUID().toString()
-                    addSoccerPlayersUseCase.invoke(
-                        AddSoccersPlayerUseCase.Params(
-                            id,
-                            it.playerName,
-                            it.playerAge,
-                            it.playerPosition,
-                            it.playerAbilitiesMap,
-                            it.playerIsInDM,
-                            it.groupId,
+                    val jogadoresResult = extractJogadoresFromInput(it.text, it.groupId)
+
+                    jogadoresResult.onSuccess { jogadores ->
+                        addSoccerPlayersUseCase.invoke(
+                            AddSoccersPlayerUseCase.Params(jogadores)
+                        ).watchStatus(
+                            loading = {
+                                emit(UiState.Loading)
+                            },
+                            success = {
+                                emit(UiState.Success)
+                            },
+                            error = { exception ->
+                                emit(UiState.Error(exception.message ?: "Erro desconhecido"))
+                            }
                         )
-                    ).watchStatus(
-                        loading = {
-                            emit(UiState.Loading)
-                        },
-                        success = {
-                            emit(UiState.Success)
-                        },
-                        error = {
-                            emit(UiState.Error("Erro ao adicionar jogador"))
-                        }
-                    )
+                    }
+
+                    jogadoresResult.onFailure { exception ->
+                        emit(UiState.Error(exception.message ?: "Erro desconhecido"))
+                    }
                 }
 
                 else -> {
@@ -57,26 +58,64 @@ class ImportSoccerPlayersViewModel @Inject constructor(
         }
     }
 
+    private fun extractJogadoresFromInput(text: String, grupoId: String): Result<List<Jogador>> {
+        val pattern = Pattern.compile("^([^|]+)\\|(\\d{1,3})\\|(GK|ZAG|LAT|MEI|ATA)(?:\\|(S|N)\\|([0-9]{1}\\.[0-9]{1})\\|([0-9]{1}\\.[0-9]{1})\\|([0-9]{1}\\.[0-9]{1})\\|([0-9]{1}\\.[0-9]{1})\\|([0-9]{1}\\.[0-9]{1})\\|([0-9]{1}\\.[0-9]{1}))?;$") // ... substituído por outras abreviações
+
+        val lines = text.split("\n")
+        val jogadores = mutableListOf<Jogador>()
+
+        for (line in lines) {
+            val matcher = pattern.matcher(line)
+
+            if (matcher.find()) {
+                val nome = matcher.group(1)
+                val idade = matcher.group(2).toInt()
+                val posicao = PosicaoJogador.values().find { it.abreviacao == matcher.group(3) }
+
+                val estaNoDM = matcher.group(4)?.let { it == "S" } ?: false
+
+                val habilidades = mutableMapOf<String, Float>()
+                listOf(
+                    "Velocidade",
+                    "Chute",
+                    "Passe",
+                    "Marcação",
+                    "Drible",
+                    "Raça"
+                ).forEachIndexed { index, habilidade ->
+                    matcher.group(5 + index)?.toFloat()?.let {
+                        habilidades[habilidade] = it
+                    }
+                }
+
+                val jogador = Jogador(
+                    id = UUID.randomUUID().toString(),
+                    nome = nome,
+                    idade = idade,
+                    posicao = posicao,
+                    habilidades = habilidades,
+                    estaNoDepartamentoMedico = estaNoDM,
+                    grupoId = grupoId
+                )
+
+                jogadores.add(jogador)
+            } else {
+                return Result.failure(Exception("Formato de entrada inválido. Preencha os valores seguindo os padrões acima."))
+            }
+        }
+
+        return Result.success(jogadores)
+    }
+
     fun saveSoccerPlayers(
-        soccerId: String?,
-        playerName: String,
-        playerAge: Int,
-        playerPosition: PosicaoJogador?,
-        playerAbilitiesMap: Map<String, Float>,
-        playerIsInDM: Boolean,
+        text: String,
         groupId: String,
     ) {
         action.value = Action.CreateSoccerPlayers(
-            soccerId,
-            playerName,
-            playerAge,
-            playerPosition,
-            playerAbilitiesMap,
-            playerIsInDM,
+            text,
             groupId,
         )
     }
-
 
     sealed class UiState {
         object Loading : UiState()
@@ -86,15 +125,8 @@ class ImportSoccerPlayersViewModel @Inject constructor(
 
     sealed class Action {
         data class CreateSoccerPlayers(
-            val id: String?,
-            val playerName: String,
-            val playerAge: Int,
-            val playerPosition: PosicaoJogador?,
-            val playerAbilitiesMap: Map<String, Float>,
-            val playerIsInDM: Boolean,
+            val text: String,
             val groupId: String,
         ) : Action()
-
     }
-
 }

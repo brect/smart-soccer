@@ -83,10 +83,7 @@ class SoccerPlayerFragment : Fragment() {
             val directions =
                 SoccerPlayerFragmentDirections.actionSoccerPlayerFragmentToImportSoccerPlayersFragment()
 
-//            if (args.detalheGrupoItemViewArgs != null) {
-//                directions.groupId = args.detalheGrupoItemViewArgs!!.id
-//            }
-
+            directions.groupId = grupoId
             findNavController().navigate(directions)
 
         }
