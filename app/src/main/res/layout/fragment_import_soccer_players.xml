@@ -3,74 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="16dp"
+    android:layout_weight="1"
     android:background="?attr/colorSurface"
-    android:clipToPadding="true"
-    android:orientation="vertical">
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp">
 
-    <!--    https://stackoverflow.com/questions/15963244/android-how-to-store-input-from-edittext-to-a-csv-->
+    <TextView
+        android:id="@+id/text_description_soccers_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Adicione uma lista de jogadores de forma rápida, seguindo o padrão abaixo."
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/containert_infos_soccer_player"
+    <TextView
+        android:id="@+id/text_description_soccers_regex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Padrão 1: Nome|Idade|Posição;\n\nPadrão 2: Nome|Idade|Posição|DM|Velocidade|Chute|Passe|Marcação|Drible|Raça;\n\nPara posição considere o padrão GK, ZAG, LAT, MEI, ATA"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInput_detailsPlayersName"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:fillViewport="true"
-        android:paddingHorizontal="24dp">
+        android:hint="@string/players"
+        app:expandedHintEnabled="false"
+        app:hintEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_details_soccer_title">
 
-        <LinearLayout
-            android:id="@+id/container_details"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_textInput_detailsPlayersName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/text_description_soccers_subtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Adicione uma lista de jogadores de forma rápida, seguindo o padrão abaixo."
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
-
-            <TextView
-                android:id="@+id/text_description_soccers_regex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Padrão 1: Nome|Idade|Posição;\nPadrão 2: Nome|Idade|Posição|DM|Velocidade|Chute|Passe|Marcação|Drible|Raça;\n\nPara posição considere o padrão GK, ZAG, LAT, MEI, ATA"
-                android:textSize="9sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_item_drag_handle" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInput_detailsPlayersName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:hint="@string/players"
-                app:expandedHintEnabled="false"
-                app:hintEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_details_soccer_title">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editText_textInput_detailsPlayersName"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textMultiLine"
-                    android:scrollbars="vertical"
-                    android:scrollbarStyle="insideInset"
-                    android:padding="10dp"
-                    android:gravity="start"
-                    android:hint="@string/hint_text_input_list_players" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+            android:gravity="start"
+            android:hint="@string/hint_text_input_list_players"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ViewFlipper
         android:id="@+id/flipper_save_item"
