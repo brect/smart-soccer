@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.padawanbr.smartsoccer.databinding.FragmentImportSoccerPlayersBinding
 import com.padawanbr.smartsoccer.presentation.extensions.showShortToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,15 +58,13 @@ class ImportSoccerPlayersFragment : Fragment() {
                 }
 
                 ImportSoccerPlayersViewModel.UiState.Loading -> {
-                    showShortToast("Carregando...")
+                    showShortToast("Aguarde...")
                 }
 
                 is ImportSoccerPlayersViewModel.UiState.Success -> {
-                    atualizaListaDeJogadores()
                     showShortToast("Jogadores adicionados com sucesso!")
+                    atualizaListaDeJogadores()
                 }
-
-                is ImportSoccerPlayersViewModel.UiState.Error -> TODO()
             }
         }
     }
@@ -73,6 +72,7 @@ class ImportSoccerPlayersFragment : Fragment() {
 
     private fun atualizaListaDeJogadores() {
         sharedViewModel.updateSoccerPlayers(true)
+        findNavController().popBackStack()
     }
 
     override fun onDestroyView() {

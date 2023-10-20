@@ -286,8 +286,6 @@ class DetailsSoccerPlayerFragment : BottomSheetDialogFragment() {
                     atualizaListaDeJogadores()
                     showShortToast("Jogador deletado com sucesso!")
                 }
-
-                is DetailsSoccerPlayerViewModel.UiState.Error -> TODO()
             }
         }
     }
