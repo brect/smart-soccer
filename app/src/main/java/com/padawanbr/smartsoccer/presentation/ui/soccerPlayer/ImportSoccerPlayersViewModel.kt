@@ -83,9 +83,8 @@ class ImportSoccerPlayersViewModel @Inject constructor(
                     "Drible",
                     "Raça"
                 ).forEachIndexed { index, habilidade ->
-                    matcher.group(5 + index)?.toFloat()?.let {
-                        habilidades[habilidade] = it
-                    }
+                    val valorHabilidade = matcher.group(5 + index)?.toFloat() ?: 0.0f
+                    habilidades[habilidade] = valorHabilidade
                 }
 
                 val jogador = Jogador(
