@@ -40,6 +40,7 @@
     <string name="habilidade">Habilidade</string>
     <string name="sort">Sortear</string>
     <string name="exclude_groups">Você deseja excluir o grupo %s? \n\nCom isso você perderá acesso a todas as configurações desse grupo.</string>
+    <string name="exclude_soccer_players">Você deseja excluir sua lista de jogadores? \n\nEssa ação irá excluir todos os jogadores desse grupo.</string>
     <string name="exclude_competition">Você deseja excluir a competição %s? \n\nCom isso você perderá acesso a todas as configurações dessa competição.</string>
     <string name="details_group_fragment_label" >Detalhes grupo</string>
     <string name="game_information_configuration">%1$s x %2$s</string>

@@ -33,5 +33,9 @@ class RoomSoccerPlayerDataSource @Inject constructor(
         jogadorDao.delete(jogadorId)
     }
 
+    override suspend fun deleteSoccerPlayersByGroup(grupoId: String) {
+        jogadorDao.deleteJogadoresByGrupo(grupoId)
+    }
+
 }
 

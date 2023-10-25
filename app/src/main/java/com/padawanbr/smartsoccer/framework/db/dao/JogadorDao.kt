@@ -45,4 +45,7 @@ interface JogadorDao {
     @Query("DELETE FROM jogador WHERE jogadorId = :jogadorId")
     fun delete(jogadorId: String)
 
+    @Query("DELETE FROM jogador WHERE grupoId = :grupoId")
+    fun deleteJogadoresByGrupo(grupoId: String)
+
 }

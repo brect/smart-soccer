@@ -13,4 +13,5 @@ interface SoccerPlayerLocalDataSource {
 
     suspend fun deleteSoccerPlayer(jogadorId: String)
 
+    suspend fun deleteSoccerPlayersByGroup(grupoId: String)
 }
