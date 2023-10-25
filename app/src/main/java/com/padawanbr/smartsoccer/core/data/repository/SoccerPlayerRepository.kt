@@ -8,5 +8,9 @@ interface SoccerPlayerRepository {
 
     suspend fun saveSoccerPlayer(jogador: Jogador)
 
+    suspend fun saveSoccerPlayers(jogadores: List<Jogador>)
+
     suspend fun deleteSoccerPlayer(jogadorId: String)
+
+    suspend fun deleteSoccerPlayersByGroup(grupoId: String)
 }

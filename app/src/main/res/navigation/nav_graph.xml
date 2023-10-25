@@ -147,6 +147,7 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+
         <action
             android:id="@+id/action_SoccerPlayerFragment_to_DetailsSoccerPlayerFragment"
             app:destination="@id/detailsSoccerPlayerFragment"
@@ -154,6 +155,11 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_soccerPlayerFragment_to_importSoccerPlayersFragment"
+            app:destination="@id/importSoccerPlayersFragment" />
+
     </fragment>
 
 
@@ -171,7 +177,7 @@
 
     </dialog>
 
-    <fragment
+    <dialog
         android:id="@+id/detailsSoccerPlayerFragment"
         android:name="com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.DetailsSoccerPlayerFragment"
         android:label="@string/soccer_player_details_fragment_label"
@@ -180,6 +186,19 @@
         <argument
             android:name="grupoId"
             app:argType="integer" />
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/importSoccerPlayersFragment"
+        tools:layout="@layout/fragment_import_soccer_players"
+        android:name="com.padawanbr.smartsoccer.presentation.ui.soccerPlayer.ImportSoccerPlayersFragment"
+        android:label="Importar jogadores" >
+
+        <argument
+            android:name="groupId"
+            android:defaultValue='""'
+            app:argType="string" />
 
     </fragment>
 

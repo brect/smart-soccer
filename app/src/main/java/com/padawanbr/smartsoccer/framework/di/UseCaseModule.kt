@@ -7,12 +7,16 @@ import com.padawanbr.smartsoccer.core.usecase.AddQuickCompetitionUseCase
 import com.padawanbr.smartsoccer.core.usecase.AddQuickCompetitionUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.AddSoccerPlayerUseCaseImpl
+import com.padawanbr.smartsoccer.core.usecase.AddSoccersPlayerUseCase
+import com.padawanbr.smartsoccer.core.usecase.AddSoccersPlayerUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.DeleteCompetitionUseCase
 import com.padawanbr.smartsoccer.core.usecase.DeleteCompetitionUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCase
 import com.padawanbr.smartsoccer.core.usecase.DeleteGroupUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.DeleteSoccerPlayerUseCase
 import com.padawanbr.smartsoccer.core.usecase.DeleteSoccerPlayerUseCaseImpl
+import com.padawanbr.smartsoccer.core.usecase.DeleteSoccerPlayersByGroupUseCase
+import com.padawanbr.smartsoccer.core.usecase.DeleteSoccerPlayersByGroupUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.GetCompetitionUseCase
 import com.padawanbr.smartsoccer.core.usecase.GetCompetitionUseCaseImpl
 import com.padawanbr.smartsoccer.core.usecase.GetSoccerPlayersByGroupUseCase
@@ -42,6 +46,9 @@ interface UseCaseModule {
     fun bindAddSoccerPlayerUseCase(useCaseImpl: AddSoccerPlayerUseCaseImpl): AddSoccerPlayerUseCase
 
     @Binds
+    fun bindAddSoccersPlayerUseCase(useCaseImpl: AddSoccersPlayerUseCaseImpl): AddSoccersPlayerUseCase
+
+    @Binds
     fun bindGetSoccerPlayersByGroupUseCase(useCaseImpl: GetSoccerPlayersByGroupUseCaseImpl): GetSoccerPlayersByGroupUseCase
 
     @Binds
@@ -49,6 +56,9 @@ interface UseCaseModule {
 
     @Binds
     fun bindDeleteSoccerPlayerUseCase(useCaseImpl: DeleteSoccerPlayerUseCaseImpl): DeleteSoccerPlayerUseCase
+
+    @Binds
+    fun bindDeleteSoccerPlayersByGroupUseCase(useCaseImpl: DeleteSoccerPlayersByGroupUseCaseImpl): DeleteSoccerPlayersByGroupUseCase
 
     @Binds
     fun bindGetGrupoComJogadoresByIdUseCase(useCaseImpl: GetGrupoComJogadoresByIdUseCaseImpl): GetGrupoComJogadoresByIdUseCase

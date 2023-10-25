@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="?attr/colorSurface">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_importSoccerPlayers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp">
+
+        <TextView
+            android:id="@+id/text_description_soccers_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adicione uma lista de jogadores de forma rápida, seguindo o padrão abaixo."
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/text_description_soccers_regex"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="40dp"
+            tools:layout_conversion_absoluteWidth="363dp" />
+
+        <TextView
+            android:id="@+id/text_description_soccers_regex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Padrão 1: Nome|Idade|Posição;\n\nPadrão 2: Nome|Idade|Posição|DM|Velocidade|Chute|Passe|Marcação|Drible|Raça;\n\nPara posição considere o padrão GK, ZAG, LAT, MEI, ATA"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/textInput_detailsPlayersName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_description_soccers_subtitle"
+            tools:layout_conversion_absoluteHeight="101dp"
+            tools:layout_conversion_absoluteWidth="363dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInput_detailsPlayersName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
+            android:hint="@string/players"
+            app:expandedHintEnabled="false"
+            app:hintEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/flipper_save_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_description_soccers_regex"
+            tools:layout_conversion_absoluteHeight="403dp"
+            tools:layout_conversion_absoluteWidth="363dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_textInput_detailsPlayersName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:hint="@string/hint_text_input_list_players"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                tools:layout_conversion_absoluteHeight="397dp"
+                tools:layout_conversion_absoluteWidth="363dp"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="175dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ViewFlipper
+            android:id="@+id/flipper_save_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInput_detailsPlayersName">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_save_item"
+                style="@style/MyButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="@string/save"
+                android:textAllCaps="false" />
+
+            <ProgressBar
+                android:id="@+id/progress_save_item"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center" />
+        </ViewFlipper>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

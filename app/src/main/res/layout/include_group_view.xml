@@ -200,7 +200,7 @@
             app:layout_constraintBottom_toTopOf="@+id/fab_moreOptions"
             app:layout_constraintEnd_toEndOf="@+id/fab_moreOptions"
             app:layout_constraintStart_toStartOf="@+id/fab_moreOptions"
-            app:srcCompat="@drawable/ic_add_round" />
+            app:srcCompat="@drawable/ic_round_groups_24" />
 
         <TextView
             android:id="@+id/textView_add_soccerPlayer"
@@ -223,7 +223,7 @@
             app:layout_constraintBottom_toTopOf="@+id/fab_add_soccerPlayer"
             app:layout_constraintEnd_toEndOf="@+id/fab_add_soccerPlayer"
             app:layout_constraintStart_toStartOf="@+id/fab_add_soccerPlayer"
-            app:srcCompat="@drawable/ic_add_round" />
+            app:srcCompat="@drawable/ic_round_shuffle_24" />
 
         <TextView
             android:id="@+id/textView_createQuickCompetition"
