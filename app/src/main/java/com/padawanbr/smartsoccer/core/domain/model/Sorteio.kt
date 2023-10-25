@@ -23,7 +23,7 @@ fun sortearTimes(
     atribuirJogadoresATimes(jogadoresDisponiveis, times, jogadoresPorPosicao, considerarPosicoes)
 
     // Balanceia os times
-    while (!isMediaHabilidadesEquilibrada(times, desvioMediaPermitido)) {
+    while (considerarOveralls && !isMediaHabilidadesEquilibrada(times, desvioMediaPermitido)) {
         realocarJogadoresEntreTimes(times)
     }
 

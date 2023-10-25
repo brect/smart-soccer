@@ -4,6 +4,8 @@ import com.padawanbr.smartsoccer.core.data.repository.SoccerPlayerLocalDataSourc
 import com.padawanbr.smartsoccer.core.domain.model.Jogador
 import com.padawanbr.smartsoccer.framework.db.dao.JogadorDao
 import com.padawanbr.smartsoccer.framework.db.entity.JogadorEntity
+import com.padawanbr.smartsoccer.framework.db.entity.toJogadorEntity
+import com.padawanbr.smartsoccer.framework.db.entity.toListJogadorEntity
 import com.padawanbr.smartsoccer.framework.db.entity.toListSoccerPlayerModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -19,6 +21,10 @@ class RoomSoccerPlayerDataSource @Inject constructor(
         }
     }
 
+    override suspend fun saveSoccerPlayers(jogadores: List<Jogador>) {
+        jogadorDao.insertAll(jogadores.toListJogadorEntity())
+    }
+
     override suspend fun saveSoccerPlayer(jogador: Jogador) {
         jogadorDao.insert(jogador.toJogadorEntity())
     }
@@ -27,14 +33,9 @@ class RoomSoccerPlayerDataSource @Inject constructor(
         jogadorDao.delete(jogadorId)
     }
 
-    private fun Jogador.toJogadorEntity() = JogadorEntity(
-        jogadorId = id,
-        nome = nome,
-        idade = idade,
-        posicao = posicao,
-        habilidades = habilidades ?: emptyMap(),
-        estaNoDepartamentoMedico = estaNoDepartamentoMedico ?: false,
-        grupoId = grupoId
-    )
+    override suspend fun deleteSoccerPlayersByGroup(grupoId: String) {
+        jogadorDao.deleteJogadoresByGrupo(grupoId)
+    }
+
 }
 

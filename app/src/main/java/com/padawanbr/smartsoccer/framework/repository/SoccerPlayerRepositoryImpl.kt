@@ -17,8 +17,16 @@ class SoccerPlayerRepositoryImpl @Inject constructor(
         soccerPlayerLocalDataSource.saveSoccerPlayer(jogador)
     }
 
+    override suspend fun saveSoccerPlayers(jogadores: List<Jogador>) {
+        soccerPlayerLocalDataSource.saveSoccerPlayers(jogadores)
+    }
+
     override suspend fun deleteSoccerPlayer(jogadorId: String) {
         soccerPlayerLocalDataSource.deleteSoccerPlayer(jogadorId)
+    }
+
+    override suspend fun deleteSoccerPlayersByGroup(grupoId: String) {
+        soccerPlayerLocalDataSource.deleteSoccerPlayersByGroup(grupoId)
     }
 
 }

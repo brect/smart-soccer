@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">daVázea</string>
+    <string name="app_name">daVárzea</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="group_fragment_label">Meus grupos</string>
@@ -17,6 +17,8 @@
 
     <string name="hint_text_input_name_item">Digite um nome para o item</string>
     <string name="hint_text_input_name_player">Digite um nome para o jogador</string>
+    <string name="hint_text_input_list_players"><font size="12">ex:\n\nBruno|30|LAT;\nPedro|25|ZAG;\nJoão|40|GK;\n\nou\n\nBruno|30|LAT|N|4.0|2.0|4.5|3.5|2.0|5.0;\nPedro|25|ZAG|S|4.0|2.0|1.5|3.5|2.0|2.0;\nJoão|40|GK|N|4.0|2.0|4.5|2.5|2.0|3.0;</font></string>
+<!--    <string name="hint_text_input_list_players">ex:\nBruno|30;\nPedro|25;\nJoão|40;\nou\nBruno|30|LAT;\nPedro|25|ZAG;\nJoão|40|GK;\nou\nBruno|30|LAT|N|4.0|2.0|4.5|3.5|2.0|5.0;\nPedro|25|ZAG|S|4.0|2.0|1.5|3.5|2.0|2.0;\nJoão|40|GK|N|4.0|2.0|4.5|2.5|2.0|3.0;</string>-->
     <string name="valor_unitario">Valor unit</string>
     <string name="desconto">Desconto</string>
     <string name="hint_text_input_dueDate">dd/mm/aaaa</string>
@@ -31,12 +33,14 @@
     <string name="label_title_category">Categoria</string>
 
     <string name="name">Nome</string>
+    <string name="players">Jogadores</string>
     <string name="hint_text_input_name_list">Digite um nome para sua lista</string>
     <string name="details_item_title">Details item</string>
     <string name="idade">idade</string>
     <string name="habilidade">Habilidade</string>
     <string name="sort">Sortear</string>
     <string name="exclude_groups">Você deseja excluir o grupo %s? \n\nCom isso você perderá acesso a todas as configurações desse grupo.</string>
+    <string name="exclude_soccer_players">Você deseja excluir sua lista de jogadores? \n\nEssa ação irá excluir todos os jogadores desse grupo.</string>
     <string name="exclude_competition">Você deseja excluir a competição %s? \n\nCom isso você perderá acesso a todas as configurações dessa competição.</string>
     <string name="details_group_fragment_label" >Detalhes grupo</string>
     <string name="game_information_configuration">%1$s x %2$s</string>

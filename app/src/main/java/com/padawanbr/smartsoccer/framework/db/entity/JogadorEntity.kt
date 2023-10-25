@@ -63,3 +63,12 @@ fun List<Jogador>.toListJogadorEntity() = map {
     )
 }
 
+fun Jogador.toJogadorEntity() = JogadorEntity(
+    jogadorId = id,
+    nome = nome,
+    idade = idade,
+    posicao = posicao,
+    habilidades = habilidades ?: emptyMap(),
+    estaNoDepartamentoMedico = estaNoDepartamentoMedico ?: false,
+    grupoId = grupoId
+)
